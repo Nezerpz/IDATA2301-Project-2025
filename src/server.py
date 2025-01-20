@@ -23,6 +23,10 @@ def home():
 def about():
     return page("about.jinja")
 
+@app.route("/cars", methods=["GET"])
+def cars():
+    return page("cars.jinja")
+
 
 # Start webserver
 app.run(args.host, args.port)

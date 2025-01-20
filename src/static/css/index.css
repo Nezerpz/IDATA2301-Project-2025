@@ -1,3 +1,4 @@
+@import "./columnLayout.css";
 #title { color: darkblue; }
 #disclaimer { 
     background-color: orangered;
