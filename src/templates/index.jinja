@@ -13,8 +13,10 @@
         <header>
             <img id="logo" src="">
             <h1 id="title">{{ title }}</h1>
-            <a href="/">Home</a>
-            <a href="/about">About</a>
+            <div class = "navbar">
+                    <p class="navbarItem"><a href="/">Home</a></p>
+                    <p class="navbarItem"><a href="/about">About</a></p>
+            </div>
         </header>
         <main>
             {% block main %}
