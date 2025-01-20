@@ -1,20 +1,20 @@
-name: Development Deployed
-run-name: ${{ github.actor }} merged to dev!
-on:
-  pull_request:
-    branches: [dev]
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-      cancel-in-progress: true
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      - name: Setup Python
-        run: sudo apt install python3 python3-pip python3-venv
-      - name: Setup Flask
-        run: python3 -m pip install flask
-      - name: Start server
-        run:  cd src; python server.py
+#name: Development Deployed
+#run-name: ${{ github.actor }} merged to dev!
+#on:
+#  pull_request:
+#    branches: [dev]
+#jobs:
+#  deploy:
+#    runs-on: ubuntu-latest
+#    concurrency:
+#      group: ${{ github.workflow }}-${{ github.ref }}
+#      cancel-in-progress: true
+#    steps:
+#      - name: Check out repository code
+#        uses: actions/checkout@v4
+#      - name: Setup Python
+#        run: sudo apt install python3 python3-pip python3-venv
+#      - name: Setup Flask
+#        run: python3 -m pip install flask
+#      - name: Start server
+#        run:  cd src; python server.py
