@@ -14,7 +14,7 @@ body{
     list-style-type: none;
     margin: 0;
 }
-.navbarItem {
+.navbar-item {
     background-color: dimgray;
     flex-grow: 1;
     text-align: center;
@@ -24,7 +24,7 @@ body{
     padding: 16px;
 }
 
-.navbarItem:hover {
+.navbar-item:hover {
     background-color: white;
     color: black;
     padding: 16px;
@@ -35,7 +35,7 @@ img {
     vertical-align: middle;
     width: 100px;
 }
-.imgText {
+.img-text {
     display: inline-block;
     vertical-align: middle;
     width: calc(100% - 100px);
