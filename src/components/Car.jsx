@@ -5,3 +5,4 @@ const Car = () => {
         </article>
     );
 }
+export default Car;
