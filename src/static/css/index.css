@@ -14,9 +14,6 @@
     background-color: dimgray;
     flex-grow: 1;
     text-align: center;
-}
-
-.navbarItem a {
     color: white;
     text-decoration: none;
     display: block;
@@ -25,9 +22,17 @@
 
 .navbarItem:hover {
     background-color: white;
-}
-
-.navbarItem a:hover {
     color: black;
     padding: 16px;
+}
+
+img {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100px;
+}
+.imgText {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 100px);
 }
