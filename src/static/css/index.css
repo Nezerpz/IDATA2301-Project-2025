@@ -1,5 +1,5 @@
 @import "./columnLayout.css";
-#title { color: darkblue; }
+#title { color: white; }
 #disclaimer { 
     background-color: orangered;
     color: white;
@@ -15,7 +15,7 @@ body{
     margin: 0;
 }
 .navbar-item {
-    background-color: dimgray;
+    background-color: #696969;
     flex-grow: 1;
     text-align: center;
     color: white;
@@ -39,4 +39,18 @@ img {
     display: inline-block;
     vertical-align: middle;
     width: calc(100% - 100px);
+}
+
+#footer-content{
+    padding: 30px;
+}
+
+header{
+    background-color: #696969;
+    color: white;
+    padding: 10px;
+}
+
+footer{
+    background-color: #696969;
 }

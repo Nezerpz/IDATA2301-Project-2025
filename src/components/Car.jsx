@@ -1,7 +1,17 @@
 const Car = () => {
     return (
         <article>
-        <h2>Car</h2>
+            <h2>Car name (Manufacturer + Model)</h2>
+            <img src="https://www.shutterstock.com/image-vector/car-logo-icon-emblem-design-600nw-473088025.jpg" alt="Car" />
+            <h3>Features</h3>
+            <ul>
+                <li>
+                    Warming seats
+                </li>
+                <li>
+                    Roof window
+                </li>
+            </ul>
         </article>
     );
 }

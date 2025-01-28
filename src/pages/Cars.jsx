@@ -1,24 +1,21 @@
 import useTitle from "../components/useTitle.jsx";
+import Filters from "../components/Filters.jsx";
+import Car from "../components/Car.jsx";
 
 function Cars(){
     useTitle("Cars");
     return (
         <div className="row">
-            <div className="col-2">
-                <p>Filters</p>
+            <div className="col-3">
+                <Filters />
             </div>
-            <div className="col-10">
-                <article className="car">
-                    <div className="specs">
-
-                    </div>
-                    <div className="order">
-                        <button>Order NOW</button>
-                    </div>
-                    <div className="moreSpecs">
-
-                    </div>
-                </article>
+            <div className="col-9">
+                <div className={"car-grid"}>
+                <Car />
+                <Car />
+                <Car />
+                <Car />
+                </div>
             </div>
         </div>
     )
