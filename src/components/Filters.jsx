@@ -44,6 +44,21 @@ const filters = () => {
                 </details>
                 <details className={"filter-item"}>
                     <summary className={"category-name"}>
+                        Transmission
+                    </summary>
+                    <ul>
+                        <li>
+                            <input type={"checkbox"} />
+                            <label>Automatic</label>
+                        </li>
+                        <li>
+                            <input type={"checkbox"} />
+                            <label>Manual</label>
+                        </li>
+                    </ul>
+                </details>
+                <details className={"filter-item"}>
+                    <summary className={"category-name"}>
                         Features
                     </summary>
                     <ul>
@@ -58,21 +73,6 @@ const filters = () => {
                         <li>
                             <input type={"checkbox"} />
                             <label>4-wheel drive</label>
-                        </li>
-                    </ul>
-                </details>
-                <details className={"filter-item"}>
-                    <summary className={"category-name"}>
-                        Transmission
-                    </summary>
-                    <ul>
-                        <li>
-                            <input type={"checkbox"} />
-                            <label>Automatic</label>
-                        </li>
-                        <li>
-                            <input type={"checkbox"} />
-                            <label>Manual</label>
                         </li>
                     </ul>
                 </details>

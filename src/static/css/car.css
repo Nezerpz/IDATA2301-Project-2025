@@ -1,10 +1,23 @@
-.car{
+.car {
+    margin: 30px;
+    padding: 0px 24px 24px 24px;
     background-color: #f1f1f1;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: left;
+    align-items: left;
     flex-direction: column;
     border-radius: 15px;
-    box-shadow: 0px 0px 20px #AAA;
-    margin: 30px;
+    box-shadow: 0px 0px 15px #BBB;
+}
+
+.car > div {
+    display: flex;
+    flex-direction: row;
+}
+
+.car img {
+    height: 250px;
+    width: auto;
+    overflow: hidden;
+    padding-right: 24px;
 }
