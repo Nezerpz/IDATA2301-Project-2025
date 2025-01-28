@@ -6,7 +6,6 @@ import Cars from './pages/Cars.jsx'
 function App() {
   return (
       <>
-      <h1>Testing under here.</h1>
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cars" element={<Cars />} />
