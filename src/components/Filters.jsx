@@ -9,12 +9,12 @@ const filters = () => {
             </div>
 
             <div className={"filter-body"}>
-                <div className={"filter-item"}>
+                <details className={"filter-item"}>
                     {/* Buttons in this function server to close or open selected category
                      TODO: Implement logic behind button opening and closing */}
-                    <button className={"category-name"}>
+                    <summary className={"category-name"}>
                         Manufacturer
-                    </button>
+                    </summary>
                     <ul>
                         <li>
                             <input type={"checkbox"} />
@@ -29,11 +29,11 @@ const filters = () => {
                             <label>Skoda</label>
                         </li>
                     </ul>
-                </div>
-                <div className={"filter-item"}>
-                    <button className={"category-name"}>
+                </details>
+                <details className={"filter-item"}>
+                    <summary className={"category-name"}>
                         Price
-                    </button>
+                    </summary>
                     <div className={"price-range"}>
                         <input type={"number"} />
                         <input type={"number"} />
@@ -41,11 +41,11 @@ const filters = () => {
                     <div className={"price-slider"}>
 
                     </div>
-                </div>
-                <div className={"filter-item"}>
-                    <button className={"category-name"}>
+                </details>
+                <details className={"filter-item"}>
+                    <summary className={"category-name"}>
                         Features
-                    </button>
+                    </summary>
                     <ul>
                         <li>
                             <input type={"checkbox"} />
@@ -60,11 +60,11 @@ const filters = () => {
                             <label>4-wheel drive</label>
                         </li>
                     </ul>
-                </div>
-                <div className={"filter-item"}>
-                    <button className={"category-name"}>
-                        Transmission type
-                    </button>
+                </details>
+                <details className={"filter-item"}>
+                    <summary className={"category-name"}>
+                        Transmission
+                    </summary>
                     <ul>
                         <li>
                             <input type={"checkbox"} />
@@ -75,7 +75,7 @@ const filters = () => {
                             <label>Manual</label>
                         </li>
                     </ul>
-                </div>
+                </details>
             </div>
         </div>
     );
