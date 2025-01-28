@@ -35,8 +35,7 @@ const filters = () => {
                         Price
                     </summary>
                     <div className={"price-range"}>
-                        <input type={"number"} />
-                        <input type={"number"} />
+                        <input type="range" min="1" max="100" value="50" className="slider" id="myRange" />
                     </div>
                     <div className={"price-slider"}>
 
