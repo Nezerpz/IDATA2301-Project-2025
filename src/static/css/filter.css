@@ -1,0 +1,29 @@
+.filter {
+    margin: 20px;
+}
+.filter-header {
+    background-color: #f0f0f0;
+    padding: 10px;
+}
+
+.filter-body {
+    padding: 10px;
+}
+
+.filter-item {
+    margin-bottom: 10px;
+}
+
+.category-name {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.price-range input {
+    width: 50px;
+    margin-right: 5px;
+}
+
+li {
+    list-style-type: none;
+}
