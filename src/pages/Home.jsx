@@ -4,9 +4,9 @@ function Home(){
     useTitle("Home");
     return (
         <div className="row">
-            <div className="col-12">
-                <h2>Find your car NOW! AAAAAAAAAA</h2>
-                <p>Sjalbais</p>
+            <div id="home" className="col-12">
+                <h2>Up for an Adventure?</h2>
+                <button>Rent Random Car</button>
 
             </div>
         </div>

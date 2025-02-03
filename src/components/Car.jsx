@@ -1,21 +1,37 @@
 import "../static/css/car.css";
+import PropTypes from 'prop-types';
 
-const Car = () => {
-    const features = ["Warming seats", "Roof window", "Floor windows"];
 
+function Car ({car}) {
     return (
-        <article className="car">
-            <h2>Car name (Manufacturer + Model)</h2>
-            <img src="https://www.shutterstock.com/image-vector/car-logo-icon-emblem-design-600nw-473088025.jpg" alt="Image of car in article" />
-            <h3>Features</h3>
-            <ul>
-                {features.map((feature, index) => (
-                    <li key={index}>
-                        {feature}
-                    </li>
-                ))}
-            </ul>
-        </article>
-    );
+        <div className="car">
+            <h2>{car.manufacturer} {car.model}</h2>
+            <div>
+                <img src={car.imageUrl} />
+                <div>
+                    <p><strong>Price: </strong>{car.price}</p>
+                    <p><strong>Transmission: </strong>{car.transmission}</p>
+                    <strong>Features:</strong>
+                    <ul>
+                        {car.features.map(feature => <li><p>{feature}</p></li>)}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    )
 }
-export default Car;
+
+
+Car.propTypes = {
+    car: PropTypes.shape({
+        manufacturer: PropTypes.string,
+        model: PropTypes.string,
+        imageUrl: PropTypes.string,
+        price: PropTypes.number,
+        transmission: PropTypes.string,
+        features: PropTypes.shape({})
+    })
+}
+
+
+export default Car

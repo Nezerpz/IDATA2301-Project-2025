@@ -1,5 +1,20 @@
 @import "./columnLayout.css";
-#title { color: white; }
+
+
+:root {
+    /*--main-color: #696969;*/
+    --main-color: #495057;
+    --foreground-color: #f1f1f1;
+    --heading-color-dark: #495057;
+    --heading-color-light: #f8f9fa;
+    --filter-color: #343a40;
+    --text-color: #222;
+    --bold-text-color: #111;
+    --corner-rounding: 12px;
+}
+
+
+#title { color: var(--heading-color-light); }
 #disclaimer { 
     background-color: orangered;
     color: white;
@@ -14,8 +29,9 @@ body{
     list-style-type: none;
     margin: 0;
 }
+
 .navbar-item {
-    background-color: #696969;
+    background-color: var(--main-color);
     flex-grow: 1;
     text-align: center;
     color: white;
@@ -30,6 +46,28 @@ body{
     padding: 16px;
 }
 
+#home {
+    height: 500px;
+    background-image: url(https://imgs.search.brave.com/RlAxmVxi2QB7xGa_ifz5YzAKA9Mn8sQxglf942zCHL8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMxLmhvdGNhcnNp/bWFnZXMuY29tL3dv/cmRwcmVzcy93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyNC8wOS9j/bGFya3Nvbi5qcGc);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+#home > h2 {
+    font-size: 250%;
+    color: var(--heading-color-light);
+    margin: 100px;
+}
+
+#home > button {
+    margin: 100px;
+    padding: 20px;
+    background-color: var(--main-color);
+    color: var(--heading-color-light);
+    border-radius: 7px;
+}
+
 img {
     display: inline-block;
     vertical-align: middle;
@@ -41,16 +79,32 @@ img {
     width: calc(100% - 100px);
 }
 
+p {
+    color: var(--text-color);
+}
+
+strong {
+    color: var(--bold-text-color);
+}
+
+summary {
+    color: var(--filter-color);
+}
+
 #footer-content{
     padding: 30px;
 }
 
 header{
-    background-color: #696969;
+    background-color: var(--main-color);
     color: white;
     padding: 10px;
 }
 
+#contactHeading {
+    color: var(--heading-color-light);
+}
+
 footer{
-    background-color: #696969;
+    background-color: var(--main-color);
 }
