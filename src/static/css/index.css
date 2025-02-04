@@ -26,7 +26,11 @@
     margin: 20px;
 }
 #disclaimer { 
+    padding: 20px;
     background-color: orangered;
+}
+#disclaimer > p {
+    font-size: 125%;
     color: white;
 }
 
