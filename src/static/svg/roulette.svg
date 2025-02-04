@@ -26,16 +26,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#505050"
      inkscape:document-units="mm"
-     inkscape:zoom="3.313418"
-     inkscape:cx="368.223"
-     inkscape:cy="390.80738"
+     inkscape:zoom="1.2359398"
+     inkscape:cx="493.14699"
+     inkscape:cy="413.8551"
      inkscape:window-width="1890"
      inkscape:window-height="1105"
      inkscape:window-x="2026"
      inkscape:window-y="32"
      inkscape:window-maximized="0"
-     inkscape:current-layer="layer1"
-     inkscape:rotation="-33" />
+     inkscape:current-layer="svg1" />
   <defs
      id="defs1" />
   <g
@@ -987,7 +986,7 @@
   </g>
   <text
      xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:27.2927px;line-height:normal;font-family:Impact;-inkscape-font-specification:'Impact, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-decoration-color:#000000;display:none;fill:#ffffff;stroke-width:0.676986;-inkscape-stroke:none"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:27.2927px;line-height:normal;font-family:Impact;-inkscape-font-specification:'Impact, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-decoration-color:#000000;display:inline;fill:#ffffff;stroke-width:0.676986;-inkscape-stroke:none"
      x="113.83286"
      y="128.86325"
      id="text1"
@@ -997,6 +996,6 @@
        sodipodi:role="line"
        id="tspan1"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:27.2927px;font-family:Impact;-inkscape-font-specification:'Impact, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;stroke-width:0.676986"
-       x="113.83286"
-       y="128.86325">Rental Roulette</tspan></text>
+       x="0"
+       y="0">Rental Roulette</tspan></text>
 </svg>

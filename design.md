@@ -12,10 +12,10 @@ Yes
 Professional colors
 
 ### Pick the main color
-Grey
+Dark Grey (\#293037)
 
 ### Pick an accent color
-Light grey
+Light blue (\#37acb9)
 
 ## Hierarchy and layout
 ### What is the most important message/product on the page?
@@ -34,6 +34,7 @@ In the main section, the content for each page will be rendered dynamically.
 In the footer, there will be "contact information" and the required project disclaimer.
 
 ### What layout(s) will you use for these sections?
+The website uses 12-column layout.
 The header will always have a logo with company name and navigation.
 When you hover over the navigation bar options, they will change color and show which page you would select.
 Footer will stay the same. Instead of links to the contact information, 
@@ -67,11 +68,14 @@ Due to the style of our page, the icons will be monochromatic.
 
 ## Typography
 ### Should it by a Serif or Sans-Serif font?
-As we mainly aim for a professional look, we will use a serif font.
+As we mainly aim for a professional look, we will use sans serif fonts.
 
 ### Bold or thin font?
+We are using bold fonts for some headings and thin fonts for some.
 
 ### Rounded or sharp edges?
+We use a mixture.
+When we are using rounded edges, it is's not a large amount of rounding
 
 ## Border rounding
 ### How rounded should be the edges, according to the theme?

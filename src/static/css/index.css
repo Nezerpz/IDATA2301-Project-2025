@@ -13,6 +13,8 @@
     --bold-text-color: #111;
     --corner-rounding: 12px;
     --dark-shadow-color: #222;
+    --button-color: #37acb9;
+    --link-color: #f1f1f1;
 }
 
 
@@ -29,7 +31,17 @@
 }
 
 body{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--foreground-color);
     margin: 0;
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
 }
 
 
@@ -72,22 +84,35 @@ body{
     margin: 100px;
 }
 
-#callToAction > h2 {
+h1,h2,h3,h4,h5 {
     font-family: Raleway;
+}
+
+h2 {
     font-size: 275%;
-    text-shadow: 2px 2px 20px var(--dark-shadow-color);
+}
+
+#callToAction > h2 {
     color: var(--heading-color-light);
+    text-shadow: 2px 2px 20px var(--dark-shadow-color);
+}
+
+a {
+    font-family: Raleway;
+    padding: 20px;
+    font-size: 125%;
 }
 
 button {
     outline: none;
     border-style: none;
+    background-color: var(--button-color);
+    font-family: Raleway;
+    font-size: 125%;
+    padding: 20px;
 }
 
 #callToAction > button {
-    font-size: 125%;
-    padding: 20px;
-    background-color: #37acb9;
     color: var(--heading-color-light);
     box-shadow: 0px 0px 20px var(--dark-shadow-color);
     border-radius: 7px;

@@ -4,7 +4,7 @@ const filters = () => {
     return (
         <div className={"filter"}>
             <div className={"filter-header"}>
-                <h2>Filters</h2>
+                <h3>Filters</h3>
 
             </div>
 
