@@ -5,16 +5,11 @@ import PropTypes from 'prop-types';
 function Car ({car}) {
     return (
         <div className="car">
-            <h2>{car.manufacturer} {car.model}</h2>
+            <h2>{car.numberOfSeats} {car.carModel}</h2>
             <div>
-                <img src={car.imageUrl} />
                 <div>
-                    <p><strong>Price: </strong>{car.price}</p>
-                    <p><strong>Transmission: </strong>{car.transmission}</p>
-                    <strong>Features:</strong>
-                    <ul>
-                        {car.features.map(feature => <li><p>{feature}</p></li>)}
-                    </ul>
+                    <p><strong>Price: </strong>{car.fuelType}</p>
+                    <p><strong>Transmission: </strong>{car.transmissionType}</p>
                 </div>
             </div>
         </div>
@@ -24,12 +19,12 @@ function Car ({car}) {
 
 Car.propTypes = {
     car: PropTypes.shape({
-        manufacturer: PropTypes.string,
-        model: PropTypes.string,
-        imageUrl: PropTypes.string,
-        price: PropTypes.number,
-        transmission: PropTypes.string,
-        features: PropTypes.shape({})
+        id: PropTypes.number,
+        carModel: PropTypes.string,
+        numberOfSeats: PropTypes.number,
+        transmissionType: PropTypes.string,
+        fuelType: PropTypes.string,
+        productionYear: PropTypes.number
     })
 }
 
