@@ -7,7 +7,7 @@ function CarList () {
     useEffect(() => {
         async function fetchCars() {
             try {
-                let response = await fetch("/cars");
+                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars");
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
@@ -19,7 +19,7 @@ function CarList () {
             }
         }
 
-        fetchCars();
+        fetchCars().then(r => console.log("Fetched cars"));
     }, []);
 
     return (
