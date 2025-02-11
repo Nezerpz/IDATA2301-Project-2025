@@ -5,10 +5,13 @@ const filters = () => {
         <div className={"filter"}>
             <div className={"filter-header"}>
                 <h3>Filters</h3>
-
             </div>
 
             <div className={"filter-body"}>
+                <input type={"text"}
+                placeholder={"Search"}
+                onChange={event => {}}
+                />
                 <details className={"filter-item"}>
                     {/* Buttons in this function server to close or open selected category
                      TODO: Implement logic behind button opening and closing */}
@@ -17,7 +20,8 @@ const filters = () => {
                     </summary>
                     <ul>
                         <li>
-                            <input type={"checkbox"} />
+                            <input type={"checkbox"}
+                            onChange={event => {}}/>
                             <label>BMW</label>
                         </li>
                         <li>

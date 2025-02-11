@@ -1,0 +1,41 @@
+@import "./index.css";
+
+.login-header{
+    background-color: var(--main-color);
+    padding: 20px;
+    text-align: center;
+    margin: 0;
+    color: var(--heading-color-light);
+    font-size: 200%;
+    font-family: Raleway;
+    text-shadow: 2px 2px 20px var(--dark-shadow-color);
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+
+    color: var(--heading-color-light);
+    font-family: Raleway;
+    box-shadow: 2px 2px 20px var(--dark-shadow-color);
+    background-color: var(--main-color);
+}
+
+.login-form input{
+    width: 90%;
+    padding: 10px;
+    margin: 10px;
+
+}
+
+.login-form button{
+    padding: 10px;
+    margin: 10px;
+
+    background-color: var(--button-color);
+    color: var(--heading-color-light);
+    box-shadow: 2px 2px 20px var(--dark-shadow-color);
+    align-self: flex-end;
+}
