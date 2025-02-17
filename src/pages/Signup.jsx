@@ -11,19 +11,56 @@ function Signup() {
                 <div className={"login"}>
                     <h1 className={"login-header"}>Sign up</h1>
                     <form className={"login-form"}>
-                        <div>
-                            <label htmlFor="name">First name</label>
-                            <input type="name" id="name" name="name" />
-                            <label htmlFor="surname">Last name</label>
-                            <input type="surname" id="surname" name="surname" />
-                            <label htmlFor="username">Username</label>
-                            <input type="username" id="username" name="username" />
-                            <label htmlFor="password">Password</label>
-                            <input type="password" id="password" name="password" />
-                            <label htmlFor="email">Email</label>
-                            <input type="email" id="email" name="email" />
-                            <label htmlFor="phone">Phone</label>
-                            <input type="phone" id="phone" name="phone" />
+                        <div className={"col-12"}>
+                            <div>
+                                {/*TODO: make label and input field be side by side without them overlaping when zooming*/}
+                                <div className={"col-1"}>
+                                    <label htmlFor="name">First name</label>
+                                </div>
+                                <div className={"col-11"}>
+                                    <input type="name" id="name" name="name" placeholder="First name" />
+                                </div>
+                            </div>
+                            <div>
+                                <div className={"col-1"}>
+                                    <label htmlFor="surname">Last name</label>
+                                </div>
+                                <div className={"col-11"}>
+                                    <input type="surname" id="surname" name="surname" placeholder="Last name" />
+                                </div>
+                            </div>
+                            <div>
+                                <div className={"col-1"}>
+                                    <label htmlFor="username">Username</label>
+                                </div>
+                                <div className={"col-11"}>
+                                    <input type="username" id="username" name="username" placeholder="Username" />
+                                </div>
+                            </div>
+                            <div>
+                                <div className={"col-1"}>
+                                    <label htmlFor="password">Password</label>
+                                </div>
+                                <div className={"col-11"}>
+                                    <input type="password" id="password" name="password" placeholder="Password" />
+                                </div>
+                            </div>
+                            <div>
+                                <div className={"col-1"}>
+                                    <label htmlFor="email">Email</label>
+                                </div>
+                                <div className={"col-11"}>
+                                    <input type="email" id="email" name="email" placeholder="Email" />
+                                </div>
+                            </div>
+                            <div>
+                                <div className={"col-1"}>
+                                    <label htmlFor="phone">Phone</label>
+                                </div>
+                                <div className={"col-11"}>
+                                    <input type="phone" id="phone" name="phone" placeholder="Phone" />
+                                </div>
+                            </div>
                         </div>
                         <div>
                             <a href={"/login"}>Login here</a>

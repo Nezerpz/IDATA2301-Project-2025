@@ -1,5 +1,12 @@
 @import "./index.css";
 
+.login{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: var(--foreground-color);
+}
+
 .login-header{
     background-color: var(--main-color);
     padding: 20px;
@@ -26,7 +33,6 @@
 .login-form input{
     width: 90%;
     padding: 10px;
-    margin: 10px;
 
 }
 

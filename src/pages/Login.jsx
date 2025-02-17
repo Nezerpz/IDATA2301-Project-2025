@@ -11,11 +11,15 @@ function Login() {
                 <div className={"login"}>
                     <h1 className={"login-header"}>Login</h1>
                     <form className={"login-form"}>
-                        <div>
-                            <label htmlFor="username">Username</label>
-                            <input type="username" id="username" name="username" />
-                            <label htmlFor="password">Password</label>
-                            <input type="password" id="password" name="password" />
+                        <div className={"col-12"}>
+                            <div>
+                                <label htmlFor="username">Username</label>
+                                <input type="username" id="username" name="username" />
+                            </div>
+                            <div>
+                                <label htmlFor="password">Password</label>
+                                <input type="password" id="password" name="password" />
+                            </div>
                         </div>
                         <div>
                             <a href={"/signup"}>Sign up here</a>
