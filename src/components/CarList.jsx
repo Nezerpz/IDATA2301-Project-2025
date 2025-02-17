@@ -22,6 +22,9 @@ function CarList () {
         fetchCars().then(r => console.log("Fetched cars"));
     }, []);
 
+    console.debug("Helooo")
+    console.debug(cars);
+
     return (
         <div>
             {error ? (
