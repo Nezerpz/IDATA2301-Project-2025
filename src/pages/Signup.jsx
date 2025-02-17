@@ -13,7 +13,7 @@ function Signup() {
                     <form className={"login-form"}>
                         <div className={"col-12"}>
                             <div>
-                                {/*TODO: make label and input field be side by side without them overlaping when zooming*/}
+                                {/*TODO: make label and input field be side by side without them overlapping when zooming*/}
                                 <div className={"col-1"}>
                                     <label htmlFor="name">First name</label>
                                 </div>
