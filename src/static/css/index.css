@@ -20,9 +20,7 @@
 
 
 #title { 
-    color: var(--heading-color-light); 
-    font-family: Anton;
-    font-style: italic;
+    color: var(--heading-color-light);
     text-shadow: 5px 5px black;
     margin: 20px;
 }
@@ -48,7 +46,7 @@ body{
 .navbar, #callToAction > a {
     color: var(--link-color);
     text-decoration: none;
-    font-family: Raleway;
+    font-family: Raleway, sans-serif;
     padding: 20px;
     font-size: 125%;
 }
@@ -65,7 +63,7 @@ body{
     background-color: var(--navbar-item-color);
     color: var(--link-color);
     text-decoration: none;
-    font-family: Raleway;
+    font-family: Raleway, sans-serif;
     font-size: 1.25em;
     text-align: center;
     word-break: keep-all;
@@ -98,7 +96,7 @@ main > div > div > section {
 }
 
 h1,h2,h3,h4,h5 {
-    font-family: Raleway;
+    font-family: Raleway, sans-serif;
 }
 
 h2 {
@@ -118,7 +116,7 @@ button {
     outline: none;
     border-style: none;
     background-color: var(--button-color);
-    font-family: Raleway;
+    font-family: Raleway, sans-serif;
     font-size: 125%;
     padding: 20px;
 }

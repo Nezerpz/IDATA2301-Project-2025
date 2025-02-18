@@ -2,7 +2,7 @@
 
 ## Theme
 ### Serious or Professional?
-Professional
+Playful Professional
 
 ## Color scheme
 ### Does the company have a color scheme?

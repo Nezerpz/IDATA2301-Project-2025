@@ -1,6 +1,26 @@
 import "../static/css/filter.css";
+import {useEffect, useState} from "react";
 
-const filters = () => {
+function filters() {
+    const [filters, setFilters] = useState([]);
+    const [error, setError] = useState(null);
+    useEffect(() => {
+        async function fetchFilters() {
+            try {
+                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars");
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                let filters = await response.json();
+                setFilters(filters);
+            } catch (error) {
+                setError(error.message);
+                console.error("Failed to fetch cars:", error);
+            }
+        }
+
+        fetchFilters().then(r => console.log("Fetched cars"));
+    }, []);
     return (
         <div className={"filter"}>
             <div className={"filter-header"}>

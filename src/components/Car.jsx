@@ -2,7 +2,6 @@ import "../static/css/car.css";
 import PropTypes from 'prop-types';
 import React from "react";
 import FeatureList from "./FeatureList.jsx";
-import feature from "./Feature.jsx";
 
 
 function Car ({car}) {
@@ -24,7 +23,6 @@ function Car ({car}) {
         </div>
     )
 }
-
 
 Car.propTypes = {
     car: PropTypes.shape({
