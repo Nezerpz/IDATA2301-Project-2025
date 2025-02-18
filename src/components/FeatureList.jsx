@@ -1,19 +1,19 @@
 import PropTypes from "prop-types";
 import Feature from "./Feature.jsx";
 
-function FeatureList ({features}) {
+function FeatureList ({features = []}) {
     return (
         <div>
-            {features.features.map((feature, index) => (
+            <ul>
+            {features.map((feature, index) => (
                 <Feature key={index} feature={feature} />
             ))}
+            </ul>
         </div>
     );
 }
 FeatureList.propTypes = {
-    features: PropTypes.shape({
-        features: PropTypes.array
-    })
+    features: PropTypes.array
 }
 
 export default FeatureList;
