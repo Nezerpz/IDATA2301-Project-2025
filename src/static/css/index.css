@@ -5,6 +5,7 @@
     /*--main-color: #696969;*/
     /*--main-color: #495057;*/
     --main-color: #293037;
+    --navbar-item-color: #394047;
     --foreground-color: #f1f1f1;
     --heading-color-dark: #495057;
     --heading-color-light: #f8f9fa;
@@ -41,9 +42,10 @@ body{
     justify-content: space-between;
     background-color: var(--foreground-color);
     margin: 0;
+    font-size: 100%;
 }
 
-a {
+.navbar, #callToAction > a {
     color: var(--link-color);
     text-decoration: none;
     font-family: Raleway;
@@ -59,21 +61,21 @@ a {
 }
 
 .navbar-item {
-    font-family: Raleway;
-    font-size: 125%;
-    background-color: var(--main-color);
-    flex-grow: 1;
-    text-align: center;
-    color: white;
+    padding: 20px;
+    background-color: var(--navbar-item-color);
+    color: var(--link-color);
     text-decoration: none;
+    font-family: Raleway;
+    font-size: 1.25em;
+    text-align: center;
+    word-break: keep-all;
+    flex-grow: 1;
     display: block;
-    padding: 16px;
 }
 
 .navbar-item:hover {
-    background-color: white;
-    color: black;
-    padding: 16px;
+    background-color: var(--link-color);
+    color: var(--navbar-item-color);
 }
 
 #home {
@@ -85,8 +87,14 @@ a {
     box-shadow: 0px 0px 100px black inset;
 }
 
-#callToAction {
-    margin: 100px;
+#leavingEnteringCar {
+    width: 500px;
+    height: auto;
+}
+
+main > div > div > section {
+    padding-left: 100px;
+    padding-right: 100px;
 }
 
 h1,h2,h3,h4,h5 {
@@ -95,6 +103,10 @@ h1,h2,h3,h4,h5 {
 
 h2 {
     font-size: 275%;
+}
+
+#callToAction {
+    margin-top: 120px;
 }
 
 #callToAction > h2 {
@@ -130,6 +142,7 @@ img {
 
 p {
     color: var(--text-color);
+    font-size: 1.5em;
 }
 
 strong {
@@ -145,6 +158,7 @@ summary {
 }
 
 header{
+    padding: 25px;
     background-color: var(--main-color);
     background-image: linear-gradient(90deg, #111, var(--main-color));
     color: white;
