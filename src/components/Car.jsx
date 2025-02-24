@@ -8,6 +8,7 @@ function Car ({car}) {
     return (
         <div className="car">
             <h2>{car.manufacturer} {car.carModel} ({car.productionYear})</h2>
+            <img src={`https://dummyimage.com/600x200/000/ffffff&text=<img src="${car.manufacturer}+${car.carModel}+(${car.productionYear})" />`} alt={car.carModel}/>
             <div>
                 <div>
                     <p><strong>Provider: </strong>{}</p>
