@@ -168,3 +168,12 @@ header{
 footer{
     background-color: var(--main-color);
 }
+
+.footer-icon{
+    width: 50px;
+    margin: 10px;
+}
+
+a {
+    display: inline-block;
+}
