@@ -7,7 +7,6 @@ function renderPage(cars) {
     return (
         <div className="row">
             <div className="col-3">
-                <h1>Hei</h1>
                 <Filters cars={cars}/>
             </div>
             <div className="col-9">
