@@ -1,0 +1,28 @@
+.car {
+    margin: 30px;
+    padding: 0px 24px 24px 24px;
+    background-color: var(--foreground-color);
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    flex-direction: column;
+    border-radius: var(--corner-rounding);
+    box-shadow: 0px 0px 15px #BBB;
+}
+
+.car > div {
+    display: flex;
+    flex-direction: row;
+}
+
+.car > h2 {
+    color: var(--heading-color-dark);
+}
+
+.car img {
+    height: 250px;
+    width: auto;
+    overflow: hidden;
+    padding-right: 24px;
+}
+

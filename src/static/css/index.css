@@ -1,5 +1,179 @@
-#title { color: darkblue; }
+@import "./columnLayout.css";
+
+
+:root {
+    /*--main-color: #696969;*/
+    /*--main-color: #495057;*/
+    --main-color: #293037;
+    --navbar-item-color: #394047;
+    --foreground-color: #f1f1f1;
+    --heading-color-dark: #495057;
+    --heading-color-light: #f8f9fa;
+    --filter-color: #343a40;
+    --text-color: #222;
+    --bold-text-color: #111;
+    --corner-rounding: 12px;
+    --dark-shadow-color: #222;
+    --button-color: #37acb9;
+    --link-color: #f1f1f1;
+}
+
+
+#title { 
+    color: var(--heading-color-light);
+    text-shadow: 5px 5px black;
+    margin: 20px;
+}
 #disclaimer { 
+    padding: 20px;
     background-color: orangered;
+}
+#disclaimer > p {
+    font-size: 125%;
     color: white;
+}
+
+body{
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--foreground-color);
+    margin: 0;
+    font-size: 100%;
+}
+
+.navbar, #callToAction > a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-family: Raleway, sans-serif;
+    padding: 20px;
+    font-size: 125%;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-around;
+    list-style-type: none;
+}
+
+.navbar-item {
+    padding: 20px;
+    background-color: var(--navbar-item-color);
+    color: var(--link-color);
+    text-decoration: none;
+    font-family: Raleway, sans-serif;
+    font-size: 1.25em;
+    text-align: center;
+    word-break: keep-all;
+    flex-grow: 1;
+    display: block;
+}
+
+.navbar-item:hover {
+    background-color: var(--link-color);
+    color: var(--navbar-item-color);
+}
+
+#home {
+    height: 500px;
+    background-image: url(https://imgs.search.brave.com/RlAxmVxi2QB7xGa_ifz5YzAKA9Mn8sQxglf942zCHL8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMxLmhvdGNhcnNp/bWFnZXMuY29tL3dv/cmRwcmVzcy93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyNC8wOS9j/bGFya3Nvbi5qcGc);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0px 0px 100px black inset;
+}
+
+#leavingEnteringCar {
+    width: 500px;
+    height: auto;
+}
+
+main > div > div > section {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
+h1,h2,h3,h4,h5 {
+    font-family: Raleway, sans-serif;
+}
+
+h2 {
+    font-size: 275%;
+}
+
+#callToAction {
+    margin-top: 120px;
+}
+
+#callToAction > h2 {
+    color: var(--heading-color-light);
+    text-shadow: 2px 2px 20px var(--dark-shadow-color);
+}
+
+button {
+    outline: none;
+    border-style: none;
+    background-color: var(--button-color);
+    font-family: Raleway, sans-serif;
+    font-size: 125%;
+    padding: 20px;
+}
+
+#callToAction > button {
+    color: var(--heading-color-light);
+    box-shadow: 0px 0px 20px var(--dark-shadow-color);
+    border-radius: 7px;
+}
+
+img {
+    display: inline-block;
+    vertical-align: middle;
+    width: 100px;
+}
+.img-text {
+    display: inline-block;
+    vertical-align: middle;
+    width: calc(100% - 100px);
+}
+
+p {
+    color: var(--text-color);
+    font-size: 1.5em;
+}
+
+strong {
+    color: var(--bold-text-color);
+}
+
+summary {
+    color: var(--filter-color);
+}
+
+#footer-content{
+    padding: 30px;
+}
+
+header{
+    padding: 25px;
+    background-color: var(--main-color);
+    background-image: linear-gradient(90deg, #111, var(--main-color));
+    color: white;
+}
+
+#contactHeading {
+    color: var(--heading-color-light);
+}
+
+footer{
+    background-color: var(--main-color);
+}
+
+.footer-icon{
+    width: 50px;
+    margin: 10px;
+}
+
+a {
+    display: inline-block;
 }
