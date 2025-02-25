@@ -1,38 +1,51 @@
 import useTitle from "../components/useTitle.jsx";
 import Filters from "../components/Filters.jsx";
 import CarList from "../components/CarList.jsx";
-import { render } from "react-dom";
+import React, { useState, useEffect } from 'react';
 
-async function renderPage(cars, error) {
-    console.debug(cars)
+function renderPage(cars) {
+    console.log(cars);
     return (
-        (error ? <div>{error}</div> :
-            <div className="row">
-                <div className="col-3">
-                    <Filters cars={cars}/>
-                </div>
-                <div className="col-9">
-                    <div className={"car-grid"}>
-                        <CarList cars={cars}/>
-                    </div>
+        <div className="row">
+            <div className="col-3">
+                <h1>Hei</h1>
+                <Filters cars={cars}/>
+            </div>
+            <div className="col-9">
+                <div className={"car-grid"}>
+                    <CarList cars={cars}/>
                 </div>
             </div>
-        )
+        </div>
     )
 }
 
-function Cars(){
+function Cars() {
     useTitle("Cars");
-    (async () => { 
+    const [cars, setCars] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+      const fetchData = async () => {
+        setLoading(true);
         try {
-            fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars")
-                .then(response => response.json())
-                .then(data => renderPage(data, null));
-        } catch (e) {
-            renderPage([], e.message);
+            let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars");
+            let data = await response.json();
+            setCars(data);
+        } catch (error) {
+            setError(error);
+        } finally {
+            setLoading(false);
         }
-        //renderPage(cars, error);
-    })();
+      };
+
+      fetchData();
+    }, []);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
+    return renderPage(cars);
 }
 
 export default Cars;
