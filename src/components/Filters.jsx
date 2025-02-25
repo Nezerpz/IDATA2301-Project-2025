@@ -14,12 +14,12 @@ function getUniqueEntries(dictList, key) {
 
 function getMaxPrice(cars) {
     const prices = getUniqueEntries(cars, "price");
-    return Math.min(prices);
+    return Math.max(prices);
 }
 
 function getMinPrice(cars) {
     const prices = getUniqueEntries(cars, "price");
-    return Math.max(prices);
+    return Math.min(prices);
 }
 
 function getUniqueEntriesInLists(dictList, key) {
@@ -68,11 +68,15 @@ Filters.propTypes = {
     cars: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.number,
+            imagePath: PropTypes.string,
             carModel: PropTypes.string,
+            price: PropTypes.number,
             numberOfSeats: PropTypes.number,
             productionYear: PropTypes.number,
             manufacturer: PropTypes.string,
             transmissionType: PropTypes.string,
+            carStatus: PropTypes.string,
+            user: PropTypes.string,
             fuelType: PropTypes.string,
             features: PropTypes.array
         })
