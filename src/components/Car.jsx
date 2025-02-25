@@ -13,7 +13,7 @@ function Car ({car}) {
                 <div>
                     <p><strong>Provider: </strong>{}</p>
                     <p><strong>Price: </strong>{}</p>
-                    <p><strong>Provider: </strong>{car.numberOfSeats}</p>
+                    <p><strong>Number of seats: </strong>{car.numberOfSeats}</p>
                     <p><strong>Transmission: </strong>{car.transmissionType}</p>
                     <p><strong>Fuel: </strong>{car.fuelType}</p>
                 </div>
