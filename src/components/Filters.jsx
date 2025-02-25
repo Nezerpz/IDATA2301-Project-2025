@@ -1,26 +1,48 @@
 import "../static/css/filter.css";
-import {useEffect, useState} from "react";
+import Filter from "./Filter.jsx";
 
-function filters() {
-    const [filters, setFilters] = useState([]);
-    const [error, setError] = useState(null);
-    useEffect(() => {
-        async function fetchFilters() {
-            try {
-                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars");
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                let filters = await response.json();
-                setFilters(filters);
-            } catch (error) {
-                setError(error.message);
-                console.error("Failed to fetch cars:", error);
-            }
-        }
+function getUniqueEntries(dictList, key) {
+    const uniqueEntries = Array.from(
+        // A set has no duplicates
+        // we use map to only extract one column
+        new Set(dictList.map(item => item[key]))
+    );
+    return uniqueEntries;
+}
 
-        fetchFilters().then(r => console.log("Fetched cars"));
-    }, []);
+function getMaxPrice(cars) {
+    const prices = getUniqueEntries(cars, "price");
+    return Math.min(prices);
+}
+
+function getMinPrice(cars) {
+    const prices = getUniqueEntries(cars, "price");
+    return Math.max(prices);
+}
+
+function getUniqueEntriesInLists(dictList, key) {
+    const uniqueEntries = Array.from(dictList.reduce(
+        // dict[key] is a list (a given for this function)
+        // The acc variable contains accumulated set
+        // A set has no duplicates
+        (acc, dict) => acc.add(dict[key]),
+        new Set() // initial value for acc
+    ));
+
+    return uniqueEntries;
+}
+
+export default function filters(cars) {
+    const manufacturers = getUniqueEntries(cars, "manufacturer");
+    const prices = [getMinPrice(cars), getMaxPrice(cars)];
+    const transmission = getUniqueEntries(cars, "transmissionType");
+    const features = getUniqueEntriesInLists(cars, "features");
+
+    console.debug(manufacturers);
+    console.debug(prices);
+    console.debug(transmission);
+    console.debug(features);
+
     return (
         <div className={"filter"}>
             <div className={"filter-header"}>
@@ -29,9 +51,9 @@ function filters() {
 
             <div className={"filter-body"}>
                 <input type={"text"}
-                placeholder={"Search"}
-                onChange={event => {}}
-                />
+                    placeholder={"Search"}
+                    onChange={event => {}}
+                    />
                 <details className={"filter-item"}>
                     {/* Buttons in this function server to close or open selected category
                      TODO: Implement logic behind button opening and closing */}
@@ -103,4 +125,3 @@ function filters() {
         </div>
     );
 }
-export default filters;
