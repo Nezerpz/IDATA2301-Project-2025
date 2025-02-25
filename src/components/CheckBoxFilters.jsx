@@ -1,10 +1,6 @@
 import PropTypes from 'prop-types';
 
-function CheckBoxFilters(name, values) {
-    console.log("name")
-    console.log(name)
-    console.log("values")
-    console.log(values)
+function CheckBoxFilters({name, values}) {
     return (
         <details className={"filter-item"}>
             <summary className={"category-name"}>{name}</summary>
@@ -12,7 +8,7 @@ function CheckBoxFilters(name, values) {
                 {values.map((value, key) => (
                     <li key={key}>
                         <input type={"checkbox"} />
-                        <label>value</label>
+                        <label>{value}</label>
                     </li>
                 ))}
             </ul>

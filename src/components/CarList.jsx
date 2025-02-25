@@ -2,6 +2,7 @@ import Car from "./Car.jsx";
 import PropTypes from 'prop-types';
 
 function CarList (cars) {
+    cars = cars["cars"]
     return (
         <div>
             {cars.map((car, index) => <Car key={index} car={car} readOnly={true} />)}

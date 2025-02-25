@@ -4,7 +4,6 @@ import CarList from "../components/CarList.jsx";
 import React, { useState, useEffect } from 'react';
 
 function renderPage(cars) {
-    console.log(cars);
     return (
         <div className="row">
             <div className="col-3">
