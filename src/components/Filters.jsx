@@ -14,12 +14,16 @@ function getUniqueEntries(dictList, key) {
 
 function getMaxPrice(cars) {
     const prices = getUniqueEntries(cars, "price");
-    return Math.max(prices);
+    const maxPrice = Math.max(...prices);
+    console.log(maxPrice);
+    return maxPrice;
 }
 
 function getMinPrice(cars) {
     const prices = getUniqueEntries(cars, "price");
-    return Math.min(prices);
+    const minPrice = Math.min(...prices);
+    console.log(minPrice);
+    return minPrice;
 }
 
 function getUniqueEntriesInLists(dictList, key) {
