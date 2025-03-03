@@ -181,8 +181,10 @@ a {
 label {
     display: flex;
     flex-direction: column;
+    margin: 15px 0;
 }
 label>span {
+    margin: 5px 0;
     transition: all .2s;
     transform-origin: top left;
 }
