@@ -54,6 +54,7 @@ body{
 .navbar {
     display: flex;
     justify-content: space-around;
+    flex-flow: row wrap;
     list-style-type: none;
 }
 
@@ -68,6 +69,7 @@ body{
     word-break: keep-all;
     flex-grow: 1;
     display: block;
+    min-width: 111px;
 }
 
 .navbar-item:hover {
@@ -176,6 +178,7 @@ footer{
 
 a {
     display: inline-block;
+    color: var(--link-color);
 }
 
 label {

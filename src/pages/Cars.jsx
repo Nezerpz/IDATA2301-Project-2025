@@ -5,7 +5,7 @@ import SearchDateFromTo from "../components/SearchDateFromTo.jsx";
 import React, { useState, useEffect } from 'react';
 
 function renderPage(cars) {
-    if (cars.length === 0) {
+    if (cars === null) {
         return (
             <div>
                 <SearchDateFromTo />
