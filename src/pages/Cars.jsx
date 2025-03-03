@@ -1,11 +1,13 @@
 import useTitle from "../components/useTitle.jsx";
 import Filters from "../components/Filters.jsx";
 import CarList from "../components/CarList.jsx";
+import SearchDateFromTo from "../components/SearchDateFromTo.jsx";
 import React, { useState, useEffect } from 'react';
 
 function renderPage(cars) {
     return (
         <div className="row">
+            <SearchDateFromTo />
             <div className="col-3">
                 <Filters cars={cars}/>
             </div>

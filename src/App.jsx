@@ -7,7 +7,6 @@ import Signup from "./pages/Signup.jsx";
 
 function App() {
   return (
-      <>
       <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cars" element={<Cars />} />
@@ -15,7 +14,6 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
       </Routes>
-      </>
   )
 }
 
