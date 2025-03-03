@@ -1,21 +1,30 @@
 import useTitle from "../components/useTitle.jsx";
 import Filters from "../components/Filters.jsx";
 import CarList from "../components/CarList.jsx";
+import SearchDateFromTo from "../components/SearchDateFromTo.jsx";
 import React, { useState, useEffect } from 'react';
 
 function renderPage(cars) {
-    return (
-        <div className="row">
-            <div className="col-3">
-                <Filters cars={cars}/>
+    if (cars.length === 0) {
+        return (
+            <div>
+                <SearchDateFromTo />
             </div>
-            <div className="col-9">
-                <div className={"car-grid"}>
-                    <CarList cars={cars}/>
+        )
+    } else {
+        return (
+            <div className="row">
+                <div className="col-3">
+                    <Filters cars={cars}/>
+                </div>
+                <div className="col-9">
+                    <div className={"car-grid"}>
+                        <CarList cars={cars}/>
+                    </div>
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
 }
 
 function Cars() {
