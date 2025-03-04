@@ -26,11 +26,11 @@
 }
 #disclaimer { 
     padding: 20px;
-    background-color: orangered;
+    background-color: #730000;
 }
 #disclaimer > p {
     font-size: 125%;
-    color: white;
+    color: var(--heading-color-light);
 }
 
 body{
