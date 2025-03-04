@@ -1,9 +1,11 @@
 import useTitle from "../components/useTitle.jsx";
+import SearchDateFromTo from "../components/SearchDateFromTo.jsx";
 
 function Home(){
     useTitle("Home");
     return (
         <div>
+            <SearchDateFromTo />
             <section id="home" className="row">
                 <div id="callToAction" className="col-12">
                     <h2>Up for an Adventure?</h2>

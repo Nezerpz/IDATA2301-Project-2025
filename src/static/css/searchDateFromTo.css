@@ -1,0 +1,11 @@
+.search-date-from-to{
+    display: flex;
+    justify-content: space-around;
+    font-family: Raleway, sans-serif;
+    flex-wrap: wrap;
+    list-style-type: none;
+    margin: 20px;
+    padding: 20px;
+    background-color: var(--main-color);
+    color: var(--heading-color-light);
+}

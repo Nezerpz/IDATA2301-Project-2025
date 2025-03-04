@@ -26,11 +26,11 @@
 }
 #disclaimer { 
     padding: 20px;
-    background-color: orangered;
+    background-color: #730000;
 }
 #disclaimer > p {
     font-size: 125%;
-    color: white;
+    color: var(--heading-color-light);
 }
 
 body{
@@ -54,6 +54,7 @@ body{
 .navbar {
     display: flex;
     justify-content: space-around;
+    flex-flow: row wrap;
     list-style-type: none;
 }
 
@@ -68,6 +69,7 @@ body{
     word-break: keep-all;
     flex-grow: 1;
     display: block;
+    min-width: 111px;
 }
 
 .navbar-item:hover {
@@ -176,4 +178,21 @@ footer{
 
 a {
     display: inline-block;
+    color: var(--link-color);
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+}
+label>span {
+    margin: 5px 0;
+    transition: all .2s;
+    transform-origin: top left;
+}
+label>input[placeholder=" "]:not(:focus):placeholder-shown + span {
+    transform: translateY(1em) scale(1.25);
+    pointer-events: none;
+    opacity: .5
 }
