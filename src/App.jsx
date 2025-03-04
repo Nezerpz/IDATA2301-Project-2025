@@ -4,6 +4,7 @@ import About from './pages/About.jsx'
 import Cars from './pages/Cars.jsx'
 import Login from './pages/Login.jsx'
 import Signup from "./pages/Signup.jsx";
+import Orders from "./pages/Orders.jsx";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/orders" element={<Orders />} />
       </Routes>
   )
 }
