@@ -1,24 +1,69 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import useTitle from "../components/useTitle.jsx";
 import "../static/css/loginAndSignup.css";
 
 
+
+
 function Login() {
     useTitle("Login");
+    const navigate = useNavigate();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleLogin = async (event) => {
+        event.preventDefault();
+        const requestBody = JSON.stringify({ username, password });
+        console.log('Request Body:', requestBody);
+        try {
+            const response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/authenticate", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                localStorage.setItem('token', data.token); // Store the token
+                navigate('/');
+            } else {
+                console.error('Failed to login', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error logging in', error);
+        }
+    };
+
     return (
         <div className={"row"}>
             <div className={"col-2"}> </div>
             <div className={"col-8"}>
                 <div className={"login"}>
                     <h1 className={"login-header"}>Login</h1>
-                    <form className={"login-form"}>
+                    <form className={"login-form"} onSubmit={handleLogin}>
                         <div className={"col-12"}>
                             <label htmlFor={"username"}>
                                 <span>Username</span>
-                                <input type="username" id="username" name="username" />
+                                <input
+                                    type="text"
+                                    id="username"
+                                    name="username"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                />
                             </label>
                             <label htmlFor={"password"}>
                                 <span>Password</span>
-                                <input type="password" id="password" name="password" />
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
                             </label>
                         </div>
                         <div>
