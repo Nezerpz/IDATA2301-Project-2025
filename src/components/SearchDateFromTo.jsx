@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../static/css/SearchDateFromTo.css';
+import '../static/css/searchDateFromTo.css';
 
 function SearchDateFromTo() {
     const navigate = useNavigate();
