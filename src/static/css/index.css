@@ -181,18 +181,18 @@ a {
     color: var(--link-color);
 }
 
-label {
+label:not(li label) {
     display: flex;
     flex-direction: column;
     margin: 15px 0;
 }
-label>span {
+label:not(li label)>span {
     margin: 5px 0;
     transition: all .2s;
     transform-origin: top left;
 }
-label>input[placeholder=" "]:not(:focus):placeholder-shown + span {
+label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + span {
     transform: translateY(1em) scale(1.25);
     pointer-events: none;
-    opacity: .5
+    opacity: .5;
 }
