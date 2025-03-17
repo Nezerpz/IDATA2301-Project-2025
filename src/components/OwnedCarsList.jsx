@@ -1,13 +1,15 @@
-import Car from "./Car.jsx";
+
+import OwnedCar from "./OwnedCar.jsx";
 
 
 function OwnedCarsList(cars) {
     cars = cars["cars"]
     return (
-        <div>
-                {cars.map((car, index) => (
-                    <Car key={index} car={car}/>))}
-        </div>
+            <ul className={"scrollable-list"}>
+                {cars.map((car) => (
+                    <OwnedCar car={car} key ={car.id}/>
+                ))}
+            </ul>
     )
 }
 

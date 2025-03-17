@@ -4,7 +4,7 @@ function OrderList (orders) {
     orders = orders["orders"]
     return (
         <div>
-            {orders.map((order, index) => <Order key={index} order={order} readOnly={true} />)}
+            {orders.map((order) => <Order key={order.id} order={order} readOnly={true} />)}
         </div>
     );
 }

@@ -1,32 +1,30 @@
-import {Route, Routes} from "react-router-dom";
+import {Route, Routes, useLocation} from "react-router-dom";
 import AddNewCar from "./AddNewCar.jsx";
 import ManageOwnedCars from "./ManageOwnedCars.jsx";
+import React from "react";
+import NotFound from "../pages/NotFound.jsx";
 
 
-function ProviderSettings(){
+function ProviderSettings({ currentPath }) {
     return (
         <div className={"row"}>
             <div className={"col-2"}></div>
             <div className={"col-8"}>
-                <h1>Provider Settings</h1>
                 <div className={"button-container"}>
-                    <button>
-                        <a href={"add"}>Add new car</a>
-                    </button>
-                    <button>
-                        <a href={"manage"}>Manage owned cars</a>
-                    </button>
+                    {currentPath === "/mypage/settings" && (
+                        <button>
+                            <a href={`${currentPath}/cars`}>Cars</a>
+                        </button>
+                    )}
                 </div>
-                <div style={{border: "3px solid black"}}>
                 <Routes>
                     <Route path="add" element={<AddNewCar />} />
-                    <Route path="manage" element={<ManageOwnedCars />} />
+                    <Route path="cars" element={<ManageOwnedCars />} />
                 </Routes>
-                </div>
             </div>
             <div className={"col-2"}></div>
         </div>
-    )
+    );
 }
 
 export default ProviderSettings

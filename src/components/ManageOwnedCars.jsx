@@ -11,7 +11,14 @@ import React, {useEffect, useState} from "react";
 function renderPage(cars) {
     return(
     <div>
-        <h1>Manage Owned Cars</h1>
+        <div className={"button-container-end"}>
+            <button>
+                <a href={"add"}>Add new car</a>
+            </button>
+            <button>
+                <a href={"/mypage/settings"}>Back</a>
+            </button>
+        </div>
         <OwnedCarsList cars={cars} />
     </div>
     )
