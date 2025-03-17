@@ -28,7 +28,7 @@ function SettingsNavbar() {
     return (
         <div className={"row"}>
                 <div className="navbar">
-                    <a className="navbar-item"href={"/orders"}>
+                    <a className="navbar-item"href={"orders"}>
                         Order History
                     </a>
                     <a className={"navbar-item"} href={"/"} onClick={handleBecomeProvider}>

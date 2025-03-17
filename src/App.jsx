@@ -6,7 +6,10 @@ import Login from './pages/Login.jsx'
 import Signup from "./pages/Signup.jsx";
 import Orders from "./pages/Orders.jsx";
 import Review from "./pages/Review.jsx";
-import UserPage from "./pages/UserPage.jsx";
+import User from "./pages/User.jsx";
+import Settings from "./pages/Settings.jsx";
+import NotFound from "./pages/NotFound.jsx";
+
 
 function App() {
   return (
@@ -18,7 +21,9 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/review" element={<Review />} />
-          <Route path="/userpage" element={<UserPage />} />
+          <Route path="/mypage/*" element={<User />} />
+          <Route path="/settings/*" element={<Settings />} />
+          <Route path="*" element={<NotFound />} />
       </Routes>
   )
 }

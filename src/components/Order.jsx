@@ -16,7 +16,7 @@ function Order ({order}) {
                 <li><strong>Price paid: </strong>{order.pricePaid}</li>
                 <li><strong>Order status: </strong>{order.orderStatus}</li>
             </ul>
-
+<div className={"button-container"}>
             <button onClick={() => {
                 <Review order = {order} type={"car"}/>
                 /*TODO: Implement logic to redirect to review page for specific car*/
@@ -29,6 +29,7 @@ function Order ({order}) {
             }}>
                 Review provider
             </button>
+</div>
 
         </div>
     )

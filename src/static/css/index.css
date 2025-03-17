@@ -100,15 +100,19 @@ h1,h2,h3,h4,h5 {
     font-family: Raleway, sans-serif;
 }
 
+h1 {
+    font-size: 4rem;
+}
+
 h2 {
-    font-size: 275%;
+    font-size: 3rem;
 }
 
 #callToAction {
     margin-top: 120px;
 }
 
-#callToAction > h2 {
+#jeremy-header {
     color: var(--heading-color-light);
     text-shadow: 2px 2px 20px var(--dark-shadow-color);
 }
@@ -118,13 +122,9 @@ button {
     border-style: none;
     background-color: var(--button-color);
     font-family: Raleway, sans-serif;
-    font-size: 125%;
+    font-size: 1.25rem;
     padding: 20px;
-}
-
-#callToAction > button {
     color: var(--heading-color-light);
-    box-shadow: 0px 0px 20px var(--dark-shadow-color);
     border-radius: 7px;
 }
 
@@ -195,4 +195,20 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
     transform: translateY(1em) scale(1.25);
     pointer-events: none;
     opacity: .5;
+}
+
+#provider-container{
+    background-color: var(--foreground-color);
+}
+
+.button-container{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.button-container > button {
+    align-self: flex-start;
 }

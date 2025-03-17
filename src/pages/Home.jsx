@@ -1,16 +1,21 @@
 import useTitle from "../components/useTitle.jsx";
 import SearchDateFromTo from "../components/SearchDateFromTo.jsx";
 
+//TODO: Fix the link. It is currently white on white background
 function Home(){
     useTitle("Home");
     return (
         <div>
-            <SearchDateFromTo />
             <section id="home" className="row">
-                <div id="callToAction" className="col-12">
-                    <h2>Up for an Adventure?</h2>
-                    <button>Rent Random Car</button>
-                    <a href="/cars">Or Browse Available...</a>
+                <div id={"callToAction"} className="col-12">
+                    <div className={"row"}>
+                        <h2 id={"jeremy-header"}>Up for an Adventure?</h2>
+                    </div>
+                    <div className={"row"}>
+                        <div className={"col-3"}>
+                            <SearchDateFromTo />
+                        </div>
+                    </div>
                 </div>
             </section>
             <section>
