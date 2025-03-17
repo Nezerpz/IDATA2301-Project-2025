@@ -1,4 +1,4 @@
-function OwnedCar(car) {
+function OwnedCarListObject(car) {
     car = car["car"]
     return (
         <li className={"owned-car"}>
@@ -11,4 +11,4 @@ function OwnedCar(car) {
 
 
 
-export default OwnedCar;
+export default OwnedCarListObject;

@@ -7,8 +7,8 @@ import Signup from "./pages/Signup.jsx";
 import Orders from "./pages/Orders.jsx";
 import Review from "./pages/Review.jsx";
 import MyPage from "./pages/MyPage.jsx";
-import Settings from "./pages/Settings.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import User from "./components/User.jsx";
 
 //TODO: DO THIS https://www.youtube.com/watch?v=oTIJunBa6MA&t=1334s
 function App() {
@@ -22,6 +22,7 @@ function App() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/review" element={<Review />} />
           <Route path="/mypage/*" element={<MyPage />} />
+          <Route path="/user" element={<User />} />
           <Route path="*" element={<NotFound />} />
       </Routes>
   )
