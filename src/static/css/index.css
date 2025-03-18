@@ -25,7 +25,7 @@
     margin: 20px;
 }
 #disclaimer { 
-    padding: 20px;
+    padding: 10px;
     background-color: #730000;
 }
 #disclaimer > p {
@@ -100,15 +100,27 @@ h1,h2,h3,h4,h5 {
     font-family: Raleway, sans-serif;
 }
 
+h1 {
+    font-size: 4rem;
+}
+
 h2 {
-    font-size: 275%;
+    font-size: 3rem;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+h4 {
+    font-size: 1.5rem;
 }
 
 #callToAction {
     margin-top: 120px;
 }
 
-#callToAction > h2 {
+#jeremy-header {
     color: var(--heading-color-light);
     text-shadow: 2px 2px 20px var(--dark-shadow-color);
 }
@@ -118,13 +130,9 @@ button {
     border-style: none;
     background-color: var(--button-color);
     font-family: Raleway, sans-serif;
-    font-size: 125%;
+    font-size: 1.25rem;
     padding: 20px;
-}
-
-#callToAction > button {
     color: var(--heading-color-light);
-    box-shadow: 0px 0px 20px var(--dark-shadow-color);
     border-radius: 7px;
 }
 
@@ -153,7 +161,7 @@ summary {
 }
 
 #footer-content{
-    padding: 30px;
+    padding: 10px;
 }
 
 header{
@@ -181,18 +189,85 @@ a {
     color: var(--link-color);
 }
 
-label {
+label:not(li label) {
     display: flex;
     flex-direction: column;
     margin: 15px 0;
 }
-label>span {
+label:not(li label)>span {
     margin: 5px 0;
     transition: all .2s;
     transform-origin: top left;
 }
-label>input[placeholder=" "]:not(:focus):placeholder-shown + span {
+label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + span {
     transform: translateY(1em) scale(1.25);
     pointer-events: none;
-    opacity: .5
+    opacity: .5;
+}
+
+#provider-container{
+    background-color: var(--foreground-color);
+}
+
+.button-container{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.button-container > button {
+    align-self: flex-start;
+}
+
+.button-container-end{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.button-container-end > button {
+    align-self: flex-end;
+}
+
+.scrollable-list {
+    overflow-y: auto;
+    max-height: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.owned-car{
+    border: 1px solid var(--main-color);
+    padding: 10px;
+}
+
+.owned-car:nth-child(odd) {
+    background-color: #f9f9f9; /* Light color for odd items */
+}
+
+.owned-car:nth-child(even) {
+    background-color: #e0e0e0; /* Slightly darker color for even items */
+}
+
+.flex-container-column {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.flex-container-row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.flex-end-item {
+    align-self: flex-end;
 }

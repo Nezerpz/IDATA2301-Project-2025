@@ -7,14 +7,11 @@ import React, { useState, useEffect } from 'react';
 function renderPage(orders) {
   return (
     <div className={"row"}>
-        <SettingsNavbar />
-        <div className={"row"}>
             <div className={"col-1"}></div>
             <div className={"col-10"}>
                 <OrderList orders={orders} />
             </div>
             <div className={"col-1"}></div>
-        </div>
     </div>
   );
 }

@@ -1,0 +1,74 @@
+
+import OwnedCarsList from './OwnedCarsList';
+import PropTypes from "prop-types";
+import Car from "./Car.jsx";
+import useTitle from "./useTitle.jsx";
+import React, {useEffect, useState} from "react";
+
+//TODO: Make the fetchFunction get the cars from "/cars/providerId".
+// The providerId should be stored in the session storage.
+
+function renderPage(cars) {
+    return(
+    <div>
+        <div className={"button-container-end"}>
+            <button>
+                <a href={"add"}>Add new car</a>
+            </button>
+            <button>
+                <a href={"/mypage/settings"}>Back</a>
+            </button>
+        </div>
+        <OwnedCarsList cars={cars} />
+    </div>
+    )
+}
+
+function ManageOwnedCars() {
+
+    useTitle("Manage");
+    const [cars, setCars] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true);
+            try {
+                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars");
+                let data = await response.json();
+                setCars(data);
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
+
+    return renderPage(cars);
+}
+
+Car.propTypes = {
+    car: PropTypes.shape({
+        id: PropTypes.number,
+        imagePath: PropTypes.string,
+        carModel: PropTypes.string,
+        price: PropTypes.number,
+        numberOfSeats: PropTypes.number,
+        productionYear: PropTypes.number,
+        manufacturer: PropTypes.string,
+        transmissionType: PropTypes.string,
+        carStatus: PropTypes.string,
+        user: PropTypes.string,
+        fuelType: PropTypes.string,
+        features: PropTypes.array
+    })
+}
+
+export default ManageOwnedCars;

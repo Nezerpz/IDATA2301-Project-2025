@@ -4,7 +4,7 @@ function CarList (cars) {
     cars = cars["cars"]
     return (
         <div>
-            {cars.map((car, index) => <Car key={index} car={car} readOnly={true} />)}
+            {cars.map((car) => <Car key={car.id} car={car} readOnly={true} />)}
         </div>
     );
 }
