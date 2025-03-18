@@ -1,4 +1,5 @@
 @import "./columnLayout.css";
+@import "./order.css";
 
 
 :root {
@@ -14,7 +15,9 @@
     --bold-text-color: #111;
     --corner-rounding: 12px;
     --dark-shadow-color: #222;
-    --button-color: #37acb9;
+    --bright-shadow-color: #BBB;
+    /*--button-color: #37acb9;*/
+    --button-color: #0f7c89;
     --link-color: #f1f1f1;
 }
 
@@ -117,7 +120,7 @@ h4 {
 }
 
 #callToAction {
-    margin-top: 120px;
+    margin-top: 10px;
 }
 
 #jeremy-header {
@@ -270,4 +273,12 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
 
 .flex-end-item {
     align-self: flex-end;
+}
+
+.review-box {
+    padding: 10px;
+}
+
+#search-date-div{
+    min-width: 210px;
 }

@@ -12,7 +12,7 @@ function Home(){
                         <h2 id={"jeremy-header"}>Up for an Adventure?</h2>
                     </div>
                     <div className={"row"}>
-                        <div className={"col-3"}>
+                        <div className={"col-3"} id={"search-date-div"}>
                             <SearchDateFromTo />
                         </div>
                     </div>

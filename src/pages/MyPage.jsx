@@ -9,13 +9,13 @@ import Users from "../components/Users.jsx";
 
 function MyPage() {
     return (
-        <div>
+        <>
             <Routes>
                 <Route path="/orders" element={<Orders />} />
                 <Route path="settings/*" element={<Settings />} />
                 <Route path="users" element={<Users />} />
             </Routes>
-        </div>
+        </>
     );
 }
 
