@@ -1,26 +1,19 @@
-:root {
-    --collapse-width: 1024px;
-}
 
 header {
     display: flex;
     flex-direction:  row;
     justify-content: flex-end; /* everything right-adjusted by default */
-    padding: 25px;
+    padding: 0px 25px;
     background-color: var(--main-color);
     background-image: linear-gradient(90deg, #111, var(--main-color));
     color: white;
 }
 
-@media screen and (max-width: var(--collapse-width)) {
-    header {
-        flex-direction: column;
-    }
-}
-
 #title { 
     /* title is left adjusted */
     margin-right: auto;
+    margin-top: 10px;
+    margin-bottom: 7px;
 }
 
 #logo {
@@ -32,6 +25,7 @@ header {
     display: flex;
     flex-direction: row; /* row layout by default */
     justify-content: space-between;
+    margin: 0px 10px;
 
     color: var(--link-color);
     font-family: Raleway, sans-serif;
@@ -39,12 +33,24 @@ header {
     list-style-type: none;
 }
 
-@media screen and (max-width: var(--collapse-width)) {
+@media screen and (max-width: 730px) {
+    header {
+        flex-direction: column;
+    }
+
+    #title {
+        margin: 10px auto;
+    }
+
     .navbar {
         /* column layout if screen is small */
         flex-direction: column;
+        margin: 10px 0px;
+        background-color: var(--navbar-item-color);
     }
 }
+
+
 
 
 .navbar-item {

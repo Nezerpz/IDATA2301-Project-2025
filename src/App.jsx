@@ -18,7 +18,9 @@ function LoginSignup() {
     </div>
   }
   else {
-    return <p>Du e logga inn</p>
+    return <div className="navbar">
+      <a className="navbar-item">User</a>
+    </div>
   }
 
 }
@@ -39,9 +41,7 @@ function App() {
              <a className="navbar-item" href="/cars">Cars</a>
              <a className="navbar-item" href="/about">About</a>
            </div>
-           <div>
-             <LoginSignup/>
-           </div>
+           <LoginSignup/>
        </header>
        <main>
          <BrowserRouter>
