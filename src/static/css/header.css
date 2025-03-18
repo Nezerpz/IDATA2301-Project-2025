@@ -11,9 +11,7 @@ header {
 
 #title { 
     /* title is left adjusted */
-    margin-right: auto;
-    margin-top: 10px;
-    margin-bottom: 7px;
+    margin: 10px auto 10px 0;
 }
 
 #logo {
