@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import useTitle from "../components/useTitle.jsx";
 import "../static/css/loginAndSignup.css";
 
@@ -67,7 +67,7 @@ function Login() {
                             </label>
                         </div>
                         <div>
-                            <a href={"/signup"}>Sign up here</a>
+                            <Link to={"/signup"}>Sign up here</Link>
                             <button type="submit">Login</button>
                         </div>
                     </form>
