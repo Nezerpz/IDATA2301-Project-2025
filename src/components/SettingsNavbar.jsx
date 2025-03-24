@@ -2,7 +2,8 @@ import {Link, useNavigate} from 'react-router-dom';
 
 //TODO: Make this dynamically change based on the user's role
 
-function SettingsNavbar() {
+
+function NavBarPicker(userType) {
     const navigate = useNavigate();
 
     const handleBecomeProvider = async (event) => {
@@ -25,16 +26,70 @@ function SettingsNavbar() {
         }
     };
 
+    if (userType === "admin") {
+        return (
+            <>
+                <Link to={"/mypage/users"} className={"navbar-item-dark"}>
+                    Users
+                </Link>
+                <Link to={"/mypage/settings"} className={"navbar-item-dark"}>
+                    Settings
+                </Link>
+            </>
+        );
+    } else if (userType === "provider") {
+        return (
+            <>
+                <Link to={"/mypage/orders"} className={"navbar-item-dark"}>
+                    Orders
+                </Link>
+                <Link to={"/mypage/settings"} className={"navbar-item-dark"}>
+                    Settings
+                </Link>
+            </>
+        );
+    } else if (userType === "customer") {
+        return (
+            <>
+                <Link to={"/mypage/orders"} className={"navbar-item-dark"}>
+                    Orders
+                </Link>
+                <Link to={"/mypage/settings"} className={"navbar-item-dark"}>
+                    Settings
+                </Link>
+                <Link className={"navbar-item-dark"} to={"/"} onClick={handleBecomeProvider}>
+                    Become a provider
+                </Link>
+            </>
+        );
+    } else {
+        //TODO: Remove after testing. Return null if no userType is provided.
+        return (
+            <>
+                <Link to={"/mypage/users"} className={"navbar-item-dark"}>
+                    User List
+                </Link>
+                <Link to={"/mypage/orders"} className={"navbar-item-dark"}>
+                    Order History
+                </Link>
+                <Link to={"/mypage/settings"} className={"navbar-item-dark"}>
+                    Settings
+                </Link>
+                <Link className={"navbar-item-dark"} to={"/"} onClick={handleBecomeProvider}>
+                    Become a provider
+                </Link>
+                <Link className={"navbar-item-dark"} to={"/mypage/provider"}>
+                    Provider options
+                </Link>
+            </>
+        );
+    }
+}
+
+function SettingsNavbar() {
     return (
-        <div className={"row"}>
-                <div className="navbar">
-                    <Link className="navbar-item"to={"orders"}>
-                        Order History
-                    </Link>
-                    <Link className={"navbar-item"} to={"/"} onClick={handleBecomeProvider}>
-                        Become a provider
-                    </Link>
-                </div>
+        <div className="navbar-column">
+            <NavBarPicker />
         </div>
     );
 

@@ -24,7 +24,7 @@ function SearchDateFromTo() {
         }
     };
 
-    //TODO: Make the return time increment hourly
+    //TODO: Make the return time increment hourly (Can be done by making it into text, and creating a custom select time component)
     const handleChange = (event) => {
         const { name, value } = event.target;
         setFormData((prevData) => ({ ...prevData, [name]: value }));

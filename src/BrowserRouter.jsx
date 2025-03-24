@@ -62,21 +62,21 @@ const router = createBrowserRouter([
             {
                 path: "settings",
                 element: <Settings />,
+            },
+            {
+                path: "provider",
                 children: [
                     {
-                        path: "provider",
-                        element: <ProviderSettings />,
-                        children: [
-                            {
-                                index: true,
-                                path: "cars",
-                                element: <ManageOwnedCars />
-                            },
-                            {
-                                path: "add",
-                                element: <AddNewCar />
-                            }
-                        ]
+                        index: true,
+                        element: <ManageOwnedCars />
+                    },
+                    {
+                        path: "cars",
+                        element: <ManageOwnedCars />
+                    },
+                    {
+                        path: "cars/add",
+                        element: <AddNewCar />
                     }
                 ]
             }

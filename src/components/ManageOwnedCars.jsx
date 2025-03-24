@@ -14,10 +14,7 @@ function renderPage(cars) {
     <div>
         <div className={"button-container-end"}>
             <button>
-                <Link to={"add"}>Add new car</Link>
-            </button>
-            <button>
-                <Link to={"/mypage/settings"}>Back</Link>
+                <Link to={"/mypage/provider/cars/add"}>Add new car</Link>
             </button>
         </div>
         <OwnedCarsList cars={cars} />

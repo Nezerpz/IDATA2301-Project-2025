@@ -16,7 +16,6 @@ function renderPage(orders) {
 }
 
 function Orders(){
-    useTitle("Orders");
     const [orders, setOrders] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);

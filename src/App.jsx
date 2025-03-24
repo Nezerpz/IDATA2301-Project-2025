@@ -9,7 +9,7 @@ function LoginSignup() {
   }
   else {
     return <div className="navbar">
-      <a className="navbar-item">User</a>
+      <a className="navbar-item" href={"/mypage/settings"}>User</a>
     </div>
   }
 
