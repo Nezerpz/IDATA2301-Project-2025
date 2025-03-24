@@ -1,10 +1,14 @@
+/*
+TODO: Remove the margin-right and move it to the container for the home page element
+ */
+
 .search-date-from-to{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    margin-right: 50px;
     max-width: 525px;
     padding: 20px;
+    border-radius: var(--corner-rounding);
 
     color: var(--heading-color-light);
     background-color: var(--main-color);
@@ -13,7 +17,7 @@
 }
 
 
-@media screen and (max-width: 500px) {
+@container (width < 500px) {
     .search-date-from-to {
         flex-direction: column;
     }

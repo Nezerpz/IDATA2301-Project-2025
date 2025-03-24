@@ -25,7 +25,6 @@ function App() {
                <img id="logo" src="src/static/svg/roulette.png" alt="Logo of the company" />
              </a>
            </div>
-           
            <div className="navbar">
              <a className="navbar-item" href="/">Home</a>
              <a className="navbar-item" href="/cars">Cars</a>
@@ -34,7 +33,7 @@ function App() {
            <LoginSignup/>
        </header>
        <main>
-         <BrowserRouter />
+           <BrowserRouter/>
        </main>
       <footer>
         <div id="footer-content">
