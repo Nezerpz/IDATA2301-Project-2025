@@ -1,5 +1,6 @@
 import useTitle from "../components/useTitle.jsx";
 import "../static/css/loginAndSignup.css";
+import {Link} from "react-router-dom";
 
 
 function Signup() {
@@ -38,7 +39,7 @@ function Signup() {
                             </label>
                         </div>
                         <div>
-                            <a href={"/login"}>Login here</a>
+                            <Link to={"/login"}>Login here</Link>
                             <button type="submit">Sign up</button>
                         </div>
                     </form>

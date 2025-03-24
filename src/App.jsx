@@ -1,14 +1,4 @@
-import { Routes, Route, BrowserRouter } from 'react-router-dom';
-import Home from './pages/Home.jsx'
-import About from './pages/About.jsx'
-import Cars from './pages/Cars.jsx'
-import Login from './pages/Login.jsx'
-import Signup from "./pages/Signup.jsx";
-import Orders from "./pages/Orders.jsx";
-import Review from "./pages/Review.jsx";
-import MyPage from "./pages/MyPage.jsx";
-import NotFound from "./pages/NotFound.jsx";
-import User from "./components/User.jsx";
+import BrowserRouter from './BrowserRouter';
 
 function LoginSignup() {
   if (localStorage.getItem("jwt") === undefined) {
@@ -44,20 +34,7 @@ function App() {
            <LoginSignup/>
        </header>
        <main>
-         <BrowserRouter>
-           <Routes>
-             <Route path="/" element={<Home />} />
-             <Route path="/cars" element={<Cars />} />
-             <Route path="/about" element={<About />} />
-             <Route path="/login" element={<Login />} />
-             <Route path="/signup" element={<Signup />} />
-             <Route path="/orders" element={<Orders />} />
-             <Route path="/review" element={<Review />} />
-             <Route path="/mypage/*" element={<MyPage />} />
-             <Route path="/user" element={<User />} />
-             <Route path="*" element={<NotFound />} />
-           </Routes>
-         </BrowserRouter>
+         <BrowserRouter />
        </main>
       <footer>
         <div id="footer-content">

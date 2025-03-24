@@ -1,5 +1,4 @@
 //TODO: Fetch the orders from the database and display them in a table
-import SettingsNavbar from "../components/SettingsNavbar.jsx";
 import OrderList from "../components/OrderList.jsx";
 import useTitle from "../components/useTitle.jsx";
 import React, { useState, useEffect } from 'react';

@@ -4,6 +4,7 @@ import CarList from "../components/CarList.jsx";
 import SearchDateFromTo from "../components/SearchDateFromTo.jsx";
 import React, { useState, useEffect } from 'react';
 
+//TODO: Implement the fetch from frontend, and display serach if not fetch has been made before
 function renderPage(cars) {
     if (cars === null) {
         return (

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import Car from "./Car.jsx";
 import useTitle from "./useTitle.jsx";
 import React, {useEffect, useState} from "react";
+import {Link} from "react-router-dom";
 
 //TODO: Make the fetchFunction get the cars from "/cars/providerId".
 // The providerId should be stored in the session storage.
@@ -13,10 +14,10 @@ function renderPage(cars) {
     <div>
         <div className={"button-container-end"}>
             <button>
-                <a href={"add"}>Add new car</a>
+                <Link to={"add"}>Add new car</Link>
             </button>
             <button>
-                <a href={"/mypage/settings"}>Back</a>
+                <Link to={"/mypage/settings"}>Back</Link>
             </button>
         </div>
         <OwnedCarsList cars={cars} />

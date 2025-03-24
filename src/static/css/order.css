@@ -1,0 +1,10 @@
+.order {
+    margin: 30px;
+    padding: 0 24px 24px 24px;
+    background-color: var(--foreground-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    border-radius: var(--corner-rounding);
+    box-shadow: 0 0 15px var(--bright-shadow-color);
+}

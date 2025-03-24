@@ -1,3 +1,4 @@
+import UserListObject from "./UserListObject.jsx";
 
 
 function UserList(users) {
@@ -5,7 +6,7 @@ function UserList(users) {
     return (
         <div>
             <h1>List of all users</h1>
-            {users.map((user) => <User key={user.id} user={user} readOnly={true} />)}
+            {users.map((user) => <UserListObject key={user.id} user={user} readOnly={true} />)}
         </div>
     )
 }
