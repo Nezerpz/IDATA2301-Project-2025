@@ -19,9 +19,13 @@ function MyPage() {
                     {/*TODO: Add nav bar for this menu*/}
                     <SettingsNavbar/>
                 </div>
-                <div className={"col-8"} id={"mypage-background"}>
-                    <Outlet/>
+                <div className={"col-10 mypage-background"}>
+                    <div className={"col-9"}>
+                        <Outlet/>
+                    </div>
+                    <div className={"col-3"}></div>
                 </div>
+
             </div>
         );
     } else {

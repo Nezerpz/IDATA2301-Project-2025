@@ -6,6 +6,7 @@ node_modules/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .vite/
+ResourceLinks.md
 
 ### STS ###
 .apt_generated

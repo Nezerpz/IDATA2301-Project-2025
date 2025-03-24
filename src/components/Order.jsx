@@ -6,33 +6,37 @@ import Review from "../pages/Review.jsx";
 // If the user is a customer in the order, show a button to review the car, and provider.
 // If the user is a provider in the order, show a button to review the customer (Might be more relevant to have in the provider menu).
 
+//TODO: Dynamically change names for the orders based on car in them.
 function Order ({order}) {
     return (
-        <div className="order">
-            <h2>{order.id}</h2>
-            <div className={"flex-container-row"}>
-                <ul className={"order-list"}>
-                    <li><strong>Start date: </strong>{order.startDate}</li>
-                    <li><strong>End date: </strong>{order.endDate}</li>
-                    <li><strong>Price paid: </strong>{order.pricePaid}</li>
-                    <li><strong>Order status: </strong>{order.orderStatus}</li>
-                </ul>
-                <div className={"button-container"}>
-                    <button onClick={() => {
-                        <Review order = {order} type={"car"}/>
-                        /*TODO: Implement logic to redirect to review page for specific car*/
-                    }}>
-                        Review car
-                    </button>
-                    <button onClick={() => {
-                        <Review order = {order} type={"provider"}/>
-                        /*TODO: Implement logic to redirect to review page for specific provider*/
-                    }}>
-                        Review provider
-                    </button>
-                </div>
+        <li className="order">
+            <div className={"flex-container-row col-8"}>
+                <h4>Manufacturer Carmodel</h4>
             </div>
-        </div>
+            <div className={"col-4 button-container flex-container-row"}>
+                <button onClick={() => {
+                    <Review order = {order} type={"car"}/>
+                    /*TODO: Implement logic to redirect to review page for specific car*/
+                }}>
+                    Review car
+                </button>
+                <button onClick={() => {
+                    <Review order = {order} type={"provider"}/>
+                    /*TODO: Implement logic to redirect to review page for specific provider*/
+                }}>
+                    Review provider
+                </button>
+            </div>
+            <div className={"row"}>
+                <span>
+                    <strong>Order nr: </strong> <text>{order.id} </text>
+                    <strong>Start: </strong><text>{order.startDate} </text>
+                    <strong>End: </strong><text>{order.endDate} </text>
+                    <strong>Paid: </strong><text>{order.pricePaid} </text>
+                    <strong>Status: </strong><text>{order.orderStatus} </text>
+                </span>
+            </div>
+        </li>
     )
 }
 

@@ -193,7 +193,7 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
 
 .scrollable-list {
     overflow-y: auto;
-    max-height: 300px;
+    max-height: 49vh;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -230,6 +230,10 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
     align-self: flex-end;
 }
 
+.flex-start-item {
+    align-self: flex-start;
+}
+
 .review-box {
     padding: 10px;
 }
@@ -242,6 +246,7 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
     padding: 20px;
 }
 
-#mypage-background {
+.mypage-background {
     background-color: lightgray;
+    min-height: 63vh;
 }
