@@ -2,6 +2,7 @@ import { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import useTitle from "../components/useTitle.jsx";
 import "../static/css/loginAndSignup.css";
+import Conflict from "./Conflict.jsx";
 
 
 
@@ -11,6 +12,7 @@ function Login() {
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const isUserLoggedIn = localStorage.getItem('jwt') !== null;
 
     const handleLogin = async (event) => {
         event.preventDefault();
@@ -29,7 +31,8 @@ function Login() {
                 const data = await response.json();
                 console.debug(data);
                 localStorage.setItem('jwt', data["jwt"]); // Store the token
-                //navigate('/');
+                    navigate('/');
+                    window.location.reload();
             } else {
                 console.error('Failed to login', response.statusText);
             }
@@ -38,45 +41,49 @@ function Login() {
         }
     };
 
-    return (
-        <div className={"row"}>
-            <div className={"col-2"}> </div>
-            <div className={"col-8"}>
-                <div className={"login"}>
-                    <h1 className={"login-header"}>Login</h1>
-                    <form className={"login-form"} onSubmit={handleLogin}>
-                        <div className={"col-12"}>
-                            <label htmlFor={"username"}>
-                                <span>Username</span>
-                                <input
-                                    type="text"
-                                    id="username"
-                                    name="username"
-                                    value={username}
-                                    onChange={(e) => setUsername(e.target.value)}
-                                />
-                            </label>
-                            <label htmlFor={"password"}>
-                                <span>Password</span>
-                                <input
-                                    type="password"
-                                    id="password"
-                                    name="password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                />
-                            </label>
-                        </div>
-                        <div>
-                            <Link to={"/signup"}>Sign up here</Link>
-                            <button type="submit">Login</button>
-                        </div>
-                    </form>
+    if(isUserLoggedIn) {
+        return <Conflict error={"You are already logged in."}/>;
+    } else {
+        return (
+            <div className={"row"}>
+                <div className={"col-2"}></div>
+                <div className={"col-8"}>
+                    <div className={"login"}>
+                        <h1 className={"login-header"}>Login</h1>
+                        <form className={"login-form"} onSubmit={handleLogin}>
+                            <div className={"col-12"}>
+                                <label htmlFor={"username"}>
+                                    <span>Username</span>
+                                    <input
+                                        type="text"
+                                        id="username"
+                                        name="username"
+                                        value={username}
+                                        onChange={(e) => setUsername(e.target.value)}
+                                    />
+                                </label>
+                                <label htmlFor={"password"}>
+                                    <span>Password</span>
+                                    <input
+                                        type="password"
+                                        id="password"
+                                        name="password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </label>
+                            </div>
+                            <div>
+                                <Link to={"/signup"}>Sign up here</Link>
+                                <button type="submit">Login</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
+                <div className={"col-2"}></div>
             </div>
-            <div className={"col-2"}> </div>
-        </div>
-    );
+        );
+    }
 }
 
 export default Login;
