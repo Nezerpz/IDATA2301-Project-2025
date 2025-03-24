@@ -34,7 +34,10 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+}
+
+main {
+    flex: 1;
 }
 
 figure > img {
@@ -233,4 +236,12 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
 
 #search-date-div{
     min-width: 210px;
+}
+
+#manage-cars {
+    padding: 20px;
+}
+
+#mypage-background {
+    background-color: lightgray;
 }

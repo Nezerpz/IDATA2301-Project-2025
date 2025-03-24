@@ -8,7 +8,9 @@ function renderPage(orders) {
     <div className={"row"}>
             <div className={"col-1"}></div>
             <div className={"col-10"}>
-                <OrderList orders={orders} />
+                <div id={"order-list"}>
+                    <OrderList orders={orders} />
+                </div>
             </div>
             <div className={"col-1"}></div>
     </div>

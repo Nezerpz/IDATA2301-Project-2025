@@ -67,10 +67,10 @@ function NavBarPicker(userType) {
         return (
             <>
                 <Link to={"/mypage/users"} className={"navbar-item-dark"}>
-                    User List
+                    User administration
                 </Link>
                 <Link to={"/mypage/orders"} className={"navbar-item-dark"}>
-                    Order History
+                    Order history
                 </Link>
                 <Link to={"/mypage/settings"} className={"navbar-item-dark"}>
                     Settings
@@ -85,6 +85,9 @@ function NavBarPicker(userType) {
         );
     }
 }
+
+//TODO: On mobile, after choosing an option, the navbar should collapse, and a back button should be shown.
+// When the  back button is clicked, the navbar should expand again, and you will see my page again.
 
 function SettingsNavbar() {
     return (

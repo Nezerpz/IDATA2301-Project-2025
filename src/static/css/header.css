@@ -35,7 +35,8 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin: 0 10px;
+    margin: 10px 0;
+    align-self: flex-end;
 
     color: var(--link-color);
     font-family: Raleway, sans-serif;
@@ -85,8 +86,9 @@ header {
 .navbar-item-dark {
     display: flex;
     align-content: center;
-    margin: auto;
     padding: 10px 20px 10px 20px;
+    flex: 1;
+    border: 1px solid var(--dark-link-color);
 
     color: var(--dark-link-color);
     font-family: Raleway, sans-serif;

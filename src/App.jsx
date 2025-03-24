@@ -1,7 +1,7 @@
 import BrowserRouter from './BrowserRouter';
 
 function LoginSignup() {
-  if (localStorage.getItem("jwt") === undefined) {
+  if (localStorage.getItem("jwt") === null) {
     return <div className="navbar">
       <a className="navbar-item" href="/login">Login</a>
       <a className="navbar-item" href="/signup">Sign up</a>

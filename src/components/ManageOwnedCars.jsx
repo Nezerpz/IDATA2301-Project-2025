@@ -11,7 +11,7 @@ import {Link} from "react-router-dom";
 
 function renderPage(cars) {
     return(
-    <div>
+    <div id={"manage-cars"}>
         <div className={"button-container-end"}>
             <button>
                 <Link to={"/mypage/provider/cars/add"}>Add new car</Link>
@@ -23,7 +23,6 @@ function renderPage(cars) {
 }
 
 function ManageOwnedCars() {
-
     useTitle("Manage");
     const [cars, setCars] = useState(null);
     const [loading, setLoading] = useState(true);
