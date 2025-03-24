@@ -1,3 +1,5 @@
+@import "./header.css";
+@import "./footer.css";
 @import "./columnLayout.css";
 @import "./order.css";
 
@@ -21,64 +23,25 @@
     --link-color: #f1f1f1;
 }
 
-
-#title { 
-    color: var(--heading-color-light);
-    text-shadow: 5px 5px black;
-    margin: 20px;
-}
-#disclaimer { 
-    padding: 10px;
-    background-color: #730000;
-}
-#disclaimer > p {
-    font-size: 125%;
-    color: var(--heading-color-light);
-}
-
-body{
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-    justify-content: space-between;
+body {
     background-color: var(--foreground-color);
     margin: 0;
     font-size: 100%;
 }
 
-.navbar, #callToAction > a {
-    color: var(--link-color);
-    text-decoration: none;
-    font-family: Raleway, sans-serif;
-    padding: 20px;
-    font-size: 125%;
-}
-
-.navbar {
+#root {
+    min-height: 100vh;
     display: flex;
-    justify-content: space-around;
-    flex-flow: row wrap;
-    list-style-type: none;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
-.navbar-item {
-    padding: 20px;
-    background-color: var(--navbar-item-color);
-    color: var(--link-color);
-    text-decoration: none;
-    font-family: Raleway, sans-serif;
-    font-size: 1.25em;
-    text-align: center;
-    word-break: keep-all;
-    flex-grow: 1;
-    display: block;
-    min-width: 111px;
+
+main > div > div > section {
+    padding-left: 100px;
+    padding-right: 100px;
 }
 
-.navbar-item:hover {
-    background-color: var(--link-color);
-    color: var(--navbar-item-color);
-}
 
 #home {
     height: 500px;
@@ -94,10 +57,6 @@ body{
     height: auto;
 }
 
-main > div > div > section {
-    padding-left: 100px;
-    padding-right: 100px;
-}
 
 h1,h2,h3,h4,h5 {
     font-family: Raleway, sans-serif;
@@ -120,7 +79,8 @@ h4 {
 }
 
 #callToAction {
-    margin-top: 10px;
+    margin-top: 120px;
+    margin-left: 25px;
 }
 
 #jeremy-header {
@@ -163,29 +123,6 @@ summary {
     color: var(--filter-color);
 }
 
-#footer-content{
-    padding: 10px;
-}
-
-header{
-    padding: 25px;
-    background-color: var(--main-color);
-    background-image: linear-gradient(90deg, #111, var(--main-color));
-    color: white;
-}
-
-#contactHeading {
-    color: var(--heading-color-light);
-}
-
-footer{
-    background-color: var(--main-color);
-}
-
-.footer-icon{
-    width: 50px;
-    margin: 10px;
-}
 
 a {
     display: inline-block;

@@ -9,14 +9,8 @@ function Home(){
         <div>
             <section id="home" className="row">
                 <div id={"callToAction"} className="col-12">
-                    <div className={"row"}>
-                        <h2 id={"jeremy-header"}>Up for an Adventure?</h2>
-                    </div>
-                    <div className={"row"}>
-                        <div className={"col-3"} id={"search-date-div"}>
-                            <SearchDateFromTo />
-                        </div>
-                    </div>
+                  <h2 id={"jeremy-header"}>Up for an Adventure?</h2>
+                  <SearchDateFromTo />
                 </div>
             </section>
             <section>

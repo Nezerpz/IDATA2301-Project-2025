@@ -1,0 +1,27 @@
+
+#footer-content{
+    padding: 10px;
+}
+
+
+#contactHeading {
+    color: var(--heading-color-light);
+}
+
+footer{
+    background-color: var(--main-color);
+}
+
+.footer-icon{
+    width: 50px;
+    margin: 10px;
+}
+
+#disclaimer { 
+    padding: 10px;
+    background-color: #730000;
+}
+#disclaimer > p {
+    font-size: 125%;
+    color: var(--heading-color-light);
+}
