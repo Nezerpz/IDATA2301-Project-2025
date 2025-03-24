@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 //TODO: Make this dynamically change based on the user's role
 
@@ -28,12 +28,12 @@ function SettingsNavbar() {
     return (
         <div className={"row"}>
                 <div className="navbar">
-                    <a className="navbar-item"href={"orders"}>
+                    <Link className="navbar-item"to={"orders"}>
                         Order History
-                    </a>
-                    <a className={"navbar-item"} href={"/"} onClick={handleBecomeProvider}>
+                    </Link>
+                    <Link className={"navbar-item"} to={"/"} onClick={handleBecomeProvider}>
                         Become a provider
-                    </a>
+                    </Link>
                 </div>
         </div>
     );

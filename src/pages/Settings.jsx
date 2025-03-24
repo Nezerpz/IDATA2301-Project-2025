@@ -6,10 +6,10 @@ function Settings() {
     const location = useLocation();
 
   return (
-    <div>
+    <>
       <h2>Settings</h2>
         <ProviderSettings currentPath={location.pathname} />
-    </div>
+    </>
   );
 }
 

@@ -2,18 +2,18 @@ import {Route, Routes, useLocation} from "react-router-dom";
 import AddNewCar from "./AddNewCar.jsx";
 import ManageOwnedCars from "./ManageOwnedCars.jsx";
 import React from "react";
-import NotFound from "../pages/NotFound.jsx";
 
 
-function ProviderSettings({ currentPath }) {
+function ProviderSettings() {
+    const location = useLocation();
     return (
         <div className={"row"}>
             <div className={"col-2"}></div>
             <div className={"col-8"}>
                 <div className={"button-container"}>
-                    {currentPath === "/mypage/settings" && (
+                    {location.pathname === "/mypage/settings" && (
                         <button>
-                            <a href={`${currentPath}/cars`}>Cars</a>
+                            <a href={`${location.pathname}/cars`}>Cars</a>
                         </button>
                     )}
                 </div>
