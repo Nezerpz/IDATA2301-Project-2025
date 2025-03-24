@@ -10,32 +10,40 @@ import Review from "../pages/Review.jsx";
 function Order ({order}) {
     return (
         <li className="order">
-            <div className={"flex-container-row col-8"}>
-                <h4>Manufacturer Carmodel</h4>
-            </div>
-            <div className={"col-4 button-container flex-container-row"}>
-                <button onClick={() => {
-                    <Review order = {order} type={"car"}/>
-                    /*TODO: Implement logic to redirect to review page for specific car*/
-                }}>
-                    Review car
-                </button>
-                <button onClick={() => {
-                    <Review order = {order} type={"provider"}/>
-                    /*TODO: Implement logic to redirect to review page for specific provider*/
-                }}>
-                    Review provider
-                </button>
-            </div>
+            <details>
+                <summary>
+                    <div className={"row"}>
+                        <div className={"order-header col-8"}>
+                            <h4>Manufacturer Carmodel</h4>
+                        </div>
+                        <div className={"col-4 button-container flex-container-row"}>
+                            <text>Review: </text>
+                            <button onClick={() => {
+                                <Review order = {order} type={"car"}/>
+                                /*TODO: Implement logic to redirect to review page for specific car*/
+                            }}>
+                                Car
+                            </button>
+                            <button onClick={() => {
+                                <Review order = {order} type={"provider"}/>
+                                /*TODO: Implement logic to redirect to review page for specific provider*/
+                            }}>
+
+                                Provider
+                            </button>
+                        </div>
+                    </div>
+                </summary>
             <div className={"row"}>
-                <span>
-                    <strong>Order nr: </strong> <text>{order.id} </text>
-                    <strong>Start: </strong><text>{order.startDate} </text>
-                    <strong>End: </strong><text>{order.endDate} </text>
-                    <strong>Paid: </strong><text>{order.pricePaid} </text>
-                    <strong>Status: </strong><text>{order.orderStatus} </text>
-                </span>
+                <ul>
+                    <li><strong>Order nr: </strong> {order.id}</li>
+                    <li><strong>Start: </strong> {order.startDate}</li>
+                    <li><strong>End: </strong> {order.endDate}</li>
+                    <li><strong>Paid: </strong> {order.pricePaid}</li>
+                    <li><strong>Status: </strong> {order.orderStatus}</li>
+                </ul>
             </div>
+            </details>
         </li>
     )
 }

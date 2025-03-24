@@ -14,15 +14,24 @@
     padding: 20px;
 }
 
-.order > div > h4{
+.order-header > h4{
     margin: 0;
 }
 
-.order > .button-container {
+.order-header {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.order > details > summary .row > .button-container {
     display: flex;
     justify-content: flex-end;
 }
 
-.order > div > button{
+.order > details > summary .row > .button-container > button{
     padding: 2px 5px;
+}
+
+.order > details > summary::marker{
+    color: var(--main-color);
 }
