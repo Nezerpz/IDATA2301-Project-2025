@@ -5,21 +5,28 @@
 import {Outlet } from 'react-router-dom';
 import SettingsNavbar from "../components/SettingsNavbar.jsx";
 import useTitle from "../components/useTitle.jsx";
+import CheckLogin from "../components/CheckLogin.jsx";
+import AccessDenied from "./AccessDenied.jsx";
 
 function MyPage() {
     useTitle("My Page");
-    return (
-        <div className={"row"}>
-            <div className={"col-2"}>
-                <h1>user name</h1>
-                {/*TODO: Add nav bar for this menu*/}
-                    <SettingsNavbar />
+    const isLoggedIn = CheckLogin();
+    if (isLoggedIn) {
+        return (
+            <div className={"row"}>
+                <div className={"col-2"}>
+                    <h1>user name</h1>
+                    {/*TODO: Add nav bar for this menu*/}
+                    <SettingsNavbar/>
+                </div>
+                <div className={"col-8"} id={"mypage-background"}>
+                    <Outlet/>
+                </div>
             </div>
-            <div className={"col-8"} id={"mypage-background"}>
-                <Outlet />
-            </div>
-        </div>
-    );
+        );
+    } else {
+        return <AccessDenied />;
+    }
 }
 
 export default MyPage;
