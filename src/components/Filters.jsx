@@ -2,8 +2,12 @@ import PropTypes from 'prop-types';
 import "../static/css/filter.css";
 import CheckBoxFilters from "./CheckBoxFilters.jsx";
 import SliderFilter from './SliderFilter';
-import SearchDateFromTo from "./SearchDateFromTo.jsx";
 
+
+/*
+ * Returns list of unique values
+ * from multiple dicts having the same key
+ */
 function getUniqueEntries(dictList, key) {
     const uniqueEntries = Array.from(
         // A set has no duplicates
@@ -13,6 +17,9 @@ function getUniqueEntries(dictList, key) {
     return uniqueEntries;
 }
 
+/*
+ * Returns highest price found among the cars 
+ */
 function getMaxPrice(cars) {
     const prices = getUniqueEntries(cars, "price");
     const maxPrice = Math.max(...prices);
@@ -20,6 +27,9 @@ function getMaxPrice(cars) {
     return maxPrice;
 }
 
+/*
+ * Returns lowest price found among the cars 
+ */
 function getMinPrice(cars) {
     const prices = getUniqueEntries(cars, "price");
     const minPrice = Math.min(...prices);
@@ -27,6 +37,13 @@ function getMinPrice(cars) {
     return minPrice;
 }
 
+
+/*
+ * Returns flattened list of unique values
+ * from multiple dicts having the same key
+ * where the key value is a list
+ * (not a single value)
+ */
 function getUniqueEntriesInLists(dictList, key) {
     const uniqueEntries = Array.from(dictList.reduce(
         // The acc variable contains accumulated set
@@ -40,30 +57,53 @@ function getUniqueEntriesInLists(dictList, key) {
     return uniqueEntries;
 }
 
-function Filters(cars) {
-    cars = cars["cars"]
+function Filters({cars, setFilters}) {
     const manufacturers = getUniqueEntries(cars, "manufacturer");
     const prices = [getMinPrice(cars), getMaxPrice(cars)];
     const transmission = getUniqueEntries(cars, "transmissionType");
     const features = getUniqueEntriesInLists(cars, "features");
-
+    console.debug(cars);
     console.debug(features);
 
-    return (
-        <div className={"filter"}>
-            <SearchDateFromTo />
+    // Called when filters are updated
+    const updateFilters = () => {
+        let filters = {
+            //"manufacturers": getSelectedManufacturers(),
+            "manufacturers": ["VOLKSWAGEN"],
+            //"prices": getSelectedPriceRange(),
+            "prices": [0, 10000],
+            //"transmission": getSelectedTransmissionTypes(),
+            "transmission": ["MANUAL"],
+            //"features": getSelectedFeatures(),
+            "features": ["Bluetooth"]
+        };
+        setFilters(filters);
+    }
 
-                <h4>Filters</h4>
+    return (
             <div className={"filter-body"}>
-                <input type={"text"}
-                    placeholder={"Search"}
-                    readOnly={true}
-                    />
-                <CheckBoxFilters name={"Manufacturers"} values={manufacturers} />
-                <SliderFilter name={"Price"} min={prices[0]} max={prices[1]} />
-                <CheckBoxFilters name={"Transmission"} values={transmission} />
-                <CheckBoxFilters name={"Features"} values={features} />
-            </div>
+
+                <CheckBoxFilters 
+                    name={"Manufacturers"} 
+                    values={manufacturers} 
+                    onUpdate={updateFilters}/>
+
+                <SliderFilter 
+                    name={"Price"} 
+                    min={prices[0]} 
+                    max={prices[1]} 
+                    onUpdate={updateFilters}/>
+
+                <CheckBoxFilters 
+                    name={"Transmission"} 
+                    values={transmission} 
+                    onUpdate={updateFilters}/>
+
+                <CheckBoxFilters 
+                    name={"Features"} 
+                    values={features} 
+                    onUpdate={updateFilters}/>
+
         </div>
     );
 }
@@ -84,7 +124,8 @@ Filters.propTypes = {
             fuelType: PropTypes.string,
             features: PropTypes.array
         })
-    )
+    ),
+    setFilters: PropTypes.func
 };
 
 export default Filters;

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-function CheckBoxFilters({name, values}) {
+function CheckBoxFilters({name, values, onUpdate}) {
     return (
         <details className={"filter-item"}>
             <summary className={"category-name"}>{name}</summary>
@@ -18,7 +18,8 @@ function CheckBoxFilters({name, values}) {
 
 CheckBoxFilters.propTypes = {
     name: PropTypes.string,
-    values: PropTypes.arrayOf(PropTypes.string)
+    values: PropTypes.arrayOf(PropTypes.string),
+    onUpdate:  PropTypes.func
 };
 
 export default CheckBoxFilters;

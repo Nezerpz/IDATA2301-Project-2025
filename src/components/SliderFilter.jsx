@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-function SliderFilter({name, min, max}) {
+function SliderFilter({name, min, max, onUpdate}) {
     return (
         <details className={"filter-item"}>
             <summary className={"category-name"}>{name}</summary>
@@ -14,7 +14,8 @@ function SliderFilter({name, min, max}) {
 SliderFilter.propTypes = {
     name: PropTypes.string,
     min: PropTypes.number,
-    max: PropTypes.number
+    max: PropTypes.number,
+    onUpdate: PropTypes.func
 };
 
 export default SliderFilter;
