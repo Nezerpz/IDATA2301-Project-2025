@@ -1,4 +1,5 @@
 .filter {
+    container-type: inline-size;
     background-color: var(--foreground-color);
     border-radius: var(--corner-rounding);
     margin: 20px;

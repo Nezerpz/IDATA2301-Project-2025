@@ -21,6 +21,7 @@
     /*--button-color: #37acb9;*/
     --button-color: #0f7c89;
     --link-color: #f1f1f1;
+    --dark-link-color: #222;
 }
 
 body {
@@ -36,6 +37,13 @@ body {
     justify-content: space-between;
 }
 
+figure > img {
+    width: 100%;
+    max-width: 500px;
+    min-width: 330px;
+    height: auto;
+}
+
 
 main > div > div > section {
     padding-left: 100px;
@@ -44,17 +52,12 @@ main > div > div > section {
 
 
 #home {
-    height: 500px;
+    height: auto;
     background-image: url(https://imgs.search.brave.com/RlAxmVxi2QB7xGa_ifz5YzAKA9Mn8sQxglf942zCHL8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMxLmhvdGNhcnNp/bWFnZXMuY29tL3dv/cmRwcmVzcy93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyNC8wOS9j/bGFya3Nvbi5qcGc);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     box-shadow: 0px 0px 100px black inset;
-}
-
-#leavingEnteringCar {
-    width: 500px;
-    height: auto;
 }
 
 
@@ -79,8 +82,9 @@ h4 {
 }
 
 #callToAction {
-    margin-top: 120px;
-    margin-left: 25px;
+    container-type: inline-size;
+
+    padding: 120px 25px;
 }
 
 #jeremy-header {
@@ -124,9 +128,20 @@ summary {
 }
 
 
-a {
+.bright-link {
     display: inline-block;
     color: var(--link-color);
+}
+
+.dark-link {
+    display: inline-block;
+    color: var(--dark-link-color);
+}
+
+button > a {
+    display: inline-block;
+    color: var(--link-color);
+    text-decoration: none;
 }
 
 label:not(li label) {

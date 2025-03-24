@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import "../static/css/filter.css";
 import CheckBoxFilters from "./CheckBoxFilters.jsx";
 import SliderFilter from './SliderFilter';
+import SearchDateFromTo from "./SearchDateFromTo.jsx";
 
 function getUniqueEntries(dictList, key) {
     const uniqueEntries = Array.from(
@@ -50,10 +51,9 @@ function Filters(cars) {
 
     return (
         <div className={"filter"}>
-            <div className={"filter-header"}>
-                <h3>Filters</h3>
-            </div>
+            <SearchDateFromTo />
 
+                <h4>Filters</h4>
             <div className={"filter-body"}>
                 <input type={"text"}
                     placeholder={"Search"}
