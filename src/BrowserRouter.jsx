@@ -12,84 +12,91 @@ import ManageOwnedCars from "./components/ManageOwnedCars.jsx";
 import Settings from "./pages/Settings.jsx";
 import Users from "./components/Users.jsx";
 import Orders from "./pages/Orders.jsx";
-import ProviderSettings from "./components/ProviderSettings.jsx";
 import AddNewCar from "./components/AddNewCar.jsx";
+import App from "./App.jsx";
 
 const router = createBrowserRouter([
     {
-        path: '/',
-        element: <Home />,
-        errorElement: <NotFound />
-    },
-    {
-        path: '/cars',
-        element: <Cars />
-    },
-    {
-        path: '/about',
-        element: <About />
-    },
-    {
-        path: '/login',
-        element: <Login />
-    },
-    {
-        path: '/signup',
-        element: <Signup />
-    },
-    {
-        path: '/review',
-        element: <Review />
-    },
-    {
-        path: '/mypage/*',
-        element: <MyPage />,
+        path:'/',
+        element: <App />,
+        errorElement: <NotFound />,
         children: [
             {
-                path: "orders",
-                element: <Orders />,
-                children:[
-                    {
-                        path: "review",
-                        element: <Review />
-                    }
-                ]
+                index: true,
+                element: <Home />,
+                errorElement: <NotFound />
             },
             {
-                path: "users",
-                element: <Users />
+                path: '/cars',
+                element: <Cars />
             },
             {
-                path: "settings",
-                element: <Settings />,
+                path: '/about',
+                element: <About />
             },
             {
-                path: "provider",
+                path: '/login',
+                element: <Login />
+            },
+            {
+                path: '/signup',
+                element: <Signup />
+            },
+            {
+                path: '/review',
+                element: <Review />
+            },
+            {
+                path: '/mypage/*',
+                element: <MyPage />,
                 children: [
                     {
-                        index: true,
-                        element: <ManageOwnedCars />
+                        path: "orders",
+                        element: <Orders />,
+                        children:[
+                            {
+                                path: "review",
+                                element: <Review />
+                            }
+                        ]
                     },
                     {
-                        path: "cars",
-                        element: <ManageOwnedCars />
+                        path: "users",
+                        element: <Users />
                     },
                     {
-                        path: "cars/add",
-                        element: <AddNewCar />
+                        path: "settings",
+                        element: <Settings />,
                     },
                     {
-                        path:"orders",
-                        element: <Orders />
+                        path: "provider",
+                        children: [
+                            {
+                                index: true,
+                                element: <ManageOwnedCars />
+                            },
+                            {
+                                path: "cars",
+                                element: <ManageOwnedCars />
+                            },
+                            {
+                                path: "cars/add",
+                                element: <AddNewCar />
+                            },
+                            {
+                                path:"orders",
+                                element: <Orders />
+                            }
+                        ]
                     }
                 ]
+            },
+            //TODO: Temp solution to the routing problem. User will be under edit admin users...
+            {
+                path: '/user',
+                element: <User />
             }
         ]
-    },
-    //TODO: Temp solution to the routing problem. User will be under edit admin users...
-    {
-        path: '/user',
-        element: <User />
     }
 ]);
 
