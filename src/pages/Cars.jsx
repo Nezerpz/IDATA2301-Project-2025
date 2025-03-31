@@ -5,7 +5,7 @@ import SearchDateFromTo from "../components/SearchDateFromTo.jsx";
 import React, { useState, useEffect } from 'react';
 
 //TODO: Implement the fetch from frontend, and display serach if not fetch has been made before
-function renderPage(cars, filters, setFilters) {
+function renderPage(cars, filters, setFromToDate, setFilters) {
     if (cars === null) {
         return (
             <h1>No soup for You!</h1>
@@ -16,7 +16,7 @@ function renderPage(cars, filters, setFilters) {
                 <div className="col-3">
                     <div className={"filter"}>
                         <h4>Search</h4>
-                        <SearchDateFromTo />
+                        <SearchDateFromTo setFromToDate={setFromToDate}/>
 
                         <h4>Filters</h4>
                         <Filters cars={cars} setFilters={setFilters}/>
@@ -34,11 +34,14 @@ function renderPage(cars, filters, setFilters) {
 
 function Cars() {
     useTitle("Cars");
-    const [cars, setCars] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [filters, setFilters] = useState(null);
+    var [fromToDate, setFromToDate] = useState(null);
+    var [cars, setCars] = useState(null);
+    var [filters, setFilters] = useState(null);
 
+    // search cars on first render 
+    // and when changing timespan
+    var [loading, setLoading] = useState(true);
+    var [error, setError] = useState(null);
     useEffect(() => {
       const fetchData = async () => {
         setLoading(true);
@@ -54,12 +57,13 @@ function Cars() {
       };
 
       fetchData();
-    }, []);
+    }, [fromToDate]);
 
+    // Re-render when cars or filters change
+    useEffect(() => {
+        return renderPage(cars, filters, setFromToDate, setFilters);
+    }, [cars, filters])
 
-    if (loading) return <div>Loading...</div>;
-    if (error) return <div>Error: {error.message}</div>;
-    return renderPage(cars, filters, setFilters);
 }
 
 export default Cars;

@@ -1,17 +1,26 @@
 import PropTypes from "prop-types";
 import Car from "./Car.jsx";
+import { useState, useEffect } from 'react';
 
 function CarList ({cars, filters}) {
-    console.debug("filtera")
-    console.debug(filters)
-    if (filters != null) {
-        cars = cars.filter(car => filters["manufacturer"].includes(car["manufacturer"]))
-    }
-    return (
-        <div>
-            {cars.map((car) => <Car key={car.id} car={car} readOnly={true} />)}
-        </div>
-    );
+
+    useEffect(() => {
+        var visibleCars = cars
+        if (filters != null && cars != null) {
+            visibleCars = cars.filter(car => {
+                let manufacturer = filters["manufacturers"]
+                console.debug(filters)
+                console.debug(manufacturer)
+                console.debug(car)
+                return manufacturer.includes(car["manufacturer"])
+            })
+        }
+        return (
+            <div>
+                {visibleCars.map((car) => <Car key={car.id} car={car} readOnly={true} />)}
+            </div>
+        );
+    }, [cars, filters])
 }
 
 

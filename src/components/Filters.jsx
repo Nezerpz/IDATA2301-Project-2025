@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import "../static/css/filter.css";
 import CheckBoxFilters from "./CheckBoxFilters.jsx";
 import SliderFilter from './SliderFilter';
+import { useState, useEffect } from 'react';
 
 
 /*
@@ -57,28 +58,24 @@ function getUniqueEntriesInLists(dictList, key) {
     return uniqueEntries;
 }
 
-function Filters({cars, setFilters}) {
-    const manufacturers = getUniqueEntries(cars, "manufacturer");
-    const prices = [getMinPrice(cars), getMaxPrice(cars)];
-    const transmission = getUniqueEntries(cars, "transmissionType");
-    const features = getUniqueEntriesInLists(cars, "features");
+function Filters({cars, filters, setFilters}) {
+    const [manufacturers, setManufacturers] = useState(getUniqueEntries(cars, "manufacturer"));
+    const [prices, setPrices] = useState([getMinPrice(cars), getMaxPrice(cars)]);
+    const [transmission, setTransmission] = useState(getUniqueEntries(cars, "transmissionType"));
+    const [features, setFeatures] = useState(getUniqueEntriesInLists(cars, "features"));
     console.debug(cars);
     console.debug(features);
 
     // Called when filters are updated
-    const updateFilters = () => {
+    useEffect(() => {
         let filters = {
-            //"manufacturers": getSelectedManufacturers(),
-            "manufacturers": ["VOLKSWAGEN"],
-            //"prices": getSelectedPriceRange(),
-            "prices": [0, 10000],
-            //"transmission": getSelectedTransmissionTypes(),
-            "transmission": ["MANUAL"],
-            //"features": getSelectedFeatures(),
-            "features": ["Bluetooth"]
+            "manufacturers": manufacturers,
+            "prices": prices,
+            "transmission": transmission,
+            "features": features
         };
         setFilters(filters);
-    }
+    }, [manufacturers, prices, transmission, features]);
 
     return (
             <div className={"filter-body"}>
@@ -86,23 +83,23 @@ function Filters({cars, setFilters}) {
                 <CheckBoxFilters 
                     name={"Manufacturers"} 
                     values={manufacturers} 
-                    onUpdate={updateFilters}/>
+                    onUpdate={setManufacturers}/>
 
                 <SliderFilter 
                     name={"Price"} 
                     min={prices[0]} 
                     max={prices[1]} 
-                    onUpdate={updateFilters}/>
+                    onUpdate={setPrices}/>
 
                 <CheckBoxFilters 
                     name={"Transmission"} 
                     values={transmission} 
-                    onUpdate={updateFilters}/>
+                    onUpdate={setTransmission}/>
 
                 <CheckBoxFilters 
                     name={"Features"} 
                     values={features} 
-                    onUpdate={updateFilters}/>
+                    onUpdate={setFeatures}/>
 
         </div>
     );
