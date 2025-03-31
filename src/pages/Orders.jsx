@@ -17,7 +17,7 @@ function renderPage(orders) {
   );
 }
 
-function Orders(){
+function Orders() {
     const [orders, setOrders] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -26,7 +26,18 @@ function Orders(){
         const fetchData = async () => {
             setLoading(true);
             try {
-                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/orders");
+                const token = localStorage.getItem("jwt");
+
+                // Determine the correct endpoint based on the current path
+                const path = window.location.pathname;
+                let endpoint = path.includes("provider") ? "/orders/provider" : "/orders/customer";
+
+                // Fetch orders
+                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + endpoint, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
                 let data = await response.json();
                 setOrders(data);
             } catch (error) {
@@ -37,13 +48,11 @@ function Orders(){
         };
 
         fetchData();
-    }, []);
+    }, [window.location.pathname]);
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
     return renderPage(orders);
-
-
 }
 
 export default Orders;

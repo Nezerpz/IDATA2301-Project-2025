@@ -7,6 +7,7 @@ import SettingsNavbar from "../components/SettingsNavbar.jsx";
 import useTitle from "../components/useTitle.jsx";
 import CheckLogin from "../components/CheckLogin.jsx";
 import AccessDenied from "./AccessDenied.jsx";
+import Logout from "../components/Logout.jsx";
 
 function MyPage() {
     useTitle("My Page");
@@ -18,6 +19,7 @@ function MyPage() {
                     <h1>user name</h1>
                     {/*TODO: Add nav bar for this menu*/}
                     <SettingsNavbar/>
+                    <Logout />
                 </div>
                 <div className={"col-10 mypage-background"}>
                     <div className={"col-9"}>
