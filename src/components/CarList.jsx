@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import Car from "./Car.jsx";
 
-function CarList ({cars, activeFilters}) {
+function CarList ({cars, filters}) {
     var visibleCars = cars;
 
-    if (activeFilters != null && cars != null) {
+    if (filters != null && cars != null) {
         visibleCars = visibleCars.filter(car => {
-            let manufacturer = activeFilters["manufacturers"]
+            let manufacturer = filters["manufacturers"]
             return manufacturer.includes(car["manufacturer"])
         });
     }
@@ -38,7 +38,7 @@ CarList.propTypes = {
             features: PropTypes.arrayOf(PropTypes.string)
         })
     ),
-    activeFilters: PropTypes.shape({
+    filters: PropTypes.shape({
         manufacturers: PropTypes.arrayOf(PropTypes.string),
         prices: PropTypes.arrayOf(PropTypes.number),
         transmission: PropTypes.arrayOf(PropTypes.string),
