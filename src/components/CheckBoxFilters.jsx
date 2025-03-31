@@ -1,14 +1,34 @@
 import PropTypes from 'prop-types';
 
+function updateList(event, name, onUpdate) {
+    let allFilters = new Array()
+    let selectedFilters = new Array()
+    let filterList = document.getElementById(name);
+    for (const listItem of filterList.childNodes) {
+        let checkboxElement = listItem.querySelector(".filter-checkbox")
+        let valueElement= listItem.querySelector(".filter-value")
+        let value = valueElement.innerText
+        if (checkboxElement.checked) {
+            selectedFilters.push(value)
+        }
+        allFilters.push(value)
+    }
+    if (selectedFilters.length == 0) {
+        selectedFilters = allFilters
+    }
+    onUpdate(selectedFilters)
+}
+
 function CheckBoxFilters({name, values, onUpdate}) {
+
     return (
         <details className={"filter-item"}>
             <summary className={"category-name"}>{name}</summary>
-            <ul>
-                {values.map((value, key) => (
-                    <li key={key}>
-                        <input type={"checkbox"} />
-                        <label>{value}</label>
+            <ul id={name}>
+                {Object.entries(values).map(indexValue => (
+                    <li key={indexValue[0]}>
+                        <input className={"filter-checkbox"} type={"checkbox"} onChange={(e) => {updateList(e, name, onUpdate)}}/>
+                        <label className={"filter-value"}>{indexValue[1]}</label>
                     </li>
                 ))}
             </ul>

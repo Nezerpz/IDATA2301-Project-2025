@@ -24,7 +24,6 @@ function getUniqueEntries(dictList, key) {
 function getMaxPrice(cars) {
     const prices = getUniqueEntries(cars, "price");
     const maxPrice = Math.max(...prices);
-    console.log(maxPrice);
     return maxPrice;
 }
 
@@ -34,7 +33,6 @@ function getMaxPrice(cars) {
 function getMinPrice(cars) {
     const prices = getUniqueEntries(cars, "price");
     const minPrice = Math.min(...prices);
-    console.log(minPrice);
     return minPrice;
 }
 
@@ -58,24 +56,28 @@ function getUniqueEntriesInLists(dictList, key) {
     return uniqueEntries;
 }
 
-function Filters({cars, filters, setFilters}) {
-    const [manufacturers, setManufacturers] = useState(getUniqueEntries(cars, "manufacturer"));
-    const [prices, setPrices] = useState([getMinPrice(cars), getMaxPrice(cars)]);
-    const [transmission, setTransmission] = useState(getUniqueEntries(cars, "transmissionType"));
-    const [features, setFeatures] = useState(getUniqueEntriesInLists(cars, "features"));
-    console.debug(cars);
-    console.debug(features);
 
-    // Called when filters are updated
+function Filters({cars, updateFilters}) {
+    const manufacturers = getUniqueEntries(cars, "manufacturer");
+    const prices = [getMinPrice(cars), getMaxPrice(cars)];
+    const transmission = getUniqueEntries(cars, "transmissionType");
+    const features = getUniqueEntriesInLists(cars, "features");
+    
+    const [activeManufacturers, setActiveManufacturers] = useState(manufacturers);
+    const [activePrices, setActivePrices] = useState(prices);
+    const [activeTransmission, setActiveTransmission] = useState(transmission);
+    const [activeFeatures, setActiveFeatures] = useState(features);
+
     useEffect(() => {
         let filters = {
-            "manufacturers": manufacturers,
-            "prices": prices,
-            "transmission": transmission,
-            "features": features
-        };
-        setFilters(filters);
-    }, [manufacturers, prices, transmission, features]);
+            "manufacturers": activeManufacturers,
+            "prices": activePrices,
+            "transmission": activeTransmission,
+            "features": activeFeatures
+        }
+        console.debug(filters);
+        updateFilters({...filters});
+    }, [activeManufacturers, activePrices, activeTransmission, activeFeatures]);
 
     return (
             <div className={"filter-body"}>
@@ -83,23 +85,23 @@ function Filters({cars, filters, setFilters}) {
                 <CheckBoxFilters 
                     name={"Manufacturers"} 
                     values={manufacturers} 
-                    onUpdate={setManufacturers}/>
+                    onUpdate={setActiveManufacturers}/>
 
                 <SliderFilter 
                     name={"Price"} 
                     min={prices[0]} 
                     max={prices[1]} 
-                    onUpdate={setPrices}/>
+                    onUpdate={setActivePrices}/>
 
                 <CheckBoxFilters 
                     name={"Transmission"} 
                     values={transmission} 
-                    onUpdate={setTransmission}/>
+                    onUpdate={setActiveTransmission}/>
 
                 <CheckBoxFilters 
                     name={"Features"} 
                     values={features} 
-                    onUpdate={setFeatures}/>
+                    onUpdate={setActiveFeatures}/>
 
         </div>
     );
@@ -122,7 +124,7 @@ Filters.propTypes = {
             features: PropTypes.array
         })
     ),
-    setFilters: PropTypes.func
+    updateFilters: PropTypes.func
 };
 
 export default Filters;

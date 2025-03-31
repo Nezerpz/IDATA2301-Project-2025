@@ -5,7 +5,7 @@ import SearchDateFromTo from "../components/SearchDateFromTo.jsx";
 import React, { useState, useEffect } from 'react';
 
 //TODO: Implement the fetch from frontend, and display serach if not fetch has been made before
-function renderPage(cars, filters, setFromToDate, setFilters) {
+function renderPage(setFromToDate, cars, filters, updateFilters) {
     if (cars === null) {
         return (
             <h1>No soup for You!</h1>
@@ -19,7 +19,7 @@ function renderPage(cars, filters, setFromToDate, setFilters) {
                         <SearchDateFromTo setFromToDate={setFromToDate}/>
 
                         <h4>Filters</h4>
-                        <Filters cars={cars} setFilters={setFilters}/>
+                        <Filters cars={cars} updateFilters={updateFilters} />
                     </div>
                 </div>
                 <div className="col-9">
@@ -34,19 +34,29 @@ function renderPage(cars, filters, setFromToDate, setFilters) {
 
 function Cars() {
     useTitle("Cars");
-    var [fromToDate, setFromToDate] = useState(null);
-    var [cars, setCars] = useState(null);
-    var [filters, setFilters] = useState(null);
+    const [fromToDate, setFromToDate] = useState(null);
+    const [cars, setCars] = useState(null);
+    const [filters, setFilters] = useState(null);
+
+    function updateFilters(newFilters) {
+        setFilters(newFilters)
+    }
 
     // search cars on first render 
     // and when changing timespan
     var [loading, setLoading] = useState(true);
     var [error, setError] = useState(null);
+
+    useEffect(() => {setTimeout(() => {console.debug(filters)}, 1000)}, [filters]);
+
     useEffect(() => {
       const fetchData = async () => {
         setLoading(true);
         try {
-            let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars");
+            let response = await fetch(
+                import.meta.env.VITE_BACKEND_URL + ":" + 
+                import.meta.env.VITE_BACKEND_PORT + "/cars"
+            );
             let data = await response.json();
             setCars(data);
         } catch (error) {
@@ -60,9 +70,7 @@ function Cars() {
     }, [fromToDate]);
 
     // Re-render when cars or filters change
-    useEffect(() => {
-        return renderPage(cars, filters, setFromToDate, setFilters);
-    }, [cars, filters])
+    return renderPage(setFromToDate, cars, filters, updateFilters);
 
 }
 

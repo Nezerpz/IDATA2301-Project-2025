@@ -1,26 +1,21 @@
 import PropTypes from "prop-types";
 import Car from "./Car.jsx";
-import { useState, useEffect } from 'react';
 
-function CarList ({cars, filters}) {
+function CarList ({cars, activeFilters}) {
+    var visibleCars = cars;
 
-    useEffect(() => {
-        var visibleCars = cars
-        if (filters != null && cars != null) {
-            visibleCars = cars.filter(car => {
-                let manufacturer = filters["manufacturers"]
-                console.debug(filters)
-                console.debug(manufacturer)
-                console.debug(car)
-                return manufacturer.includes(car["manufacturer"])
-            })
-        }
-        return (
-            <div>
-                {visibleCars.map((car) => <Car key={car.id} car={car} readOnly={true} />)}
-            </div>
-        );
-    }, [cars, filters])
+    if (activeFilters != null && cars != null) {
+        visibleCars = visibleCars.filter(car => {
+            let manufacturer = activeFilters["manufacturers"]
+            return manufacturer.includes(car["manufacturer"])
+        });
+    }
+
+    return (
+        <div>
+            {visibleCars.map((car) => <Car key={car.id} car={car} readOnly={true} />)}
+        </div>
+    );
 }
 
 
@@ -43,8 +38,8 @@ CarList.propTypes = {
             features: PropTypes.arrayOf(PropTypes.string)
         })
     ),
-    filters: PropTypes.shape({
-        manufacturer: PropTypes.arrayOf(PropTypes.string),
+    activeFilters: PropTypes.shape({
+        manufacturers: PropTypes.arrayOf(PropTypes.string),
         prices: PropTypes.arrayOf(PropTypes.number),
         transmission: PropTypes.arrayOf(PropTypes.string),
         features: PropTypes.arrayOf(PropTypes.string)
