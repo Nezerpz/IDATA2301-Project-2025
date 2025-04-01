@@ -3,13 +3,13 @@ import {Outlet, Link} from "react-router-dom";
 function LoginSignup() {
   if (localStorage.getItem("jwt") === null) {
     return <div className="navbar">
-      <a className="navbar-item" href="/login">Login</a>
-      <a className="navbar-item" href="/signup">Sign up</a>
+      <Link className="navbar-item" to="/login">Login</Link>
+      <Link className="navbar-item" to="/signup">Sign up</Link>
     </div>
   }
   else {
     return <div className="navbar">
-      <a className="navbar-item" href={"/mypage/settings"}>User</a>
+      <Link className="navbar-item" to={"/mypage/settings"}>User</Link>
     </div>
   }
 

@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, {useEffect, useState} from "react";
-import Review from "../pages/Review.jsx";
+import ReviewPage from "../pages/ReviewPage.jsx";
 import useTitle from "./useTitle.jsx";
 
 //TODO: Implement logic to show a different button depending on the user's role in the order.
@@ -49,13 +49,13 @@ function renderComponent ({order, car}) {
                         <div className={"col-4 button-container flex-container-row"}>
                             <text>Review: </text>
                             <button onClick={() => {
-                                <Review order = {order} type={"car"}/>
+                                <ReviewPage order = {order} type={"car"}/>
                                 /*TODO: Implement logic to redirect to review page for specific car*/
                             }}>
                                 Car
                             </button>
                             <button onClick={() => {
-                                <Review order = {order} type={"provider"}/>
+                                <ReviewPage order = {order} type={"provider"}/>
                                 /*TODO: Implement logic to redirect to review page for specific provider*/
                             }}>
 

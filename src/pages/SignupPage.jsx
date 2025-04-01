@@ -1,10 +1,10 @@
 import useTitle from "../components/useTitle.jsx";
 import "../static/css/loginAndSignup.css";
 import {Link} from "react-router-dom";
-import Conflict from "./Conflict.jsx";
+import Conflict from "./ConflictPage.jsx";
 
 
-function Signup() {
+function SignupPage() {
     useTitle("Sign up");
     const isUserLoggedIn = localStorage.getItem('jwt') !== null;
     if (isUserLoggedIn) {
@@ -56,4 +56,4 @@ function Signup() {
     }
 }
 
-export default Signup;
+export default SignupPage;

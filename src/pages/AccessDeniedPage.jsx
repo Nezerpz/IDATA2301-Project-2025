@@ -1,4 +1,4 @@
-function AccessDenied() {
+function AccessDeniedPage() {
     return (
         <div>
             <h1>403 - Access Denied</h1>
@@ -7,4 +7,4 @@ function AccessDenied() {
     );
 }
 
-export default AccessDenied;
+export default AccessDeniedPage;

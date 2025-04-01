@@ -1,17 +1,17 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import Home from './pages/Home.jsx'
-import About from './pages/About.jsx'
-import Cars from './pages/Cars.jsx'
-import Login from './pages/Login.jsx'
-import Signup from "./pages/Signup.jsx";
-import Review from "./pages/Review.jsx";
+import HomePage from './pages/HomePage.jsx'
+import AboutPage from './pages/AboutPage.jsx'
+import CarsPage from './pages/CarsPage.jsx'
+import LoginPage from './pages/LoginPage.jsx'
+import SignupPage from "./pages/SignupPage.jsx";
+import ReviewPage from "./pages/ReviewPage.jsx";
 import MyPage from "./pages/MyPage.jsx";
-import NotFound from "./pages/NotFound.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
 import User from "./components/User.jsx";
 import ManageOwnedCars from "./components/ManageOwnedCars.jsx";
-import Settings from "./pages/Settings.jsx";
+import SettingsPage from "./pages/SettingsPage.jsx";
 import Users from "./components/Users.jsx";
-import Orders from "./pages/Orders.jsx";
+import OrdersPage from "./pages/OrdersPage.jsx";
 import AddNewCar from "./components/AddNewCar.jsx";
 import App from "./App.jsx";
 
@@ -19,32 +19,31 @@ const router = createBrowserRouter([
     {
         path:'/',
         element: <App />,
-        errorElement: <NotFound />,
+        errorElement: <NotFoundPage />,
         children: [
             {
                 index: true,
-                element: <Home />,
-                errorElement: <NotFound />
+                element: <HomePage />,
             },
             {
                 path: '/cars',
-                element: <Cars />
+                element: <CarsPage />
             },
             {
                 path: '/about',
-                element: <About />
+                element: <AboutPage />
             },
             {
                 path: '/login',
-                element: <Login />
+                element: <LoginPage />
             },
             {
                 path: '/signup',
-                element: <Signup />
+                element: <SignupPage />
             },
             {
                 path: '/review',
-                element: <Review />
+                element: <ReviewPage />
             },
             {
                 path: '/mypage/*',
@@ -52,11 +51,11 @@ const router = createBrowserRouter([
                 children: [
                     {
                         path: "orders",
-                        element: <Orders />,
+                        element: <OrdersPage />,
                         children:[
                             {
                                 path: "review",
-                                element: <Review />
+                                element: <ReviewPage />
                             }
                         ]
                     },
@@ -66,7 +65,7 @@ const router = createBrowserRouter([
                     },
                     {
                         path: "settings",
-                        element: <Settings />,
+                        element: <SettingsPage />,
                     },
                     {
                         path: "provider",
@@ -85,7 +84,7 @@ const router = createBrowserRouter([
                             },
                             {
                                 path:"orders",
-                                element: <Orders />
+                                element: <OrdersPage />
                             }
                         ]
                     }

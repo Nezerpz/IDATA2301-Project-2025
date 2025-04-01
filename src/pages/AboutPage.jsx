@@ -1,6 +1,6 @@
 import useTitle from "../components/useTitle.jsx";
 
-function About() {
+function AboutPage() {
     useTitle("About");
     return(
     <div className="row">
@@ -11,4 +11,4 @@ function About() {
     </div>
 )
 }
-export default About;
+export default AboutPage;

@@ -11,14 +11,14 @@ import {Link} from "react-router-dom";
 
 function renderPage(cars) {
     return(
-    <div id={"manage-cars"}>
-        <div className={"button-container-end"}>
-            <button>
-                <Link to={"/mypage/provider/cars/add"}>Add new car</Link>
-            </button>
+        <div id={"manage-cars"}>
+            <div className={"button-container-end"}>
+                <button>
+                    <Link to={"/mypage/provider/cars/add"}>Add new car</Link>
+                </button>
+            </div>
+            <OwnedCarsList cars={cars}/>
         </div>
-        <OwnedCarsList cars={cars} />
-    </div>
     )
 }
 

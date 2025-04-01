@@ -2,7 +2,7 @@
 //TODO: CSS for review-box
 
 
-function Review(order){
+function ReviewPage(order){
     order = ["order"];
     return (
             <div className={"review-box row"}>
@@ -22,4 +22,4 @@ function Review(order){
     )
 }
 
-export default Review;
+export default ReviewPage;

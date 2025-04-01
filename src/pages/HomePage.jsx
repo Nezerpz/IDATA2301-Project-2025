@@ -3,7 +3,7 @@ import SearchDateFromTo from "../components/SearchDateFromTo.jsx";
 import { Link } from 'react-router-dom';
 
 //TODO: Fix the link. It is currently white on white background
-function Home(){
+function HomePage(){
     useTitle("Home");
     return (
         <div>
@@ -25,4 +25,4 @@ function Home(){
         </div>
     )
 }
-export default Home;
+export default HomePage;

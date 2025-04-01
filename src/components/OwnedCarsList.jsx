@@ -1,5 +1,5 @@
 
-import OwnedCarListObject from "./OwnedCarListObject.jsx";
+import OwnedCarListItem from "./OwnedCarListItem.jsx";
 
 
 function OwnedCarsList(cars) {
@@ -7,7 +7,7 @@ function OwnedCarsList(cars) {
     return (
             <ul className={"scrollable-list"}>
                 {cars.map((car) => (
-                    <OwnedCarListObject car={car} key ={car.id}/>
+                    <OwnedCarListItem car={car} key ={car.id}/>
                 ))}
             </ul>
     )

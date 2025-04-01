@@ -1,31 +1,10 @@
 import {Link, useNavigate} from 'react-router-dom';
-import {useEffect, useState} from "react";
+import {useEffect, useRef, useState} from "react";
+import ProviderSettings from "./ProviderSettings.jsx";
 
 //TODO: Make this dynamically change based on the user's role
 
 function renderComponent({userType}) {
-    const navigate = useNavigate();
-    const handleBecomeProvider = async (event) => {
-        event.preventDefault();
-        try {
-            const token = localStorage.getItem("jwt");
-            const response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/become-provider", {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                    'Content-Type': 'application/json',
-                },
-            });
-
-            if (response.ok) {
-                navigate('/');
-            } else {
-                console.error('Failed to become a provider', response.statusText);
-            }
-        } catch (error) {
-            console.error('Error becoming a provider', error);
-        }
-    };
     if (userType === "ADMIN") {
         {/*TODO: Remove the parts used for testing later.*/}
         return (
@@ -33,46 +12,26 @@ function renderComponent({userType}) {
                 <Link to={"/mypage/users"} className={"navbar-item-dark"}>
                     User administration
                 </Link>
-                <Link to={"/mypage/orders"} className={"navbar-item-dark"}>
-                    Order history
-                </Link>
-                <Link to={"/mypage/settings"} className={"navbar-item-dark"}>
-                    Settings
-                </Link>
-                <Link className={"navbar-item-dark"} to={"/"} onClick={handleBecomeProvider}>
-                    Become a provider
-                </Link>
-                <Link className={"navbar-item-dark"} to={"/mypage/provider"}>
-                    Provider options
-                </Link>
+                <CustomerOrders />
+                <SettingsLink />
+                <BecomeProvider />
+                <ProviderSettings />
             </>
         );
     } else if (userType === "PROVIDER") {
         return (
             <>
-                <Link to={"/mypage/orders"} className={"navbar-item-dark"}>
-                    Orders as a customer
-                </Link>
-                <Link to={"/mypage/provider/orders"} className={"navbar-item-dark"}>
-                    Orders as a provider
-                </Link>
-                <Link to={"/mypage/settings"} className={"navbar-item-dark"}>
-                    Settings
-                </Link>
+                <CustomerOrders />
+                <SettingsLink />
+                <DropdownProvider />
             </>
         );
     } else if (userType === "CUSTOMER") {
         return (
             <>
-                <Link to={"/mypage/orders"} className={"navbar-item-dark"}>
-                    Orders
-                </Link>
-                <Link to={"/mypage/settings"} className={"navbar-item-dark"}>
-                    Settings
-                </Link>
-                <Link className={"navbar-item-dark"} to={"/"} onClick={handleBecomeProvider}>
-                    Become a provider
-                </Link>
+                <CustomerOrders />
+                <SettingsLink />
+                <BecomeProvider />
             </>
         );
     }
@@ -104,6 +63,96 @@ function NavBarPicker() {
         fetchData();
     }, []);
     return renderComponent({userType});
+}
+
+function DropdownProvider(){
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        if (isOpen) {
+            const dropdown = dropdownRef.current;
+            const rect = dropdown.getBoundingClientRect();
+            if (rect.right > window.innerWidth) {
+                dropdown.style.left = 'auto';
+                dropdown.style.right = '0';
+            }
+            if (rect.bottom > window.innerHeight) {
+                dropdown.style.top = 'auto';
+                dropdown.style.bottom = '100%';
+            }
+        }
+    }, [isOpen]);
+
+    const handleDropdownClick = () => {
+        setIsOpen(!isOpen);
+    };
+
+    return (
+        <div className={"dropdown"} onClick={handleDropdownClick}>
+            <text className={"navbar-item-dark dropItem"}>
+                Provider
+            </text>
+            {isOpen && (
+                <div className={"dropdown-content"} ref={dropdownRef}>
+                    <Link to={"/mypage/provider/cars"} className={"navbar-item-dark"}>
+                        Manage cars
+                    </Link>
+                    <Link to={"/mypage/provider/orders"} className={"navbar-item-dark"}>
+                        Orders
+                    </Link>
+                </div>
+            )}
+        </div>
+    )
+}
+
+function SettingsLink() {
+    return (
+        <>
+            <Link to={"/mypage/settings"} className={"navbar-item-dark"}>
+                Settings
+            </Link>
+        </>
+    );
+}
+
+function CustomerOrders() {
+    return (
+        <Link to={"/mypage/orders"} className={"navbar-item-dark"}>
+            Orders
+        </Link>
+    );
+}
+
+function BecomeProvider() {
+    const navigate = useNavigate();
+    const handleBecomeProvider = async (event) => {
+        event.preventDefault();
+        try {
+            const token = localStorage.getItem("jwt");
+            const response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/become-provider", {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (response.ok) {
+                navigate('/');
+            } else {
+                console.error('Failed to become a provider', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error becoming a provider', error);
+        }
+    };
+    return (
+        <Link className={"navbar-item-dark"} to={"/"} onClick={handleBecomeProvider}>
+            Become a provider
+        </Link>
+    );
 }
 
 //TODO: On mobile, after choosing an option, the navbar should collapse, and a back button should be shown.

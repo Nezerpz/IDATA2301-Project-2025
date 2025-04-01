@@ -42,6 +42,7 @@ header {
     font-family: Raleway, sans-serif;
     text-decoration: none;
     list-style-type: none;
+    width: -webkit-fill-available;
 }
 
 @media screen and (max-width: 730px) {

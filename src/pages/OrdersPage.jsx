@@ -4,20 +4,18 @@ import useTitle from "../components/useTitle.jsx";
 import React, { useState, useEffect } from 'react';
 
 function renderPage(orders) {
-  return (
-    <div className={"row"}>
-            <div className={"col-1"}></div>
-            <div className={"col-10"}>
-                <div id={"order-list"}>
-                    <OrderList orders={orders} />
-                </div>
+    if (orders.length === 0) {
+        return <text>No orders found</text>;
+    } else if (orders.length >= 1) {
+        return (
+            <div id={"order-list"}>
+                <OrderList orders={orders} />
             </div>
-            <div className={"col-1"}></div>
-    </div>
-  );
+        );
+    }
 }
 
-function Orders() {
+function OrdersPage() {
     const [orders, setOrders] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -55,4 +53,4 @@ function Orders() {
     return renderPage(orders);
 }
 
-export default Orders;
+export default OrdersPage;

@@ -28,7 +28,7 @@ function renderPage(cars) {
     }
 }
 
-function Cars() {
+function CarsPage() {
     useTitle("Cars");
     const [cars, setCars] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -57,4 +57,4 @@ function Cars() {
     return renderPage(cars);
 }
 
-export default Cars;
+export default CarsPage;

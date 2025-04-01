@@ -6,8 +6,10 @@ import {Outlet } from 'react-router-dom';
 import SettingsNavbar from "../components/SettingsNavbar.jsx";
 import useTitle from "../components/useTitle.jsx";
 import CheckLogin from "../components/CheckLogin.jsx";
-import AccessDenied from "./AccessDenied.jsx";
+import AccessDeniedPage from "./AccessDeniedPage.jsx";
 import Logout from "../components/Logout.jsx";
+import OrderList from "../components/OrderList.jsx";
+import React from "react";
 
 function MyPage() {
     useTitle("My Page");
@@ -16,14 +18,22 @@ function MyPage() {
         return (
             <div className={"row"}>
                 <div className={"col-2"}>
-                    <h1>user name</h1>
-                    {/*TODO: Add nav bar for this menu*/}
-                    <SettingsNavbar/>
-                    <Logout />
+                    <div id={"settings-menu"}>
+                        <h1>user name</h1>
+                        {/*TODO: Add nav bar for this menu*/}
+                        <SettingsNavbar/>
+                        <Logout />
+                    </div>
                 </div>
                 <div className={"col-10 mypage-background"}>
                     <div className={"col-9"}>
-                        <Outlet/>
+                        <div className={"col-1"}></div>
+                        <div className={"col-10"}>
+                            <div id={"order-list"}>
+                                <Outlet/>
+                            </div>
+                        </div>
+                        <div className={"col-1"}></div>
                     </div>
                     <div className={"col-3"}></div>
                 </div>
@@ -31,7 +41,7 @@ function MyPage() {
             </div>
         );
     } else {
-        return <AccessDenied />;
+        return <AccessDeniedPage />;
     }
 }
 
