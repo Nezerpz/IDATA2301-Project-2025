@@ -51,10 +51,15 @@ function Cars() {
       const fetchData = async () => {
         setLoading(true);
         try {
-            let response = await fetch(
+            const response = await fetch(
                 import.meta.env.VITE_BACKEND_URL + ":" + 
-                import.meta.env.VITE_BACKEND_PORT + "/cars"
+                import.meta.env.VITE_BACKEND_PORT + "/cars", {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', },
+                    body: JSON.stringify(fromToDate),
+                }
             );
+
             let data = await response.json();
             setCars(data);
         } catch (error) {

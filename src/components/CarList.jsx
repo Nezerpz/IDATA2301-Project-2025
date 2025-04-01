@@ -4,25 +4,42 @@ import Car from "./Car.jsx";
 function CarList ({cars, filters}) {
     var visibleCars = cars;
 
+    // Only filter if there are filters and cars
     if (filters != null && cars != null) {
         visibleCars = visibleCars.filter(car => {
-    console.debug(car)
-            let manufacturer = filters["manufacturers"]
-            let features = filters["features"]
-            let prices = filters["prices"]
-            let transmission = filters["transmission"]
-            console.log(`filter: ${features} \n\n car: ${car["features"]}`)
-            console.log(features.length)
-            return (
-                (manufacturer.length != 0
-                    ? manufacturer.includes(car["manufacturer"])
+
+            // Supported filters
+            let selectedManufacturers = filters["manufacturers"]
+            let selectedFeatures = filters["features"]
+            let selectedPriceRange = filters["prices"]
+            let minPrice = selectedPriceRange[0]
+            let maxPrice = selectedPriceRange[1]
+            let selectedTransmissionTypes = filters["transmission"]
+
+            // Corresponding car properties
+            let carManufacturer = car["manufacturer"]
+            let carPrice = car["price"]
+            let carTransmissionType = car["transmissionType"]
+            let carFeatures = car["features"]
+
+            return ( // Car is shown if...
+
+                // either none or the correct manufacturer is selected, and...
+                (selectedManufacturers.length != 0
+                    ? selectedManufacturers.includes(carManufacturer)
                     : true) &&
-                car["price"] >= prices[0] && car["price"] <= prices[1] &&
-                (transmission.length != 0
-                    ? transmission.includes(car["transmissionType"])
+
+                // the car price is between min and max, and...
+                carPrice >= minPrice && carPrice <= maxPrice &&
+
+                // the right transmission type is selected, and...
+                (selectedTransmissionTypes.length != 0
+                    ? selectedTransmissionTypes.includes(carTransmissionType)
                     : true) &&
-                (features.length != 0 
-                    ? features.every((feature) => car["features"].includes(feature))
+
+                // either none or all matching features are selected.
+                (selectedFeatures.length != 0 
+                    ? selectedFeatures.every((feature) => carFeatures.includes(feature))
                     : true)
 
             )
