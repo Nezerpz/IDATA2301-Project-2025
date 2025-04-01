@@ -66,7 +66,7 @@ function Filters({cars, updateFilters}) {
     const [activeManufacturers, setActiveManufacturers] = useState(manufacturers);
     const [activePrices, setActivePrices] = useState(prices);
     const [activeTransmission, setActiveTransmission] = useState(transmission);
-    const [activeFeatures, setActiveFeatures] = useState(features);
+    const [activeFeatures, setActiveFeatures] = useState([]);
 
     useEffect(() => {
         let filters = {
@@ -75,7 +75,7 @@ function Filters({cars, updateFilters}) {
             "transmission": activeTransmission,
             "features": activeFeatures
         }
-        console.debug(filters);
+        console.log(filters)
         updateFilters({...filters});
     }, [activeManufacturers, activePrices, activeTransmission, activeFeatures]);
 

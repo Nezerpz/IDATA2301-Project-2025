@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 
 function updateList(event, name, onUpdate) {
-    let allFilters = new Array()
     let selectedFilters = new Array()
     let filterList = document.getElementById(name);
     for (const listItem of filterList.childNodes) {
@@ -11,10 +10,6 @@ function updateList(event, name, onUpdate) {
         if (checkboxElement.checked) {
             selectedFilters.push(value)
         }
-        allFilters.push(value)
-    }
-    if (selectedFilters.length == 0) {
-        selectedFilters = allFilters
     }
     onUpdate(selectedFilters)
 }

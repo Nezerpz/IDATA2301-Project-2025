@@ -47,8 +47,6 @@ function Cars() {
     var [loading, setLoading] = useState(true);
     var [error, setError] = useState(null);
 
-    useEffect(() => {setTimeout(() => {console.debug(filters)}, 1000)}, [filters]);
-
     useEffect(() => {
       const fetchData = async () => {
         setLoading(true);

@@ -1,11 +1,5 @@
 import PropTypes from 'prop-types';
-import {  useState } from 'react';
-
-function minUpdate() {
-}
-
-function maxUpdate() {
-}
+import { useState, useEffect } from 'react';
 
 function SliderFilter({name, min, max, onUpdate}) {
     let allFilters = new Array()
@@ -15,6 +9,10 @@ function SliderFilter({name, min, max, onUpdate}) {
     
     const [minValue, setMinValue] = useState(min);
     const [maxValue, setMaxValue] = useState(max);
+
+    useEffect(() => {
+        onUpdate([minValue, maxValue])
+    }, [minValue, maxValue])
     
     return (
         <details className={"filter-item"}>
@@ -24,8 +22,8 @@ function SliderFilter({name, min, max, onUpdate}) {
                 <input type="range" min={min} max={max} value={maxValue} className="max" id={`${name}-max-slider`} onChange={e => setMaxValue(e.target.value)}/>
             </div>
             <div>
-                <input type="number" min={min} max={max} defaultValue={min} onChange={minUpdate}/>
-                <input type="number" min={min} max={max} defaultValue={max} onChange={maxUpdate}/>
+                <input type="number" min={min} max={max} defaultValue={min} value={minValue} onChange={e => setMinValue(e.target.value)}/>
+                <input type="number" min={min} max={max} defaultValue={max} value={maxValue} onChange={e => setMaxValue(e.target.value)}/>
             </div>
         </details>
     );
