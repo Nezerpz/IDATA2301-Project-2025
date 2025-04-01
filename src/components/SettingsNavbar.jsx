@@ -80,6 +80,7 @@ function renderComponent({userType}) {
 
 function NavBarPicker() {
     const [userType, setUserType] = useState(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -89,6 +90,13 @@ function NavBarPicker() {
                         'Authorization': `Bearer ${token}`
                     }
                 });
+
+            if (response.status === 401) {
+                // Delete the JWT token and redirect to the login page
+                localStorage.removeItem("jwt");
+                navigate('/login');
+            }
+
                 let data = await response.json();
                 setUserType(data);
         };
