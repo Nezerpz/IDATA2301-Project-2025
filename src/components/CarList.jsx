@@ -3,11 +3,21 @@ import Car from "./Car.jsx";
 
 function CarList ({cars, filters}) {
     var visibleCars = cars;
+    console.debug(filters)
 
     if (filters != null && cars != null) {
         visibleCars = visibleCars.filter(car => {
             let manufacturer = filters["manufacturers"]
-            return manufacturer.includes(car["manufacturer"])
+            let features = filters["features"]
+            let prices = filters["prices"]
+            let transmission = filters["transmission"]
+            return (
+                manufacturer.includes(car["manufacturer"]) &&
+                car["price"] >= prices[0] && car["price"] <= prices[1] &&
+                transmission.includes(car["transmission"]) &&
+                features.every((feature) => car["features"].includes(feature))
+
+            )
         });
     }
 
