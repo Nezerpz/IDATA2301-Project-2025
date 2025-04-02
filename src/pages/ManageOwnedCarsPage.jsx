@@ -1,8 +1,8 @@
 
-import OwnedCarsList from './OwnedCarsList';
+import OwnedCarsList from '../components/OwnedCarsList.jsx';
 import PropTypes from "prop-types";
-import Car from "./Car.jsx";
-import useTitle from "./useTitle.jsx";
+import Car from "../components/Car.jsx";
+import useTitle from "../components/useTitle.jsx";
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
@@ -22,7 +22,7 @@ function renderPage(cars) {
     )
 }
 
-function ManageOwnedCars() {
+function ManageOwnedCarsPage() {
     useTitle("Manage");
     const [cars, setCars] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -32,7 +32,12 @@ function ManageOwnedCars() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars");
+                const token = localStorage.getItem("jwt");
+                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars/provider", {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
                 let data = await response.json();
                 setCars(data);
             } catch (error) {
@@ -68,4 +73,4 @@ Car.propTypes = {
     })
 }
 
-export default ManageOwnedCars;
+export default ManageOwnedCarsPage;

@@ -8,12 +8,13 @@ import ReviewPage from "./pages/ReviewPage.jsx";
 import MyPage from "./pages/MyPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import User from "./components/User.jsx";
-import ManageOwnedCars from "./components/ManageOwnedCars.jsx";
+import ManageOwnedCarsPage from "./pages/ManageOwnedCarsPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
 import Users from "./components/Users.jsx";
 import OrdersPage from "./pages/OrdersPage.jsx";
 import AddNewCar from "./components/AddNewCar.jsx";
 import App from "./App.jsx";
+import EditCarPage from "./pages/EditCarPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -72,15 +73,19 @@ const router = createBrowserRouter([
                         children: [
                             {
                                 index: true,
-                                element: <ManageOwnedCars />
+                                element: <ManageOwnedCarsPage />
                             },
                             {
                                 path: "cars",
-                                element: <ManageOwnedCars />
+                                element: <ManageOwnedCarsPage />
                             },
                             {
                                 path: "cars/add",
                                 element: <AddNewCar />
+                            },
+                            {
+                                path: "cars/edit/:id",
+                                element: <EditCarPage />
                             },
                             {
                                 path:"orders",

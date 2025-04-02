@@ -2,6 +2,7 @@ import {Link} from "react-router-dom";
 
 function OwnedCarListItem(car) {
     car = car["car"]
+    //TODO: Instead of going to delete carId, give an alert to confirm the deletion.
     return (
         <li className={"owned-car flex-container-column"}>
             <span>
