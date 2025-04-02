@@ -12,7 +12,6 @@ async function saveChanges(car) {
             },
             body: JSON.stringify(car)
         });
-        console.log('Car:', car);
         if (!response.ok) {
             throw new Error('Failed to save changes');
         }
