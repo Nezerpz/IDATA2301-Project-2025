@@ -15,7 +15,7 @@ function renderComponent({userType}) {
                 <CustomerOrders />
                 <SettingsLink />
                 <BecomeProvider />
-                <ProviderSettings />
+                <DropdownProvider />
             </>
         );
     } else if (userType === "PROVIDER") {

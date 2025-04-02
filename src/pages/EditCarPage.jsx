@@ -1,7 +1,28 @@
 import {useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 
-function renderPage(car, setCar, manufacturers) {
+async function saveChanges(car) {
+    const token = localStorage.getItem("jwt");
+    try {
+        const response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars/" + car.id, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(car)
+        });
+        console.log('Car:', car);
+        if (!response.ok) {
+            throw new Error('Failed to save changes');
+        }
+        alert("Car details updated successfully!");
+    } catch (error) {
+        alert(`Error: ${error.message}`);
+    }
+}
+
+function renderPage(car, setCar, manufacturers, handleSubmit) {
     const handleFeatureChange = (e, index) => {
         const newFeatures = [...car.features];
         newFeatures[index] = e.target.value;
@@ -20,7 +41,7 @@ function renderPage(car, setCar, manufacturers) {
     return (
         <div>
             <h1>{car.manufacturer} {car.carModel}</h1>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <label>
                     <span>Manufacturer</span>
                     <select placeholder="Select Manufacturer" value={car.manufacturer} onChange={(e) => setCar({ ...car, manufacturer: e.target.value })}>
@@ -123,11 +144,16 @@ function EditCarPage() {
         fetchManufacturersData();
     }, []);
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        saveChanges(car);
+    };
+
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
     if (!car || manufacturers.length === 0) return <div>Loading data...</div>;
 
-    return renderPage(car, setCar, manufacturers);
+    return renderPage(car, setCar, manufacturers, handleSubmit);
 }
 
 export default EditCarPage;

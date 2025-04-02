@@ -18,7 +18,7 @@ function Order({order}) {
         const fetchData = async () => {
             setLoading(true);
             try {
-                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/car/" + order.carId);
+                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars/" + order.carId);
                 let data = await response.json();
                 setCar(data);
             } catch (error) {

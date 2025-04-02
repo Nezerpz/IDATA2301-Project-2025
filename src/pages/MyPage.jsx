@@ -2,6 +2,10 @@
 //TODO: This is supposed to be the root where the user can see their profile and corresponding information.
 // Implement the actual page with the user's information. Rename to mypage?
 
+//TODO: When token is expired, the user should be redirected to the login page.
+// Works when first entering the page, since the check happens in SettingsNavbar.
+// Change the check to happen in every page which needs credentials.
+
 import {Outlet } from 'react-router-dom';
 import SettingsNavbar from "../components/SettingsNavbar.jsx";
 import useTitle from "../components/useTitle.jsx";
