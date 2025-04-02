@@ -34,7 +34,12 @@ function renderPage(setFromToDate, cars, filters, updateFilters) {
 
 function Cars() {
     useTitle("Cars");
-    const [fromToDate, setFromToDate] = useState(null);
+    const [fromToDate, setFromToDate] = useState({ 
+        dateFrom: '2025-04-01', 
+        dateTo: '2025-05-17', 
+        timeFrom: '08:00', 
+        timeTo: '17:00' 
+    });
     const [cars, setCars] = useState(null);
     const [filters, setFilters] = useState(null);
 

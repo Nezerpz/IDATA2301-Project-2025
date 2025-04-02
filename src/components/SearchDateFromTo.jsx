@@ -22,6 +22,7 @@ function SearchDateFromTo({setFromToDate}) {
     //TODO: Make the return time increment hourly
     const handleChange = (event) => {
         const { name, value } = event.target;
+        console.log(`updated ${name} = ${value}`)
         setTimespan((prevData) => ({ ...prevData, [name]: value }));
     };
 
@@ -36,6 +37,7 @@ function SearchDateFromTo({setFromToDate}) {
                     onChange={handleChange} />
 
                 <input type="time" name="timeFrom" id="fromTime" step={"3600"}
+                    value={timespan.timeFrom}
                     onChange={handleChange} />
 
             </label>
@@ -48,6 +50,7 @@ function SearchDateFromTo({setFromToDate}) {
                     onChange={handleChange} />
 
                 <input type="time" name="timeTo" id="toTime" step={"3600"}
+                    value={timespan.timeTo}
                     onChange={handleChange} />
 
             </label>
