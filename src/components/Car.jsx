@@ -21,6 +21,9 @@ function Car ({car}) {
                     <FeatureList features={car.features}/>
                 </div>
             </div>
+            <div>
+                <button>Order Now</button>
+            </div>
         </div>
     )
 }
