@@ -1,16 +1,29 @@
 import useTitle from "../components/useTitle.jsx";
 import SearchDateFromTo from "../components/SearchDateFromTo.jsx";
 import { Link } from 'react-router-dom';
+import { CarContext } from "../context/CarContext.js";
+import { useState} from 'react';
 
 //TODO: Fix the link. It is currently white on white background
 function Home(){
     useTitle("Home");
+    let today = new Date()
+    let oneWeekFromNow = new Date()
+    oneWeekFromNow.setDate(today.getDate() + 7)
+    let [timeSpan, setTimeSpan] = useState({
+        "dateFrom": today,
+        "dateTo": oneWeekFromNow,
+        "timeFrom": "08:00",
+        "timeTo": "17:00"
+    })
     return (
         <div>
             <section id="home">
                 <div id={"callToAction"}>
                   <h2 id={"jeremy-header"}>Up for an Adventure?</h2>
-                  <SearchDateFromTo />
+                  <CarContext.Provider value={[timeSpan, setTimeSpan]}>
+                    <SearchDateFromTo />
+                  </CarContext.Provider>
                 </div>
             </section>
             <section>
