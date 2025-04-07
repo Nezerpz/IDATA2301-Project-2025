@@ -15,7 +15,7 @@ function SliderFilter({name, min, max, onUpdate}) {
     }, [minValue, maxValue])
     
     return (
-        <details className={"filter-item"}>
+        <details className={"filter-item"} open>
             <summary className={"category-name"}>{name}</summary>
             <div className={"price-range"}>
                 <input type="range" min={min} max={max} value={minValue} className="min" id={`${name}-min-slider`} onChange={e => setMinValue(e.target.value)}/>

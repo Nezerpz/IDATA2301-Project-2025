@@ -3,6 +3,20 @@ import PropTypes from 'prop-types';
 import React from "react";
 import FeatureList from "./FeatureList.jsx";
 
+async function orderCar(car) {
+    let token = localStorage.getItem("jwt")
+    const response = await fetch(
+        import.meta.env.VITE_BACKEND_URL + ":" + 
+        import.meta.env.VITE_BACKEND_PORT + `/order?car_id=${car.id}`, {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json', 
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify("hei"),
+        }
+    );
+}
 
 function Car ({car}) {
     return (
@@ -22,7 +36,7 @@ function Car ({car}) {
                 </div>
             </div>
             <div>
-                <button>Order Now</button>
+                <button onClick={() => {orderCar(car)}}>Order Now</button>
             </div>
         </div>
     )
