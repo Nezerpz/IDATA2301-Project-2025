@@ -1,8 +1,9 @@
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 
 async function saveChanges(car) {
     const token = localStorage.getItem("jwt");
+    console.log(car);
     try {
         const response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars/" + car.id, {
             method: 'PUT',
@@ -12,8 +13,12 @@ async function saveChanges(car) {
             },
             body: JSON.stringify(car)
         });
-        if (!response.ok) {
-            throw new Error('Failed to save changes');
+        if (response.status === 404) {
+            throw new Error('Car not found');
+        }  else if (response.status === 401) {
+            throw new Error('Unauthorized');
+        } else if (!response.ok) {
+            throw new Error('Failed to update car');
         }
         alert("Car details updated successfully!");
     } catch (error) {
@@ -21,7 +26,7 @@ async function saveChanges(car) {
     }
 }
 
-function renderPage(car, setCar, manufacturers, handleSubmit) {
+function renderPage(car, setCar, manufacturers, transmissionTypes, fuelTypes, carStatus, handleSubmit) {
     const handleFeatureChange = (e, index) => {
         const newFeatures = [...car.features];
         newFeatures[index] = e.target.value;
@@ -58,12 +63,20 @@ function renderPage(car, setCar, manufacturers, handleSubmit) {
                     <input type="number" placeholder="Enter number of seats" value={car.numberOfSeats} onChange={(e) => setCar({ ...car, numberOfSeats: e.target.value })} />
                 </label>
                 <label>
-                    <span>Transmission type</span>
-                    <input type="text" placeholder="Enter transmission type" value={car.transmissionType} onChange={(e) => setCar({ ...car, transmissionType: e.target.value })} />
+                    <span>Transmission</span>
+                    <select placeholder="Select transmission" value={car.transmissionType} onChange={(e) => setCar({ ...car, transmissionType: e.target.value })}>
+                        {transmissionTypes.map((value, index) => (
+                            <option key={index}>{value}</option>
+                        ))}
+                    </select>
                 </label>
                 <label>
-                    <span>Fuel type</span>
-                    <input type="text" placeholder="Enter fuel type" value={car.fuelType} onChange={(e) => setCar({ ...car, fuelType: e.target.value })} />
+                    <span>Fuel</span>
+                    <select placeholder="Select fuel" value={car.fuelType} onChange={(e) => setCar({ ...car, fuelType: e.target.value })}>
+                        {fuelTypes.map((value, index) => (
+                            <option key={index}>{value}</option>
+                        ))}
+                    </select>
                 </label>
                 <label>
                     <span>Price</span>
@@ -92,6 +105,14 @@ function renderPage(car, setCar, manufacturers, handleSubmit) {
                     <span>Image</span>
                     <input type="file" placeholder="Upload image" />
                 </label>
+                <label>
+                    <span>Car Status</span>
+                    <select placeholder="Select car status" value={car.carStatus} onChange={(e) => setCar({ ...car, carStatus: e.target.value })}>
+                        {carStatus.map((value, index) => (
+                            <option key={index}>{value}</option>
+                        ))}
+                    </select>
+                </label>
                 <button type="submit">Save changes</button>
             </form>
         </div>
@@ -100,8 +121,12 @@ function renderPage(car, setCar, manufacturers, handleSubmit) {
 
 function EditCarPage() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [car, setCar] = useState(null);
     const [manufacturers, setManufacturers] = useState([]);
+    const [transmissionTypes, setTransmissionTypes] = useState([]);
+    const [fuelTypes, setFuelTypes] = useState([]);
+    const [carStatus, setCarStatus] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -127,6 +152,7 @@ function EditCarPage() {
         fetchData();
     }, [id]);
 
+    //TODO: Condense into one fetch function
     useEffect(() => {
         const fetchManufacturersData = async () => {
             try {
@@ -143,16 +169,64 @@ function EditCarPage() {
         fetchManufacturersData();
     }, []);
 
+    useEffect(() => {
+        const fetchTransmissionTypesData = async () => {
+            try {
+                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/transmission-types");
+                let data = await response.json();
+                setTransmissionTypes(data);
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchTransmissionTypesData();
+    }, []);
+
+    useEffect(() => {
+        const fetchFuelTypesData = async () => {
+            try {
+                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/fuel-types");
+                let data = await response.json();
+                setFuelTypes(data);
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchFuelTypesData();
+    }, []);
+
+    useEffect(() => {
+        const fetchCarStatusData = async () => {
+            try {
+                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/car-status");
+                let data = await response.json();
+                setCarStatus(data);
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchCarStatusData();
+    }, []);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         saveChanges(car);
+        navigate("/mypage/provider/cars");
     };
 
     if (loading) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
     if (!car || manufacturers.length === 0) return <div>Loading data...</div>;
 
-    return renderPage(car, setCar, manufacturers, handleSubmit);
+    return renderPage(car, setCar, manufacturers, transmissionTypes, fuelTypes, carStatus, handleSubmit);
 }
 
 export default EditCarPage;
