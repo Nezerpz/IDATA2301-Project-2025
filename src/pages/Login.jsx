@@ -27,7 +27,7 @@ function Login() {
             if (response.ok) {
                 const data = await response.json();
                 localStorage.setItem('jwt', data["jwt"]); // Store the token
-                //navigate('/');
+                navigate('/');
             } else {
                 console.error('Failed to login', response.statusText);
             }

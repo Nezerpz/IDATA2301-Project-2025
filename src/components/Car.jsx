@@ -2,34 +2,47 @@ import "../static/css/car.css";
 import PropTypes from 'prop-types';
 import FeatureList from "./FeatureList.jsx";
 import { CarContext } from "../context/CarContext.js";
-import { useContext} from "react";
+import OrderModal from "../components/OrderModal.jsx";
+import { useState, useContext } from "react";
 
 
-async function orderCar(car, fromToDate) {
+async function orderCar(car, fromToDate, setIsOrdering) {
     let token = localStorage.getItem("jwt")
-    const response = await fetch(
-        import.meta.env.VITE_BACKEND_URL + ":" + 
-        import.meta.env.VITE_BACKEND_PORT + `/order`, {
-            method: 'POST',
-            headers: { 
-                'Content-Type': 'application/json', 
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({
-                "id": car.id,
-                "fromDate": fromToDate.fromDate,
-                "toDate": fromToDate.toDate,
-                "fromTime": fromToDate.fromTime,
-                "toTime": fromToDate.toTime
+    var response
+    try {
+        response = await fetch(
+            import.meta.env.VITE_BACKEND_URL + ":" + 
+            import.meta.env.VITE_BACKEND_PORT + `/order`, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json', 
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    "id": car.id,
+                    "dateFrom": fromToDate.dateFrom,
+                    "dateTo": fromToDate.dateTo,
+                    "timeFrom": fromToDate.timeFrom,
+                    "timeTo": fromToDate.timeTo
 
-            }),
-        }
-    );
-    alert(await response.json())
+                }),
+            }
+        );
+        response = await response.json()
+    }
+
+    catch (e) {
+        alert("Failed to place order")
+    }
+
+    setIsOrdering(true)
 }
 
 function Car ({car}) {
+    const [ordering, setIsOrdering] = useState(false)
     let [ fromToDate, setFromToDate ] = useContext(CarContext);
+    console.debug(fromToDate)
+    // <button onClick={() => {orderCar(car, fromToDate, setIsOrdering)}}>Order Now</button>
     return (
         <div className="car">
             <h2>{car.manufacturer} {car.carModel} ({car.productionYear})</h2>
@@ -37,7 +50,7 @@ function Car ({car}) {
             <div>
                 <div>
                     <p><strong>Provider: </strong>{car.user}</p>
-                    <p><strong>Price: </strong>{car.price}</p>
+                    <p><strong>Price: </strong>{car.price}/day</p>
                     <p><strong>Number of seats: </strong>{car.numberOfSeats}</p>
                     <p><strong>Transmission: </strong>{car.transmissionType}</p>
                     <p><strong>Fuel: </strong>{car.fuelType}</p>
@@ -47,8 +60,14 @@ function Car ({car}) {
                 </div>
             </div>
             <div>
-                <button onClick={() => {orderCar(car, fromToDate)}}>Order Now</button>
+                <button onClick={() => {setIsOrdering(true)}}>Order Now</button>
             </div>
+            <OrderModal 
+                open={ordering} 
+                onClose={() => {setIsOrdering(false)}} 
+                car={car} 
+                timespan={fromToDate}>
+            </OrderModal>
         </div>
     )
 }

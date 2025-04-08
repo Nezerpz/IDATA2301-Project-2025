@@ -20,7 +20,7 @@ function renderPage(fromToDate, setFromToDate, cars, filters, updateFilters) {
                             <h4>Search</h4>
                             <SearchDateFromTo />
 
-                            <h4>Filters</h4>
+                            <h4>Filter</h4>
                             <Filters cars={cars} updateFilters={updateFilters} />
                         </div>
                     </div>
