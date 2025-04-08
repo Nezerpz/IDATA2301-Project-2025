@@ -75,7 +75,6 @@ function Filters({cars, updateFilters}) {
             "transmission": activeTransmission,
             "features": activeFeatures
         }
-        console.log(filters)
         updateFilters({...filters});
     }, [activeManufacturers, activePrices, activeTransmission, activeFeatures]);
 

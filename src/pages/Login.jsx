@@ -15,7 +15,6 @@ function Login() {
     const handleLogin = async (event) => {
         event.preventDefault();
         const requestBody = JSON.stringify({ username, password });
-        console.log('Request Body:', requestBody);
         try {
             const response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/authenticate", {
                 method: 'POST',
@@ -27,7 +26,6 @@ function Login() {
 
             if (response.ok) {
                 const data = await response.json();
-                console.debug(data);
                 localStorage.setItem('jwt', data["jwt"]); // Store the token
                 //navigate('/');
             } else {

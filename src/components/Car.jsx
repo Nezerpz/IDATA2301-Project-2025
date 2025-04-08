@@ -7,7 +7,6 @@ import { useContext} from "react";
 
 async function orderCar(car, fromToDate) {
     let token = localStorage.getItem("jwt")
-    console.log(fromToDate)
     const response = await fetch(
         import.meta.env.VITE_BACKEND_URL + ":" + 
         import.meta.env.VITE_BACKEND_PORT + `/order`, {

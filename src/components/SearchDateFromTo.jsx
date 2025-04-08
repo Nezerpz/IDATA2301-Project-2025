@@ -12,14 +12,12 @@ function SearchDateFromTo() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.debug("it works")
         setTimespan({...newTimespan});
     };
 
     //TODO: Make the return time increment hourly
     const handleChange = (event) => {
         const { name, value } = event.target;
-        console.log(`updated ${name} = ${value}`)
         setNewTimespan((prevData) => ({ ...prevData, [name]: value }));
     };
 
