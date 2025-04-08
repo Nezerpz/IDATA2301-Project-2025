@@ -258,3 +258,11 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
     justify-content: space-between;
     height: 100%;
 }
+
+.icon-with-onclick {
+    color: var(--dark-link-color);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
