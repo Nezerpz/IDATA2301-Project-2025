@@ -1,5 +1,6 @@
 import PropTypes from "prop-types"
 import ReactDom from 'react-dom'
+import { useNavigate } from 'react-router';
 
 const MODAL_STYLES = {
     position: 'fixed',
@@ -14,12 +15,6 @@ const MODAL_STYLES = {
     zIndex: 1000
 }
 
-const INFO_STYLES = {
-    maxHeight: '200px', 
-    overflow: 'scroll',
-    boxShadow: '0px -20px 20px lightgrey inset'
-}
-
 const OVERLAY_STYLES = {
     position: 'fixed',
     top: 0,
@@ -30,7 +25,41 @@ const OVERLAY_STYLES = {
     zIndex: 1000
 }
 
+async function placeOrder(car, timespan, navigate, onClose) {
+    let token = localStorage.getItem("jwt")
+    var response
+    try {
+        response = await fetch(
+            import.meta.env.VITE_BACKEND_URL + ":" + 
+            import.meta.env.VITE_BACKEND_PORT + `/order`, {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/json', 
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({
+                    "id": car.id,
+                    "dateFrom": timespan.dateFrom,
+                    "dateTo": timespan.dateTo,
+                    "timeFrom": timespan.timeFrom,
+                    "timeTo": timespan.timeTo
+
+                }),
+            }
+        );
+        response = await response.json()
+        navigate("/mypage/orders")
+    }
+
+    catch (e) {
+        alert("Failed to place order")
+        onClose()
+    }
+
+}
+
 function OrderModal({open, onClose, car, timespan}) {
+    let navigate = useNavigate()
     if (!open) return null
     let dateFrom = new Date(timespan.dateFrom)
     let dateTo = new Date(timespan.dateTo)
@@ -41,17 +70,12 @@ function OrderModal({open, onClose, car, timespan}) {
             <div style={OVERLAY_STYLES}></div>
             <div style={MODAL_STYLES}>
                 <h4>Order {car.carModel}</h4>
-                <div style={INFO_STYLES}>
-                    <h5>From</h5>
-                    <p>{timespan.dateFrom} {timespan.timeFrom}</p>
-                    <h5>To</h5>
-                    <p>{timespan.dateTo} {timespan.timeTo}</p>
-                    <h5>For</h5>
-                    <p>{car.price}/day</p>
-                </div>
-                <h5>In Total</h5>
+                <p><strong>From:</strong> {timespan.dateFrom} {timespan.timeFrom}</p>
+                <p><strong>To:</strong> {timespan.dateTo} {timespan.timeTo}</p>
+                <p><strong>For</strong> {car.price}/day</p>
+                <h4>In Total</h4>
                 <p>{car.price} x {totalDays} = {totalPrice} total</p>
-                <button onClick={onClose}>Place Order</button>
+                <button onClick={() => {placeOrder(car, timespan, navigate, onClose)}}>Place Order</button>
                 <button onClick={onClose}>Cancel</button>
             </div>
         </>,

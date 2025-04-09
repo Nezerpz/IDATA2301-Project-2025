@@ -6,37 +6,6 @@ import OrderModal from "../components/OrderModal.jsx";
 import { useState, useContext } from "react";
 
 
-async function orderCar(car, fromToDate, setIsOrdering) {
-    let token = localStorage.getItem("jwt")
-    var response
-    try {
-        response = await fetch(
-            import.meta.env.VITE_BACKEND_URL + ":" + 
-            import.meta.env.VITE_BACKEND_PORT + `/order`, {
-                method: 'POST',
-                headers: { 
-                    'Content-Type': 'application/json', 
-                    'Authorization': `Bearer ${token}`
-                },
-                body: JSON.stringify({
-                    "id": car.id,
-                    "dateFrom": fromToDate.dateFrom,
-                    "dateTo": fromToDate.dateTo,
-                    "timeFrom": fromToDate.timeFrom,
-                    "timeTo": fromToDate.timeTo
-
-                }),
-            }
-        );
-        response = await response.json()
-    }
-
-    catch (e) {
-        alert("Failed to place order")
-    }
-
-    setIsOrdering(true)
-}
 
 function Car ({car}) {
     const [ordering, setIsOrdering] = useState(false)
@@ -60,7 +29,7 @@ function Car ({car}) {
                 </div>
             </div>
             <div>
-                <button onClick={() => {setIsOrdering(true)}}>Order Now</button>
+                <button onClick={() => {setIsOrdering(true)}}>Rent This Car</button>
             </div>
             <OrderModal 
                 open={ordering} 
