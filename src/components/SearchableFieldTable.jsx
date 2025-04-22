@@ -4,10 +4,14 @@ function SearchableFieldTable({ data, columns, rowKey, children }) {
     const [search, setSearch] = useState("");
 
     // Filter data based on search input
-    const filteredData = data.filter((row) =>
-        columns.some((column) =>
-            String(row[column]).toLowerCase().includes(search.toLowerCase())
-        )
+    const filteredData = data.filter((row) =>{
+        const searchTerms = search.toLowerCase().split(" ").filter(Boolean);
+        return searchTerms.every((term) =>
+            columns.some((column) =>
+                String(row[column]).toLowerCase().includes(term)
+            )
+        );
+    }
     );
 
     return (
