@@ -1,63 +1,64 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../static/css/searchDateFromTo.css';
+import { CarContext } from '../context/CarContext.js';
 
-function SearchDateFromTo({setFromToDate}) {
+function SearchDateFromTo() {
     const navigate = useNavigate();
-    const [timespan, setTimespan] = useState({ 
-        dateFrom: '2025-04-01', 
-        dateTo: '2025-05-17', 
-        timeFrom: '08:00', 
-        timeTo: '17:00' 
-    });
+    let [timespan, setTimespan] = useContext(CarContext);
+    const [newTimespan, setNewTimespan] = useState(timespan);
 
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.debug("it works")
-        setFromToDate({...timespan});
+        setTimespan({...newTimespan});
     };
 
     //TODO: Make the return time increment hourly
     const handleChange = (event) => {
         const { name, value } = event.target;
-        console.log(`updated ${name} = ${value}`)
-        setTimespan((prevData) => ({ ...prevData, [name]: value }));
+        setNewTimespan((prevData) => ({ ...prevData, [name]: value }));
     };
 
-    return (
-        <form className="search-date-from-to" onSubmit={handleSubmit}>
+    if (timespan == null) {
+        return <h1>No cars available in timespan</h1>
+    }
 
-            <label htmlFor="from">
-                <span>From</span>
+    else {
+        return (
+            <form className="search-date-from-to" onSubmit={handleSubmit}>
 
-                <input type="date" name="dateFrom" id="from" 
-                    value={timespan.dateFrom} 
-                    onChange={handleChange} />
+                <label htmlFor="from">
+                    <span>From</span>
 
-                <input type="time" name="timeFrom" id="fromTime" step={"3600"}
-                    value={timespan.timeFrom}
-                    onChange={handleChange} />
+                    <input type="date" name="dateFrom" id="from" 
+                        value={newTimespan.dateFrom} 
+                        onChange={handleChange} />
 
-            </label>
+                    <input type="time" name="timeFrom" id="fromTime" step={"3600"}
+                        value={newTimespan.timeFrom}
+                        onChange={handleChange} />
 
-            <label htmlFor="to">
-                <span>To</span>
+                </label>
 
-                <input type="date" name="dateTo" id="to" 
-                    value={timespan.dateTo} 
-                    onChange={handleChange} />
+                <label htmlFor="to">
+                    <span>To</span>
 
-                <input type="time" name="timeTo" id="toTime" step={"3600"}
-                    value={timespan.timeTo}
-                    onChange={handleChange} />
+                    <input type="date" name="dateTo" id="to" 
+                        value={newTimespan.dateTo} 
+                        onChange={handleChange} />
 
-            </label>
+                    <input type="time" name="timeTo" id="toTime" step={"3600"}
+                        value={newTimespan.timeTo}
+                        onChange={handleChange} />
 
-            <button type="submit">Find car</button>
-        </form>
-    );
+                </label>
+
+                <button type="submit">Find car</button>
+            </form>
+        );
+    }
 }
 
 SearchDateFromTo.propTypes = {
