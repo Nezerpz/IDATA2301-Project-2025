@@ -1,0 +1,30 @@
+
+.searchable-input {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 5px;
+}
+
+.searchableFieldTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.searchableFieldTable tr:nth-child(odd) {
+    background-color: #f9f9f9; /* Light color for odd rows */
+}
+
+.searchableFieldTable tr:nth-child(even) {
+    background-color: #e0e0e0; /* Slightly darker color for even rows */
+}
+
+.searchableFieldTableHeading {
+    border: 1px solid var(--main-color);
+    padding: 10px;
+}
+
+.searchableFieldTableRow {
+    border: 1px solid var(--main-color);
+    padding: 10px;
+}
+

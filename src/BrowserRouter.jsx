@@ -7,10 +7,10 @@ import SignupPage from "./pages/SignupPage.jsx";
 import ReviewPage from "./pages/ReviewPage.jsx";
 import MyPage from "./pages/MyPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
-import User from "./components/User.jsx";
+import UserPage from "./pages/UserPage.jsx";
 import ManageOwnedCarsPage from "./pages/ManageOwnedCarsPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
-import Users from "./components/Users.jsx";
+import UsersPage from "./pages/UsersPage.jsx";
 import OrdersPage from "./pages/OrdersPage.jsx";
 import AddNewCar from "./components/AddNewCar.jsx";
 import App from "./App.jsx";
@@ -62,7 +62,11 @@ const router = createBrowserRouter([
                     },
                     {
                         path: "users",
-                        element: <Users />
+                        element: <UsersPage />,
+                    },
+                    {
+                        path: 'users/:id',
+                        element: <UserPage />
                     },
                     {
                         path: "settings",
@@ -94,11 +98,6 @@ const router = createBrowserRouter([
                         ]
                     }
                 ]
-            },
-            //TODO: Temp solution to the routing problem. User will be under edit admin users...
-            {
-                path: '/user',
-                element: <User />
             }
         ]
     }
