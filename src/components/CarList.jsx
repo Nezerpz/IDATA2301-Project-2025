@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import Car from "./Car.jsx";
 
-function CarList ({cars, filters}) {
+function CarList ({cars, filters, sortMethod}) {
     var visibleCars = cars;
 
     // Only filter if there are filters and cars
@@ -43,7 +43,11 @@ function CarList ({cars, filters}) {
                     : true)
 
             )
-        });
+        })
+
+        if (sortMethod != null) {
+            visibleCars.sort((carA, carB) => { sortMethod(carA, carB) });
+        }
     }
 
     return (
@@ -78,5 +82,6 @@ CarList.propTypes = {
         prices: PropTypes.arrayOf(PropTypes.number),
         transmission: PropTypes.arrayOf(PropTypes.string),
         features: PropTypes.arrayOf(PropTypes.string)
-    })
+    }),
+    sortMethod: PropTypes.func
 }

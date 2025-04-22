@@ -1,12 +1,14 @@
 import useTitle from "../components/useTitle.jsx";
 import Filters from "../components/Filters.jsx";
 import CarList from "../components/CarList.jsx";
+import CarSort from "../components/CarSort.jsx";
+import sortMethods from "../util/sortMethods.js";
 import SearchDateFromTo from "../components/SearchDateFromTo.jsx";
 import { CarContext } from "../context/CarContext.js";
 import React, { useState, useEffect } from 'react';
 
 //TODO: Implement the fetch from frontend, and display serach if not fetch has been made before
-function renderPage(fromToDate, setFromToDate, cars, filters, updateFilters) {
+function renderPage(fromToDate, setFromToDate, cars, filters, updateFilters, sortMethod, setSortMethod) {
     if (cars === null) {
         return (
             <h1>No soup for You!</h1>
@@ -26,7 +28,8 @@ function renderPage(fromToDate, setFromToDate, cars, filters, updateFilters) {
                     </div>
                     <div className="col-9">
                         <div className={"car-grid"}>
-                            <CarList cars={cars} filters={filters}/>
+                            <CarSort setSortMethod={setSortMethod} />
+                            <CarList cars={cars} filters={filters} sortMethod={sortMethod}/>
                         </div>
                     </div>
                 </div>
@@ -45,6 +48,7 @@ function Cars() {
     });
     const [cars, setCars] = useState(null);
     const [filters, setFilters] = useState(null);
+    const [sortMethod, setSortMethod] = useState(null);
 
     function updateFilters(newFilters) {
         setFilters(newFilters)
@@ -81,7 +85,12 @@ function Cars() {
     }, [fromToDate]);
 
     // Re-render when cars or filters change
-    return renderPage(fromToDate, setFromToDate, cars, filters, updateFilters);
+    return renderPage(
+        fromToDate, setFromToDate, 
+        cars, 
+        filters, updateFilters, 
+        sortMethod, setSortMethod
+    );
 
 }
 

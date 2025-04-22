@@ -84,7 +84,7 @@ function OrderModal({open, onClose, car, timespan}) {
 }
 
 
-OrderModal.PropTypes = {
+OrderModal.propTypes = {
     open: PropTypes.bool,
     car: PropTypes.shape({
         id: PropTypes.number,
