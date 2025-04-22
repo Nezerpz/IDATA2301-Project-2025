@@ -9,7 +9,8 @@ import useTitle from "./useTitle.jsx";
 
 //TODO: Dynamically change names for the orders based on car in them.
 
-function Order({order}) {
+function Order(order) {
+    order = order["order"];
     const [car, setCar] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -67,8 +68,8 @@ function renderComponent ({order, car}) {
             <div className={"row"}>
                 <ul>
                     <li><strong>Order nr: </strong> {order.id}</li>
-                    <li><strong>Start: </strong> {order.startDate}</li>
-                    <li><strong>End: </strong> {order.endDate}</li>
+                    <li><strong>Start: </strong> {order.dateFrom} | {order.timeFrom}</li>
+                    <li><strong>End: </strong> {order.dateTo} | {order.timeTo}</li>
                     <li><strong>Paid: </strong> {order.pricePaid}</li>
                     <li><strong>Status: </strong> {order.orderStatus ? 'Ongoing' : 'Complete'}</li>
                 </ul>
@@ -77,19 +78,5 @@ function renderComponent ({order, car}) {
         </li>
     )
 }
-
-Order.propTypes = {
-    order: PropTypes.shape({
-        id: PropTypes.number,
-        startDate: PropTypes.string,
-        endDate: PropTypes.string,
-        pricePaid: PropTypes.number,
-        orderStatus: PropTypes.bool,
-        carId: PropTypes.number,
-        customerId: PropTypes.number,
-        providerId: PropTypes.number
-    })
-}
-
 
 export default Order

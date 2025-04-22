@@ -24,7 +24,6 @@ function SearchableFieldTable({ data, columns, rowKey, children }) {
                 className={"searchable-input"}
             />
 
-            {/* Table */}
             <table className={"searchableFieldTable"}>
                 <thead>
                 <tr>

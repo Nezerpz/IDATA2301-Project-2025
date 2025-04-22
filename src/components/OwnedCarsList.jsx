@@ -1,5 +1,4 @@
 
-import OwnedCarListItem from "./OwnedCarListItem.jsx";
 import SearchableFieldTable from "./SearchableFieldTable.jsx";
 import React from "react";
 import {Link} from "react-router-dom";
@@ -69,7 +68,7 @@ function OwnedCarsList(cars) {
         }
     });
     return (
-    <SearchableFieldTable data={processedCars} columns={["car model", "manufacturer",
+    <SearchableFieldTable data={processedCars} columns={["id","car model", "manufacturer",
         "fuel type", "transmission type","production year", "car status"]} rowKey={"id"}>
         <EditCar />
         <DeleteCar />

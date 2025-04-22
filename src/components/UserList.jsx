@@ -1,5 +1,3 @@
-import UserListItem from "./UserListItem.jsx";
-import {useState} from "react";
 import SearchableFieldTable from "./SearchableFieldTable.jsx";
 import {Link, useNavigate} from "react-router-dom";
 

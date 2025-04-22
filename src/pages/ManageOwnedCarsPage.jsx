@@ -7,40 +7,6 @@ import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import SearchableFieldTable from "../components/SearchableFieldTable.jsx";
 
-//TODO: Make the fetchFunction get the cars from "/cars/providerId".
-// The providerId should be stored in the session storage.
-
-function EditCar({row}){
-
-}
-
-function DeleteCar({row}) {
-    const handleDelete = async () => {
-        const token = localStorage.getItem("jwt");
-        try {
-            let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars/" + row.id, {
-                method: "DELETE",
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            if (response.ok) {
-                alert("Car deleted successfully");
-            } else {
-                alert("Failed to delete car");
-            }
-        } catch (error) {
-            console.error("Error deleting car:", error);
-        }
-    };
-
-    return (
-        <button onClick={handleDelete}>
-            Delete
-        </button>
-    );
-}
-
 function renderPage(cars) {
     return(
         <div id={"manage-cars"}>
