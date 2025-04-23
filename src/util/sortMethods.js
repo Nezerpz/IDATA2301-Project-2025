@@ -1,7 +1,10 @@
+function nullCheck(a, b) {
+    return (a == null) || (b == null)
+}
 
 const sortMethods = {
-    "price_low_high": (carA, carB) => { return carA["price"] - carB["price"] },
-    "price_high_low": (carA, carB) => { return carB["price"] - carA["price"] }//,
+    "price_low_high": (a, b) => { return nullCheck(a,b) ? 0 : a["price"] - b["price"] },
+    "price_high_low": (a, b) => { return nullCheck(a,b) ? 0 : b["price"] - a["price"] }//,
     //"best_reviews":   (carA, carB) => { carA["review"] - carB["review"] }
 }
 

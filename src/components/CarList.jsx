@@ -1,8 +1,11 @@
 import PropTypes from "prop-types";
 import Car from "./Car.jsx";
+import { CarContext } from '../context/CarContext.js'
+import { useContext } from "react";
 
-function CarList ({cars, filters, sortMethod}) {
+function CarList ({cars}) {
     var visibleCars = cars;
+    const [ , , filters, , sortMethod, ] = useContext(CarContext)
 
     // Only filter if there are filters and cars
     if (filters != null && cars != null) {
@@ -45,8 +48,9 @@ function CarList ({cars, filters, sortMethod}) {
             )
         })
 
-        if (sortMethod != null) {
-            visibleCars.sort((carA, carB) => { sortMethod(carA, carB) });
+        if (sortMethod != null && visibleCars != null) {
+            visibleCars = visibleCars.sort(sortMethod);
+            console.log(`sortMethod: ${sortMethod}`)
         }
     }
 
@@ -76,12 +80,5 @@ CarList.propTypes = {
             productionYear: PropTypes.number,
             features: PropTypes.arrayOf(PropTypes.string)
         })
-    ),
-    filters: PropTypes.shape({
-        manufacturers: PropTypes.arrayOf(PropTypes.string),
-        prices: PropTypes.arrayOf(PropTypes.number),
-        transmission: PropTypes.arrayOf(PropTypes.string),
-        features: PropTypes.arrayOf(PropTypes.string)
-    }),
-    sortMethod: PropTypes.func
+    )
 }
