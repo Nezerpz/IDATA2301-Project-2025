@@ -2,7 +2,8 @@ import PropTypes from 'prop-types';
 import "../static/css/filter.css";
 import CheckBoxFilters from "./CheckBoxFilters.jsx";
 import SliderFilter from './SliderFilter';
-import { useState, useEffect } from 'react';
+import { CarContext } from '../context/CarContext.js';
+import { useState, useEffect, useContext } from 'react';
 
 
 /*
@@ -57,7 +58,9 @@ function getUniqueEntriesInLists(dictList, key) {
 }
 
 
-function Filters({cars, updateFilters}) {
+function Filters({cars}) {
+    const [ , , , updateFilters, , ] = useContext(CarContext);
+
     const manufacturers = getUniqueEntries(cars, "manufacturer");
     const prices = [getMinPrice(cars), getMaxPrice(cars)];
     const transmission = getUniqueEntries(cars, "transmissionType");
@@ -122,8 +125,7 @@ Filters.propTypes = {
             fuelType: PropTypes.string,
             features: PropTypes.array
         })
-    ),
-    updateFilters: PropTypes.func
+    )
 };
 
 export default Filters;

@@ -290,6 +290,16 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
     min-width: 210px;
 }
 
+#car-controls {
+    max-width: 545px;
+}
+
+#car-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
 #manage-cars {
     padding: 20px;
 }
