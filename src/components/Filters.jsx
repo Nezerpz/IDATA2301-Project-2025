@@ -2,8 +2,13 @@ import PropTypes from 'prop-types';
 import "../static/css/filter.css";
 import CheckBoxFilters from "./CheckBoxFilters.jsx";
 import SliderFilter from './SliderFilter';
-import SearchDateFromTo from "./SearchDateFromTo.jsx";
+import { useState, useEffect } from 'react';
 
+
+/*
+ * Returns list of unique values
+ * from multiple dicts having the same key
+ */
 function getUniqueEntries(dictList, key) {
     const uniqueEntries = Array.from(
         // A set has no duplicates
@@ -13,20 +18,31 @@ function getUniqueEntries(dictList, key) {
     return uniqueEntries;
 }
 
+/*
+ * Returns highest price found among the cars 
+ */
 function getMaxPrice(cars) {
     const prices = getUniqueEntries(cars, "price");
     const maxPrice = Math.max(...prices);
-    console.log(maxPrice);
     return maxPrice;
 }
 
+/*
+ * Returns lowest price found among the cars 
+ */
 function getMinPrice(cars) {
     const prices = getUniqueEntries(cars, "price");
     const minPrice = Math.min(...prices);
-    console.log(minPrice);
     return minPrice;
 }
 
+
+/*
+ * Returns flattened list of unique values
+ * from multiple dicts having the same key
+ * where the key value is a list
+ * (not a single value)
+ */
 function getUniqueEntriesInLists(dictList, key) {
     const uniqueEntries = Array.from(dictList.reduce(
         // The acc variable contains accumulated set
@@ -40,30 +56,52 @@ function getUniqueEntriesInLists(dictList, key) {
     return uniqueEntries;
 }
 
-function Filters(cars) {
-    cars = cars["cars"]
+
+function Filters({cars, updateFilters}) {
     const manufacturers = getUniqueEntries(cars, "manufacturer");
     const prices = [getMinPrice(cars), getMaxPrice(cars)];
     const transmission = getUniqueEntries(cars, "transmissionType");
     const features = getUniqueEntriesInLists(cars, "features");
+    
+    const [activeManufacturers, setActiveManufacturers] = useState(manufacturers);
+    const [activePrices, setActivePrices] = useState(prices);
+    const [activeTransmission, setActiveTransmission] = useState(transmission);
+    const [activeFeatures, setActiveFeatures] = useState([]);
 
-    console.debug(features);
+    useEffect(() => {
+        let filters = {
+            "manufacturers": activeManufacturers,
+            "prices": activePrices,
+            "transmission": activeTransmission,
+            "features": activeFeatures
+        }
+        updateFilters({...filters});
+    }, [activeManufacturers, activePrices, activeTransmission, activeFeatures]);
 
     return (
-        <div className={"filter"}>
-            <SearchDateFromTo />
-
-                <h4>Filters</h4>
             <div className={"filter-body"}>
-                <input type={"text"}
-                    placeholder={"Search"}
-                    readOnly={true}
-                    />
-                <CheckBoxFilters name={"Manufacturers"} values={manufacturers} />
-                <SliderFilter name={"Price"} min={prices[0]} max={prices[1]} />
-                <CheckBoxFilters name={"Transmission"} values={transmission} />
-                <CheckBoxFilters name={"Features"} values={features} />
-            </div>
+
+                <CheckBoxFilters 
+                    name={"Manufacturers"} 
+                    values={manufacturers} 
+                    onUpdate={setActiveManufacturers}/>
+
+                <SliderFilter 
+                    name={"Price"} 
+                    min={prices[0]} 
+                    max={prices[1]} 
+                    onUpdate={setActivePrices}/>
+
+                <CheckBoxFilters 
+                    name={"Transmission"} 
+                    values={transmission} 
+                    onUpdate={setActiveTransmission}/>
+
+                <CheckBoxFilters 
+                    name={"Features"} 
+                    values={features} 
+                    onUpdate={setActiveFeatures}/>
+
         </div>
     );
 }
@@ -84,7 +122,8 @@ Filters.propTypes = {
             fuelType: PropTypes.string,
             features: PropTypes.array
         })
-    )
+    ),
+    updateFilters: PropTypes.func
 };
 
 export default Filters;

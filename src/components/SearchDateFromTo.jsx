@@ -1,51 +1,68 @@
-import { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../static/css/searchDateFromTo.css';
-import {fetchWithAuth} from "../static/js/auth.js";
+import { CarContext } from '../context/CarContext.js';
 
 function SearchDateFromTo() {
     const navigate = useNavigate();
-    const [formData, setFormData] = useState({ dateFrom: '', dateTo: '', timeFrom: '', timeTo: '' });
+    let [timespan, setTimespan] = useContext(CarContext);
+    const [newTimespan, setNewTimespan] = useState(timespan);
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars", {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        });
-
-        if (response.ok) {
-            navigate('/cars');
-        } else {
-            // Handle error
-            console.error('Failed to submit form');
-        }
+        setTimespan({...newTimespan});
     };
 
     //TODO: Make the return time increment hourly (Can be done by making it into text, and creating a custom select time component)
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setFormData((prevData) => ({ ...prevData, [name]: value }));
+        setNewTimespan((prevData) => ({ ...prevData, [name]: value }));
     };
 
-    return (
-        <form className="search-date-from-to" onSubmit={handleSubmit}>
-            <label htmlFor="from">
-                <span>From</span>
-                <input type="date" name="dateFrom" id="from" value={formData.dateFrom} onChange={handleChange} />
-                <input type="time" name="timeFrom" id="fromTime" onChange={handleChange} step={"3600"}/>
-            </label>
-            <label htmlFor="to">
-                <span>To</span>
-                <input type="date" name="dateTo" id="to" value={formData.dateTo} onChange={handleChange} />
-                <input type="time" name="timeTo" id="toTime" onChange={handleChange} step={"3600"}/>
-            </label>
-            <button type="submit">Find car</button>
-        </form>
-    );
+    if (timespan == null) {
+        return <h1>No cars available in timespan</h1>
+    }
+
+    else {
+        return (
+            <form className="search-date-from-to" onSubmit={handleSubmit}>
+
+                <label htmlFor="from">
+                    <span>From</span>
+
+                    <input type="date" name="dateFrom" id="from"
+                        value={newTimespan.dateFrom}
+                        onChange={handleChange} />
+
+                    <input type="time" name="timeFrom" id="fromTime" step={"3600"}
+                        value={newTimespan.timeFrom}
+                        onChange={handleChange} />
+
+                </label>
+
+                <label htmlFor="to">
+                    <span>To</span>
+
+                    <input type="date" name="dateTo" id="to"
+                        value={newTimespan.dateTo}
+                        onChange={handleChange} />
+
+                    <input type="time" name="timeTo" id="toTime" step={"3600"}
+                        value={newTimespan.timeTo}
+                        onChange={handleChange} />
+
+                </label>
+
+                <button type="submit">Find car</button>
+            </form>
+        );
+    }
+}
+
+SearchDateFromTo.propTypes = {
+    setFromToDate: PropTypes.func
 }
 
 export default SearchDateFromTo;
