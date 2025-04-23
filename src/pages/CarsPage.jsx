@@ -11,7 +11,6 @@ import {fetchWithAuth} from "../static/js/auth.js";
 
 function CarsPage() {
     useTitle("Cars");
-<<<<<<< HEAD:src/pages/Cars.jsx
     let defaultSortMethod = (a,b) => { return sortMethods["price_high_low"] }
 
     const [cars, setCars] = useState(null);
