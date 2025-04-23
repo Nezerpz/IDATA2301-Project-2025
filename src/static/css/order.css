@@ -1,10 +1,37 @@
 .order {
-    margin: 30px;
-    padding: 0 24px 24px 24px;
-    background-color: var(--foreground-color);
+    border: 1px solid var(--main-color);
+    padding: 10px;
+}
+
+.order:nth-child(odd) {
+    background-color: #f9f9f9; /* Light color for odd items */
+}
+
+.order:nth-child(even) {
+    background-color: #e0e0e0; /* Slightly darker color for even items */
+}
+#order-list {
+    padding: 20px;
+}
+
+.order-header > h4{
+    margin: 0;
+}
+
+.order-header {
     display: flex;
-    flex-direction: column;
-    justify-content: left;
-    border-radius: var(--corner-rounding);
-    box-shadow: 0 0 15px var(--bright-shadow-color);
+    justify-content: flex-start;
+}
+
+.order > details > summary .row > .button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.order > details > summary .row > .button-container > button{
+    padding: 2px 5px;
+}
+
+.order > details > summary::marker{
+    color: var(--main-color);
 }

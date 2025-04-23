@@ -6,10 +6,12 @@ import sortMethods from "../util/sortMethods.js";
 import SearchDateFromTo from "../components/SearchDateFromTo.jsx";
 import { CarContext } from "../context/CarContext.js";
 import React, { useState, useEffect } from 'react';
+import {fetchWithAuth} from "../static/js/auth.js";
 
 
-function Cars() {
+function CarsPage() {
     useTitle("Cars");
+<<<<<<< HEAD:src/pages/Cars.jsx
     let defaultSortMethod = (a,b) => { return sortMethods["price_high_low"] }
 
     const [cars, setCars] = useState(null);
@@ -29,8 +31,8 @@ function Cars() {
       const fetchData = async () => {
         setLoading(true);
         try {
-            const response = await fetch(
-                import.meta.env.VITE_BACKEND_URL + ":" + 
+            const response = await fetchWithAuth(
+                import.meta.env.VITE_BACKEND_URL + ":" +
                 import.meta.env.VITE_BACKEND_PORT + "/cars", {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', },
@@ -88,5 +90,4 @@ function Cars() {
 
 }
 
-export default Cars;
-
+export default CarsPage;

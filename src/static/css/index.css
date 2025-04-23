@@ -2,6 +2,8 @@
 @import "./footer.css";
 @import "./columnLayout.css";
 @import "./order.css";
+@import "./dropdown.css";
+@import "./searchableFieldTable.css";
 
 
 :root {
@@ -34,7 +36,10 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+}
+
+main {
+    flex: 1;
 }
 
 figure > img {
@@ -232,7 +237,7 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
 
 .scrollable-list {
     overflow-y: auto;
-    max-height: 300px;
+    max-height: 40vh;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -269,6 +274,14 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
     align-self: flex-end;
 }
 
+.flex-start-item {
+    align-self: flex-start;
+}
+
+.flex-space-between {
+    justify-content: space-between;
+}
+
 .review-box {
     padding: 10px;
 }
@@ -285,4 +298,28 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+}
+
+#manage-cars {
+    padding: 20px;
+}
+
+.mypage-background {
+    background-color: lightgray;
+    min-height: 63vh;
+}
+
+#settings-menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.icon-with-onclick {
+    color: var(--dark-link-color);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
 }

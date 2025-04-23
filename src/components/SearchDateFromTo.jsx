@@ -15,7 +15,7 @@ function SearchDateFromTo() {
         setTimespan({...newTimespan});
     };
 
-    //TODO: Make the return time increment hourly
+    //TODO: Make the return time increment hourly (Can be done by making it into text, and creating a custom select time component)
     const handleChange = (event) => {
         const { name, value } = event.target;
         setNewTimespan((prevData) => ({ ...prevData, [name]: value }));
@@ -32,8 +32,8 @@ function SearchDateFromTo() {
                 <label htmlFor="from">
                     <span>From</span>
 
-                    <input type="date" name="dateFrom" id="from" 
-                        value={newTimespan.dateFrom} 
+                    <input type="date" name="dateFrom" id="from"
+                        value={newTimespan.dateFrom}
                         onChange={handleChange} />
 
                     <input type="time" name="timeFrom" id="fromTime" step={"3600"}
@@ -45,8 +45,8 @@ function SearchDateFromTo() {
                 <label htmlFor="to">
                     <span>To</span>
 
-                    <input type="date" name="dateTo" id="to" 
-                        value={newTimespan.dateTo} 
+                    <input type="date" name="dateTo" id="to"
+                        value={newTimespan.dateTo}
                         onChange={handleChange} />
 
                     <input type="time" name="timeTo" id="toTime" step={"3600"}
