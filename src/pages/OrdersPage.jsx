@@ -28,7 +28,7 @@ function OrdersPage() {
 
                 // Determine the correct endpoint based on the current path
                 const path = window.location.pathname;
-                let endpoint = path.includes("provider") ? "/orders/provider" : "/orders/customer";
+                let endpoint = path.includes("provider") ? "/orders/provider" : path.includes("admin") ? "/orders" : "/orders/customer";
 
                 // Fetch orders
                 let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + endpoint);

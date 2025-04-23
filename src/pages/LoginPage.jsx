@@ -28,7 +28,6 @@ function LoginPage() {
 
             if (response.ok) {
                 const data = await response.json();
-                console.debug(data);
                 localStorage.setItem('jwt', data["accessToken"]);  // Store the token
                 navigate('/');
                 window.location.reload();

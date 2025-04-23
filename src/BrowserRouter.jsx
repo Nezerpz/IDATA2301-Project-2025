@@ -55,12 +55,25 @@ const router = createBrowserRouter([
                         element: <ReviewPage />
                     },
                     {
-                        path: "users",
-                        element: <UsersPage />,
-                    },
-                    {
-                        path: 'users/:id',
-                        element: <UserPage />
+                        path: "admin",
+                        children: [
+                            {
+                                path: "users",
+                                element: <UsersPage />,
+                            },
+                            {
+                                path: "users/:id",
+                                element: <UserPage />,
+                            },
+                            {
+                                path: "cars",
+                                element: <ManageOwnedCarsPage />,
+                            },
+                            {
+                                path: "orders",
+                                element: <OrdersPage />
+                            }
+                        ]
                     },
                     {
                         path: "settings",

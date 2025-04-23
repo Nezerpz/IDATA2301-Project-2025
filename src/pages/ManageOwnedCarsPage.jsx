@@ -31,7 +31,10 @@ function ManageOwnedCarsPage() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars/provider");
+                const path = window.location.pathname;
+                let endpoint = path.includes("provider") ? "/cars/provider" : "/cars" ;
+
+                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + endpoint);
                 let data = await response.json();
                 setCars(data);
             } catch (error) {

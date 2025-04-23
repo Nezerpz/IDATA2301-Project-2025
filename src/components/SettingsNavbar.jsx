@@ -2,6 +2,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import {useEffect, useRef, useState} from "react";
 import ProviderSettings from "./ProviderSettings.jsx";
 import {fetchWithAuth} from "../static/js/auth.js";
+import {DropdownMenu} from "react-bootstrap";
 
 //TODO: Make this dynamically change based on the user's role
 
@@ -10,9 +11,7 @@ function renderComponent({userType}) {
         {/*TODO: Remove the parts used for testing later.*/}
         return (
             <>
-                <Link to={"/mypage/users"} className={"navbar-item-dark"}>
-                    User administration
-                </Link>
+                <DropdownAdmin />
                 <CustomerOrders />
                 <SettingsLink />
                 <BecomeProvider />
@@ -59,6 +58,51 @@ function NavBarPicker() {
         fetchData();
     }, []);
     return renderComponent({userType});
+}
+
+function DropdownAdmin() {
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        if (isOpen) {
+            const dropdown = dropdownRef.current;
+            const rect = dropdown.getBoundingClientRect();
+            if (rect.right > window.innerWidth) {
+                dropdown.style.left = 'auto';
+                dropdown.style.right = '0';
+            }
+            if (rect.bottom > window.innerHeight) {
+                dropdown.style.top = 'auto';
+                dropdown.style.bottom = '100%';
+            }
+        }
+    }, [isOpen]);
+
+    const handleDropdownClick = () => {
+        setIsOpen(!isOpen);
+    };
+
+    return (
+        <div className={"dropdown"} onClick={handleDropdownClick}>
+            <text className={"navbar-item-dark dropItem"}>
+                Admin
+            </text>
+            {isOpen && (
+                <div className={"dropdown-content"} ref={dropdownRef}>
+                    <Link to={"/mypage/admin/users"} className={"navbar-item-dark"}>
+                        User administration
+                    </Link>
+                    <Link to={"/mypage/admin/cars"} className={"navbar-item-dark"}>
+                        Manage cars
+                    </Link>
+                    <Link to={"/mypage/admin/orders"} className={"navbar-item-dark"}>
+                        Orders
+                    </Link>
+                </div>
+            )}
+        </div>
+    )
 }
 
 function DropdownProvider(){
