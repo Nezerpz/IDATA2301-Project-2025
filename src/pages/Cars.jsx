@@ -10,10 +10,11 @@ import React, { useState, useEffect } from 'react';
 
 function Cars() {
     useTitle("Cars");
+    let defaultSortMethod = (a,b) => { return sortMethods["price_high_low"] }
 
     const [cars, setCars] = useState(null);
     const [filters, setFilters] = useState(null);
-    const [sortMethod, setSortMethod] = useState(null);
+    const [sortMethod, setSortMethod] = useState(defaultSortMethod);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [fromToDate, setFromToDate] = useState({ 
