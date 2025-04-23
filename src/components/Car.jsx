@@ -13,7 +13,7 @@ function Car ({car}) {
     // <button onClick={() => {orderCar(car, fromToDate, setIsOrdering)}}>Order Now</button>
     return (
         <div className="car">
-            <h2>{car.manufacturer} {car.carModel} ({car.productionYear})</h2>
+            <h3>{car.manufacturer} {car.carModel} ({car.productionYear})</h3>
             <img src={`https://dummyimage.com/600x200/000/ffffff&text=<img src="${car.manufacturer}+${car.carModel}+(${car.productionYear})" />`} alt={car.carModel}/>
             <div>
                 <div>

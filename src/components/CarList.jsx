@@ -55,7 +55,7 @@ function CarList ({cars}) {
     }
 
     return (
-        <div>
+        <div id={"car-list"}>
             {visibleCars.map((car) => <Car key={car.id} car={car} readOnly={true} />)}
         </div>
     );

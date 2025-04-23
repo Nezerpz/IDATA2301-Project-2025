@@ -64,7 +64,7 @@ function Cars() {
         return (
             <CarContext.Provider value={[fromToDate, setFromToDate, filters, updateFilters, sortMethod, setSortMethod]}>
                 <div className="row">
-                    <div className="col-3">
+                    <div id="car-controls" className="col-3">
                         <div className={"filter"}>
                             <h4>Search</h4>
                             <SearchDateFromTo />
