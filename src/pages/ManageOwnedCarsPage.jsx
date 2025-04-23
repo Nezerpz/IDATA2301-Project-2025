@@ -1,32 +1,27 @@
 
-import OwnedCarsList from './OwnedCarsList';
+import OwnedCarsList from '../components/OwnedCarsList.jsx';
 import PropTypes from "prop-types";
-import Car from "./Car.jsx";
-import useTitle from "./useTitle.jsx";
+import Car from "../components/Car.jsx";
+import useTitle from "../components/useTitle.jsx";
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-
-//TODO: Make the fetchFunction get the cars from "/cars/providerId".
-// The providerId should be stored in the session storage.
+import SearchableFieldTable from "../components/SearchableFieldTable.jsx";
+import {fetchWithAuth} from "../static/js/auth.js";
 
 function renderPage(cars) {
     return(
-    <div>
-        <div className={"button-container-end"}>
-            <button>
-                <Link to={"add"}>Add new car</Link>
-            </button>
-            <button>
-                <Link to={"/mypage/settings"}>Back</Link>
-            </button>
+        <div id={"manage-cars"}>
+            <div className={"button-container-end"}>
+                <button>
+                    <Link to={"/mypage/provider/cars/add"}>Add new car</Link>
+                </button>
+            </div>
+            <OwnedCarsList cars={cars}/>
         </div>
-        <OwnedCarsList cars={cars} />
-    </div>
     )
 }
 
-function ManageOwnedCars() {
-
+function ManageOwnedCarsPage() {
     useTitle("Manage");
     const [cars, setCars] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -36,7 +31,10 @@ function ManageOwnedCars() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars");
+                const path = window.location.pathname;
+                let endpoint = path.includes("provider") ? "/cars/provider" : "/cars" ;
+
+                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + endpoint);
                 let data = await response.json();
                 setCars(data);
             } catch (error) {
@@ -72,4 +70,4 @@ Car.propTypes = {
     })
 }
 
-export default ManageOwnedCars;
+export default ManageOwnedCarsPage;

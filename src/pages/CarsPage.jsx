@@ -4,6 +4,7 @@ import CarList from "../components/CarList.jsx";
 import SearchDateFromTo from "../components/SearchDateFromTo.jsx";
 import { CarContext } from "../context/CarContext.js";
 import React, { useState, useEffect } from 'react';
+import {fetchWithAuth} from "../static/js/auth.js";
 
 //TODO: Implement the fetch from frontend, and display serach if not fetch has been made before
 function renderPage(fromToDate, setFromToDate, cars, filters, updateFilters) {
@@ -35,13 +36,13 @@ function renderPage(fromToDate, setFromToDate, cars, filters, updateFilters) {
     }
 }
 
-function Cars() {
+function CarsPage() {
     useTitle("Cars");
-    const [fromToDate, setFromToDate] = useState({ 
-        dateFrom: '2025-04-01', 
-        dateTo: '2025-05-17', 
-        timeFrom: '08:00', 
-        timeTo: '17:00' 
+    const [fromToDate, setFromToDate] = useState({
+        dateFrom: '2025-04-01',
+        dateTo: '2025-05-17',
+        timeFrom: '08:00',
+        timeTo: '17:00'
     });
     const [cars, setCars] = useState(null);
     const [filters, setFilters] = useState(null);
@@ -50,7 +51,7 @@ function Cars() {
         setFilters(newFilters)
     }
 
-    // search cars on first render 
+    // search cars on first render
     // and when changing timespan
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -59,8 +60,8 @@ function Cars() {
       const fetchData = async () => {
         setLoading(true);
         try {
-            const response = await fetch(
-                import.meta.env.VITE_BACKEND_URL + ":" + 
+            const response = await fetchWithAuth(
+                import.meta.env.VITE_BACKEND_URL + ":" +
                 import.meta.env.VITE_BACKEND_PORT + "/cars", {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', },
@@ -85,5 +86,4 @@ function Cars() {
 
 }
 
-export default Cars;
-
+export default CarsPage;

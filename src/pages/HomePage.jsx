@@ -5,7 +5,7 @@ import { CarContext } from "../context/CarContext.js";
 import { useState} from 'react';
 
 //TODO: Fix the link. It is currently white on white background
-function Home(){
+function HomePage(){
     useTitle("Home");
     let today = new Date()
     let oneWeekFromNow = new Date()
@@ -38,4 +38,4 @@ function Home(){
         </div>
     )
 }
-export default Home;
+export default HomePage;

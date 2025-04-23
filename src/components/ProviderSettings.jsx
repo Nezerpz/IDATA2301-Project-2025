@@ -1,26 +1,20 @@
-import {Route, Routes, useLocation} from "react-router-dom";
-import AddNewCar from "./AddNewCar.jsx";
-import ManageOwnedCars from "./ManageOwnedCars.jsx";
+import {Link, Outlet} from "react-router-dom";
 import React from "react";
 
 
 function ProviderSettings() {
-    const location = useLocation();
     return (
         <div className={"row"}>
-            <div className={"col-2"}></div>
-            <div className={"col-8"}>
+            <h2>Provider options</h2>
+            <div className={"col-2"}>
                 <div className={"button-container"}>
-                    {location.pathname === "/mypage/settings" && (
-                        <button>
-                            <a href={`${location.pathname}/cars`}>Cars</a>
-                        </button>
-                    )}
+                    <button>
+                        <Link to={"/mypage/provider/cars"}>Cars</Link>
+                    </button>
                 </div>
-                <Routes>
-                    <Route path="add" element={<AddNewCar />} />
-                    <Route path="cars" element={<ManageOwnedCars />} />
-                </Routes>
+            </div>
+            <div className={"col-8"}>
+                <Outlet />
             </div>
             <div className={"col-2"}></div>
         </div>
