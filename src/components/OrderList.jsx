@@ -1,4 +1,3 @@
-import Order from './Order';
 import SearchableFieldTable from "./SearchableFieldTable.jsx";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
@@ -6,9 +5,9 @@ import {useEffect, useState} from "react";
 function ReviewCustomer(order, navigate) {
     return (
         <button onClick={() => {
-            navigate("/mypage/review", {state: {order: order, type: "car"}})
+            navigate("/mypage/review", {state: {order: order, type: "customer"}})
         }}>
-            Review Car
+            Review Customer
         </button>
     )
 }
@@ -26,16 +25,16 @@ function ReviewProvider(order, navigate) {
 function ReviewCar(order, navigate) {
     return(
         <button onClick={() => {
-            navigate("/mypage/review", {state: {order: order, type: "customer"}})
+            navigate("/mypage/review", {state: {order: order, type: "car"}})
         }}>
-            Review Customer
+            Review Car
         </button>
     )
 }
 
 function ReviewOptions({row}) {
     const navigate = useNavigate();
-    const [user, setUser] = useState(null);
+    const [userRole, setUserRole] = useState(null);
     const [order, setOrder] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -57,7 +56,47 @@ function ReviewOptions({row}) {
         fetchData();
     }, []);
 
-    //TODO: Check if the user is the provider or the customer
+    useEffect(() => {
+        const fetchUserRole = async () => {
+            setLoading(true);
+            try {
+                const token = localStorage.getItem("jwt");
+                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/users/self", {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                let data = await response.json();
+                setUserRole(data.userType.toLowerCase());
+            } catch (error) {
+                setError(error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchUserRole();
+    }, []);
+
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>Error: {error.message}</div>;
+
+    if (userRole === "customer") {
+        return (
+            <>
+                    {ReviewCar(order, navigate)}
+                    {ReviewProvider(order, navigate)}
+            </>
+        )
+    } else if (userRole === "provider") {
+        return (
+            <>
+                    {ReviewCustomer(order, navigate)}
+            </>
+        )
+    }
+
+    //TODO: Check if the user is the provider or the customer in the order
 
 
 }
