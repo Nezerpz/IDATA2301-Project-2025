@@ -1,4 +1,9 @@
+@import "./header.css";
+@import "./footer.css";
 @import "./columnLayout.css";
+@import "./order.css";
+@import "./dropdown.css";
+@import "./searchableFieldTable.css";
 
 
 :root {
@@ -14,69 +19,45 @@
     --bold-text-color: #111;
     --corner-rounding: 12px;
     --dark-shadow-color: #222;
-    --button-color: #37acb9;
+    --bright-shadow-color: #BBB;
+    /*--button-color: #37acb9;*/
+    --button-color: #0f7c89;
     --link-color: #f1f1f1;
+    --dark-link-color: #222;
 }
 
-
-#title { 
-    color: var(--heading-color-light);
-    text-shadow: 5px 5px black;
-    margin: 20px;
-}
-#disclaimer { 
-    padding: 20px;
-    background-color: orangered;
-}
-#disclaimer > p {
-    font-size: 125%;
-    color: white;
-}
-
-body{
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-    justify-content: space-between;
+body {
     background-color: var(--foreground-color);
     margin: 0;
     font-size: 100%;
 }
 
-.navbar, #callToAction > a {
-    color: var(--link-color);
-    text-decoration: none;
-    font-family: Raleway, sans-serif;
-    padding: 20px;
-    font-size: 125%;
-}
-
-.navbar {
+#root {
+    min-height: 100vh;
     display: flex;
-    justify-content: space-around;
-    list-style-type: none;
+    flex-direction: column;
 }
 
-.navbar-item {
-    padding: 20px;
-    background-color: var(--navbar-item-color);
-    color: var(--link-color);
-    text-decoration: none;
-    font-family: Raleway, sans-serif;
-    font-size: 1.25em;
-    text-align: center;
-    word-break: keep-all;
-    flex-grow: 1;
-    display: block;
+main {
+    flex: 1;
 }
 
-.navbar-item:hover {
-    background-color: var(--link-color);
-    color: var(--navbar-item-color);
+figure > img {
+    width: 100%;
+    max-width: 500px;
+    min-width: 330px;
+    height: auto;
 }
+
+
+main > div > div > section {
+    padding-left: 100px;
+    padding-right: 100px;
+}
+
 
 #home {
-    height: 500px;
+    height: auto;
     background-image: url(https://imgs.search.brave.com/RlAxmVxi2QB7xGa_ifz5YzAKA9Mn8sQxglf942zCHL8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMxLmhvdGNhcnNp/bWFnZXMuY29tL3dv/cmRwcmVzcy93cC1j/b250ZW50L3VwbG9h/ZHMvMjAyNC8wOS9j/bGFya3Nvbi5qcGc);
     background-repeat: no-repeat;
     background-size: cover;
@@ -84,29 +65,34 @@ body{
     box-shadow: 0px 0px 100px black inset;
 }
 
-#leavingEnteringCar {
-    width: 500px;
-    height: auto;
-}
-
-main > div > div > section {
-    padding-left: 100px;
-    padding-right: 100px;
-}
 
 h1,h2,h3,h4,h5 {
     font-family: Raleway, sans-serif;
 }
 
+h1 {
+    font-size: 4rem;
+}
+
 h2 {
-    font-size: 275%;
+    font-size: 3rem;
+}
+
+h3 {
+    font-size: 2rem;
+}
+
+h4 {
+    font-size: 1.5rem;
 }
 
 #callToAction {
-    margin-top: 120px;
+    container-type: inline-size;
+
+    padding: 120px 25px;
 }
 
-#callToAction > h2 {
+#jeremy-header {
     color: var(--heading-color-light);
     text-shadow: 2px 2px 20px var(--dark-shadow-color);
 }
@@ -116,13 +102,9 @@ button {
     border-style: none;
     background-color: var(--button-color);
     font-family: Raleway, sans-serif;
-    font-size: 125%;
+    font-size: 1.25rem;
     padding: 20px;
-}
-
-#callToAction > button {
     color: var(--heading-color-light);
-    box-shadow: 0px 0px 20px var(--dark-shadow-color);
     border-radius: 7px;
 }
 
@@ -150,30 +132,194 @@ summary {
     color: var(--filter-color);
 }
 
-#footer-content{
-    padding: 30px;
-}
 
-header{
-    padding: 25px;
-    background-color: var(--main-color);
-    background-image: linear-gradient(90deg, #111, var(--main-color));
-    color: white;
-}
-
-#contactHeading {
-    color: var(--heading-color-light);
-}
-
-footer{
-    background-color: var(--main-color);
-}
-
-.footer-icon{
-    width: 50px;
-    margin: 10px;
-}
-
-a {
+.bright-link {
     display: inline-block;
+    color: var(--link-color);
+}
+
+.dark-link {
+    display: inline-block;
+    color: var(--dark-link-color);
+}
+
+button > a {
+    display: inline-block;
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+label:not(li label) {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+}
+label:not(li label)>span {
+    margin: 5px 0;
+    transition: all .2s;
+    transform-origin: top left;
+}
+label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + span {
+    transform: translateY(1em) scale(1.25);
+    pointer-events: none;
+    opacity: .5;
+}
+
+.price-range {
+    display: flex;
+    flex-direction: column;
+    margin: 30px auto;
+    /*
+    pointer-events: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none; 
+    */
+}
+
+.price-range > input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    position: absolute;
+    width: 80%;
+    height: 3px;
+    background-color: var(--button-color);
+    pointer-events: none;
+}
+
+.price-range > input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: var(--button-color);
+    height: 2rem;
+    width: 1rem;
+    border-radius: var(--corner-rounding);
+    cursor: pointer;
+    pointer-events: all;
+}
+.price-range > input[type="range"]::-moz-range-thumb {
+    border: none;
+    border-radius: var(--corner-rounding);
+    background-color: var(--button-color);
+    height: 2rem;
+    width: 1rem;
+    cursor: pointer;
+    pointer-events: all;
+}
+
+#provider-container{
+    background-color: var(--foreground-color);
+}
+
+.button-container{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.button-container > button {
+    align-self: flex-start;
+}
+
+.button-container-end{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.button-container-end > button {
+    align-self: flex-end;
+}
+
+.scrollable-list {
+    overflow-y: auto;
+    max-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.owned-car{
+    border: 1px solid var(--main-color);
+    padding: 10px;
+}
+
+.owned-car:nth-child(odd) {
+    background-color: #f9f9f9; /* Light color for odd items */
+}
+
+.owned-car:nth-child(even) {
+    background-color: #e0e0e0; /* Slightly darker color for even items */
+}
+
+.flex-container-column {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.flex-container-row {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.flex-end-item {
+    align-self: flex-end;
+}
+
+.flex-start-item {
+    align-self: flex-start;
+}
+
+.flex-space-between {
+    justify-content: space-between;
+}
+
+.review-box {
+    padding: 10px;
+}
+
+#search-date-div{
+    min-width: 210px;
+}
+
+#car-controls {
+    max-width: 545px;
+}
+
+#car-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#manage-cars {
+    padding: 20px;
+}
+
+.mypage-background {
+    background-color: lightgray;
+    min-height: 63vh;
+}
+
+#settings-menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.icon-with-onclick {
+    color: var(--dark-link-color);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
 }

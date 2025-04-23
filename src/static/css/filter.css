@@ -1,8 +1,12 @@
 .filter {
-    background-color: var(--foreground-color);
+    container-type: inline-size;
+    margin-top: 25px;
     border-radius: var(--corner-rounding);
     margin: 20px;
     padding-bottom: 12px;
+}
+.filter label {
+    color: var(--heading-color-light);
 }
 .filter-header {
     text-align: center;
@@ -14,7 +18,9 @@
 }
 
 .filter-body {
-    padding: 10px;
+    border-radius: var(--corner-rounding);
+    background-color: var(--main-color);
+    padding: 20px;
 }
 
 .filter-item {
@@ -22,6 +28,7 @@
 }
 
 .category-name {
+    color: var(--heading-color-light);
     font-weight: bold;
     cursor: pointer;
 }
