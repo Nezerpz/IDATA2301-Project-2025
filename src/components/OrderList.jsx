@@ -1,6 +1,7 @@
 import SearchableFieldTable from "./SearchableFieldTable.jsx";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
+import {fetchWithAuth} from "../static/js/auth.js";
 
 function ReviewCustomer(order, navigate) {
     return (
@@ -43,7 +44,7 @@ function ReviewOptions({row}) {
         const fetchData = async () => {
             setLoading(true);
             try {
-                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/orders/" + row.id);
+                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/orders/" + row.id);
                 let data = await response.json();
                 setOrder(data);
             } catch (error) {
@@ -60,12 +61,7 @@ function ReviewOptions({row}) {
         const fetchUserRole = async () => {
             setLoading(true);
             try {
-                const token = localStorage.getItem("jwt");
-                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/users/self", {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
+                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/users/self");
                 let data = await response.json();
                 setUserRole(data.userType.toLowerCase());
             } catch (error) {

@@ -1,6 +1,7 @@
 import UserList from "../components/UserList.jsx";
 import useTitle from "../components/useTitle.jsx";
 import React, {useEffect, useState} from "react";
+import {fetchWithAuth} from "../static/js/auth.js";
 
 function renderPage(users) {
   return (
@@ -21,12 +22,8 @@ function UsersPage() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const token = localStorage.getItem("jwt");
-                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/users",{
+                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/users",{
                     method:"POST",
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    },
                 });
                 let data = await response.json();
                 setUsers(data);

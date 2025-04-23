@@ -3,6 +3,7 @@ import Filters from "../components/Filters.jsx";
 import CarList from "../components/CarList.jsx";
 import SearchDateFromTo from "../components/SearchDateFromTo.jsx";
 import React, { useState, useEffect } from 'react';
+import {fetchWithAuth} from "../static/js/auth.js";
 
 //TODO: Implement the fetch from frontend, and display serach if not fetch has been made before
 function renderPage(cars) {
@@ -38,7 +39,7 @@ function CarsPage() {
       const fetchData = async () => {
         setLoading(true);
         try {
-            let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars");
+            let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars");
             let data = await response.json();
             setCars(data);
         } catch (error) {

@@ -6,6 +6,7 @@ import useTitle from "../components/useTitle.jsx";
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import SearchableFieldTable from "../components/SearchableFieldTable.jsx";
+import {fetchWithAuth} from "../static/js/auth.js";
 
 function renderPage(cars) {
     return(
@@ -30,12 +31,7 @@ function ManageOwnedCarsPage() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const token = localStorage.getItem("jwt");
-                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars/provider", {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
+                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars/provider");
                 let data = await response.json();
                 setCars(data);
             } catch (error) {

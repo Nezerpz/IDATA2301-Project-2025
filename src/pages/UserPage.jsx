@@ -1,14 +1,13 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
+import {fetchWithAuth} from "../static/js/auth.js";
 
 async function saveChanges(user) {
-    const token = localStorage.getItem("jwt");
     try {
-        const response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/users/" + user.id, {
+        const response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/users/" + user.id, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
             },
             body: JSON.stringify(user)
         });
@@ -77,12 +76,7 @@ function UserPage() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const token = localStorage.getItem("jwt");
-                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/users/" + id,{
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    },
-                });
+                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/users/" + id);
                 let data = await response.json();
                 setUser(data);
             } catch (error) {

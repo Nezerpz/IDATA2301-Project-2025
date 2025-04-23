@@ -1,6 +1,7 @@
 import {Link, useNavigate} from 'react-router-dom';
 import {useEffect, useRef, useState} from "react";
 import ProviderSettings from "./ProviderSettings.jsx";
+import {fetchWithAuth} from "../static/js/auth.js";
 
 //TODO: Make this dynamically change based on the user's role
 
@@ -43,12 +44,7 @@ function NavBarPicker() {
 
     useEffect(() => {
         const fetchData = async () => {
-                const token = localStorage.getItem("jwt");
-                let response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/userType", {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
+                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/userType");
 
             if (response.status === 401) {
                 // Delete the JWT token and redirect to the login page
@@ -131,10 +127,9 @@ function BecomeProvider() {
         event.preventDefault();
         try {
             const token = localStorage.getItem("jwt");
-            const response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/become-provider", {
+            const response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/become-provider", {
                 method: 'POST',
                 headers: {
-                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
             });

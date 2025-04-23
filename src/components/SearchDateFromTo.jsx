@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../static/css/searchDateFromTo.css';
+import {fetchWithAuth} from "../static/js/auth.js";
 
 function SearchDateFromTo() {
     const navigate = useNavigate();
@@ -8,7 +9,7 @@ function SearchDateFromTo() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars", {
+        const response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

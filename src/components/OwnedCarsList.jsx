@@ -2,6 +2,7 @@
 import SearchableFieldTable from "./SearchableFieldTable.jsx";
 import React from "react";
 import {Link} from "react-router-dom";
+import {fetchWithAuth} from "../static/js/auth.js";
 
 function EditCar({row}){
     return(
@@ -22,13 +23,11 @@ function DeleteCar({row}) {
     };
 
     const postDelete = async () => {
-        const token = localStorage.getItem("jwt");
         try {
-            const response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars/" + row.id, {
+            const response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars/" + row.id, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
                 }
             });
             if (response.status === 404) {
