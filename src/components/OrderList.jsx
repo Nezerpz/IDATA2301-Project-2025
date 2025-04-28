@@ -3,6 +3,8 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {fetchWithAuth} from "../static/js/auth.js";
 
+
+//TODO: Fix the poor implementation of figuring out the user role in the current order to decide which actions they have available.
 function ReviewCustomer(order, navigate) {
     return (
         <button onClick={() => {
