@@ -15,7 +15,7 @@ function Car ({car}) {
         <div className="car">
             <h3>{car.manufacturer} {car.carModel} ({car.productionYear})</h3>
             <img src={`https://dummyimage.com/600x200/000/ffffff&text=<img src="${car.manufacturer}+${car.carModel}+(${car.productionYear})" />`} alt={car.carModel}/>
-            <img src={car.imagePath} alt={car.carModel}/>
+            <img src={"src" + car.imagePath} alt={car.carModel}/>
             {console.log(car.imagePath)}
             <div>
                 <div>
