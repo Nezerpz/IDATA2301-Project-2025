@@ -58,6 +58,14 @@ function renderPage(car, setCar, manufacturers, transmissionTypes, fuelTypes, ca
                     <input type="text" placeholder="Enter Model" value={car.carModel} onChange={(e) => setCar({ ...car, carModel: e.target.value })} />
                 </label>
                 <label>
+                    <span>Status</span>
+                    <select placeholder={"Select status"} value={car.status} onChange={(e) => setCar({ ...car, status: e.target.value })}>
+                        {carStatus.map((value, index) => (
+                        <option key={index}>{value}</option>
+                        ))}
+                    </select>
+                </label>
+                <label>
                     <span>Number of seats</span>
                     <input type="number" placeholder="Enter number of seats" value={car.numberOfSeats} onChange={(e) => setCar({ ...car, numberOfSeats: e.target.value })} />
                 </label>
@@ -103,14 +111,6 @@ function renderPage(car, setCar, manufacturers, transmissionTypes, fuelTypes, ca
                 <label>
                     <span>Image</span>
                     <input type="file" placeholder="Upload image" />
-                </label>
-                <label>
-                    <span>Car Status</span>
-                    <select placeholder="Select car status" value={car.carStatus} onChange={(e) => setCar({ ...car, carStatus: e.target.value })}>
-                        {carStatus.map((value, index) => (
-                            <option key={index}>{value}</option>
-                        ))}
-                    </select>
                 </label>
                 <button type="submit">Save changes</button>
             </form>

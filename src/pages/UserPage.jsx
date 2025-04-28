@@ -42,6 +42,7 @@ function renderPage(user, setUser) {
                             <span>Email</span>
                             <input type={"email"} value={user.email} onChange={(e) => setUser({...user, email: e.target.value})} />
                         </label>
+                        {/*TODO: Fix password reset button to trigger a password reset on user. */}
                         <div className={"button-container"}>
                             <button type={"submit"}>Submit changes</button>
                             <h4>Password reset</h4>
