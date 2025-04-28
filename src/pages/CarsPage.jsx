@@ -6,6 +6,7 @@ import sortMethods from "../util/sortMethods.js";
 import SearchDateFromTo from "../components/SearchDateFromTo.jsx";
 import { CarContext } from "../context/CarContext.js";
 import React, { useState, useEffect } from 'react';
+import { useSearchParams } from "react-router-dom";
 import {fetchWithAuth} from "../static/js/auth.js";
 
 
@@ -13,16 +14,18 @@ function CarsPage() {
     useTitle("Cars");
     let defaultSortMethod = (a,b) => { return sortMethods["price_high_low"] }
 
+    const [searchParams] = useSearchParams();
     const [cars, setCars] = useState(null);
     const [filters, setFilters] = useState(null);
     const [sortMethod, setSortMethod] = useState(defaultSortMethod);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [fromToDate, setFromToDate] = useState({ 
-        dateFrom: '2025-04-01', 
-        dateTo: '2025-05-17', 
-        timeFrom: '08:00', 
-        timeTo: '17:00' 
+
+    const [fromToDate, setFromToDate] = useState({
+        dateFrom: searchParams.get("dateFrom") || '2025-04-01',
+        dateTo: searchParams.get("dateTo") || '2025-05-17',
+        timeFrom: searchParams.get("timeFrom") || '08:00',
+        timeTo: searchParams.get("timeTo") || '17:00'
     });
 
     // Fetch data when search changes (timespan)
