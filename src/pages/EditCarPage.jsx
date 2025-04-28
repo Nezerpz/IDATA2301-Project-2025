@@ -216,7 +216,13 @@ function EditCarPage() {
     const handleSubmit = (e) => {
         e.preventDefault();
         saveChanges(car);
-        navigate("/mypage/provider/cars");
+        let path = window.location.pathname;
+        let pathTo = "provider";
+        let isAdmin = path.includes("admin");
+        if (isAdmin) {
+            pathTo = "admin";
+        }
+        navigate(`/mypage/${pathTo}/cars`);
     };
 
     if (loading) return <div>Loading...</div>;
