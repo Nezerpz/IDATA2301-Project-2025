@@ -1,6 +1,7 @@
 .car {
     max-width: 700px;
     margin: 30px;
+    min-width: 495px;
     padding: 0px 24px 24px 24px;
     background-color: var(--foreground-color);
     display: flex;
@@ -10,6 +11,15 @@
     box-shadow: 0 0 15px var(--bright-shadow-color);
 }
 
+.car-image {
+    height: 250px;
+    width: auto;
+    min-width: 200px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: var(--corner-rounding);
+}
+
 .car > div {
     display: flex;
     flex-direction: row;
@@ -17,12 +27,5 @@
 
 .car > h3 {
     color: var(--heading-color-dark);
-}
-
-.car img {
-    height: 250px;
-    width: auto;
-    overflow: hidden;
-    padding-right: 24px;
 }
 
