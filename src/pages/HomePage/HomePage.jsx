@@ -1,7 +1,7 @@
-import useTitle from "../components/useTitle.jsx";
-import SearchDateFromTo from "../components/SearchDateFromTo.jsx";
+import useTitle from "../../components/useTitle.jsx";
+import SearchDateFromTo from "../../components/SearchDateFromTo/SearchDateFromTo.jsx";
 import { Link } from 'react-router-dom';
-import { CarContext } from "../context/CarContext.js";
+import { CarContext } from "../../context/CarContext.js";
 import { useState} from 'react';
 
 //TODO: Fix the link. It is currently white on white background

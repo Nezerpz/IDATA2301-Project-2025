@@ -1,7 +1,6 @@
-import PropTypes from "prop-types";
 import { useContext } from "react";
-import { CarContext } from '../context/CarContext.js'
-import sortMethods from "../util/sortMethods.js";
+import { CarContext } from '../../context/CarContext.js'
+import sortMethods from "../../static/js/sortMethods.js";
 
 
 function CarSort() {

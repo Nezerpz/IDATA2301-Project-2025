@@ -1,5 +1,5 @@
 
-import SearchableFieldTable from "./SearchableFieldTable.jsx";
+import SearchableFieldTable from "./SearchableFieldTable/SearchableFieldTable.jsx";
 import React from "react";
 import {Link} from "react-router-dom";
 import {fetchWithAuth} from "../static/js/auth.js";

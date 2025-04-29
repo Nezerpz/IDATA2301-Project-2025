@@ -1,8 +1,8 @@
-import "../static/css/car.css";
+import "./Car.css";
 import PropTypes from 'prop-types';
 import FeatureList from "./FeatureList.jsx";
-import { CarContext } from "../context/CarContext.js";
-import OrderModal from "../components/OrderModal.jsx";
+import { CarContext } from "../../context/CarContext.js";
+import OrderModal from "./OrderModal.jsx";
 import { useState, useContext } from "react";
 
 

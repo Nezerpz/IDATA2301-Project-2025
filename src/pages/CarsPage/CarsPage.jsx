@@ -1,12 +1,12 @@
-import useTitle from "../components/useTitle.jsx";
-import Filters from "../components/Filters.jsx";
-import CarList from "../components/CarList.jsx";
-import CarSort from "../components/CarSort.jsx";
-import sortMethods from "../util/sortMethods.js";
-import SearchDateFromTo from "../components/SearchDateFromTo.jsx";
-import { CarContext } from "../context/CarContext.js";
+import useTitle from "../../components/useTitle.jsx";
+import Filters from "../../components/CarFilters/CarFilters.jsx";
+import CarList from "../../components/CarList/CarList.jsx";
+import CarSort from "../../components/CarSort/CarSort.jsx";
+import sortMethods from "../../static/js/sortMethods.js";
+import SearchDateFromTo from "../../components/SearchDateFromTo/SearchDateFromTo.jsx";
+import { CarContext } from "../../context/CarContext.js";
 import React, { useState, useEffect } from 'react';
-import {fetchWithAuth} from "../static/js/auth.js";
+import {fetchWithAuth} from "../../static/js/auth.js";
 
 
 function CarsPage() {

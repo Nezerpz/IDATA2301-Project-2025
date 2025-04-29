@@ -1,11 +1,11 @@
 
 import OwnedCarsList from '../components/OwnedCarsList.jsx';
 import PropTypes from "prop-types";
-import Car from "../components/Car.jsx";
+import Car from "../components/Car/Car.jsx";
 import useTitle from "../components/useTitle.jsx";
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import SearchableFieldTable from "../components/SearchableFieldTable.jsx";
+import SearchableFieldTable from "../components/SearchableFieldTable/SearchableFieldTable.jsx";
 import {fetchWithAuth} from "../static/js/auth.js";
 
 function renderPage(cars) {

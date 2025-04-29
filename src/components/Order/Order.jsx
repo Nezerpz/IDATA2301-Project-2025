@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, {useEffect, useState} from "react";
 import ReviewPage from "../pages/ReviewPage.jsx";
-import useTitle from "./useTitle.jsx";
+import useTitle from "../useTitle.jsx";
 import {fetchWithAuth} from "../static/js/auth.js";
 
 //TODO: Implement logic to show a different button depending on the user's role in the order.

@@ -1,4 +1,4 @@
-import SearchableFieldTable from "./SearchableFieldTable.jsx";
+import SearchableFieldTable from "../SearchableFieldTable/SearchableFieldTable.jsx";
 import {Link, useNavigate} from "react-router-dom";
 
 function EditUser({ row }) {
