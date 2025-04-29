@@ -1,0 +1,12 @@
+.mypage-background {
+    background-color: lightgray;
+    min-height: 63vh;
+}
+
+#settings-menu{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+

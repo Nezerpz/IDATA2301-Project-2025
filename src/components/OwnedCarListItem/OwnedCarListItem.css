@@ -1,0 +1,14 @@
+
+.owned-car{
+    border: 1px solid var(--main-color);
+    padding: 10px;
+}
+
+.owned-car:nth-child(odd) {
+    background-color: #f9f9f9; /* Light color for odd items */
+}
+
+.owned-car:nth-child(even) {
+    background-color: #e0e0e0; /* Slightly darker color for even items */
+}
+

@@ -1,4 +1,4 @@
-import SearchableFieldTable from "../SearchableFieldTable/SearchableFieldTable.jsx";
+import SearchableFieldTable from "../../components/SearchableFieldTable/SearchableFieldTable.jsx";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {fetchWithAuth} from "../../static/js/auth.js";
