@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import { useState } from "react";
 import {fetchWithAuth} from "../static/js/auth.js";
+import "./ReviewPage.css";
 
 function ReviewPage() {
     const location = useLocation();

@@ -12,6 +12,7 @@ import useTitle from "../../components/useTitle.jsx";
 import CheckLogin from "../../components/CheckLogin.jsx";
 import AccessDeniedPage from "../AccessDeniedPage.jsx";
 import Logout from "../../components/Logout.jsx";
+import "./MyPage.css";
 import React from "react";
 
 function MyPage() {
