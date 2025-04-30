@@ -7,7 +7,7 @@ import SearchDateFromTo from "../../components/SearchDateFromTo/SearchDateFromTo
 import { CarContext } from "../../context/CarContext.js";
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from "react-router-dom";
-import {fetchWithAuth} from "../static/js/auth.js";
+import {fetchWithAuth} from "../../static/js/auth.js";
 import "./CarsPage.css";
 
 

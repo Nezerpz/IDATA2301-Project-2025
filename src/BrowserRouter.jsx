@@ -4,7 +4,7 @@ import AboutPage from './pages/AboutPage.jsx'
 import CarsPage from './pages/CarsPage/CarsPage.jsx'
 import LoginPage from './pages/LoginPage/LoginPage.jsx'
 import SignupPage from "./pages/SignupPage/SignupPage.jsx";
-import ReviewPage from "./pages/ReviewPage.jsx";
+import ReviewPage from "./pages/ReviewPage/ReviewPage.jsx";
 import MyPage from "./pages/MyPage/MyPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import UserPage from "./pages/UserPage/UserPage.jsx";
