@@ -3,7 +3,9 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './searchDateFromTo.css';
 import { CarContext } from '../../context/CarContext.js';
+
 import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 function SearchDateFromTo() {
     const navigate = useNavigate();
@@ -28,9 +30,8 @@ function SearchDateFromTo() {
     };
 
     //TODO: Make the return time increment hourly (Can be done by making it into text, and creating a custom select time component)
-    const handleChange = (event) => {
-        const { name, value } = event.target;
-        setNewTimespan((prevData) => ({ ...prevData, [name]: value }));
+    const handleChange = (date) => {
+        setNewTimespan(date);
     };
 
     if (timespan == null) {
@@ -44,9 +45,7 @@ function SearchDateFromTo() {
                 <label htmlFor="from">
                     <span className={"search-heading"}>From</span>
 
-                    <input type="date" name="dateFrom" id="from"
-                        value={newTimespan.dateFrom}
-                        onChange={handleChange} />
+                    <DatePicker selected={newTimespan.dateFrom} onChange={(date) => handleChange(date)}/>
 
                     <input type="time" name="timeFrom" id="fromTime" step={"900"}
                         value={newTimespan.timeFrom}
@@ -57,10 +56,7 @@ function SearchDateFromTo() {
                 <label htmlFor="to">
                     <span className={"search-heading"}>To</span>
 
-                    <input type="date" name="dateTo" id="to"
-                        value={newTimespan.dateTo}
-                        onChange={handleChange} />
-                    <DatePicker selected={newTimespan.dateTo} onChange={handleChange} />
+                    <DatePicker selected={newTimespan.dateTo} onChange={(date) => handleChange(date)} />
 
                     <input type="time" name="timeTo" id="toTime" step={"900"}
                         value={newTimespan.timeTo}

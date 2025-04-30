@@ -27,7 +27,7 @@ function Car ({car}) {
                 </div>
             </div>
             <div>
-                <button onClick={() => {setIsOrdering(true)}}>Rent for {car.price}/day</button>
+                <button className = {"big-button"} onClick={() => {setIsOrdering(true)}}>Rent for {car.price}/day</button>
             </div>
             <OrderModal 
                 open={ordering} 
