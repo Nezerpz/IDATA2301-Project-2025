@@ -1,10 +1,11 @@
-@import "./index.css";
 
 .login{
+    margin: 50px 25px 50px 25px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     background-color: var(--foreground-color);
+    border-radius:12px;
 }
 
 .login-header{
