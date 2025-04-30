@@ -16,8 +16,8 @@
 }
 
 .searchableFieldTable {
+    table-layout: auto;
     width: 100%;
-    /*border-collapse: collapse;*/
 }
 
 .searchableFieldTableHeading {
@@ -36,6 +36,14 @@
     font-family: 'Raleway'
 }
 
+.searchableFieldTable td {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    white-space: normal;
+    text-decoration: none;
+    hyphens: auto;
+}
 
 .searchableFieldTable tr:nth-child(odd) {
     background-color: #f9f9f9;
