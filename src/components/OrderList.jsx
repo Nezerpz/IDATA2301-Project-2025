@@ -3,6 +3,8 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {fetchWithAuth} from "../../static/js/auth.js";
 
+
+//TODO: Fix the poor implementation of figuring out the user role in the current order to decide which actions they have available.
 function ReviewCustomer(order, navigate) {
     return (
         <button onClick={() => {
@@ -31,6 +33,29 @@ function ReviewCar(order, navigate) {
             Review Car
         </button>
     )
+}
+
+function EditOrder(order, navigate) {
+    const path = window.location.pathname;
+    const isAdmin = path.includes("admin");
+    const isProvider = path.includes("provider");
+    if (isAdmin) {
+        return(
+            <button onClick={() => {
+                navigate("/mypage/admin/orders/edit", {state: {order: order}})
+            }}>
+                Edit Order
+            </button>
+        )
+    } else if (isProvider) {
+        return (
+            <button onClick={() => {
+                navigate("/mypage/provider/orders/edit", {state: {order: order}})
+            }}>
+                Edit Order
+            </button>
+        )
+    }
 }
 
 function ReviewOptions({row}) {
@@ -80,14 +105,21 @@ function ReviewOptions({row}) {
     if (userRole === "customer") {
         return (
             <>
-                    {ReviewCar(order, navigate)}
-                    {ReviewProvider(order, navigate)}
+                {ReviewCar(order, navigate)}
+                {ReviewProvider(order, navigate)}
             </>
         )
     } else if (userRole === "provider") {
         return (
             <>
-                    {ReviewCustomer(order, navigate)}
+                {ReviewCustomer(order, navigate)}
+                {EditOrder(order, navigate)}
+            </>
+        )
+    } else if (userRole === "admin") {
+        return (
+            <>
+                {EditOrder(order, navigate)}
             </>
         )
     }
