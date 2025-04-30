@@ -7,6 +7,7 @@ import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import SearchableFieldTable from "../components/SearchableFieldTable/SearchableFieldTable.jsx";
 import {fetchWithAuth} from "../static/js/auth.js";
+import "./ManageOwnedCarsPage.css"
 
 function renderPage(cars) {
     return(
