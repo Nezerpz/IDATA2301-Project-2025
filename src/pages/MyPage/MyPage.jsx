@@ -14,16 +14,29 @@ import AccessDeniedPage from "../AccessDeniedPage.jsx";
 import Logout from "../../components/Logout.jsx";
 import "./MyPage.css";
 import React from "react";
+import {jwtDecode} from "jwt-decode";
+
+function getUsername(token) {
+    try {
+        const decodedToken = jwtDecode(token);
+        return decodedToken.sub;
+    } catch (error) {
+        console.error("Error decoding token:", error);
+        return null;
+    }
+}
 
 function MyPage() {
     useTitle("My Page");
+    const token = localStorage.getItem("jwt");
+    const username = getUsername(token);
     const isLoggedIn = CheckLogin();
     if (isLoggedIn) {
         return (
             <div className={"row"}>
                 <div className={"col-2"}>
                     <div id={"settings-menu"}>
-                        <h1>user name</h1>
+                        <h1>{username}</h1>
                         {/*TODO: Add nav bar for this menu*/}
                         <SettingsNavbar/>
                         <Logout />

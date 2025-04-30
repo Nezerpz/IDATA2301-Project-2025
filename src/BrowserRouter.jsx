@@ -8,7 +8,7 @@ import ReviewPage from "./pages/ReviewPage/ReviewPage.jsx";
 import MyPage from "./pages/MyPage/MyPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 import UserPage from "./pages/UserPage/UserPage.jsx";
-import ManageOwnedCarsPage from "./pages/ManageOwnedCarsPage.jsx";
+import ManageOwnedCarsPage from "./pages/ManageOwnedCarsPage/ManageOwnedCarsPage.jsx";
 import SettingsPage from "./pages/SettingsPage.jsx";
 import UsersPage from "./pages/UsersPage/UsersPage.jsx";
 import OrdersPage from "./pages/OrdersPage.jsx";
@@ -77,12 +77,10 @@ const router = createBrowserRouter([
                             {
                                 path: "orders",
                                 element: <OrdersPage />,
-                                children: [
-                                    {
-                                        path: "edit/:id",
-                                        element: <EditOrderPage />
-                                    }
-                                ]
+                            },
+                            {
+                                path: "orders/edit/:id",
+                                element: <EditOrderPage />
                             }
                         ]
                     },
@@ -112,6 +110,10 @@ const router = createBrowserRouter([
                             {
                                 path:"orders",
                                 element: <OrdersPage />
+                            },
+                            {
+                                path: "orders/edit/:id",
+                                element: <EditOrderPage />
                             }
                         ]
                     }

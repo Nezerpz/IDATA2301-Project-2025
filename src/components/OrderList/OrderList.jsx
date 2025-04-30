@@ -33,14 +33,14 @@ function ReviewCar(order, navigate) {
     )
 }
 
-function EditOrder(order, navigate) {
+function EditOrder(row, navigate) {
     const path = window.location.pathname;
     const isAdmin = path.includes("admin");
     const pathTo = isAdmin ? "admin" : "provider";
 
     return (
         <button onClick={() => {
-            navigate(`/mypage/${pathTo}/orders/edit`, { state: { order: order } });
+            navigate(`/mypage/${pathTo}/orders/edit/${row.id}`);
         }}>
             Edit Order
         </button>
@@ -99,7 +99,7 @@ function ReviewOptions({row}) {
     if (isAdmin && !!path.includes("admin") ) {
         return (
             <>
-                {EditOrder(order, navigate)}
+                {EditOrder(row, navigate)}
             </>
         )
     } else if (isCustomer) {
@@ -113,7 +113,7 @@ function ReviewOptions({row}) {
         return (
             <>
                 {ReviewCustomer(order, navigate)}
-                {EditOrder(order, navigate)}
+                {EditOrder(row, navigate)}
             </>
         )
     }
@@ -129,7 +129,7 @@ function OrderList (orders) {
     const processedOrders = orders.map((order) => ({
         ...order,
         "order date": `${order.dateFrom}-${order.timeFrom} / ${order.dateTo}-${order.timeTo}`,
-        "status": order.orderStaus ? "Complete" : "Ongoing",
+        "status": `${order.orderStatus}`,
         "order number": order.id,
         "price paid": order.pricePaid,
         "car": `${order.car.manufacturer} ${order.car.carModel}`,
