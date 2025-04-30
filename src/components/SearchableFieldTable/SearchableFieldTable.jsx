@@ -19,7 +19,7 @@ function SearchableFieldTable({ data, columns, rowKey, children }) {
         <div>
             <input
                 type="text"
-                placeholder="Search..."
+                placeholder="Search attributes..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 className={"searchable-input"}
