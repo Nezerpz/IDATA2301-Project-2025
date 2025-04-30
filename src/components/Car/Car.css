@@ -12,6 +12,16 @@
     box-shadow: 0 0 15px var(--bright-shadow-color);
 }
 
+.car strong {
+    font-family: 'Raleway', 'sans-serif';
+    color: var(--heading-color-dark);
+}
+
+.car p {
+    margin: 15px 0px 15px 0px;
+    font-family: 'Raleway', 'sans-serif';
+}
+
 .car-image {
     max-height: 250px;
     width: auto;
@@ -29,3 +39,14 @@
     color: var(--heading-color-dark);
 }
 
+.features {
+   border: 2px solid gray;
+   border-radius: 12px;
+   margin: auto;
+   right: 0px;
+   padding-right: 20px;
+}
+
+.feature {
+    font-family: 'Raleway';
+}

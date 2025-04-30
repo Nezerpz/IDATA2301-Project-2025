@@ -18,18 +18,16 @@ function Car ({car}) {
             {console.log(car.imagePath)}
             <div>
                 <div>
-                    <p><strong>Provider: </strong>{car.user}</p>
-                    <p><strong>Price: </strong>{car.price}/day</p>
-                    <p><strong>Number of seats: </strong>{car.numberOfSeats}</p>
-                    <p><strong>Transmission: </strong>{car.transmissionType}</p>
-                    <p><strong>Fuel: </strong>{car.fuelType}</p>
+                    <p><strong>{car.user}</strong></p>
+                    <p>{car.transmissionType} {car.fuelType}</p>
+                    <p>{car.numberOfSeats} seats</p>
                 </div>
                 <div className={"features"}>
                     <FeatureList features={car.features}/>
                 </div>
             </div>
             <div>
-                <button onClick={() => {setIsOrdering(true)}}>Rent This Car</button>
+                <button onClick={() => {setIsOrdering(true)}}>Rent for {car.price}/day</button>
             </div>
             <OrderModal 
                 open={ordering} 
