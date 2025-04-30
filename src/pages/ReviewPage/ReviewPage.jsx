@@ -106,7 +106,7 @@ function ReviewPage() {
                         onChange={(e) => setReview(e.target.value)}
                     />
                 </label>
-                <button type="submit">Submit</button>
+                <button className={"big-button"} type="submit">Submit</button>
             </div>
         </form>
     );

@@ -65,14 +65,16 @@ function SearchDateFromTo() {
                     <input type="time" name="timeTo" id="toTime" step={"900"}
                         value={newTimespan.timeTo}
                         onChange={handleChange} />
-
                 </label>
 
-                {isCarsPage ? (
-                <button type="submit" className="search-button">Search</button>
-                ) : (
-                    <button type="submit" className="search-button" onClick={() => navigate("/cars")}>Search</button>
-                )}
+                {isCarsPage 
+                    ? (<button type="submit" 
+                            className="big-button">Search
+                        </button>) 
+                    : (<button type="submit" 
+                            className="big-button" 
+                            onClick={() => navigate("/cars")}>Search
+                        </button>)}
             </form>
         );
     }
