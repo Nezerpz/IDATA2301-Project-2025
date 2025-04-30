@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {fetchWithAuth} from "../static/js/auth.js";
+import {fetchWithAuth} from "../../static/js/auth.js";
 import {useParams} from "react-router-dom";
 
 

@@ -15,7 +15,7 @@ import OrdersPage from "./pages/OrdersPage/OrdersPage.jsx";
 import AddNewCar from "./pages/ManageOwnedCarsPage/AddNewCar.jsx";
 import App from "./App.jsx";
 import EditCarPage from "./pages/EditCarPage/EditCarPage.jsx";
-import EditOrderPage from "./pages/EditOrderPage.jsx";
+import EditOrderPage from "./pages/EditOrderPage/EditOrderPage.jsx";
 
 const router = createBrowserRouter([
     {
