@@ -7,15 +7,16 @@
 
 .searchableFieldTable {
     width: 100%;
-    border-collapse: collapse;
+    /*border-collapse: collapse;*/
 }
 
+
 .searchableFieldTable tr:nth-child(odd) {
-    background-color: #f9f9f9; /* Light color for odd rows */
+    background-color: #f9f9f9;
 }
 
 .searchableFieldTable tr:nth-child(even) {
-    background-color: #e0e0e0; /* Slightly darker color for even rows */
+    background-color: #e0e0e0; 
 }
 
 .searchableFieldTableHeading {
@@ -26,5 +27,26 @@
 .searchableFieldTableRow {
     border: 1px solid var(--main-color);
     padding: 10px;
+}
+
+.searchableFieldTable thead {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.searchableFieldTable thead tr th:first-child {
+    border-top-left-radius: 10px;
+}
+    
+.searchableFieldTable thead tr th:last-child {
+    border-top-right-radius: 10px;
+}
+
+.searchableFieldTable tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+    
+.searchableFieldTable tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
 }
 

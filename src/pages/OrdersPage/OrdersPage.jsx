@@ -1,8 +1,8 @@
 //TODO: Fetch the orders from the database and display them in a table
-import OrderList from "../components/OrderList/OrderList.jsx";
-import useTitle from "../components/useTitle.jsx";
+import OrderList from "../../components/OrderList/OrderList.jsx";
+import useTitle from "../../components/useTitle.jsx";
 import React, { useState, useEffect } from 'react';
-import {fetchWithAuth} from "../static/js/auth.js";
+import {fetchWithAuth} from "../../static/js/auth.js";
 
 function renderPage(orders) {
     if (orders.length === 0) {
