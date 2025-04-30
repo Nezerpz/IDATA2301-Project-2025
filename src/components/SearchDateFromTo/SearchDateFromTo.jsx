@@ -6,6 +6,7 @@ import { CarContext } from '../../context/CarContext.js';
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import '@vaadin/time-picker/src/vaadin-time-picker.js';
 
 function SearchDateFromTo() {
     const navigate = useNavigate();
@@ -30,8 +31,9 @@ function SearchDateFromTo() {
     };
 
     //TODO: Make the return time increment hourly (Can be done by making it into text, and creating a custom select time component)
-    const handleChange = (date) => {
-        setNewTimespan(date);
+    const handleChange = (event) => {
+        const { id, value } = event.target;
+        setNewTimespan((prevData) => ({ ...prevData, [id]: value }));
     };
 
     if (timespan == null) {
@@ -44,23 +46,14 @@ function SearchDateFromTo() {
 
                 <label htmlFor="from">
                     <span className={"search-heading"}>From</span>
-
-                    <DatePicker selected={newTimespan.dateFrom} onChange={(date) => handleChange(date)}/>
-
-                    <input type="time" name="timeFrom" id="fromTime" step={"900"}
-                        value={newTimespan.timeFrom}
-                        onChange={handleChange} />
-
+                    <DatePicker id={"dateFrom"} selected={newTimespan.dateFrom} onChange={handleChange}/>
+                    <TimePicker id={"timeFrom"} label="From" value="08:30" step={60 * 30} onChange={handleChange}/>
                 </label>
 
                 <label htmlFor="to">
                     <span className={"search-heading"}>To</span>
-
-                    <DatePicker selected={newTimespan.dateTo} onChange={(date) => handleChange(date)} />
-
-                    <input type="time" name="timeTo" id="toTime" step={"900"}
-                        value={newTimespan.timeTo}
-                        onChange={handleChange} />
+                    <DatePicker id={"dateTo"} selected={newTimespan.dateTo} onChange={handleChange} />
+                    <TimePicker id={"timeTo"} label="To" value="16:30" step={60 * 30} onChange={handleChange}/>
                 </label>
 
                 {isCarsPage 
