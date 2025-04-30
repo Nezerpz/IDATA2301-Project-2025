@@ -29,8 +29,11 @@
     font-family: Raleway, sans-serif;
     font-size: 1.5em;
     text-align: center;
-    word-break: keep-all;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
     text-decoration: none;
+    hyphens: auto;
 }
 
 .dropdown-content a:hover {
