@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { CarContext } from '../../context/CarContext.js'
 import sortMethods from "../../static/js/sortMethods.js";
+import "./CarSort.css";
 
 
 function CarSort() {
@@ -15,7 +16,7 @@ function CarSort() {
 
     return (
         <div>
-            <select onChange={updateSortMethod}>
+            <select className={"car-sort"}onChange={updateSortMethod}>
                 <option value={"price_high_low"}>Price High-Low</option>
                 <option value={"price_low_high"}>Price Low-High</option>
             </select>

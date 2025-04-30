@@ -41,7 +41,7 @@ function SearchDateFromTo() {
             <form className="search-date-from-to" onSubmit={handleSubmit}>
 
                 <label htmlFor="from">
-                    <span>From</span>
+                    <span className={"search-heading"}>From</span>
 
                     <input type="date" name="dateFrom" id="from"
                         value={newTimespan.dateFrom}
@@ -54,7 +54,7 @@ function SearchDateFromTo() {
                 </label>
 
                 <label htmlFor="to">
-                    <span>To</span>
+                    <span className={"search-heading"}>To</span>
 
                     <input type="date" name="dateTo" id="to"
                         value={newTimespan.dateTo}
