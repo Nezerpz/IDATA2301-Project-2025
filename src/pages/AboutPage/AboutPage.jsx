@@ -1,4 +1,4 @@
-import useTitle from "../components/useTitle.jsx";
+import useTitle from "../../components/useTitle.jsx";
 
 function AboutPage() {
     useTitle("About");
