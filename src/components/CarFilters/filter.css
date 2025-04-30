@@ -6,6 +6,7 @@
     padding-bottom: 12px;
 }
 .filter label {
+    font-family: 'Raleway';
     color: var(--heading-color-light);
 }
 .filter-header {
@@ -28,8 +29,8 @@
 }
 
 .category-name {
+    font-family: 'Raleway';
     color: var(--heading-color-light);
-    font-weight: bold;
     cursor: pointer;
 }
 
