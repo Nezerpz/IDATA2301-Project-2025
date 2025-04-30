@@ -6,13 +6,24 @@ import { CarContext } from '../../context/CarContext.js';
 
 function SearchDateFromTo() {
     const navigate = useNavigate();
+    const path = window.location.pathname;
+    const isCarsPage = path.includes("cars");
     let [timespan, setTimespan] = useContext(CarContext);
     const [newTimespan, setNewTimespan] = useState(timespan);
 
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setTimespan({...newTimespan});
+        setTimespan({ ...newTimespan });
+
+        const queryParams = new URLSearchParams({
+            dateFrom: newTimespan.dateFrom,
+            timeFrom: newTimespan.timeFrom,
+            dateTo: newTimespan.dateTo,
+            timeTo: newTimespan.timeTo,
+        }).toString();
+
+        navigate(`/cars?${queryParams}`);
     };
 
     //TODO: Make the return time increment hourly (Can be done by making it into text, and creating a custom select time component)
@@ -55,7 +66,11 @@ function SearchDateFromTo() {
 
                 </label>
 
-                <button type="submit">Find car</button>
+                {isCarsPage ? (
+                <button type="submit" className="search-button">Search</button>
+                ) : (
+                    <button type="submit" className="search-button" onClick={() => navigate("/cars")}>Search</button>
+                )}
             </form>
         );
     }

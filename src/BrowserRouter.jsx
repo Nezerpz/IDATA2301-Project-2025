@@ -70,6 +70,10 @@ const router = createBrowserRouter([
                                 element: <ManageOwnedCarsPage />,
                             },
                             {
+                                path: "cars/edit/:id",
+                                element: <EditCarPage />
+                            },
+                            {
                                 path: "orders",
                                 element: <OrdersPage />
                             }

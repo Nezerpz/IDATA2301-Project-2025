@@ -13,13 +13,23 @@ function SliderFilter({name, min, max, onUpdate}) {
     useEffect(() => {
         onUpdate([minValue, maxValue])
     }, [minValue, maxValue])
+
+    const handleMinChange = (e) => {
+        const value = Math.min(Number(e.target.value), maxValue - 1); // Prevent collision
+        setMinValue(value);
+    };
+
+    const handleMaxChange = (e) => {
+        const value = Math.max(Number(e.target.value), minValue + 1); // Prevent collision
+        setMaxValue(value);
+    };
     
     return (
         <details className={"filter-item"} open>
             <summary className={"category-name"}>{name}</summary>
             <div className={"price-range"}>
-                <input type="range" min={min} max={max} value={minValue} className="min" id={`${name}-min-slider`} onChange={e => setMinValue(e.target.value)}/>
-                <input type="range" min={min} max={max} value={maxValue} className="max" id={`${name}-max-slider`} onChange={e => setMaxValue(e.target.value)}/>
+                <input type="range" min={min} max={max} value={minValue} className="min" id={`${name}-min-slider`} onChange={handleMinChange}/>
+                <input type="range" min={min} max={max} value={maxValue} className="max" id={`${name}-max-slider`} onChange={handleMaxChange}/>
             </div>
             <div>
                 <input type="number" min={min} max={max} value={minValue} onChange={e => setMinValue(e.target.value)}/>
