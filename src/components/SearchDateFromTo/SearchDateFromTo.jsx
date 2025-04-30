@@ -22,9 +22,9 @@ function SearchDateFromTo() {
         event.preventDefault();
         let timespan = {
             dateFrom: (newDateFrom.toISOString().split('T')[0]),
-            timeFrom: `${newTimeFrom.getHours()}:${newTimeTo.getHours()}`,
+            timeFrom: ('0'  + newTimeFrom.getHours()).slice(-2)+':'+('0' + newTimeFrom.getMinutes()).slice(-2),
             dateTo: (newDateTo.toISOString().split('T')[0]),
-            timeTo: `${newTimeTo.getHours()}:${newTimeTo.getMinutes()}`,
+            timeTo: ('0'  + newTimeTo.getHours()).slice(-2)+':'+('0' + newTimeTo.getMinutes()).slice(-2),
         }
         console.debug(timespan)
         setTimespan({...timespan});
