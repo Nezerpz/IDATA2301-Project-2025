@@ -6,6 +6,9 @@ import { CarContext } from '../../context/CarContext.js';
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import ReactTimePicker from 'react-time-picker';
+import 'react-time-picker/dist/TimePicker.css';
+
 
 function SearchDateFromTo() {
     const navigate = useNavigate();
@@ -47,9 +50,13 @@ function SearchDateFromTo() {
                     <span className={"search-heading"}>From</span>
 
                     <DatePicker id={"dateFrom"} selected={newTimespan.dateFrom} onChange={(date) => handleChange(date)}/>
-                    <input type="time" name="timeFrom" id="timeFrom" step={"900"}
+                    <ReactTimePicker
+                        name="timeFrom"
                         value={newTimespan.timeFrom}
-                        onChange={handleChange} />
+                        format="HH:mm"
+                        onChange={(time) => {handleChange(date)}}
+                        disableClock
+                    />
 
                 </label>
 
