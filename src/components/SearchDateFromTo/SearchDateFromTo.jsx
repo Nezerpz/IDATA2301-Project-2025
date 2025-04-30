@@ -4,39 +4,34 @@ import { useNavigate } from 'react-router-dom';
 import './searchDateFromTo.css';
 import { CarContext } from '../../context/CarContext.js';
 
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import ReactTimePicker from 'react-time-picker';
-import 'react-time-picker/dist/TimePicker.css';
-
+import { DatePicker } from 'rsuite';
+import { TimePicker } from 'rsuite';
+import 'rsuite/TimePicker/styles/index.css';
 
 function SearchDateFromTo() {
     const navigate = useNavigate();
     const path = window.location.pathname;
     const isCarsPage = path.includes("cars");
     let [timespan, setTimespan] = useContext(CarContext);
-    const [newTimespan, setNewTimespan] = useState(timespan);
-
+    const [newDateFrom, setNewDateFrom] = useState(new Date(timespan.dateFrom));
+    const [newTimeFrom, setNewTimeFrom] = useState(new Date(`${timespan.dateFrom} ${timespan.timeFrom}`));
+    const [newDateTo, setNewDateTo] = useState(new Date(timespan.dateTo));
+    const [newTimeTo, setNewTimeTo] = useState(new Date(`${timespan.dateTo} ${timespan.timeTo}`));
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        setTimespan({ ...newTimespan });
-
-        const queryParams = new URLSearchParams({
-            dateFrom: newTimespan.dateFrom,
-            timeFrom: newTimespan.timeFrom,
-            dateTo: newTimespan.dateTo,
-            timeTo: newTimespan.timeTo,
-        }).toString();
-
+        let timespan = {
+            dateFrom: newDateFrom.toISOString().split('T')[0],
+            timeFrom: `${newTimeFrom.getHours()}:${newTimeTo.getHours()}`,
+            dateTo: newDateTo.toISOString().split('T')[0],
+            timeTo: `${newTimeTo.getHours()}:${newTimeTo.getMinutes()}`,
+        }
+        console.debug(timespan)
+        setTimespan({...timespan});
+        const queryParams = new URLSearchParams(timespan).toString();
         navigate(`/cars?${queryParams}`);
     };
 
-    //TODO: Make the return time increment hourly (Can be done by making it into text, and creating a custom select time component)
-    const handleChange = (event) => {
-        const { id, value } = event.target;
-        setNewTimespan((prevData) => ({ ...prevData, [id]: value }));
-    };
 
     if (timespan == null) {
         return <h1>No cars available in timespan</h1>
@@ -49,24 +44,40 @@ function SearchDateFromTo() {
                 <label htmlFor="from">
                     <span className={"search-heading"}>From</span>
 
-                    <DatePicker id={"dateFrom"} selected={newTimespan.dateFrom} onChange={(date) => handleChange(date)}/>
-                    <ReactTimePicker
-                        name="timeFrom"
-                        value={newTimespan.timeFrom}
+                    <DatePicker id={"dateFrom"} 
+                        format="dd.MM.yyyy" 
+                        showWeekNumbers 
+                        size="sm"
+                        defaultValue={newDateFrom} 
+                        onChange={(date) => {setNewDateFrom(date)}}/>
+
+                    <TimePicker id={"timeFrom"} 
                         format="HH:mm"
-                        onChange={(time) => {handleChange(date)}}
-                        disableClock
-                    />
+                        showWeekNumbers 
+                        size="sm"
+                        editable={true}
+                        defaultValue={newTimeFrom}
+                        hideMinutes={minute => minute % 15 !== 0}
+                        onChange={(time) => {setNewTimeFrom(time)}}/> 
 
                 </label>
 
                 <label htmlFor="to">
                     <span className={"search-heading"}>To</span>
 
-                    <DatePicker id={"dateTo"} selected={newTimespan.dateTo} onChange={handleChange} />
-                    <input type="time" name="timeTo" id="timeTo" step={"900"}
-                        value={newTimespan.timeTo}
-                        onChange={handleChange} />
+                    <DatePicker id={"dateTo"} 
+                        format="dd.MM.yyyy" 
+                        size="sm"
+                        defaultValue={newDateTo} 
+                        onChange={(date)=> setNewDateTo(date)}/>
+
+                    <TimePicker id={"timeTo"} 
+                        format="HH:mm"
+                        size="sm"
+                        editable={true}
+                        defaultValue={newTimeTo}
+                        hideMinutes={minute => minute % 15 !== 0} 
+                        onChange={(time) => {setNewTimeTo(time)}}/> 
                 </label>
 
                 {isCarsPage 
