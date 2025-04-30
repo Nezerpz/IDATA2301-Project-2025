@@ -3,8 +3,6 @@ import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {fetchWithAuth} from "../../static/js/auth.js";
 
-
-//TODO: Fix the poor implementation of figuring out the user role in the current order to decide which actions they have available.
 function ReviewCustomer(order, navigate) {
     return (
         <button onClick={() => {
@@ -35,32 +33,23 @@ function ReviewCar(order, navigate) {
     )
 }
 
-function EditOrder(order, navigate) {
+function EditOrder(row, navigate) {
     const path = window.location.pathname;
     const isAdmin = path.includes("admin");
-    const isProvider = path.includes("provider");
-    if (isAdmin) {
-        return(
-            <button onClick={() => {
-                navigate("/mypage/admin/orders/edit", {state: {order: order}})
-            }}>
-                Edit Order
-            </button>
-        )
-    } else if (isProvider) {
-        return (
-            <button onClick={() => {
-                navigate("/mypage/provider/orders/edit", {state: {order: order}})
-            }}>
-                Edit Order
-            </button>
-        )
-    }
+    const pathTo = isAdmin ? "admin" : "provider";
+
+    return (
+        <button onClick={() => {
+            navigate(`/mypage/${pathTo}/orders/edit/${row.id}`);
+        }}>
+            Edit Order
+        </button>
+    );
 }
 
 function ReviewOptions({row}) {
     const navigate = useNavigate();
-    const [userRole, setUserRole] = useState(null);
+    const [userData, setUserData] = useState(null);
     const [order, setOrder] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -83,12 +72,13 @@ function ReviewOptions({row}) {
     }, []);
 
     useEffect(() => {
-        const fetchUserRole = async () => {
+        const fetchUser = async () => {
             setLoading(true);
             try {
                 let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/users/self");
                 let data = await response.json();
-                setUserRole(data.userType.toLowerCase());
+                console.log(data);
+                setUserData(data);
             } catch (error) {
                 setError(error);
             } finally {
@@ -96,30 +86,34 @@ function ReviewOptions({row}) {
             }
         };
 
-        fetchUserRole();
+        fetchUser();
     }, []);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading || !userData || !order) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
 
-    if (userRole === "customer") {
+    const isCustomer = order.customerId === userData.id;
+    const isProvider = order.providerId === userData.id;
+    const isAdmin = userData.userType === "ADMIN";
+    const path = window.location.pathname;
+    if (isAdmin && !!path.includes("admin") ) {
+        return (
+            <>
+                {EditOrder(row, navigate)}
+            </>
+        )
+    } else if (isCustomer) {
         return (
             <>
                 {ReviewCar(order, navigate)}
                 {ReviewProvider(order, navigate)}
             </>
         )
-    } else if (userRole === "provider") {
+    } else if (isProvider) {
         return (
             <>
                 {ReviewCustomer(order, navigate)}
-                {EditOrder(order, navigate)}
-            </>
-        )
-    } else if (userRole === "admin") {
-        return (
-            <>
-                {EditOrder(order, navigate)}
+                {EditOrder(row, navigate)}
             </>
         )
     }
@@ -134,7 +128,7 @@ function OrderList (orders) {
     const processedOrders = orders.map((order) => ({
         ...order,
         "order date": `${order.dateFrom}-${order.timeFrom} / ${order.dateTo}-${order.timeTo}`,
-        "status": order.orderStaus ? "Complete" : "Ongoing",
+        "status": `${order.orderStatus}`,
         "order number": order.id,
         "price paid": order.pricePaid,
         "car": `${order.car.manufacturer} ${order.car.carModel}`,

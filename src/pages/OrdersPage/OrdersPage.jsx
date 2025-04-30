@@ -6,7 +6,7 @@ import {fetchWithAuth} from "../../static/js/auth.js";
 
 function renderPage(orders) {
     if (orders.length === 0) {
-        return <text>No orders found</text>;
+        return <p>No orders found</p>;
     } else if (orders.length >= 1) {
         return (
             <div id={"order-list"}>

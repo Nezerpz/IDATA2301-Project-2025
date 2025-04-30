@@ -71,7 +71,7 @@ function renderComponent ({order, car}) {
                     <li><strong>Start: </strong> {order.dateFrom} | {order.timeFrom}</li>
                     <li><strong>End: </strong> {order.dateTo} | {order.timeTo}</li>
                     <li><strong>Paid: </strong> {order.pricePaid}</li>
-                    <li><strong>Status: </strong> {order.orderStatus ? 'Ongoing' : 'Complete'}</li>
+                    <li><strong>Status: </strong> {order.orderStatus}</li>
                 </ul>
             </div>
             </details>
