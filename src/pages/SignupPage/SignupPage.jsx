@@ -1,7 +1,7 @@
 import useTitle from "../../components/useTitle.jsx";
 import "../../static/css/loginAndSignup.css";
 import {Link, useNavigate} from "react-router-dom";
-import Conflict from "../ConflictPage.jsx";
+import Conflict from "../ConflictPage/ConflictPage.jsx";
 
 
 function SignupPage() {

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import useTitle from "../../components/useTitle.jsx";
 import "../../static/css/loginAndSignup.css";
-import Conflict from "../ConflictPage.jsx";
+import Conflict from "../ConflictPage/ConflictPage.jsx";
 
 
 
