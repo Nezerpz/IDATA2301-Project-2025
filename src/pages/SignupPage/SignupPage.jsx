@@ -1,10 +1,55 @@
-import useTitle from "../components/useTitle.jsx";
-import "../static/css/loginAndSignup.css";
-import {Link} from "react-router-dom";
-import Conflict from "./ConflictPage.jsx";
+import useTitle from "../../components/useTitle.jsx";
+import "../../static/css/loginAndSignup.css";
+import {Link, useNavigate} from "react-router-dom";
+import Conflict from "../ConflictPage.jsx";
 
 
 function SignupPage() {
+    const navigate = useNavigate()
+    const handleSignup = async (event) => {
+        event.preventDefault()
+        console.log("something happens")
+        try {
+        let form = event.target
+        let response = await fetch(
+            import.meta.env.VITE_BACKEND_URL + ":" + 
+            import.meta.env.VITE_BACKEND_PORT + "/users/new", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                "firstName": form.name.value,
+                "lastName": form.lastName.value,
+                "username": form.username.value,
+                "password": form.password.value,
+                "email": form.email.value,
+                "phone": form.phone.value
+            }),
+            credentials: 'include'
+        })
+
+        if (response.ok) {
+            let authResponse = await fetch(
+                import.meta.env.VITE_BACKEND_URL + ":" +
+                import.meta.env.VITE_BACKEND_PORT + "/authenticate", {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    "username": form.username.value, 
+                    "password": form.password.value
+                })
+            })
+            let data = await authResponse.json()
+            localStorage.setItem('jwt', data["accessToken"]);  // Store the token
+            navigate('/');
+            window.location.reload();
+        } else {
+            console.error('Failed to login', response.statusText);
+        }
+        } catch (e) {
+            console.error("Error logging in", e)
+        }
+    }
+
     useTitle("Sign up");
     const isUserLoggedIn = localStorage.getItem('jwt') !== null;
     if (isUserLoggedIn) {
@@ -16,7 +61,7 @@ function SignupPage() {
                 <div className={"col-8"}>
                     <div className={"login"}>
                         <h1 className={"login-header"}>Sign up</h1>
-                        <form className={"login-form"}>
+                        <form className={"login-form"} onSubmit={handleSignup}>
                             <div className={"col-12"}>
                                 <label htmlFor={"firstName"}>
                                     <span>First name</span>

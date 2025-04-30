@@ -7,12 +7,12 @@
 // Change the check to happen in every page which needs credentials.
 
 import {Outlet } from 'react-router-dom';
-import SettingsNavbar from "../components/SettingsNavbar.jsx";
-import useTitle from "../components/useTitle.jsx";
-import CheckLogin from "../components/CheckLogin.jsx";
-import AccessDeniedPage from "./AccessDeniedPage.jsx";
-import Logout from "../components/Logout.jsx";
-import OrderList from "../components/OrderList.jsx";
+import SettingsNavbar from "./SettingsNavbar.jsx";
+import useTitle from "../../components/useTitle.jsx";
+import CheckLogin from "../../components/CheckLogin.jsx";
+import AccessDeniedPage from "../AccessDeniedPage.jsx";
+import Logout from "../../components/Logout.jsx";
+import "./MyPage.css";
 import React from "react";
 
 function MyPage() {

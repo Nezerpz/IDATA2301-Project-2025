@@ -1,8 +1,7 @@
 import {Link, useNavigate} from 'react-router-dom';
 import {useEffect, useRef, useState} from "react";
-import ProviderSettings from "./ProviderSettings.jsx";
-import {fetchWithAuth} from "../static/js/auth.js";
-import {DropdownMenu} from "react-bootstrap";
+import {fetchWithAuth} from "../../static/js/auth.js";
+import "./dropdown.css";
 
 //TODO: Make this dynamically change based on the user's role
 

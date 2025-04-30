@@ -1,5 +1,6 @@
 import {Link} from "react-router-dom";
 import {fetchWithAuth} from "../../static/js/auth.js";
+import "./OwnedCarListItem.css";
 
 function OwnedCarListItem(car) {
     car = car["car"]

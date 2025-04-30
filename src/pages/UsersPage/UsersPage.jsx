@@ -1,7 +1,7 @@
-import UserList from "../components/UserList.jsx";
-import useTitle from "../components/useTitle.jsx";
+import UserList from "../../components/UserList/UserList.jsx";
+import useTitle from "../../components/useTitle.jsx";
 import React, {useEffect, useState} from "react";
-import {fetchWithAuth} from "../static/js/auth.js";
+import {fetchWithAuth} from "../../static/js/auth.js";
 
 function renderPage(users) {
   return (

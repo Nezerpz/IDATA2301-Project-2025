@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import '../static/css/searchDateFromTo.css';
-import { CarContext } from '../context/CarContext.js';
+import './searchDateFromTo.css';
+import { CarContext } from '../../context/CarContext.js';
 
 function SearchDateFromTo() {
     const navigate = useNavigate();

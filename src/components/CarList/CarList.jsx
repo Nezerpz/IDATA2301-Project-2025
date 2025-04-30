@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
-import Car from "./Car.jsx";
-import { CarContext } from '../context/CarContext.js'
+import Car from "../Car/Car.jsx";
+import { CarContext } from '../../context/CarContext.js'
 import { useContext } from "react";
 
 function CarList ({cars}) {

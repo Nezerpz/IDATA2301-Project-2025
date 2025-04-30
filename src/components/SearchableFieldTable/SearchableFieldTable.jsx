@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./SearchableFieldTable.css";
 
 function SearchableFieldTable({ data, columns, rowKey, children }) {
     const [search, setSearch] = useState("");

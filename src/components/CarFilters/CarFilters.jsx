@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
-import "../static/css/filter.css";
+import "./filter.css";
 import CheckBoxFilters from "./CheckBoxFilters.jsx";
 import SliderFilter from './SliderFilter';
-import { CarContext } from '../context/CarContext.js';
+import { CarContext } from '../../context/CarContext.js';
 import { useState, useEffect, useContext } from 'react';
 
 
