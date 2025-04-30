@@ -21,9 +21,9 @@ function SearchDateFromTo() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         let timespan = {
-            dateFrom: newDateFrom.toISOString().split('T')[0],
+            dateFrom: (newDateFrom.toISOString().split('T')[0]),
             timeFrom: `${newTimeFrom.getHours()}:${newTimeTo.getHours()}`,
-            dateTo: newDateTo.toISOString().split('T')[0],
+            dateTo: (newDateTo.toISOString().split('T')[0]),
             timeTo: `${newTimeTo.getHours()}:${newTimeTo.getMinutes()}`,
         }
         console.debug(timespan)
