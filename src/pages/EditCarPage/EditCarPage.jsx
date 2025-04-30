@@ -103,16 +103,16 @@ function renderPage(car, setCar, manufacturers, transmissionTypes, fuelTypes, ca
                                 value={feature}
                                 onChange={(e) => handleFeatureChange(e, index)}
                             />
-                            <button type="button" onClick={() => removeFeature(index)}>Remove</button>
+                            <button className={"big-button"} type="button" onClick={() => removeFeature(index)}>Remove</button>
                         </div>
                     ))}
-                    <button type="button" onClick={addFeature}>Add Feature</button>
+                    <button className={"big-button"} type="button" onClick={addFeature}>Add Feature</button>
                 </label>
                 <label>
                     <span>Image</span>
                     <input type="file" placeholder="Upload image" />
                 </label>
-                <button type="submit">Save changes</button>
+                <button className={"big-button"} type="submit">Save changes</button>
             </form>
         </div>
     );

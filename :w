@@ -16,37 +16,20 @@ TODO: Remove the margin-right and move it to the container for the home page ele
     list-style-type: none;
 }
 
-.search-heading {
-    font-weight: bold;
-}
-
-/*
 .search-date-from-to input {
     border: none;
     outline: none;
 }
-*/
 
 #from {
-    width: 100%;
-    border-top-left-radius: 7px;
     border-top-right-radius: 7px;
 }
 
-#timeFrom {
+#fromTime {
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
 }
 
-#to {
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-}
-
-#timeTo {
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
-}
 
 @container (width < 500px) {
     .search-date-from-to {

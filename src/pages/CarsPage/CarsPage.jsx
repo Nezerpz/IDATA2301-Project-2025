@@ -70,14 +70,9 @@ function CarsPage() {
             <CarContext.Provider value={[fromToDate, setFromToDate, filters, updateFilters, sortMethod, setSortMethod]}>
                 <div className="row">
                     <div id="car-controls" className="col-3">
-                        <div className={"filter"}>
-                            <h4>Search</h4>
+                        <div className={"carlist-controls"}>
                             <SearchDateFromTo />
-
-                            <h4>Filter</h4>
                             <Filters cars={cars} />
-
-                            <h4>Sort</h4>
                             <CarSort />
                         </div>
                     </div>

@@ -2,14 +2,48 @@
 .searchable-input {
     width: 100%;
     margin-bottom: 10px;
-    padding: 5px 0 ;
+    padding: 10px;
+    border-radius: 12px;
+    border-width: 0px;
+    outline: none;
+    background-color: var(--main-color);
+    font-family: 'Raleway';
+    color: white;
+}
+
+.searchable-input::placeholder {
+    color: var(--heading-color-light);
 }
 
 .searchableFieldTable {
+    table-layout: auto;
     width: 100%;
-    /*border-collapse: collapse;*/
 }
 
+.searchableFieldTableHeading {
+    padding: 10px;
+    border: 1px solid var(--main-color);
+    border-radius: 2px;
+    background-color: var(--main-color);
+    color: var(--heading-color-light);
+    font-family: Raleway, sans-serif
+}
+
+.searchableFieldTableRow {
+    padding: 10px;
+    border: 0px solid var(--main-color);
+    border-radius: 2px;
+    font-family: 'Raleway'
+}
+
+.searchableFieldTable td {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    white-space: normal;
+    text-decoration: none;
+    hyphens: auto;
+}
 
 .searchableFieldTable tr:nth-child(odd) {
     background-color: #f9f9f9;
@@ -17,16 +51,6 @@
 
 .searchableFieldTable tr:nth-child(even) {
     background-color: #e0e0e0; 
-}
-
-.searchableFieldTableHeading {
-    border: 1px solid var(--main-color);
-    padding: 10px;
-}
-
-.searchableFieldTableRow {
-    border: 1px solid var(--main-color);
-    padding: 10px;
 }
 
 .searchableFieldTable thead {

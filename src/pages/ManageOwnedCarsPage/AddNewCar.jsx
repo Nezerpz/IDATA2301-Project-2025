@@ -45,7 +45,7 @@ function AddNewCar() {
                     <span>Image</span>
                     <input type="file" placeholder="Upload image" />
                 </label>
-                <button type="submit">Add Car</button>
+                <button className={"big-button"} type="submit">Add Car</button>
             </form>
         </div>
     );

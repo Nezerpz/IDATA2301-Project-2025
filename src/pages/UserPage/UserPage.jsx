@@ -44,9 +44,9 @@ function renderPage(user, setUser) {
                         </label>
                         {/*TODO: Fix password reset button to trigger a password reset on user. */}
                         <div className={"button-container"}>
-                            <button type={"submit"}>Submit changes</button>
+                            <button className={"big-button"} type={"submit"}>Submit changes</button>
                             <h4>Password reset</h4>
-                            <button>Send password reset</button>
+                            <button className={"big-button"}>Send password reset</button>
                         </div>
                     </form>
                         <h4>Suspend or delete user?</h4>
