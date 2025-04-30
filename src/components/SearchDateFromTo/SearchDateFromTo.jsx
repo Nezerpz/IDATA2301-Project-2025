@@ -6,7 +6,6 @@ import { CarContext } from '../../context/CarContext.js';
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import '@vaadin/time-picker/src/vaadin-time-picker.js';
 
 function SearchDateFromTo() {
     const navigate = useNavigate();
@@ -46,14 +45,21 @@ function SearchDateFromTo() {
 
                 <label htmlFor="from">
                     <span className={"search-heading"}>From</span>
-                    <DatePicker id={"dateFrom"} selected={newTimespan.dateFrom} onChange={handleChange}/>
-                    <TimePicker id={"timeFrom"} label="From" value="08:30" step={60 * 30} onChange={handleChange}/>
+
+                    <DatePicker id={"dateFrom"} selected={newTimespan.dateFrom} onChange={(date) => handleChange(date)}/>
+                    <input type="time" name="timeFrom" id="timeFrom" step={"900"}
+                        value={newTimespan.timeFrom}
+                        onChange={handleChange} />
+
                 </label>
 
                 <label htmlFor="to">
                     <span className={"search-heading"}>To</span>
+
                     <DatePicker id={"dateTo"} selected={newTimespan.dateTo} onChange={handleChange} />
-                    <TimePicker id={"timeTo"} label="To" value="16:30" step={60 * 30} onChange={handleChange}/>
+                    <input type="time" name="timeTo" id="timeTo" step={"900"}
+                        value={newTimespan.timeTo}
+                        onChange={handleChange} />
                 </label>
 
                 {isCarsPage 
