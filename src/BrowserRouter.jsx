@@ -12,7 +12,7 @@ import ManageOwnedCarsPage from "./pages/ManageOwnedCarsPage/ManageOwnedCarsPage
 import SettingsPage from "./pages/SettingsPage/SettingsPage.jsx";
 import UsersPage from "./pages/UsersPage/UsersPage.jsx";
 import OrdersPage from "./pages/OrdersPage/OrdersPage.jsx";
-import AddNewCar from "./components/AddNewCar.jsx";
+import AddNewCar from "./pages/ManageOwnedCarsPage/AddNewCar.jsx";
 import App from "./App.jsx";
 import EditCarPage from "./pages/EditCarPage/EditCarPage.jsx";
 
