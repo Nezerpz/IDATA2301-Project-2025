@@ -33,9 +33,23 @@ function ReviewCar(order, navigate) {
     )
 }
 
+function EditOrder(order, navigate) {
+    const path = window.location.pathname;
+    const isAdmin = path.includes("admin");
+    const pathTo = isAdmin ? "admin" : "provider";
+
+    return (
+        <button onClick={() => {
+            navigate(`/mypage/${pathTo}/orders/edit`, { state: { order: order } });
+        }}>
+            Edit Order
+        </button>
+    );
+}
+
 function ReviewOptions({row}) {
     const navigate = useNavigate();
-    const [userRole, setUserRole] = useState(null);
+    const [userData, setUserData] = useState(null);
     const [order, setOrder] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -58,12 +72,13 @@ function ReviewOptions({row}) {
     }, []);
 
     useEffect(() => {
-        const fetchUserRole = async () => {
+        const fetchUser = async () => {
             setLoading(true);
             try {
                 let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/users/self");
                 let data = await response.json();
-                setUserRole(data.userType.toLowerCase());
+                console.log(data);
+                setUserData(data);
             } catch (error) {
                 setError(error);
             } finally {
@@ -71,26 +86,38 @@ function ReviewOptions({row}) {
             }
         };
 
-        fetchUserRole();
+        fetchUser();
     }, []);
 
-    if (loading) return <div>Loading...</div>;
+    if (loading || !userData || !order) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
 
-    if (userRole === "customer") {
+    const isCustomer = order.customerId === userData.id;
+    const isProvider = order.providerId === userData.id;
+    const isAdmin = userData.userType === "ADMIN";
+    const path = window.location.pathname;
+    if (isAdmin && !!path.includes("admin") ) {
         return (
             <>
-                    {ReviewCar(order, navigate)}
-                    {ReviewProvider(order, navigate)}
+                {EditOrder(order, navigate)}
             </>
         )
-    } else if (userRole === "provider") {
+    } else if (isCustomer) {
         return (
             <>
-                    {ReviewCustomer(order, navigate)}
+                {ReviewCar(order, navigate)}
+                {ReviewProvider(order, navigate)}
+            </>
+        )
+    } else if (isProvider) {
+        return (
+            <>
+                {ReviewCustomer(order, navigate)}
+                {EditOrder(order, navigate)}
             </>
         )
     }
+
 
     //TODO: Check if the user is the provider or the customer in the order
 

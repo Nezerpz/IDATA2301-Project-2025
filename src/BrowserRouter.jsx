@@ -15,6 +15,7 @@ import OrdersPage from "./pages/OrdersPage.jsx";
 import AddNewCar from "./components/AddNewCar.jsx";
 import App from "./App.jsx";
 import EditCarPage from "./pages/EditCarPage.jsx";
+import EditOrderPage from "./pages/EditOrderPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -75,7 +76,13 @@ const router = createBrowserRouter([
                             },
                             {
                                 path: "orders",
-                                element: <OrdersPage />
+                                element: <OrdersPage />,
+                                children: [
+                                    {
+                                        path: "edit/:id",
+                                        element: <EditOrderPage />
+                                    }
+                                ]
                             }
                         ]
                     },

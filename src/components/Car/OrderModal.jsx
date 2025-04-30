@@ -1,6 +1,7 @@
 import PropTypes from "prop-types"
 import ReactDom from 'react-dom'
 import { useNavigate } from 'react-router';
+import {fetchWithAuth} from "../../static/js/auth.js";
 
 const MODAL_STYLES = {
     position: 'fixed',
@@ -26,16 +27,14 @@ const OVERLAY_STYLES = {
 }
 
 async function placeOrder(car, timespan, navigate, onClose) {
-    let token = localStorage.getItem("jwt")
     var response
     try {
-        response = await fetch(
+        response = await fetchWithAuth(
             import.meta.env.VITE_BACKEND_URL + ":" + 
             import.meta.env.VITE_BACKEND_PORT + `/order`, {
                 method: 'POST',
                 headers: { 
-                    'Content-Type': 'application/json', 
-                    'Authorization': `Bearer ${token}`
+                    'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     "id": car.id,
