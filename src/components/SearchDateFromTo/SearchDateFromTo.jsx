@@ -3,6 +3,7 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './searchDateFromTo.css';
 import { CarContext } from '../../context/CarContext.js';
+import DatePicker from "react-datepicker";
 
 function SearchDateFromTo() {
     const navigate = useNavigate();
@@ -47,7 +48,7 @@ function SearchDateFromTo() {
                         value={newTimespan.dateFrom}
                         onChange={handleChange} />
 
-                    <input type="time" name="timeFrom" id="fromTime" step={"3600"}
+                    <input type="time" name="timeFrom" id="fromTime" step={"900"}
                         value={newTimespan.timeFrom}
                         onChange={handleChange} />
 
@@ -59,8 +60,9 @@ function SearchDateFromTo() {
                     <input type="date" name="dateTo" id="to"
                         value={newTimespan.dateTo}
                         onChange={handleChange} />
+                    <DatePicker selected={newTimespan.dateTo} onChange={handleChange} />
 
-                    <input type="time" name="timeTo" id="toTime" step={"3600"}
+                    <input type="time" name="timeTo" id="toTime" step={"900"}
                         value={newTimespan.timeTo}
                         onChange={handleChange} />
 

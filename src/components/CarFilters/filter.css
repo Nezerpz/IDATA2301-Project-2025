@@ -25,6 +25,8 @@
 
 .filter-item {
     margin-bottom: 10px;
+    color: var(--heading-color-light);
+    font-family: "Raleway";
 }
 
 .price-range {

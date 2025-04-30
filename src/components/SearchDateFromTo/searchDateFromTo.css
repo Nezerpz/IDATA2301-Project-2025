@@ -20,10 +20,12 @@ TODO: Remove the margin-right and move it to the container for the home page ele
     font-weight: bold;
 }
 
+/*
 .search-date-from-to input {
     border: none;
     outline: none;
 }
+*/
 
 #from {
     border-top-left-radius: 7px;

@@ -1,7 +1,7 @@
 .car {
     width: 100%;
     max-width: 495px;
-    margin: 30px;
+    margin: 20px;
     min-width: 250px;
     padding: 0px 24px 24px 24px;
     background-color: var(--foreground-color);
