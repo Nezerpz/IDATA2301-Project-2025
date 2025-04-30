@@ -11,7 +11,7 @@ import SettingsNavbar from "./SettingsNavbar.jsx";
 import useTitle from "../../components/useTitle.jsx";
 import CheckLogin from "../../static/js/checkLogin.js";
 import AccessDeniedPage from "../AccessDeniedPage/AccessDeniedPage.jsx";
-import Logout from "../../components/Logout.jsx";
+import Logout from "../../components/LogOut/Logout.jsx";
 import "./MyPage.css";
 import React from "react";
 
