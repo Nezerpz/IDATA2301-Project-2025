@@ -41,7 +41,6 @@ function Car ({car}) {
 
             <span className={"grow"}></span>
             <div className={"orderButtonContainer"}>
-                <button className = {"big-button"} onClick={() => {setIsOrdering(true)}}>Rent for {car.price}/day</button>
                 <button className = {"big-button"} onClick={() => {canOrder()}}>Rent for {car.price}/day</button>
             </div>
             <OrderModal 
