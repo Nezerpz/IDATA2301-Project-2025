@@ -10,7 +10,6 @@ import { useState, useContext } from "react";
 function Car ({car}) {
     const [ordering, setIsOrdering] = useState(false)
     let [ fromToDate, setFromToDate ] = useContext(CarContext);
-    // <button onClick={() => {orderCar(car, fromToDate, setIsOrdering)}}>Order Now</button>
     return (
         <div className="car">
             <h3>{car.manufacturer} {car.carModel} ({car.productionYear})</h3>

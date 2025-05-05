@@ -102,8 +102,13 @@ strong {
     color: var(--bold-text-color);
 }
 
-summary {
-    color: var(--filter-color);
+details summary { 
+  color: var(--filter-color);
+  cursor: pointer;
+}
+
+details summary > * {
+  display: inline;
 }
 
 

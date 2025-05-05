@@ -49,7 +49,9 @@
 }
 
 .features > summary {
-    color: lightgray;
+    font-family: "Raleway";
+    color: gray;
+    color: gray;
 }
 
 .feature {
