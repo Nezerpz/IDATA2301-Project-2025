@@ -13,13 +13,13 @@
 }
 
 .car strong {
-    font-family: 'Raleway', 'sans-serif';
+    font-family: var(--main-font);
     color: var(--heading-color-dark);
 }
 
 .car p {
     margin: 15px 0px 15px 0px;
-    font-family: 'Raleway', 'sans-serif';
+    font-family: var(--main-font);
 }
 
 .car-image {
@@ -30,7 +30,7 @@
     border-radius: var(--corner-rounding);
 }
 
-.car > div {
+.car-info {
     display: flex;
     flex-direction: row;
 }
@@ -40,13 +40,24 @@
 }
 
 .features {
-   border: 2px solid gray;
-   border-radius: 12px;
+   border: 2px solid lightgray;
+   border-radius: 7px;
    margin: auto;
+   margin-bottom: 18px;
    right: 0px;
-   padding-right: 20px;
+   padding: 10px;
+}
+
+.features > summary {
+    font-family: var(--main-font);
+    color: gray;
+    color: gray;
 }
 
 .feature {
-    font-family: 'Raleway';
+    font-family: var(--main-font);
+}
+
+.orderButtonContainer {
+    justify-self: flex-end;
 }

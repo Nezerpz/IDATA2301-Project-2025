@@ -36,7 +36,7 @@ function MyPage() {
             <div className={"row"}>
                 <div className={"col-2"}>
                     <div id={"settings-menu"}>
-                        <h1>{username}</h1>
+                        <h1 id="username-heading">{username}</h1>
                         {/*TODO: Add nav bar for this menu*/}
                         <SettingsNavbar/>
                         <Logout />

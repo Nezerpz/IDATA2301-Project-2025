@@ -12,6 +12,7 @@ import {useNavigate} from "react-router-dom";
 function Car ({car}) {
     const [ordering, setIsOrdering] = useState(false)
     let [ fromToDate, setFromToDate ] = useContext(CarContext);
+
     const navigate = useNavigate();
     // <button onClick={() => {orderCar(car, fromToDate, setIsOrdering)}}>Order Now</button>
 
@@ -28,19 +29,19 @@ function Car ({car}) {
 
     return (
         <div className="car">
-            <h3>{car.manufacturer} {car.carModel} ({car.productionYear})</h3>
+            <h3>{car.manufacturer} {car.carModel}</h3>
             <img src={"src" + car.imagePath} alt={car.carModel} className={"car-image"}/>
-            <div>
+            <div className={"carInfo"}>
                 <div>
                     <p><strong>{car.user}</strong></p>
-                    <p>{car.transmissionType} {car.fuelType}</p>
-                    <p>{car.numberOfSeats} seats</p>
+                    <p>{car.transmissionType} ∙ {car.fuelType} ∙ {car.numberOfSeats} SEATS ∙ {car.productionYear}</p>
                 </div>
-                <div className={"features"}>
-                    <FeatureList features={car.features}/>
-                </div>
+                <FeatureList features={car.features}/>
             </div>
-            <div>
+
+            <span className={"grow"}></span>
+            <div className={"orderButtonContainer"}>
+                <button className = {"big-button"} onClick={() => {setIsOrdering(true)}}>Rent for {car.price}/day</button>
                 <button className = {"big-button"} onClick={() => {canOrder()}}>Rent for {car.price}/day</button>
             </div>
             <OrderModal 

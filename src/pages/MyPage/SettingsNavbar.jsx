@@ -7,14 +7,11 @@ import "./dropdown.css";
 
 function renderComponent({userType}) {
     if (userType === "ADMIN") {
-        {/*TODO: Remove the parts used for testing later.*/}
         return (
             <>
-                <DropdownAdmin />
                 <CustomerOrders />
                 <SettingsLink />
-                <BecomeProvider />
-                <DropdownProvider />
+                <DropdownAdmin />
             </>
         );
     } else if (userType === "PROVIDER") {
@@ -86,18 +83,18 @@ function DropdownAdmin() {
     return (
         <div className={"dropdown"} onClick={handleDropdownClick}>
             <text className={"navbar-item-dark dropItem"}>
-                Admin
+                Admin Settings
             </text>
             {isOpen && (
                 <div className={"dropdown-content"} ref={dropdownRef}>
                     <Link to={"/mypage/admin/users"} className={"navbar-item-dark"}>
-                        User administration
+                        Manage Users
                     </Link>
                     <Link to={"/mypage/admin/cars"} className={"navbar-item-dark"}>
-                        Manage cars
+                        Manage Cars
                     </Link>
                     <Link to={"/mypage/admin/orders"} className={"navbar-item-dark"}>
-                        Orders
+                        Manage Orders
                     </Link>
                 </div>
             )}
@@ -160,7 +157,7 @@ function SettingsLink() {
 function CustomerOrders() {
     return (
         <Link to={"/mypage/orders"} className={"navbar-item-dark"}>
-            Orders
+            My Orders
         </Link>
     );
 }

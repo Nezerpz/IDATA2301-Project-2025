@@ -3,6 +3,12 @@
     min-height: 63vh;
 }
 
+#username-heading {
+    word-break: keep-all; /* Avoid breaking CJK text */
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+
 #settings-menu{
     display: flex;
     flex-direction: column;
