@@ -45,9 +45,17 @@
    margin: auto;
    margin-bottom: 18px;
    right: 0px;
-   padding-right: 20px;
+   padding: 10px;
+}
+
+.features > summary {
+    color: lightgray;
 }
 
 .feature {
     font-family: 'Raleway';
+}
+
+.orderButtonContainer {
+    justify-self: flex-end;
 }

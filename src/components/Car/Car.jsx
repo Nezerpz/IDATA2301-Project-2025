@@ -20,10 +20,10 @@ function Car ({car}) {
                     <p><strong>{car.user}</strong></p>
                     <p>{car.transmissionType} {car.fuelType} {car.numberOfSeats.toString().toUpperCase()} seats</p>
                 </div>
-
                 <FeatureList features={car.features}/>
             </div>
-            <div>
+            <span className={"grow"}></span>
+            <div className={"orderButtonContainer"}>
                 <button className = {"big-button"} onClick={() => {setIsOrdering(true)}}>Rent for {car.price}/day</button>
             </div>
             <OrderModal 

@@ -78,6 +78,9 @@ h4 {
     color: var(--heading-color-light);
     border-radius: 7px;
 }
+.grow {
+    flex-grow: 1;
+}
 
 img {
     display: inline-block;

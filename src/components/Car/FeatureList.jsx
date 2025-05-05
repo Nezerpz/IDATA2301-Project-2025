@@ -4,13 +4,14 @@ import Feature from "./Feature.jsx";
 function FeatureList ({features = []}) {
     return features.length > 0
         ? (
-            <div className={"features"}>
+            <details className={"features"}>
+                <summary>Features</summary>
                 <ul>
                 {features.map((feature, index) => (
                     <Feature key={index} feature={feature} />
                 ))}
                 </ul>
-            </div>
+            </details>
         ) : (<></>);
 }
 FeatureList.propTypes = {
