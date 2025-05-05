@@ -15,7 +15,7 @@
     margin: 0;
     color: var(--heading-color-light);
     font-size: 200%;
-    font-family: Raleway,sans-serif;
+    font-family: var(--main-font); 
     text-shadow: 2px 2px 20px var(--dark-shadow-color);
 }
 
@@ -26,7 +26,7 @@
     padding: 20px;
 
     color: var(--heading-color-light);
-    font-family: Raleway,sans-serif;
+    font-family: var(--main-font);
     box-shadow: 2px 2px 20px var(--dark-shadow-color);
     background-color: var(--main-color);
 }

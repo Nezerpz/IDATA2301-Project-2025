@@ -16,7 +16,7 @@
 }
 
 .filter-category-name {
-    font-family: 'Raleway';
+    font-family: var(--main-font);
     color: var(--heading-color-light);
     font-weight: bold;
     cursor: pointer;
@@ -26,7 +26,7 @@
 .filter-category {
     margin-bottom: 10px;
     color: var(--heading-color-light);
-    font-family: "Raleway";
+    font-family: var(--main-font);
 }
 
 .price-range {

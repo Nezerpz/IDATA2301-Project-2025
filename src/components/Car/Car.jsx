@@ -17,7 +17,7 @@ function Car ({car}) {
             <div className={"carInfo"}>
                 <div>
                     <p><strong>{car.user}</strong></p>
-                    <p>{car.transmissionType} ∙ {car.fuelType} ∙ {car.numberOfSeats.toString().toUpperCase()} seats ∙ {car.productionYear}</p>
+                    <p>{car.transmissionType} ∙ {car.fuelType} ∙ {car.numberOfSeats} SEATS ∙ {car.productionYear}</p>
                 </div>
                 <FeatureList features={car.features}/>
             </div>

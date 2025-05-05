@@ -12,7 +12,7 @@ TODO: Remove the margin-right and move it to the container for the home page ele
 
     color: var(--heading-color-light);
     background-color: var(--main-color);
-    font-family: Raleway, sans-serif;
+    font-family: var(--main-font);
     list-style-type: none;
 }
 

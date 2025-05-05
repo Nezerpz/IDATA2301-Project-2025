@@ -26,7 +26,7 @@ header {
     margin: 0 10px;
 
     color: var(--link-color);
-    font-family: Raleway, sans-serif;
+    font-family: var(--main-font);
     text-decoration: none;
     list-style-type: none;
 }
@@ -39,7 +39,7 @@ header {
     align-self: flex-end;
 
     color: var(--link-color);
-    font-family: Raleway, sans-serif;
+    font-family: var(--main-font);
     text-decoration: none;
     list-style-type: none;
     width: -webkit-fill-available;
@@ -72,7 +72,7 @@ header {
     padding: 10px 20px 10px 20px;
 
     color: var(--link-color);
-    font-family: Raleway, sans-serif;
+    font-family: var(--main-font);
     font-size: 1.5em;
     text-align: center;
     word-break: keep-all;
@@ -93,7 +93,7 @@ header {
     background-color: var(--foreground-color);
 
     color: var(--dark-link-color);
-    font-family: Raleway, sans-serif;
+    font-family: var(--main-font);
     font-size: 1.5em;
     text-align: center;
     word-break: keep-all;
