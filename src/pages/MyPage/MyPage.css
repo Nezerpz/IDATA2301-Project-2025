@@ -4,8 +4,9 @@
 }
 
 #username-heading {
-    line-break: anywhere;
-    word-break: break-all;
+    word-break: keep-all; /* Avoid breaking CJK text */
+    overflow-wrap: break-word;
+    hyphens: auto;
 }
 
 #settings-menu{
