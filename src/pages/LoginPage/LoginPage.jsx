@@ -1,15 +1,14 @@
 import { useState } from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useNavigate, useLocation} from 'react-router-dom';
 import useTitle from "../../components/useTitle.jsx";
 import "../../static/css/loginAndSignup.css";
 import Conflict from "../ConflictPage/ConflictPage.jsx";
 
 
-
-
 function LoginPage() {
     useTitle("Login");
     const navigate = useNavigate();
+    const location = useLocation();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const isUserLoggedIn = localStorage.getItem('jwt') !== null;
@@ -29,7 +28,8 @@ function LoginPage() {
             if (response.ok) {
                 const data = await response.json();
                 localStorage.setItem('jwt', data["accessToken"]);  // Store the token
-                navigate('/');
+                const redirectTo = location.state?.from || '/';
+                navigate(redirectTo);
                 window.location.reload();
             } else {
                 console.error('Failed to login', response.statusText);
@@ -72,7 +72,7 @@ function LoginPage() {
                                 </label>
                             </div>
                             <div>
-                                <Link to={"/signup"}>Sign up here</Link>
+                                <Link className={"bright-link"} to={"/signup"} state={location.state}>Sign up here</Link>
                                 <button className={"big-button"}type="submit">Login</button>
                             </div>
                         </form>

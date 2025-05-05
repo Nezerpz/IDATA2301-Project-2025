@@ -50,7 +50,6 @@ function CarList ({cars}) {
 
         if (sortMethod != null && visibleCars != null) {
             visibleCars = visibleCars.sort(sortMethod);
-            console.log(`sortMethod: ${sortMethod}`)
         }
     }
 
