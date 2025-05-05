@@ -65,7 +65,20 @@
     pointer-events: all;
 }
 
-li {
+.filter-category ul {
+    padding-left: 10px;
+}
+
+.filter-category li {
     list-style-type: none;
+}
+
+.filter-category label {
+    font-size: 1.25rem;
+}
+
+.filter-category input {
+    width: 1.25rem;
+    height: 1.25rem;
 }
 

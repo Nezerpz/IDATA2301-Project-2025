@@ -26,12 +26,12 @@ function CheckBoxFilters({name, values, onUpdate}) {
             <ul>
                 {Object.entries(values).map(indexValue => (
                     <li key={indexValue[0]}>
-
-                        <input className={"filter-checkbox"} 
-                            type={"checkbox"} 
-                            onChange={(e) => {updateList(e, name, onUpdate)}}/>
-
-                        <label className={"filter-value"}>{indexValue[1]}</label>
+                        <label className={"filter-value"}>
+                            <input className={"filter-checkbox"} 
+                                type={"checkbox"} 
+                                onChange={(e) => {updateList(e, name, onUpdate)}}/>
+                                {indexValue[1]}
+                        </label>
 
                     </li>
                 ))}
