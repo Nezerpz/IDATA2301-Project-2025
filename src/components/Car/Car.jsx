@@ -12,12 +12,12 @@ function Car ({car}) {
     let [ fromToDate, setFromToDate ] = useContext(CarContext);
     return (
         <div className="car">
-            <h3>{car.manufacturer} {car.carModel} ({car.productionYear})</h3>
+            <h3>{car.manufacturer} {car.carModel}</h3>
             <img src={"src" + car.imagePath} alt={car.carModel} className={"car-image"}/>
             <div className={"carInfo"}>
                 <div>
                     <p><strong>{car.user}</strong></p>
-                    <p>{car.transmissionType} {car.fuelType} {car.numberOfSeats.toString().toUpperCase()} seats</p>
+                    <p>{car.transmissionType} ∙ {car.fuelType} ∙ {car.numberOfSeats.toString().toUpperCase()} seats ∙ {car.productionYear}</p>
                 </div>
                 <FeatureList features={car.features}/>
             </div>
