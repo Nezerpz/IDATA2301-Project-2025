@@ -44,7 +44,8 @@ function NavBarPicker() {
             if (response.status === 401) {
                 // Delete the JWT token and redirect to the login page
                 localStorage.removeItem("jwt");
-                navigate('/login');
+                //navigate('/login');
+                navigate('/login', { state: { from: window.location.pathname } });
             }
 
                 let data = await response.json();
@@ -175,7 +176,8 @@ function BecomeProvider() {
             });
 
             if (response.ok) {
-                navigate('/');
+                //navigate('/');
+                navigate('/login', { state: { from: window.location.pathname } });
             } else {
                 console.error('Failed to become a provider', response.statusText);
             }

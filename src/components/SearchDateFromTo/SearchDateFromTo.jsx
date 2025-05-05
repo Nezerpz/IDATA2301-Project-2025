@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import './searchDateFromTo.css';
 import { CarContext } from '../../context/CarContext.js';
 
-
 import { DatePicker, TimePicker } from 'rsuite';
 import 'rsuite/TimePicker/styles/index.css';
 
@@ -80,12 +79,12 @@ function SearchDateFromTo() {
                         onChange={(time) => {setNewTimeTo(time)}}/> 
                 </label>
 
-                {isCarsPage 
-                    ? (<button type="submit" 
+                {isCarsPage
+                    ? (<button type="submit"
                             className="big-button">Search
-                        </button>) 
-                    : (<button type="submit" 
-                            className="big-button" 
+                        </button>)
+                    : (<button type="submit"
+                            className="big-button"
                             onClick={() => navigate("/cars")}>Search
                         </button>)}
             </form>

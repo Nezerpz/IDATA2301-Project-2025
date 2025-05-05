@@ -4,7 +4,7 @@ import CarList from "../../components/CarList/CarList.jsx";
 import CarSort from "../../components/CarSort/CarSort.jsx";
 import sortMethods from "../../static/js/sortMethods.js";
 import SearchDateFromTo from "../../components/SearchDateFromTo/SearchDateFromTo.jsx";
-import { CarContext } from "../../context/CarContext.js";
+import { CarContext, defaultTimespan } from "../../context/CarContext.js";
 import React, { useState, useEffect } from 'react';
 import { useSearchParams } from "react-router-dom";
 import {fetchWithAuth} from "../../static/js/auth.js";
@@ -23,10 +23,10 @@ function CarsPage() {
     const [error, setError] = useState(null);
 
     const [fromToDate, setFromToDate] = useState({
-        dateFrom: searchParams.get("dateFrom") || '2025-04-01',
-        dateTo: searchParams.get("dateTo") || '2025-05-17',
-        timeFrom: searchParams.get("timeFrom") || '08:00',
-        timeTo: searchParams.get("timeTo") || '17:00'
+        dateFrom: searchParams.get("dateFrom") || defaultTimespan.dateFrom,
+        dateTo: searchParams.get("dateTo") || defaultTimespan.dateTo,
+        timeFrom: searchParams.get("timeFrom") || defaultTimespan.timeFrom,
+        timeTo: searchParams.get("timeTo") || defaultTimespan.timeTo
     });
 
     // Fetch data when search changes (timespan)
