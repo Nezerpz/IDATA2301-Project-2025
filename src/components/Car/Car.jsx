@@ -15,15 +15,13 @@ function Car ({car}) {
         <div className="car">
             <h3>{car.manufacturer} {car.carModel} ({car.productionYear})</h3>
             <img src={"src" + car.imagePath} alt={car.carModel} className={"car-image"}/>
-            <div>
+            <div className={"carInfo"}>
                 <div>
                     <p><strong>{car.user}</strong></p>
-                    <p>{car.transmissionType} {car.fuelType}</p>
-                    <p>{car.numberOfSeats} seats</p>
+                    <p>{car.transmissionType} {car.fuelType} {car.numberOfSeats.toString().toUpperCase()} seats</p>
                 </div>
-                <div className={"features"}>
-                    <FeatureList features={car.features}/>
-                </div>
+
+                <FeatureList features={car.features}/>
             </div>
             <div>
                 <button className = {"big-button"} onClick={() => {setIsOrdering(true)}}>Rent for {car.price}/day</button>
