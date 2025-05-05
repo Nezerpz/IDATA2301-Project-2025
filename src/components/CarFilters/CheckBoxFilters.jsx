@@ -21,9 +21,9 @@ function updateList(event, name, onUpdate) {
 
 function CheckBoxFilters({name, values, onUpdate}) {
     return (
-        <details className={"filter-item"}>
-            <summary className={"category-name"}>{name}</summary>
-            <ul id={name}>
+        <details className={"filter-category"}>
+            <summary className={"filter-category-name"}>{name}</summary>
+            <ul>
                 {Object.entries(values).map(indexValue => (
                     <li key={indexValue[0]}>
 

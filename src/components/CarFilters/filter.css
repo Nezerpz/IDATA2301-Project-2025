@@ -15,7 +15,7 @@
     padding: 20px;
 }
 
-.category-name {
+.filter-category-name {
     font-family: 'Raleway';
     color: var(--heading-color-light);
     font-weight: bold;
@@ -23,7 +23,7 @@
 }
 
 
-.filter-item {
+.filter-category {
     margin-bottom: 10px;
     color: var(--heading-color-light);
     font-family: "Raleway";
