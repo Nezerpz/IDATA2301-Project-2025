@@ -15,42 +15,31 @@
     padding: 20px;
 }
 
-.category-name {
-    font-family: 'Raleway';
+.filter-category-name {
+    font-family: var(--main-font);
     color: var(--heading-color-light);
     font-weight: bold;
     cursor: pointer;
 }
 
 
-.filter-item {
+.filter-category {
     margin-bottom: 10px;
     color: var(--heading-color-light);
-    font-family: "Raleway";
+    font-family: var(--main-font);
 }
 
 .price-range {
     display: flex;
-    flex-direction: column;
-    margin: 30px auto;
-    /*
-    pointer-events: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none; 
-    */
-}
-
-.price-range input {
-    width: 50px;
-    margin-right: 5px;
+    flex-direction: row;
+    width: 100%;
+    margin: 30px 0px;
 }
 
 .price-range > input[type="range"] {
     -webkit-appearance: none;
     appearance: none;
     position: absolute;
-    width: 80%;
     height: 3px;
     background-color: var(--button-color);
     pointer-events: none;
@@ -76,7 +65,23 @@
     pointer-events: all;
 }
 
-li {
+.filter-category ul {
+    padding-left: 10px;
+}
+
+.filter-category li {
     list-style-type: none;
 }
 
+.filter-category label {
+    font-size: 1.25rem;
+}
+
+.filter-category input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+}
+
+.filter-category input[type="checkbox"]:checked {
+    accent-color: var(--button-color);
+}

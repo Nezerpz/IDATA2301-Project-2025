@@ -1,6 +1,12 @@
 
 #car-controls {
-    max-width: 545px;
+    max-width: 700px;
+}
+
+#car-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #car-list {

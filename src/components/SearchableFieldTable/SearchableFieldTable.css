@@ -7,7 +7,7 @@
     border-width: 0px;
     outline: none;
     background-color: var(--main-color);
-    font-family: 'Raleway';
+    font-family: var(--main-font); 
     color: white;
 }
 
@@ -26,14 +26,14 @@
     border-radius: 2px;
     background-color: var(--main-color);
     color: var(--heading-color-light);
-    font-family: Raleway, sans-serif
+    font-family: var(--main-font);
 }
 
 .searchableFieldTableRow {
     padding: 10px;
     border: 0px solid var(--main-color);
     border-radius: 2px;
-    font-family: 'Raleway'
+    font-family: var(--main-font);
 }
 
 .searchableFieldTable td {

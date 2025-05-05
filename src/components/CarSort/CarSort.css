@@ -5,6 +5,6 @@
     border-radius: var(--corner-rounding);
     background-color: var(--main-color);
     color: var(--heading-color-light);
-    font-family: "Raleway";
+    font-family: var(--main-font);
     font-weight: bold;
 }

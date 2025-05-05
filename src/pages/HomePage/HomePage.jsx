@@ -1,7 +1,7 @@
 import useTitle from "../../components/useTitle.jsx";
 import SearchDateFromTo from "../../components/SearchDateFromTo/SearchDateFromTo.jsx";
 import { Link } from 'react-router-dom';
-import { CarContext } from "../../context/CarContext.js";
+import { CarContext, defaultTimespan } from "../../context/CarContext.js";
 import "./HomePage.css";
 import { useState} from 'react';
 
@@ -11,12 +11,7 @@ function HomePage(){
     let today = new Date()
     let oneWeekFromNow = new Date()
     oneWeekFromNow.setDate(today.getDate() + 7)
-    let [timeSpan, setTimeSpan] = useState({
-        "dateFrom": today,
-        "dateTo": oneWeekFromNow,
-        "timeFrom": "08:00",
-        "timeTo": "17:00"
-    })
+    let [timeSpan, setTimeSpan] = useState(defaultTimespan)
     return (
         <div>
             <section id="home">

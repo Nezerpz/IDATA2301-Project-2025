@@ -74,8 +74,10 @@ function OrderModal({open, onClose, car, timespan}) {
                 <p><strong>For</strong> {car.price}/day</p>
                 <h4>In Total</h4>
                 <p>{car.price} x {totalDays} = {totalPrice} total</p>
-                <button onClick={() => {placeOrder(car, timespan, navigate, onClose)}}>Place Order</button>
-                <button onClick={onClose}>Cancel</button>
+                <div className={"button-container flex-container-row"}>
+                    <button className = {"big-button"} onClick={() => {placeOrder(car, timespan, navigate, onClose)}}>Place Order</button>
+                    <button className = {"big-button"} onClick={onClose}>Cancel</button>
+                </div>
             </div>
         </>,
         document.getElementById("portal")
