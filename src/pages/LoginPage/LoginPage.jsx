@@ -1,15 +1,14 @@
 import { useState } from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useNavigate, useLocation} from 'react-router-dom';
 import useTitle from "../../components/useTitle.jsx";
 import "../../static/css/loginAndSignup.css";
 import Conflict from "../ConflictPage/ConflictPage.jsx";
 
 
-
-
 function LoginPage() {
     useTitle("Login");
     const navigate = useNavigate();
+    const location = useLocation();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const isUserLoggedIn = localStorage.getItem('jwt') !== null;
@@ -29,7 +28,8 @@ function LoginPage() {
             if (response.ok) {
                 const data = await response.json();
                 localStorage.setItem('jwt', data["accessToken"]);  // Store the token
-                navigate('/');
+                const redirectTo = location.state?.from || '/'; //Sender til forrige path dersom den er blit tilsendt det av forigge ledd ellers blir den returnert til home
+                navigate(redirectTo);
                 window.location.reload();
             } else {
                 console.error('Failed to login', response.statusText);
