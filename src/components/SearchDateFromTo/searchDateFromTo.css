@@ -6,7 +6,7 @@ TODO: Remove the margin-right and move it to the container for the home page ele
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    max-width: 525px;
+    max-width: 625px;
     padding: 20px;
     border-radius: var(--corner-rounding);
 
@@ -48,7 +48,7 @@ TODO: Remove the margin-right and move it to the container for the home page ele
     border-bottom-right-radius: 7px;
 }
 
-@container (width < 500px) {
+@container (width < 575px) {
     .search-date-from-to {
         flex-direction: column;
     }
