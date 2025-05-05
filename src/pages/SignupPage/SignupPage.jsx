@@ -1,11 +1,12 @@
 import useTitle from "../../components/useTitle.jsx";
 import "../../static/css/loginAndSignup.css";
-import {Link, useNavigate} from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 import Conflict from "../ConflictPage/ConflictPage.jsx";
 
 
 function SignupPage() {
     const navigate = useNavigate()
+    const location = useLocation()
     const handleSignup = async (event) => {
         event.preventDefault()
         console.log("something happens")
@@ -90,7 +91,7 @@ function SignupPage() {
                                 </label>
                             </div>
                             <div>
-                                <Link className={"bright-link"} to={"/login"}>Login here</Link>
+                                <Link className={"bright-link"} to={"/login"} state={location.state}>Login here</Link>
                                 <button className={"big-button"} type="submit">Sign up</button>
                             </div>
                         </form>
