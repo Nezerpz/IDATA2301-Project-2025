@@ -4,13 +4,28 @@ import FeatureList from "./FeatureList.jsx";
 import { CarContext } from "../../context/CarContext.js";
 import OrderModal from "./OrderModal.jsx";
 import { useState, useContext } from "react";
+import checkLogin from "../../static/js/checkLogin.js";
+import {useNavigate} from "react-router-dom";
 
 
 
 function Car ({car}) {
     const [ordering, setIsOrdering] = useState(false)
     let [ fromToDate, setFromToDate ] = useContext(CarContext);
+    const navigate = useNavigate();
     // <button onClick={() => {orderCar(car, fromToDate, setIsOrdering)}}>Order Now</button>
+
+
+    const canOrder = () => {
+        if (checkLogin()) {
+            setIsOrdering(true);
+        }
+        else {
+            alert("You need to be logged in to order a car.");
+            navigate('/login', { state: { from: window.location.pathname } });
+        }
+    }
+
     return (
         <div className="car">
             <h3>{car.manufacturer} {car.carModel} ({car.productionYear})</h3>
@@ -26,7 +41,7 @@ function Car ({car}) {
                 </div>
             </div>
             <div>
-                <button className = {"big-button"} onClick={() => {setIsOrdering(true)}}>Rent for {car.price}/day</button>
+                <button className = {"big-button"} onClick={() => {canOrder()}}>Rent for {car.price}/day</button>
             </div>
             <OrderModal 
                 open={ordering} 
