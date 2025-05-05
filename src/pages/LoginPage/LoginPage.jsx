@@ -28,7 +28,11 @@ function LoginPage() {
             if (response.ok) {
                 const data = await response.json();
                 localStorage.setItem('jwt', data["accessToken"]);  // Store the token
+<<<<<<< Updated upstream
                 const redirectTo = location.state?.from || '/'; //Sender til forrige path dersom den er blit tilsendt det av forigge ledd ellers blir den returnert til home
+=======
+                const redirectTo = location.state?.from || '/';
+>>>>>>> Stashed changes
                 navigate(redirectTo);
                 window.location.reload();
             } else {
@@ -72,7 +76,7 @@ function LoginPage() {
                                 </label>
                             </div>
                             <div>
-                                <Link to={"/signup"}>Sign up here</Link>
+                                <Link className={"bright-link"} to={"/signup"}>Sign up here</Link>
                                 <button className={"big-button"}type="submit">Login</button>
                             </div>
                         </form>

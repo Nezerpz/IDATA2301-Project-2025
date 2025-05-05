@@ -40,7 +40,8 @@ function SignupPage() {
             })
             let data = await authResponse.json()
             localStorage.setItem('jwt', data["accessToken"]);  // Store the token
-            navigate('/');
+            const redirectTo = location.state?.from || '/';
+            navigate(redirectTo);
             window.location.reload();
         } else {
             console.error('Failed to login', response.statusText);
@@ -89,7 +90,7 @@ function SignupPage() {
                                 </label>
                             </div>
                             <div>
-                                <Link to={"/login"}>Login here</Link>
+                                <Link className={"bright-link"} to={"/login"}>Login here</Link>
                                 <button className={"big-button"} type="submit">Sign up</button>
                             </div>
                         </form>
