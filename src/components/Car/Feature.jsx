@@ -1,9 +1,9 @@
 
 function Feature ({feature}) {
     return (
-        <div className="feature">
+        <li className="feature">
             {feature}
-        </div>
+        </li>
     )
 }
 

@@ -90,7 +90,7 @@ function SignupPage() {
                             </div>
                             <div>
                                 <Link to={"/login"}>Login here</Link>
-                                <button type="submit">Sign up</button>
+                                <button className={"big-button"} type="submit">Sign up</button>
                             </div>
                         </form>
                     </div>

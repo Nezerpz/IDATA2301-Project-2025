@@ -68,7 +68,7 @@ h4 {
 }
 
 
-button {
+.big-button {
     outline: none;
     border-style: none;
     background-color: var(--button-color);

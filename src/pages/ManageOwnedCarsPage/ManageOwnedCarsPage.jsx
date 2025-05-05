@@ -12,7 +12,7 @@ function renderPage(cars) {
     return(
         <div id={"manage-cars"}>
             <div className={"button-container-end"}>
-                <button>
+                <button className={"big-button"}>
                     <Link to={"/mypage/provider/cars/add"}>Add new car</Link>
                 </button>
             </div>
