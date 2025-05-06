@@ -46,9 +46,7 @@ function MyPage() {
                     <div className={"col-9"}>
                         <div className={"col-1"}></div>
                         <div className={"col-10"}>
-                            <div id={"order-list"}>
-                                <Outlet/>
-                            </div>
+                            <Outlet/>
                         </div>
                         <div className={"col-1"}></div>
                     </div>
