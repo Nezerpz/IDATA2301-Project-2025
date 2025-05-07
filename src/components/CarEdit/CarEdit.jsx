@@ -17,8 +17,6 @@ function CarEdit({carToEdit, title, actionText}) {
             .map(option => option.value)
         setCar({ ...car, features: newFeatures })
     }
-    console.log("Bileeeeeen")
-    console.log(car)
 
     // Fetch required info
     useEffect(() => { (async () => {
@@ -83,6 +81,8 @@ function CarEdit({carToEdit, title, actionText}) {
 
     // Function used to register new car
     const addCar = async (car) => {
+        console.log("requerstbody car null?")
+        console.log(car)
         try {
             const response = await fetchWithAuth("/cars/add", {
                 method: 'POST',
