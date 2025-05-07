@@ -5,6 +5,7 @@ import "./AdminPage.css";
 function AdminPage() {
   return (
       <div id={"admin-page"}>
+          <h1>Admin page</h1>
           <Link to={"/mypage/admin/users"} className={"navbar-item-dark"}>
               Manage Users
           </Link>

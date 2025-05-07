@@ -5,6 +5,7 @@ function ProviderPage() {
 
     return(
         <div id={"provider-page"}>
+            <h1>Provider page</h1>
             <Link to={"/mypage/provider/cars"} className={"navbar-item-dark"}>
                 Manage cars
             </Link>
