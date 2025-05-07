@@ -17,28 +17,13 @@ import React from "react";
 import {jwtDecode} from "jwt-decode";
 import BackButton from "../../components/BackButton/BackButton.jsx";
 
-function getUsername(token) {
-    try {
-        const decodedToken = jwtDecode(token);
-        return decodedToken.sub;
-    } catch (error) {
-        console.error("Error decoding token:", error);
-        return null;
-    }
-}
-
 function MyPage() {
     useTitle("My Page");
-    const token = localStorage.getItem("jwt");
-    const username = getUsername(token);
     const isLoggedIn = CheckLogin();
     if (isLoggedIn) {
         return (
             <div className={"row mypage-background"}>
-                <div className={"col-1"}>
-                </div>
-                <div className={"col-1"}>
-                    <BackButton />
+                <div className={"col-2"}>
                 </div>
                 <div className={"col-8"}>
                     <div className={"mypage-container"}>
