@@ -1,0 +1,12 @@
+.car-edit-property-heading {
+    font-family: var(--main-font)
+}
+
+.car-edit-property-select {
+    padding: 10px;
+    border-radius: var(--corner-rounding);
+}
+
+.car-edit-property-textinput {
+    padding: 10px;
+}

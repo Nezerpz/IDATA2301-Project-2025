@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types'
 import React, { useState, useEffect } from "react";
 import { fetchJSON, fetchWithAuth } from "../../static/js/auth.js"
+import "./CarEdit.css";
 
 function CarEdit({carToEdit, title, actionText}) {
     const [manufacturers, setManufacturers] = useState(null)
-    const [manufacturer, setManufacturer] = useState("none")
+    const [transmissionTypes, setTransmissionTypes] = useState(null)
+    const [fuelTypes, setFuelTypes] = useState(null)
     const [car, setCar] = useState(carToEdit == null ? { features: [] } : carToEdit)
     const [features, setFeatures] = useState(null)
 
@@ -15,11 +17,26 @@ function CarEdit({carToEdit, title, actionText}) {
         setCar({ ...car, newFeatures })
     }
 
+    // Fetch required info
     useEffect(() => { (async () => {
         if (manufacturers == null) {
             try {
                 let data = await fetchJSON("/manufacturers", { method: "GET" })
                 setManufacturers(data)
+            }   catch (e) { console.error(e) }
+        }
+
+        if (transmissionTypes == null) {
+            try {
+                let data = await fetchJSON("/transmission-types", { method: "GET" })
+                setTransmissionTypes(data)
+            }   catch (e) { console.error(e) }
+        }
+
+        if (fuelTypes == null) {
+            try {
+                let data = await fetchJSON("/fuel-types", { method: "GET" })
+                setFuelTypes(data)
             }   catch (e) { console.error(e) }
         }
 
@@ -96,10 +113,10 @@ function CarEdit({carToEdit, title, actionText}) {
             <h1>{title}</h1>
             <form onSubmit={(e) => handleSubmit(e, carToEdit, car)}>
                 <label>
-                    <span>Manufacturer</span>
-                    <select placeholder="Select Manufacturer" 
-                        value={manufacturer} 
-                        onChange={e => setManufacturer(e.target.value)}>
+                    <span className={"car-edit-property-heading"}>Manufacturer</span>
+                    <select className={"car-edit-property-select"} placeholder="Select Manufacturer" 
+                        value={car.manufacturer} 
+                        onChange={e => setCar({ ...car, manufacturer: e.target.value})}>
                         {manufacturers != null 
                             ? manufacturers.map((value, i) => (
                                 <option key={i}>{value}</option>))
@@ -107,15 +124,14 @@ function CarEdit({carToEdit, title, actionText}) {
                     </select>
                 </label>
                 <label>
-                    <span>Model</span>
-                    {carToEdit != null 
-                        ? <input type="text" placeholder="Enter Model" 
-                            value={car.carModel} 
+                    <span className={"car-edit-property-heading"}>Model</span>
+                        <input type="text" placeholder="Enter Model" 
+                            className={"car-edit-property-textinput"}
+                            value={car.carModel != undefined ? car.carModel : "None"} 
                             onChange={(e) => setCar({ ...car, carModel: e.target.value })} />
-                        : <input type="text" placeholder="Enter Model" />}
                 </label>
                 <label>
-                    <span>Number of seats</span>
+                    <span className={"car-edit-property-heading"}>Number of seats</span>
                     {carToEdit != null 
                         ? <input type="number" placeholder="Enter number of seats" 
                             value={car.numberOfSeats} 
@@ -123,23 +139,36 @@ function CarEdit({carToEdit, title, actionText}) {
                         : <input type="number" placeholder="Enter number of seats" />}
                 </label>
                 <label>
-                    <span>Transmission type</span>
-                    {carToEdit != null 
-                        ? <select placeholder="Select transmission type" 
+                    <span className={"car-edit-property-heading"}>Transmission type</span>
+                        <select className={"car-edit-property-select"} placeholder="Select transmission type" 
                             value={car.transmissionType} 
-                            onChange={(e) => setCar({ ...car, transmissionType: e.target.value })} />
-                        : <select placeholder="Select transmission type" />}
+                            onChange={(e) => setCar({ ...car, transmissionType: e.target.value })} >
+                            {transmissionTypes != null 
+                                ? transmissionTypes
+                                    .map((value, i) => (
+                                        <option key={i} value={value}>
+                                            {value}
+                                        </option>))
+                                : <option>None</option>}
+                        </select>
                 </label>
                 <label>
-                    <span>Fuel type</span>
-                    {carToEdit != null 
-                        ? <input type="text" placeholder="Enter fuel type" 
-                            value={car.fuelType} 
-                            onChange={(e) => setCar({ ...car, fuelType: e.target.value })} />
-                        : <input type="text" placeholder="Enter fuel type" />}
+                    <span className={"car-edit-property-heading"}>Fuel type</span>
+                    <select className={"car-edit-property-select"} placeholder="Select fuel type" 
+                        value={car.fuelType} 
+                        onChange={(e) => setCar({ ...car, fuelType: e.target.value })} >
+                        {fuelTypes != null 
+                            ? fuelTypes
+                                .map((value, i) => (
+                                    <option key={i} value={value}>
+                                        {value}
+                                    </option>))
+                            : <option>None</option>}
+                    </select>
+                        
                 </label>
                 <label>
-                    <span>Price</span>
+                    <span className={"car-edit-property-heading"}>Rental Price per Day</span>
                     {carToEdit != null 
                         ? <input type="number" placeholder="Enter price" 
                             value={car.price} 
@@ -147,7 +176,7 @@ function CarEdit({carToEdit, title, actionText}) {
                         : <input type="number" placeholder="Enter price" />}
                 </label>
                 <label>
-                    <span>Production year</span>
+                    <span className={"car-edit-property-heading"}>Production year</span>
                     {carToEdit != null 
                         ? <input type="number" placeholder="Enter production year" 
                             value={car.price} 
@@ -155,9 +184,9 @@ function CarEdit({carToEdit, title, actionText}) {
                         : <input type="number" placeholder="Enter production year" />}
                 </label>
                 <label>
-                    <span>Features</span>
+                    <span className={"car-edit-property-heading"}>Features</span>
                     <select placeholder="Select Features" multiple
-                        value={car["features"]}
+                        value={car.features}
                         onChange={e => updateSelectedFeatures(e.target)}>
                         {features != null 
                             ? features
@@ -170,7 +199,7 @@ function CarEdit({carToEdit, title, actionText}) {
                     </select>
                 </label>
                 <label>
-                    <span>Image</span>
+                    <span className={"car-edit-property-heading"}>Image</span>
                     <input type="file" placeholder="Upload image" />
                 </label>
                 <button className={"big-button"} type="submit">{actionText}</button>
