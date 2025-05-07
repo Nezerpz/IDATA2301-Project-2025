@@ -1,21 +1,21 @@
+import PropTypes from 'prop-types'
 import React, { useState, useEffect } from "react";
 import { fetchJSON, fetchWithAuth } from "../../static/js/auth.js"
 
 function CarEdit({carToEdit, title, actionText}) {
     const [manufacturers, setManufacturers] = useState(null)
     const [manufacturer, setManufacturer] = useState("none")
-    const [car, setCar] = useState(carToEdit == null ? {} : carToEdit)
-    const [selectedFeatures, setSelectedFeatures] = useState(car == null ? [] : null)
+    const [car, setCar] = useState(carToEdit == null ? { features: [] } : carToEdit)
     const [features, setFeatures] = useState(null)
 
     function updateSelectedFeatures(selectElement) {
         let newFeatures = Array.from(selectElement.children)
             .filter(option => option.selected)
             .map(option => option.value)
-        setSelectedFeatures(newFeatures)
+        setCar({ ...car, newFeatures })
     }
 
-    useEffect(() => {
+    useEffect(() => { (async () => {
         if (manufacturers == null) {
             try {
                 let data = await fetchJSON("/manufacturers", { method: "GET" })
@@ -30,78 +30,65 @@ function CarEdit({carToEdit, title, actionText}) {
                 setFeatures(data)
             }   catch (e) { console.error(e) }
         }
+    })()}, [manufacturers, features, car])
 
-        if (selectedFeatures == null) {
-            try {
-                // Fetch car data
-                let data = await fetchJSON(`/car/${car["id"]}`, { method: "GET" })
+    // Function used to update existing car
+    const updateCar = async (car) => {
+        try {
+            const response = await fetchWithAuth("/cars/" + car.id, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(car)
+            });
 
-                // Exctract feature names
-                let featureData = jsonData["features"]
+            // Handling return codes
+            if (response.status === 404) {
+                throw new Error('Car not found');
+            }  else if (response.status === 401) {
+                throw new Error('Unauthorized');
+            } else if (!response.ok) {
+                throw new Error('Failed to update car');
+            }
 
-                // Retreive feature id's by comparison
-                let theSelectedFeatures = featureData.map(selectedFeature => {
-                    features
-                        .some(f => f["featureName"] === selectedFeature)
-                        .map(f  => f["id"])
-                })
-                
-                // Set selected feature ID's
-                setSelectedFeatures(theSelectedFeatures)
-            }   catch (e) { console.error(e) }
+            alert("Car details updated successfully!");
+        } 
+
+        catch (error) {
+            alert(`Error: ${error.message}`);
         }
-    })
+    }
 
+    // Function used to register new car
+    const addCar = async (car) => {
+        try {
+            const response = await fetchWithAuth("/cars/add", {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(car)
+            });
+
+            // Handle return codes
+            if (response.status === 404) {
+                throw new Error('Car not found');
+            }  else if (response.status === 401) {
+                throw new Error('Unauthorized');
+            } else if (!response.ok) {
+                throw new Error('Failed to update car');
+            }
+
+            alert("Car details updated successfully!");
+        } 
+
+        catch (error) {
+            alert(`Error: ${error.message}`);
+        }
+    }
+
+    // Callback for submit button
     const handleSubmit = (e, carToEdit, car) => {
         e.preventDefault()
-
-        if (carToEdit != null) { 
-            try {
-                const response = await fetchWithAuth("/cars/" + car.id, {
-                    method: 'PUT',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(car)
-                });
-
-                // Handling response messages
-                if (response.status === 404) {
-                    throw new Error('Car not found');
-                }  else if (response.status === 401) {
-                    throw new Error('Unauthorized');
-                } else if (!response.ok) {
-                    throw new Error('Failed to update car');
-                }
-
-                alert("Car details updated successfully!");
-            } 
-
-            catch (error) {
-                alert(`Error: ${error.message}`);
-            }
-        }
-
-        else { 
-            const addCar = async () => {
-                try {
-                    const response = await fetchWithAuth("/cars/add", {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(car)
-                    });
-                    if (response.status === 404) {
-                        throw new Error('Car not found');
-                    }  else if (response.status === 401) {
-                        throw new Error('Unauthorized');
-                    } else if (!response.ok) {
-                        throw new Error('Failed to update car');
-                    }
-                    alert("Car details updated successfully!");
-                } catch (error) {
-                    alert(`Error: ${error.message}`);
-                }
-            }
-            addCar()
-        }
+        if (carToEdit != null) { updateCar(car) }
+        else                   { addCar(car)       }
     }
 
     return (
@@ -116,8 +103,7 @@ function CarEdit({carToEdit, title, actionText}) {
                         {manufacturers != null 
                             ? manufacturers.map((value, i) => (
                                 <option key={i}>{value}</option>))
-                            : <option>none</option>
-                        }
+                            : <option>none</option>}
                     </select>
                 </label>
                 <label>
@@ -126,8 +112,7 @@ function CarEdit({carToEdit, title, actionText}) {
                         ? <input type="text" placeholder="Enter Model" 
                             value={car.carModel} 
                             onChange={(e) => setCar({ ...car, carModel: e.target.value })} />
-                        : <input type="text" placeholder="Enter Model" />
-                    }
+                        : <input type="text" placeholder="Enter Model" />}
                 </label>
                 <label>
                     <span>Number of seats</span>
@@ -135,17 +120,15 @@ function CarEdit({carToEdit, title, actionText}) {
                         ? <input type="number" placeholder="Enter number of seats" 
                             value={car.numberOfSeats} 
                             onChange={(e) => setCar({ ...car, numberOfSeats: e.target.value })} />
-                        : <input type="number" placeholder="Enter number of seats" />
-                    }
+                        : <input type="number" placeholder="Enter number of seats" />}
                 </label>
                 <label>
                     <span>Transmission type</span>
                     {carToEdit != null 
-                        ? <input type="text" placeholder="Enter transmission type" 
+                        ? <select placeholder="Select transmission type" 
                             value={car.transmissionType} 
                             onChange={(e) => setCar({ ...car, transmissionType: e.target.value })} />
-                        : <input type="text" placeholder="Enter transmission type" />
-                    }
+                        : <select placeholder="Select transmission type" />}
                 </label>
                 <label>
                     <span>Fuel type</span>
@@ -153,8 +136,7 @@ function CarEdit({carToEdit, title, actionText}) {
                         ? <input type="text" placeholder="Enter fuel type" 
                             value={car.fuelType} 
                             onChange={(e) => setCar({ ...car, fuelType: e.target.value })} />
-                        : <input type="text" placeholder="Enter fuel type" />
-                    }
+                        : <input type="text" placeholder="Enter fuel type" />}
                 </label>
                 <label>
                     <span>Price</span>
@@ -162,8 +144,7 @@ function CarEdit({carToEdit, title, actionText}) {
                         ? <input type="number" placeholder="Enter price" 
                             value={car.price} 
                             onChange={(e) => setCar({ ...car, price: e.target.value })} />
-                        : <input type="number" placeholder="Enter price" />
-                    }
+                        : <input type="number" placeholder="Enter price" />}
                 </label>
                 <label>
                     <span>Production year</span>
@@ -171,14 +152,12 @@ function CarEdit({carToEdit, title, actionText}) {
                         ? <input type="number" placeholder="Enter production year" 
                             value={car.price} 
                             onChange={(e) => setCar({ ...car, productionYear: e.target.value })} />
-                        : <input type="number" placeholder="Enter production year" />
-                    }
+                        : <input type="number" placeholder="Enter production year" />}
                 </label>
                 <label>
                     <span>Features</span>
-                    {/* /features */}
                     <select placeholder="Select Features" multiple
-                        value={selectedFeatures}
+                        value={car["features"]}
                         onChange={e => updateSelectedFeatures(e.target)}>
                         {features != null 
                             ? features
@@ -187,8 +166,7 @@ function CarEdit({carToEdit, title, actionText}) {
                                     <option key={f[0]} value={f[0]}>
                                         {f[1]}
                                     </option>))
-                            : <option>none</option>
-                        }
+                            : <option>none</option>}
                     </select>
                 </label>
                 <label>
@@ -199,6 +177,15 @@ function CarEdit({carToEdit, title, actionText}) {
             </form>
         </div>
     );
+}
+
+CarEdit.propTypes = {
+    carToEdit: PropTypes.shape({
+        
+    }),
+    title: PropTypes.string,
+    actionText: PropTypes.string
+
 }
 
 export default CarEdit;
