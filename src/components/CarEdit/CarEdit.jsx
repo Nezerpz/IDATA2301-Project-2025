@@ -80,10 +80,22 @@ function CarEdit({carToEdit, title, actionText}) {
         }
     })
 
+    const handleSubmit = (e, car) {
+        e.preventDefault()
+
+        if (car != null) { 
+            saveChanges(car)
+        }
+
+        else { 
+            addNewCar() 
+        }
+    }
+
     return (
         <div>
             <h1>{title}</h1>
-            <form>
+            <form onSubmit={(e) => handleSubmit(e, car)}>
                 <label>
                     <span>Manufacturer</span>
                     <select placeholder="Select Manufacturer" 
