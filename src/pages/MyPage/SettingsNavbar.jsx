@@ -39,7 +39,7 @@ function NavBarPicker() {
 
     useEffect(() => {
         const fetchData = async () => {
-                let response = await fetchWithAuth("/userType");
+            let response = await fetchWithAuth("/userType");
 
             if (response.status === 401) {
                 // Delete the JWT token and redirect to the login page
