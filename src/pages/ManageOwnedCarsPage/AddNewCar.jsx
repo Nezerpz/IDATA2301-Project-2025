@@ -4,7 +4,10 @@ import CarEdit from '../../components/CarEdit/CarEdit.jsx'
 //TODO: Add option to add manufacturer
 function AddNewCar() {
     return (
-        <CarEdit car={null} title={"Add New Car"} actionText={"Add Car"}/>
+        <CarEdit 
+            carToEdit={null} 
+            title={"Add New Car"} 
+            actionText={"Add Car"}/>
     )
 }
 

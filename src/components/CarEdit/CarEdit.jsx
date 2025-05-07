@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 
-function CarEdit({car, title, actionText}) {
+function CarEdit({carToEdit, title, actionText}) {
     const [manufacturers, setManufacturers] = useState(null)
     const [manufacturer, setManufacturer] = useState("none")
-    const [features, setFeatures] = useState(null)
     const [selectedFeatures, setSelectedFeatures] = useState(car == null ? [] : null)
+    const [features, setFeatures] = useState(null)
+    const [car, setCar] = useState(carToEdit)
 
     function updateSelectedFeatures(selectElement) {
         let newFeatures = Array.from(selectElement.children)
@@ -97,27 +98,58 @@ function CarEdit({car, title, actionText}) {
                 </label>
                 <label>
                     <span>Model</span>
-                    <input type="text" placeholder="Enter Model" />
+                    {car != null 
+                        ? <input type="text" placeholder="Enter Model" 
+                            value={car.carModel} 
+                            onChange={(e) => setCar({ ...car, carModel: e.target.value })} />
+                        : <input type="text" placeholder="Enter Model" />
+                    }
                 </label>
                 <label>
                     <span>Number of seats</span>
                     <input type="number" placeholder="Enter number of seats" />
+                    {car != null 
+                        ? <input type="number" placeholder="Enter number of seats" 
+                            value={car.numberOfSeats} 
+                            onChange={(e) => setCar({ ...car, numberOfSeats: e.target.value })} />
+                        : <input type="number" placeholder="Enter number of seats" />
+                    }
                 </label>
                 <label>
                     <span>Transmission type</span>
-                    <input type="text" placeholder="Enter transmission type" />
+                    {car != null 
+                        ? <input type="text" placeholder="Enter transmission type" 
+                            value={car.transmissionType} 
+                            onChange={(e) => setCar({ ...car, transmissionType: e.target.value })} />
+                        : <input type="text" placeholder="Enter transmission type" />
+                    }
                 </label>
                 <label>
                     <span>Fuel type</span>
-                    <input type="text" placeholder="Enter fuel type" />
+                    {car != null 
+                        ? <input type="text" placeholder="Enter fuel type" 
+                            value={car.fuelType} 
+                            onChange={(e) => setCar({ ...car, fuelType: e.target.value })} />
+                        : <input type="text" placeholder="Enter fuel type" />
+                    }
                 </label>
                 <label>
                     <span>Price</span>
-                    <input type="number" placeholder="Enter price" />
+                    {car != null 
+                        ? <input type="number" placeholder="Enter price" 
+                            value={car.price} 
+                            onChange={(e) => setCar({ ...car, price: e.target.value })} />
+                        : <input type="number" placeholder="Enter price" />
+                    }
                 </label>
                 <label>
                     <span>Production year</span>
-                    <input type="number" placeholder="Enter production year" />
+                    {car != null 
+                        ? <input type="number" placeholder="Enter production year" 
+                            value={car.price} 
+                            onChange={(e) => setCar({ ...car, productionYear: e.target.value })} />
+                        : <input type="number" placeholder="Enter production year" />
+                    }
                 </label>
                 <label>
                     <span>Features</span>
