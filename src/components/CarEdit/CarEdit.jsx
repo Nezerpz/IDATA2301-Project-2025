@@ -10,6 +10,7 @@ function CarEdit({carToEdit, title, actionText}) {
     const [car, setCar] = useState(carToEdit == null ? { features: [] } : carToEdit)
     const [features, setFeatures] = useState(null)
 
+    // Helper to update selected features
     function updateSelectedFeatures(selectElement) {
         let newFeatures = Array.from(selectElement.children)
             .filter(option => option.selected)
@@ -49,6 +50,18 @@ function CarEdit({carToEdit, title, actionText}) {
         }
     })()}, [manufacturers, features, car])
 
+
+    // Removes some code-duplication
+    function handleReturnCodes(response) {
+        if (response.status === 404) {
+            throw new Error('Car not found');
+        }  else if (response.status === 401) {
+            throw new Error('Unauthorized');
+        } else if (!response.ok) {
+            throw new Error('Failed to update car');
+        }
+    }
+
     // Function used to update existing car
     const updateCar = async (car) => {
         try {
@@ -57,16 +70,7 @@ function CarEdit({carToEdit, title, actionText}) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(car)
             });
-
-            // Handling return codes
-            if (response.status === 404) {
-                throw new Error('Car not found');
-            }  else if (response.status === 401) {
-                throw new Error('Unauthorized');
-            } else if (!response.ok) {
-                throw new Error('Failed to update car');
-            }
-
+            handleReturnCodes(response)
             alert("Car details updated successfully!");
         } 
 
@@ -83,16 +87,7 @@ function CarEdit({carToEdit, title, actionText}) {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(car)
             });
-
-            // Handle return codes
-            if (response.status === 404) {
-                throw new Error('Car not found');
-            }  else if (response.status === 401) {
-                throw new Error('Unauthorized');
-            } else if (!response.ok) {
-                throw new Error('Failed to update car');
-            }
-
+            handleReturnCodes(response)
             alert("Car details updated successfully!");
         } 
 
@@ -111,36 +106,36 @@ function CarEdit({carToEdit, title, actionText}) {
     return (
         <div>
             <h1>{title}</h1>
-            <form onSubmit={(e) => handleSubmit(e, carToEdit, car)}>
+            <form className={"car-edit"} onSubmit={(e) => handleSubmit(e, carToEdit, car)}>
                 <label>
                     <span className={"car-edit-property-heading"}>Manufacturer</span>
-                    <select className={"car-edit-property-select"} placeholder="Select Manufacturer" 
+                    <select placeholder="Select Manufacturer" 
+                        className={"car-edit-property-input"}
                         value={car.manufacturer} 
                         onChange={e => setCar({ ...car, manufacturer: e.target.value})}>
                         {manufacturers != null 
                             ? manufacturers.map((value, i) => (
                                 <option key={i}>{value}</option>))
-                            : <option>none</option>}
+                            : <option>None</option>}
                     </select>
                 </label>
                 <label>
                     <span className={"car-edit-property-heading"}>Model</span>
                         <input type="text" placeholder="Enter Model" 
-                            className={"car-edit-property-textinput"}
-                            value={car.carModel != undefined ? car.carModel : "None"} 
+                            className={"car-edit-property-input"}
+                            value={car.carModel != undefined ? car.carModel : ""} 
                             onChange={(e) => setCar({ ...car, carModel: e.target.value })} />
                 </label>
                 <label>
                     <span className={"car-edit-property-heading"}>Number of seats</span>
-                    {carToEdit != null 
-                        ? <input type="number" placeholder="Enter number of seats" 
-                            value={car.numberOfSeats} 
+                        <input type="number" placeholder="Enter number of seats" min={1}
+                            className={"car-edit-property-input"}
+                            value={car.numberOfSeats != undefined ? car.numberOfSeats : 5} 
                             onChange={(e) => setCar({ ...car, numberOfSeats: e.target.value })} />
-                        : <input type="number" placeholder="Enter number of seats" />}
                 </label>
                 <label>
                     <span className={"car-edit-property-heading"}>Transmission type</span>
-                        <select className={"car-edit-property-select"} placeholder="Select transmission type" 
+                        <select className={"car-edit-property-input"} placeholder="Select transmission type" 
                             value={car.transmissionType} 
                             onChange={(e) => setCar({ ...car, transmissionType: e.target.value })} >
                             {transmissionTypes != null 
@@ -154,7 +149,7 @@ function CarEdit({carToEdit, title, actionText}) {
                 </label>
                 <label>
                     <span className={"car-edit-property-heading"}>Fuel type</span>
-                    <select className={"car-edit-property-select"} placeholder="Select fuel type" 
+                    <select className={"car-edit-property-input"} placeholder="Select fuel type" 
                         value={car.fuelType} 
                         onChange={(e) => setCar({ ...car, fuelType: e.target.value })} >
                         {fuelTypes != null 
@@ -169,23 +164,22 @@ function CarEdit({carToEdit, title, actionText}) {
                 </label>
                 <label>
                     <span className={"car-edit-property-heading"}>Rental Price per Day</span>
-                    {carToEdit != null 
-                        ? <input type="number" placeholder="Enter price" 
-                            value={car.price} 
+                         <input type="number" placeholder="Enter price" min={0}
+                            className={"car-edit-property-input"}
+                            value={car.price != undefined ? car.price : ""} 
                             onChange={(e) => setCar({ ...car, price: e.target.value })} />
-                        : <input type="number" placeholder="Enter price" />}
                 </label>
                 <label>
                     <span className={"car-edit-property-heading"}>Production year</span>
-                    {carToEdit != null 
-                        ? <input type="number" placeholder="Enter production year" 
-                            value={car.price} 
+                        <input type="number" placeholder="Enter production year" min={1885}
+                            className={"car-edit-property-input"}
+                            value={car.productionYear != undefined ? car.productionYear : ""} 
                             onChange={(e) => setCar({ ...car, productionYear: e.target.value })} />
-                        : <input type="number" placeholder="Enter production year" />}
                 </label>
                 <label>
                     <span className={"car-edit-property-heading"}>Features</span>
                     <select placeholder="Select Features" multiple
+                        className={"car-edit-property-input"}
                         value={car.features}
                         onChange={e => updateSelectedFeatures(e.target)}>
                         {features != null 
