@@ -7,7 +7,7 @@ function CarEdit({carToEdit, title, actionText}) {
     const [manufacturers, setManufacturers] = useState(null)
     const [transmissionTypes, setTransmissionTypes] = useState(null)
     const [fuelTypes, setFuelTypes] = useState(null)
-    const [car, setCar] = useState(carToEdit == null ? { features: [] } : carToEdit)
+    const [car, setCar] = useState(carToEdit != null ? carToEdit : { features: [] })
     const [features, setFeatures] = useState(null)
 
     // Helper to update selected features
@@ -15,8 +15,10 @@ function CarEdit({carToEdit, title, actionText}) {
         let newFeatures = Array.from(selectElement.children)
             .filter(option => option.selected)
             .map(option => option.value)
-        setCar({ ...car, newFeatures })
+        setCar({ ...car, features: newFeatures })
     }
+    console.log("Bileeeeeen")
+    console.log(car)
 
     // Fetch required info
     useEffect(() => { (async () => {
