@@ -8,7 +8,7 @@ function AddNewCar() {
     const [features, setFeatures] = useState(null)
     const [selectedFeatures, setSelectedFeatures] = useState([3, 4])
 
-    function updateFeatures(selectElement) {
+    function updateSelectedFeatures(selectElement) {
         let newFeatures = Array.from(selectElement.children)
             .filter(option => option.selected)
             .map(option => option.value)
@@ -96,7 +96,7 @@ function AddNewCar() {
                     {/* /features */}
                     <select placeholder="Select Features" multiple
                         value={selectedFeatures}
-                        onChange={e => updateFeatures(e.target)}>
+                        onChange={e => updateSelectedFeatures(e.target)}>
                         {features != null 
                             ? features
                                 .map(f => [f["id"], f["featureName"]])
