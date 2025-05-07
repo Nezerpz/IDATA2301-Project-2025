@@ -18,12 +18,9 @@ export async function refreshToken() {
     }
 }
 
+
 export async function fetchJSON(endpoint, options = {}) {
-    const response = await fetch(
-        import.meta.env.VITE_BACKEND_URL + ":" +
-        import.meta.env.VITE_BACKEND_PORT + endpoint,
-        options
-    )
+    let response = fetchWithAuth(endpoint, options)
     let data = await response.json()
     return data
 }
@@ -36,7 +33,11 @@ export async function fetchWithAuth(endpoint, options = {}) {
     };
 
     try {
-        const response = await fetchJSON(endpoint, { ...options, headers });
+        const response = await fetch(
+            import.meta.env.VITE_BACKEND_URL + ":" +
+            import.meta.env.VITE_BACKEND_PORT + endpoint,
+            {...options, headers }
+        )
 
         // Refresh token if expired
         if (response.status === 401) {
