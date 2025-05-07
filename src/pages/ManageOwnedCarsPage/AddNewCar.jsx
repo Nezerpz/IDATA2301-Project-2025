@@ -6,6 +6,15 @@ function AddNewCar() {
     const [manufacturers, setManufacturers] = useState(null)
     const [manufacturer, setManufacturer] = useState("none")
     const [features, setFeatures] = useState(null)
+    const [selectedFeatures, setSelectedFeatures] = useState([3, 4])
+
+    function updateFeatures(selectElement) {
+        let newFeatures = Array.from(selectElement.children)
+            .filter(option => option.selected)
+            .map(option => option.value)
+        console.debug(newFeatures)
+        setSelectedFeatures(newFeatures)
+    }
 
     if (manufacturers == null) {
         const fetchData = async () => { 
@@ -17,6 +26,24 @@ function AddNewCar() {
                 let jsonData = await response.json()
                 console.debug(jsonData)
                 setManufacturers(jsonData)
+            }
+            catch (e) {
+                console.error(e)
+            }
+        }
+        fetchData()
+    }
+
+    if (features == null) {
+        const fetchData = async () => { 
+            try {
+                const response = await fetch(
+                    import.meta.env.VITE_BACKEND_URL + ":" +
+                    import.meta.env.VITE_BACKEND_PORT + "/features"
+                )
+                let jsonData = await response.json()
+                console.debug(jsonData)
+                setFeatures(jsonData)
             }
             catch (e) {
                 console.error(e)
@@ -67,9 +94,18 @@ function AddNewCar() {
                 <label>
                     <span>Features</span>
                     {/* /features */}
-                    <select placeholder="Select Features">
-                        <option>Bluetooth</option>
-                        <option>BMW</option>
+                    <select placeholder="Select Features" multiple
+                        value={selectedFeatures}
+                        onChange={e => updateFeatures(e.target)}>
+                        {features != null 
+                            ? features
+                                .map(f => [f["id"], f["featureName"]])
+                                .map(f => (
+                                    <option key={f[0]} value={f[0]}>
+                                        {f[1]}
+                                    </option>))
+                            : <option>none</option>
+                        }
                     </select>
                 </label>
                 <label>
