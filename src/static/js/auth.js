@@ -20,7 +20,7 @@ export async function refreshToken() {
 
 
 export async function fetchJSON(endpoint, options = {}) {
-    let response = fetchWithAuth(endpoint, options)
+    let response = await fetchWithAuth(endpoint, options)
     let data = await response.json()
     return data
 }

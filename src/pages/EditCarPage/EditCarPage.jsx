@@ -1,7 +1,7 @@
 import {useNavigate, useParams} from "react-router-dom";
 import React, {useEffect, useState} from "react";
 import CarEdit from '../../components/CarEdit/CarEdit.jsx'
-import {fetchWithAuth} from "../../static/js/auth.js";
+import {fetchJSON} from "../../static/js/auth.js";
 
 function EditCarPage() {
     const { id } = useParams();
@@ -11,12 +11,8 @@ function EditCarPage() {
     useEffect(() => {
         const fetchdata = async () => {
             try {
-                let response = await fetchwithauth("/cars/" + id, {
-                    headers: {
-                    }
-                });
-                let data = await response.json();
-                setcar(data);
+                let data = await fetchJSON("/cars/" + id);
+                setCar(data);
             } catch (error) {
                 console.error(error);
             }
