@@ -3,15 +3,16 @@ import React, { useState, useEffect } from "react";
 function CarEdit({carToEdit, title, actionText}) {
     const [manufacturers, setManufacturers] = useState(null)
     const [manufacturer, setManufacturer] = useState("none")
+    const [car, setCar] = useState(carToEdit)
     const [selectedFeatures, setSelectedFeatures] = useState(car == null ? [] : null)
     const [features, setFeatures] = useState(null)
-    const [car, setCar] = useState(carToEdit)
 
     function updateSelectedFeatures(selectElement) {
         let newFeatures = Array.from(selectElement.children)
             .filter(option => option.selected)
             .map(option => option.value)
-        console.debug(newFeatures)
+        console.log("new features")
+        console.log(newFeatures)
         setSelectedFeatures(newFeatures)
     }
 
@@ -80,22 +81,68 @@ function CarEdit({carToEdit, title, actionText}) {
         }
     })
 
-    const handleSubmit = (e, car) {
+    const handleSubmit = (e, carToEdit) => {
         e.preventDefault()
 
-        if (car != null) { 
-            saveChanges(car)
+        if (carToEdit != null) { 
+            const updateCar = async () => {
+                try {
+                    const response = await fetchWithAuth(
+                        import.meta.env.VITE_BACKEND_URL + ":" + 
+                        import.meta.env.VITE_BACKEND_PORT + "/cars/" + car.id, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(car)
+                    });
+                    if (response.status === 404) {
+                        throw new Error('Car not found');
+                    }  else if (response.status === 401) {
+                        throw new Error('Unauthorized');
+                    } else if (!response.ok) {
+                        throw new Error('Failed to update car');
+                    }
+                    alert("Car details updated successfully!");
+                } catch (error) {
+                    alert(`Error: ${error.message}`);
+                }
+            }
+            updateCar()
         }
 
         else { 
-            addNewCar() 
+            const addCar = async () => {
+                try {
+                    const response = await fetchWithAuth(
+                        import.meta.env.VITE_BACKEND_URL + ":" + 
+                        import.meta.env.VITE_BACKEND_PORT + "/cars/add", {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(car)
+                    });
+                    if (response.status === 404) {
+                        throw new Error('Car not found');
+                    }  else if (response.status === 401) {
+                        throw new Error('Unauthorized');
+                    } else if (!response.ok) {
+                        throw new Error('Failed to update car');
+                    }
+                    alert("Car details updated successfully!");
+                } catch (error) {
+                    alert(`Error: ${error.message}`);
+                }
+            }
+            addCar()
         }
     }
 
     return (
         <div>
             <h1>{title}</h1>
-            <form onSubmit={(e) => handleSubmit(e, car)}>
+            <form onSubmit={(e) => handleSubmit(e, carToEdit)}>
                 <label>
                     <span>Manufacturer</span>
                     <select placeholder="Select Manufacturer" 
@@ -110,7 +157,7 @@ function CarEdit({carToEdit, title, actionText}) {
                 </label>
                 <label>
                     <span>Model</span>
-                    {car != null 
+                    {carToEdit != null 
                         ? <input type="text" placeholder="Enter Model" 
                             value={car.carModel} 
                             onChange={(e) => setCar({ ...car, carModel: e.target.value })} />
@@ -119,8 +166,7 @@ function CarEdit({carToEdit, title, actionText}) {
                 </label>
                 <label>
                     <span>Number of seats</span>
-                    <input type="number" placeholder="Enter number of seats" />
-                    {car != null 
+                    {carToEdit != null 
                         ? <input type="number" placeholder="Enter number of seats" 
                             value={car.numberOfSeats} 
                             onChange={(e) => setCar({ ...car, numberOfSeats: e.target.value })} />
@@ -129,7 +175,7 @@ function CarEdit({carToEdit, title, actionText}) {
                 </label>
                 <label>
                     <span>Transmission type</span>
-                    {car != null 
+                    {carToEdit != null 
                         ? <input type="text" placeholder="Enter transmission type" 
                             value={car.transmissionType} 
                             onChange={(e) => setCar({ ...car, transmissionType: e.target.value })} />
@@ -138,7 +184,7 @@ function CarEdit({carToEdit, title, actionText}) {
                 </label>
                 <label>
                     <span>Fuel type</span>
-                    {car != null 
+                    {carToEdit != null 
                         ? <input type="text" placeholder="Enter fuel type" 
                             value={car.fuelType} 
                             onChange={(e) => setCar({ ...car, fuelType: e.target.value })} />
@@ -147,7 +193,7 @@ function CarEdit({carToEdit, title, actionText}) {
                 </label>
                 <label>
                     <span>Price</span>
-                    {car != null 
+                    {carToEdit != null 
                         ? <input type="number" placeholder="Enter price" 
                             value={car.price} 
                             onChange={(e) => setCar({ ...car, price: e.target.value })} />
@@ -156,7 +202,7 @@ function CarEdit({carToEdit, title, actionText}) {
                 </label>
                 <label>
                     <span>Production year</span>
-                    {car != null 
+                    {carToEdit != null 
                         ? <input type="number" placeholder="Enter production year" 
                             value={car.price} 
                             onChange={(e) => setCar({ ...car, productionYear: e.target.value })} />
