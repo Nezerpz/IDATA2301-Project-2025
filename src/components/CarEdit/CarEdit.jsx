@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { fetchWithAuth } from "../../static/js/auth.js"
 
 function CarEdit({carToEdit, title, actionText}) {
     const [manufacturers, setManufacturers] = useState(null)
     const [manufacturer, setManufacturer] = useState("none")
-    const [car, setCar] = useState(carToEdit)
-    const [selectedFeatures, setSelectedFeatures] = useState(car == null ? [] : null)
+    const [car, setCar] = useState(carToEdit == null ? {} : carToEdit)
+    const [selectedFeatures, setSelectedFeatures] = useState(carToEdit == null ? [] : null)
     const [features, setFeatures] = useState(null)
 
     function updateSelectedFeatures(selectElement) {
@@ -81,7 +82,7 @@ function CarEdit({carToEdit, title, actionText}) {
         }
     })
 
-    const handleSubmit = (e, carToEdit) => {
+    const handleSubmit = (e, carToEdit, car) => {
         e.preventDefault()
 
         if (carToEdit != null) { 
@@ -117,7 +118,7 @@ function CarEdit({carToEdit, title, actionText}) {
                     const response = await fetchWithAuth(
                         import.meta.env.VITE_BACKEND_URL + ":" + 
                         import.meta.env.VITE_BACKEND_PORT + "/cars/add", {
-                        method: 'PUT',
+                        method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                         },
@@ -142,7 +143,7 @@ function CarEdit({carToEdit, title, actionText}) {
     return (
         <div>
             <h1>{title}</h1>
-            <form onSubmit={(e) => handleSubmit(e, carToEdit)}>
+            <form onSubmit={(e) => handleSubmit(e, carToEdit, car)}>
                 <label>
                     <span>Manufacturer</span>
                     <select placeholder="Select Manufacturer" 
