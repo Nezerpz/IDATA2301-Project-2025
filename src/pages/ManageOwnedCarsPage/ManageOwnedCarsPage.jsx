@@ -6,18 +6,17 @@ import useTitle from "../../components/useTitle.jsx";
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {fetchWithAuth} from "../../static/js/auth.js";
-import "./ManageOwnedCarsPage.css"
 
 function renderPage(cars) {
     return(
-        <div id={"manage-cars"}>
+        <>
             <div className={"button-container-end"}>
                 <button className={"big-button"}>
                     <Link to={"/mypage/provider/cars/add"}>Add new car</Link>
                 </button>
             </div>
             <OwnedCarsList cars={cars}/>
-        </div>
+        </>
     )
 }
 

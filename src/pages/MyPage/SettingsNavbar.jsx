@@ -2,8 +2,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import {useEffect, useRef, useState} from "react";
 import {fetchWithAuth} from "../../static/js/auth.js";
 import "./dropdown.css";
-
-//TODO: Make this dynamically change based on the user's role
+import Logout from "../../components/LogOut/Logout.jsx";
 
 function renderComponent({userType}) {
     if (userType === "ADMIN") {
@@ -11,7 +10,7 @@ function renderComponent({userType}) {
             <>
                 <CustomerOrders />
                 <SettingsLink />
-                <DropdownAdmin />
+                <AdminPage />
             </>
         );
     } else if (userType === "PROVIDER") {
@@ -19,7 +18,7 @@ function renderComponent({userType}) {
             <>
                 <CustomerOrders />
                 <SettingsLink />
-                <DropdownProvider />
+                <ProviderPage />
             </>
         );
     } else if (userType === "CUSTOMER") {
@@ -42,9 +41,7 @@ function NavBarPicker() {
                 let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/userType");
 
             if (response.status === 401) {
-                // Delete the JWT token and redirect to the login page
                 localStorage.removeItem("jwt");
-                //navigate('/login');
                 navigate('/login', { state: { from: window.location.pathname } });
             }
 
@@ -82,9 +79,9 @@ function DropdownAdmin() {
 
     return (
         <div className={"dropdown"} onClick={handleDropdownClick}>
-            <text className={"navbar-item-dark dropItem"}>
+            <span className={"navbar-item-dark dropItem"}>
                 Admin Settings
-            </text>
+            </span>
             {isOpen && (
                 <div className={"dropdown-content"} ref={dropdownRef}>
                     <Link to={"/mypage/admin/users"} className={"navbar-item-dark"}>
@@ -127,9 +124,9 @@ function DropdownProvider(){
 
     return (
         <div className={"dropdown"} onClick={handleDropdownClick}>
-            <text className={"navbar-item-dark dropItem"}>
+            <span className={"navbar-item-dark dropItem"}>
                 Provider
-            </text>
+            </span>
             {isOpen && (
                 <div className={"dropdown-content"} ref={dropdownRef}>
                     <Link to={"/mypage/provider/cars"} className={"navbar-item-dark"}>
@@ -154,6 +151,22 @@ function SettingsLink() {
     );
 }
 
+function AdminPage() {
+    return (
+        <Link to={"/mypage/admin"} className={"navbar-item-dark"}>
+            Admin Page
+        </Link>
+    );
+}
+
+function ProviderPage() {
+    return (
+        <Link to={"/mypage/provider"} className={"navbar-item-dark"}>
+            Provider Page
+        </Link>
+    );
+}
+
 function CustomerOrders() {
     return (
         <Link to={"/mypage/orders"} className={"navbar-item-dark"}>
@@ -167,6 +180,7 @@ function BecomeProvider() {
     const handleBecomeProvider = async (event) => {
         event.preventDefault();
         try {
+            if (window.confirm("Are you sure you want to become a provider?")) {
             const token = localStorage.getItem("jwt");
             const response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/become-provider", {
                 method: 'POST',
@@ -174,6 +188,7 @@ function BecomeProvider() {
                     'Content-Type': 'application/json',
                 },
             });
+            }
 
             if (response.ok) {
                 //navigate('/');
@@ -197,9 +212,10 @@ function BecomeProvider() {
 
 function SettingsNavbar() {
     return (
-        <div className="navbar-column">
+        <>
             <NavBarPicker />
-        </div>
+            <Logout />
+        </>
     );
 
 }
