@@ -81,8 +81,6 @@ function CarEdit({carToEdit, title, actionText}) {
 
     // Function used to register new car
     const addCar = async (car) => {
-        console.log("requerstbody car null?")
-        console.log(car)
         try {
             const response = await fetchWithAuth("/cars/add", {
                 method: 'POST',
