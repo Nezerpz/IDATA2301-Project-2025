@@ -39,7 +39,7 @@ function NavBarPicker() {
 
     useEffect(() => {
         const fetchData = async () => {
-                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/userType");
+                let response = await fetchWithAuth("/userType");
 
             if (response.status === 401) {
                 // Delete the JWT token and redirect to the login page
@@ -168,7 +168,7 @@ function BecomeProvider() {
         event.preventDefault();
         try {
             const token = localStorage.getItem("jwt");
-            const response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/become-provider", {
+            const response = await fetchWithAuth("/become-provider", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -31,7 +31,7 @@ function OrdersPage() {
                 let endpoint = path.includes("provider") ? "/orders/provider" : path.includes("admin") ? "/orders" : "/orders/customer";
 
                 // Fetch orders
-                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + endpoint);
+                let response = await fetchWithAuth(endpoint);
                 let data = await response.json();
                 setOrders(data);
             } catch (error) {

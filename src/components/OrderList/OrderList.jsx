@@ -58,7 +58,7 @@ function ReviewOptions({row}) {
         const fetchData = async () => {
             setLoading(true);
             try {
-                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/orders/" + row.id);
+                let response = await fetchWithAuth("/orders/" + row.id);
                 let data = await response.json();
                 setOrder(data);
             } catch (error) {
@@ -75,7 +75,7 @@ function ReviewOptions({row}) {
         const fetchUser = async () => {
             setLoading(true);
             try {
-                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/users/self");
+                let response = await fetchWithAuth("/users/self");
                 let data = await response.json();
                 console.log(data);
                 setUserData(data);

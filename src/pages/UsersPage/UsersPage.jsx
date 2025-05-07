@@ -22,7 +22,7 @@ function UsersPage() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/users",{
+                let response = await fetchWithAuth("/users",{
                     method:"POST",
                 });
                 let data = await response.json();

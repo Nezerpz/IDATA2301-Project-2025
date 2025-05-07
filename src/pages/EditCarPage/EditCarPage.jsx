@@ -5,7 +5,7 @@ import {fetchWithAuth} from "../../static/js/auth.js";
 async function saveChanges(car) {
     console.log(car);
     try {
-        const response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars/" + car.id, {
+        const response = await fetchWithAuth("/cars/" + car.id, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -133,7 +133,7 @@ function EditCarPage() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars/" + id, {
+                let response = await fetchWithAuth("/cars/" + id, {
                     headers: {
                     }
                 });
@@ -153,7 +153,7 @@ function EditCarPage() {
     useEffect(() => {
         const fetchManufacturersData = async () => {
             try {
-                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/manufacturers");
+                let response = await fetchWithAuth("/manufacturers");
                 let data = await response.json();
                 setManufacturers(data);
             } catch (error) {
@@ -169,7 +169,7 @@ function EditCarPage() {
     useEffect(() => {
         const fetchTransmissionTypesData = async () => {
             try {
-                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/transmission-types");
+                let response = await fetchWithAuth("/transmission-types");
                 let data = await response.json();
                 setTransmissionTypes(data);
             } catch (error) {
@@ -185,7 +185,7 @@ function EditCarPage() {
     useEffect(() => {
         const fetchFuelTypesData = async () => {
             try {
-                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/fuel-types");
+                let response = await fetchWithAuth("/fuel-types");
                 let data = await response.json();
                 setFuelTypes(data);
             } catch (error) {
@@ -201,7 +201,7 @@ function EditCarPage() {
     useEffect(() => {
         const fetchCarStatusData = async () => {
             try {
-                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/car-status");
+                let response = await fetchWithAuth("/car-status");
                 let data = await response.json();
                 setCarStatus(data);
             } catch (error) {

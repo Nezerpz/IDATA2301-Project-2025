@@ -1,84 +1,54 @@
 import React, { useState, useEffect } from "react";
-import { fetchWithAuth } from "../../static/js/auth.js"
+import { fetchJSON, fetchWithAuth } from "../../static/js/auth.js"
 
 function CarEdit({carToEdit, title, actionText}) {
     const [manufacturers, setManufacturers] = useState(null)
     const [manufacturer, setManufacturer] = useState("none")
     const [car, setCar] = useState(carToEdit == null ? {} : carToEdit)
-    const [selectedFeatures, setSelectedFeatures] = useState(carToEdit == null ? [] : null)
+    const [selectedFeatures, setSelectedFeatures] = useState(car == null ? [] : null)
     const [features, setFeatures] = useState(null)
 
     function updateSelectedFeatures(selectElement) {
         let newFeatures = Array.from(selectElement.children)
             .filter(option => option.selected)
             .map(option => option.value)
-        console.log("new features")
-        console.log(newFeatures)
         setSelectedFeatures(newFeatures)
     }
 
     useEffect(() => {
         if (manufacturers == null) {
-            const fetchData = async () => { 
-                try {
-                    const response = await fetch(
-                        import.meta.env.VITE_BACKEND_URL + ":" +
-                        import.meta.env.VITE_BACKEND_PORT + "/manufacturers"
-                    )
-                    let jsonData = await response.json()
-                    console.debug(jsonData)
-                    setManufacturers(jsonData)
-                }
-                catch (e) {
-                    console.error(e)
-                }
-            }
-            fetchData()
+            try {
+                let data = await fetchJSON("/manufacturers", { method: "GET" })
+                setManufacturers(data)
+            }   catch (e) { console.error(e) }
         }
 
         if (features == null) {
-            const fetchData = async () => { 
-                try {
-                    const response = await fetch(
-                        import.meta.env.VITE_BACKEND_URL + ":" +
-                        import.meta.env.VITE_BACKEND_PORT + "/features"
-                    )
-                    let jsonData = await response.json()
-                    console.debug(jsonData)
-                    setFeatures(jsonData)
-                }
-                catch (e) {
-                    console.error(e)
-                }
-            }
-            fetchData()
+            try {
+                let data = await fetchJSON("/features", { method: "Get" })
+                console.debug(data)
+                setFeatures(data)
+            }   catch (e) { console.error(e) }
         }
 
-
         if (selectedFeatures == null) {
-            const fetchData = async () => { 
-                try {
-                    const response = await fetch(
-                        import.meta.env.VITE_BACKEND_URL + ":" +
-                        import.meta.env.VITE_BACKEND_PORT + `/car/${car["id"]}`
-                    )
-                    let jsonData = await response.json()
-                    let featureData = jsonData["features"]
-                    console.debug(featureData)
-                    let theSelectedFeatures = featureData.map(selectedFeature => {
-                        features
-                            .some(f => f["featureName"] === selectedFeature)
-                            .map(f  => f["id"])
-                    })
-                    
-                    console.debug(theSelectedFeatures)
-                    setSelectedFeatures(theSelectedFeatures)
-                }
-                catch (e) {
-                    console.error(e)
-                }
-            }
-            fetchData()
+            try {
+                // Fetch car data
+                let data = await fetchJSON(`/car/${car["id"]}`, { method: "GET" })
+
+                // Exctract feature names
+                let featureData = jsonData["features"]
+
+                // Retreive feature id's by comparison
+                let theSelectedFeatures = featureData.map(selectedFeature => {
+                    features
+                        .some(f => f["featureName"] === selectedFeature)
+                        .map(f  => f["id"])
+                })
+                
+                // Set selected feature ID's
+                setSelectedFeatures(theSelectedFeatures)
+            }   catch (e) { console.error(e) }
         }
     })
 
@@ -86,42 +56,36 @@ function CarEdit({carToEdit, title, actionText}) {
         e.preventDefault()
 
         if (carToEdit != null) { 
-            const updateCar = async () => {
-                try {
-                    const response = await fetchWithAuth(
-                        import.meta.env.VITE_BACKEND_URL + ":" + 
-                        import.meta.env.VITE_BACKEND_PORT + "/cars/" + car.id, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(car)
-                    });
-                    if (response.status === 404) {
-                        throw new Error('Car not found');
-                    }  else if (response.status === 401) {
-                        throw new Error('Unauthorized');
-                    } else if (!response.ok) {
-                        throw new Error('Failed to update car');
-                    }
-                    alert("Car details updated successfully!");
-                } catch (error) {
-                    alert(`Error: ${error.message}`);
+            try {
+                const response = await fetchWithAuth("/cars/" + car.id, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(car)
+                });
+
+                // Handling response messages
+                if (response.status === 404) {
+                    throw new Error('Car not found');
+                }  else if (response.status === 401) {
+                    throw new Error('Unauthorized');
+                } else if (!response.ok) {
+                    throw new Error('Failed to update car');
                 }
+
+                alert("Car details updated successfully!");
+            } 
+
+            catch (error) {
+                alert(`Error: ${error.message}`);
             }
-            updateCar()
         }
 
         else { 
             const addCar = async () => {
                 try {
-                    const response = await fetchWithAuth(
-                        import.meta.env.VITE_BACKEND_URL + ":" + 
-                        import.meta.env.VITE_BACKEND_PORT + "/cars/add", {
+                    const response = await fetchWithAuth("/cars/add", {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(car)
                     });
                     if (response.status === 404) {
