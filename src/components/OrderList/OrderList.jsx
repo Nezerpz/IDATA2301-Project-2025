@@ -129,12 +129,12 @@ function OrderList (orders) {
         "order date": `${order.dateFrom}-${order.timeFrom} / ${order.dateTo}-${order.timeTo}`,
         "status": `${order.orderStatus}`,
         "order number": order.id,
-        "price paid": order.pricePaid,
+        "total price": order.pricePaid,
         "car": `${order.car.manufacturer} ${order.car.carModel}`,
 
     }));
     return (
-            <SearchableFieldTable rowKey={"id"} data={processedOrders} columns={["order number", "car", "order date", "status", "price paid"]}>
+            <SearchableFieldTable rowKey={"id"} data={processedOrders} columns={["order number", "car", "order date", "status", "total price"]}>
                 <ReviewOptions />
             </SearchableFieldTable>
     );
