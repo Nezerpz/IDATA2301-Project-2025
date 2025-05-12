@@ -23,13 +23,13 @@ function MyPage() {
     if (isLoggedIn) {
         return (
             <div className={"row mypage-background"}>
-                <div className={"col-2"}>
-                </div>
+                <div className={"col-2"}></div>
                 <div className={"col-8"}>
                     <div className={"mypage-container"}>
                         <Outlet/>
                     </div>
                 </div>
+                <div className={"col-2"}></div>
             </div>
         );
     } else {

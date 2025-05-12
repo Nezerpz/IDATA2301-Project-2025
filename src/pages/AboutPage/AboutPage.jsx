@@ -1,4 +1,5 @@
 import useTitle from "../../components/useTitle.jsx";
+import {Link} from "react-router-dom";
 
 function AboutPage() {
     useTitle("About");
@@ -7,12 +8,21 @@ function AboutPage() {
         <div className={"col-2"}></div>
         <div className="col-8">
             <h2>Our Story</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet erat in ante cursus feugiat vel a metus. Integer viverra orci ac urna sodales, ac vehicula dolor fermentum. Nulla facilisi. Integer ultricies, nunc at facilisis gravida, ante purus varius risus, in laoreet nunc purus sed libero. Sed euismod vestibulum orci id varius. Nam et purus nisi.</p>
+            <p>
+                Welcome to Rental Roulette, the service that wants to make car rental easy for you!
 
-            <p>Vivamus euismod est sit amet sollicitudin pharetra. Fusce bibendum ligula at ipsum vulputate, non venenatis felis laoreet. Integer auctor vel tortor non tristique. Etiam euismod auctor eros, ac suscipit felis volutpat id. Mauris auctor neque ut ante lacinia, ac tincidunt sapien iaculis. Aliquam interdum purus vel nisi placerat, a feugiat lectus rhoncus.</p>
-
-            <p>Donec sollicitudin lectus vel risus aliquet, vel lobortis ipsum gravida. Fusce lacinia sem felis, et volutpat ante congue vel. Donec fermentum ante et nisi pharetra, at auctor neque tristique. Curabitur egestas leo ac dolor consectetur, ut luctus felis gravida. Aenean cursus tristique felis a tincidunt. Vivamus volutpat nec nisi ac rhoncus.</p>
-
+                We are a dedicated team of car enthusiasts who wish to make car rental as easy as possible.
+                Both as a provider and a user!
+            </p>
+            <p>
+                We are a small team of developers that have worked hard to make this service a reality.
+                We are passionate about cars and want to make it as easy as possible for you to rent a car.
+                We have worked hard to implement features we think you will love.
+            </p>
+            <p>
+                We are always looking for ways to improve our service, so if you have any feedback or suggestions,
+                please feel free to contact us. We would love to hear from you!
+            </p>
         </div>
         <div className={"col-2"}></div>
     </div>

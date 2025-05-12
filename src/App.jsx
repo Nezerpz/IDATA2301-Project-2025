@@ -59,6 +59,7 @@ function LoginSignup() {
   else {
     return <div className="navbar">
       <UserDropdown />
+
     </div>
   }
 
