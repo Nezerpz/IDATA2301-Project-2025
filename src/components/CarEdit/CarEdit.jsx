@@ -51,7 +51,7 @@ function CarEdit({carToEdit, title, actionText}) {
     })()}, [manufacturers, features, car])
 
     // Used to set image for Car
-    async function uploadImage(id, event) {
+    async function uploadImage(id, event, setCar) {
         event.preventDefault()
         let file = event.target.files[0]
         const formData = new FormData()
@@ -69,6 +69,7 @@ function CarEdit({carToEdit, title, actionText}) {
             console.log("Image uploaded successfully")
             let imagePath = await response.text();
             console.log(imagePath)
+            setCar({...car, imagePath: imagePath})
         }
 
         else {
@@ -220,7 +221,7 @@ function CarEdit({carToEdit, title, actionText}) {
                 <label>
                     <span className={"car-edit-property-heading"}>Image</span>
                     <input type="file" placeholder="Upload image" 
-                        onChange={e => uploadImage(car.id, e)}/>
+                        onChange={e => uploadImage(car.id, e, setCar)}/>
                 </label>
                 <button className={"big-button"} type="submit">{actionText}</button>
             </form>
