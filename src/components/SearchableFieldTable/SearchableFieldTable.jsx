@@ -40,11 +40,11 @@ function SearchableFieldTable({ data, columns, rowKey, children }) {
                 {filteredData.map((row) => (
                     <tr key={row[rowKey]}>
                         {columns.map((column) => (
-                            <td key={column} className={"searchableFieldTableRow"}>
+                            <td key={column} className={"searchableFieldTableRow"} data-header={column.charAt(0).toUpperCase() + column.slice(1) + ": "}>
                                 {row[column]}
                             </td>
                         ))}
-                        <td className={"searchableFieldTableRow"}>
+                        <td className={"searchableFieldTableRow"} data-header="Actions">
                             {React.Children.map(children, (child) =>
                                 React.cloneElement(child, { row })
                             )}

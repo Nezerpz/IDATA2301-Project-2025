@@ -100,6 +100,14 @@ header {
     text-decoration: none;
 }
 
+.navbar-item .navbar-item-dark {
+    font-size: 1em;
+}
+
+.navbar-item-dark .navbar-item {
+    font-size: 1em;
+}
+
 .navbar-item-dark:hover {
     background-color: var(--dark-link-color);
     color: var(--link-color);

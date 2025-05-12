@@ -85,7 +85,7 @@ function OrderList({ orders }) {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                let response = await fetchWithAuth("/users/self");
+                const response = await fetchWithAuth("/users/self");
                 const data = await response.json();
                 setUserData(data);
             } catch (error) {
@@ -101,12 +101,12 @@ function OrderList({ orders }) {
                 const updatedOrders = await Promise.all(
                     orders.map(async (order) => {
                         const customerResponse = await fetchWithAuth(
-                            `${import.meta.env.VITE_BACKEND_URL}:${import.meta.env.VITE_BACKEND_PORT}/users/name/${order.customerId}`
+                            `/users/name/${order.customerId}`
                         );
                         const customerData = await customerResponse.json();
 
                         const providerResponse = await fetchWithAuth(
-                            `${import.meta.env.VITE_BACKEND_URL}:${import.meta.env.VITE_BACKEND_PORT}/users/name/${order.providerId}`
+                            `/users/name/${order.providerId}`
                         );
                         const providerData = await providerResponse.json();
 
@@ -151,9 +151,7 @@ function OrderList({ orders }) {
 
     return (
         <SearchableFieldTable rowKey={"id"} data={processedOrders} columns={columns}>
-
                 <ReviewOptions userData={userData} />
-
         </SearchableFieldTable>
     );
 }

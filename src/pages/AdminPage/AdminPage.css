@@ -1,0 +1,6 @@
+#admin-page {
+    display: flex;
+    flex-direction: column;
+    padding: 40px 0;
+    gap: 20px;
+}
