@@ -51,20 +51,24 @@ function CarEdit({carToEdit, title, actionText}) {
     })()}, [manufacturers, features, car])
 
     // Used to set image for Car
-    function uploadImage(id, event) {
+    async function uploadImage(id, event) {
         event.preventDefault()
         let file = event.target.files[0]
         const formData = new FormData()
         formData.append('file', file)
 
         // Send image
-        let response = fetchWithAuth(`/upload`, {
+        let response = await fetchWithAuth(`/upload`, {
             method: "POST",
             body: formData
         })
 
+        console.log(response)
+
         if (response.ok) {
             console.log("Image uploaded successfully")
+            let imagePath = await response.text();
+            console.log(imagePath)
         }
 
         else {
