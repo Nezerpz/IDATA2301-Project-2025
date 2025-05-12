@@ -46,7 +46,9 @@ function Car ({car}) {
                     <ProviderReviewModal
                         open={reviews}
                         onClose={() => {setReviews(false)}}
-                        carId={car.id} />
+                        carId={car.id}
+                        provider={car.user}
+                    />
                     <p>{car.transmissionType} ∙ {car.fuelType} ∙ {car.numberOfSeats} SEATS ∙ {car.productionYear}</p>
                 </div>
                 <FeatureList features={car.features}/>

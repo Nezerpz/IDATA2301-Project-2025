@@ -1,3 +1,5 @@
+import {useNavigate} from "react-router-dom";
+
 export async function refreshToken() {
     try {
         const response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/refresh-token", {
@@ -6,6 +8,10 @@ export async function refreshToken() {
         });
 
         if (!response.ok) {
+            if (response.status === 401) {
+                localStorage.removeItem("jwt");
+                useNavigate("/login");
+            }
             throw new Error("Failed to refresh token");
         }
 
