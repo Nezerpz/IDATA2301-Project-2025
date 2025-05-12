@@ -6,11 +6,13 @@ import OrderModal from "./OrderModal.jsx";
 import { useState, useContext } from "react";
 import checkLogin from "../../static/js/checkLogin.js";
 import {useNavigate, useSearchParams} from "react-router-dom";
+import ProviderReviewModal from "./ProviderReviewModal.jsx";
 
 
 
 function Car ({car}) {
     const [ordering, setIsOrdering] = useState(false)
+    const [reviews, setReviews] = useState(false);
     const [searchParams] = useSearchParams();
     let [ fromToDate, setFromToDate ] = useContext(CarContext);
 
@@ -34,12 +36,21 @@ function Car ({car}) {
             <img src={"src" + car.imagePath} alt={car.carModel} className={"car-image"}/>
             <div className={"carInfo"}>
                 <div>
-                    <p><strong>{car.user}</strong></p>
+                    <p
+                        className={"car-user"}
+                        title={"Read reviews of this user"}
+                        onClick={() => {setReviews(true)}}
+                    >
+                        <strong>{car.user}</strong>
+                    </p>
+                    <ProviderReviewModal
+                        open={reviews}
+                        onClose={() => {setReviews(false)}}
+                        carId={car.id} />
                     <p>{car.transmissionType} ∙ {car.fuelType} ∙ {car.numberOfSeats} SEATS ∙ {car.productionYear}</p>
                 </div>
                 <FeatureList features={car.features}/>
             </div>
-
             <span className={"grow"}></span>
             <div className={"orderButtonContainer"}>
                 <button className = {"big-button"} onClick={() => {canOrder()}}>Rent for {car.price}/day</button>

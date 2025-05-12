@@ -2,29 +2,7 @@ import PropTypes from "prop-types"
 import ReactDom from 'react-dom'
 import { useNavigate } from 'react-router';
 import {fetchWithAuth} from "../../static/js/auth.js";
-
-const MODAL_STYLES = {
-    position: 'fixed',
-    width: '325px',
-    maxHeight: '525px',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    backgroundColor: '#EEE',
-    borderRadius: '12px',
-    padding: '25px',
-    zIndex: 1000
-}
-
-const OVERLAY_STYLES = {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    zIndex: 1000
-}
+import "./Modal.css"
 
 async function placeOrder(car, timespan, navigate, onClose) {
     var response
@@ -66,8 +44,8 @@ function OrderModal({open, onClose, car, timespan}) {
     let totalPrice = car.price * totalDays
     return ReactDom.createPortal(
         <>
-            <div style={OVERLAY_STYLES}></div>
-            <div style={MODAL_STYLES}>
+            <div className={"overlay"}></div>
+            <div className={"modal"}>
                 <h4>Order {car.carModel}</h4>
                 <p><strong>From:</strong> {timespan.dateFrom} {timespan.timeFrom}</p>
                 <p><strong>To:</strong> {timespan.dateTo} {timespan.timeTo}</p>

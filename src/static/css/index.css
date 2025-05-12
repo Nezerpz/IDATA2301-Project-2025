@@ -76,6 +76,7 @@ h4 {
     font-family: var(--main-font);
     font-size: 1.25rem;
     padding: 20px;
+    cursor: pointer;
     color: var(--heading-color-light);
     border-radius: 7px;
 }
