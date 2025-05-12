@@ -91,6 +91,10 @@
         display: none;
     }
 
+    .searchableFieldTable tbody {
+        display: block;
+    }
+
     .searchableFieldTable tbody tr {
         display: flex;
         flex-direction: column;
