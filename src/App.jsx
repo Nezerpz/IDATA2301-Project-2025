@@ -9,7 +9,7 @@ function LoginSignup() {
   }
   else {
     return <div className="navbar">
-      <Link className="navbar-item" to={"/mypage/settings"}>User</Link>
+      <Link className="navbar-item" to={"/mypage/orders"}>User</Link>
     </div>
   }
 
