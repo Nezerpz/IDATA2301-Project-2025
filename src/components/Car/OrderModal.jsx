@@ -7,9 +7,7 @@ import "./Modal.css"
 async function placeOrder(car, timespan, navigate, onClose) {
     var response
     try {
-        response = await fetchWithAuth(
-            import.meta.env.VITE_BACKEND_URL + ":" + 
-            import.meta.env.VITE_BACKEND_PORT + `/order`, {
+        response = await fetchWithAuth(`/order`, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',

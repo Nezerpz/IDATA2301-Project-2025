@@ -38,7 +38,7 @@ function NavBarPicker() {
 
     useEffect(() => {
         const fetchData = async () => {
-                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/userType");
+            let response = await fetchWithAuth("/userType");
 
             if (response.status === 401) {
                 localStorage.removeItem("jwt");
@@ -95,7 +95,7 @@ function BecomeProvider() {
         try {
             if (window.confirm("Are you sure you want to become a provider?")) {
             const token = localStorage.getItem("jwt");
-            const response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/become-provider", {
+            const response = await fetchWithAuth("/become-provider", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

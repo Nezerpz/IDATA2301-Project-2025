@@ -4,7 +4,7 @@ import {fetchWithAuth} from "../../static/js/auth.js";
 
 async function saveChanges(user) {
     try {
-        const response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/users/" + user.id, {
+        const response = await fetchWithAuth("/users/" + user.id, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -77,7 +77,7 @@ function UserPage() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/users/" + id);
+                let response = await fetchWithAuth("/users/" + id);
                 let data = await response.json();
                 setUser(data);
             } catch (error) {
