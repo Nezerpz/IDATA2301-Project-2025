@@ -3,6 +3,10 @@
     display: inline-block;
 }
 
+.dropdown-toggle:hover{
+    cursor: pointer;
+}
+
 .dropdown-content {
     display: none;
     position: absolute;
