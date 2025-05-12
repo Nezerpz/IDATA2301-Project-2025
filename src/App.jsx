@@ -33,7 +33,7 @@ function UserDropdown() {
 
     return (
         <div className="dropdown navbar-item" onClick={handleDropdownClick}>
-            <span className="dropdown-toggle" aria-haspopup="true" aria-expanded={isOpen}>
+            <span className="dropdown-toggle">
                 User
             </span>
             {isOpen && (

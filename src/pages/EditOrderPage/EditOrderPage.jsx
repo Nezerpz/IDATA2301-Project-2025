@@ -85,7 +85,6 @@ function EditOrderPage() {
                 let orderStatusResponse = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/order-statuses");
                 let orderStatusData = await orderStatusResponse.json();
                 setOrderStatuses(orderStatusData);
-                console.log(orderStatusData);
 
             } catch (error) {
                 setError(error);

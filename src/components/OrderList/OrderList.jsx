@@ -77,7 +77,6 @@ function ReviewOptions({row}) {
             try {
                 let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/users/self");
                 let data = await response.json();
-                console.log(data);
                 setUserData(data);
             } catch (error) {
                 setError(error);
@@ -134,7 +133,6 @@ function OrderList (orders) {
         "car": `${order.car.manufacturer} ${order.car.carModel}`,
 
     }));
-    console.log(processedOrders);
     return (
             <SearchableFieldTable rowKey={"id"} data={processedOrders} columns={["order number", "car", "order date", "status", "price paid"]}>
                 <ReviewOptions />

@@ -1,7 +1,6 @@
 .dropdown {
     position: relative;
     display: inline-block;
-    width: 100%;
 }
 
 .dropdown-content {
@@ -54,5 +53,10 @@
     .dropdown-content {
         left: 0%;
         top: 100%;
+    }
+    #dropdown-user-menu {
+        left: 50%;
+        transform: translateX(-50%);
+        top: calc(100% + 20px);
     }
 }
