@@ -88,6 +88,7 @@ function OrderList({ orders }) {
                 const response = await fetchWithAuth("/users/self");
                 const data = await response.json();
                 setUserData(data);
+
             } catch (error) {
                 console.error("Error fetching user data:", error);
                 setError(error);
