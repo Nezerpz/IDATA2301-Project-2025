@@ -47,98 +47,114 @@ function EditOrder(row, navigate) {
     );
 }
 
-function ReviewOptions({row}) {
+function ReviewOptions({ row, userData }) {
     const navigate = useNavigate();
+
+    const isCustomer = row.customerId === userData.id;
+    const isProvider = row.providerId === userData.id;
+    const isAdmin = userData.userType === "ADMIN";
+    const path = window.location.pathname;
+
+    if (isAdmin && path.includes("admin")) {
+        return <>{EditOrder(row, navigate)}</>;
+    } else if (isCustomer) {
+        return (
+            <>
+                {ReviewCar(row, navigate)}
+                {ReviewProvider(row, navigate)}
+            </>
+        );
+    } else if (isProvider) {
+        return (
+            <>
+                {ReviewCustomer(row, navigate)}
+                {EditOrder(row, navigate)}
+            </>
+        );
+    }
+
+    return null;
+}
+
+function OrderList({ orders }) {
+    const [processedOrders, setProcessedOrders] = useState([]);
     const [userData, setUserData] = useState(null);
-    const [order, setOrder] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        const fetchData = async () => {
-            setLoading(true);
-            try {
-                let response = await fetchWithAuth("/orders/" + row.id);
-                let data = await response.json();
-                setOrder(data);
-            } catch (error) {
-                setError(error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            setLoading(true);
+        const fetchUserData = async () => {
             try {
                 let response = await fetchWithAuth("/users/self");
-                let data = await response.json();
-                console.log(data);
+                const data = await response.json();
                 setUserData(data);
             } catch (error) {
+                console.error("Error fetching user data:", error);
                 setError(error);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchUser();
-    }, []);
+        const fetchUsernames = async () => {
+            try {
+                const updatedOrders = await Promise.all(
+                    orders.map(async (order) => {
+                        const customerResponse = await fetchWithAuth(
+                            `${import.meta.env.VITE_BACKEND_URL}:${import.meta.env.VITE_BACKEND_PORT}/users/name/${order.customerId}`
+                        );
+                        const customerData = await customerResponse.json();
 
-    if (loading || !userData || !order) return <div>Loading...</div>;
+                        const providerResponse = await fetchWithAuth(
+                            `${import.meta.env.VITE_BACKEND_URL}:${import.meta.env.VITE_BACKEND_PORT}/users/name/${order.providerId}`
+                        );
+                        const providerData = await providerResponse.json();
+
+                        return {
+                            ...order,
+                            "customer name": customerData.name,
+                            "provider name": providerData.name,
+                            "order date": `${order.dateFrom}-${order.timeFrom} / ${order.dateTo}-${order.timeTo}`,
+                            "status": `${order.orderStatus}`,
+                            "order number": order.id,
+                            "price paid": order.pricePaid,
+                            "car": `${order.car.manufacturer} ${order.car.carModel}`,
+                        };
+                    })
+                );
+                setProcessedOrders(updatedOrders);
+            } catch (error) {
+                console.error("Error fetching usernames:", error);
+                setError(error);
+            }
+        };
+
+        fetchUserData();
+        fetchUsernames();
+    }, [orders]);
+
+    if (loading || !userData) return <div>Loading...</div>;
     if (error) return <div>Error: {error.message}</div>;
 
-    const isCustomer = order.customerId === userData.id;
-    const isProvider = order.providerId === userData.id;
+    // Determine columns based on user role
+    const isCustomer = processedOrders.some((order) => order.customerId === userData.id);
+    const isProvider = processedOrders.some((order) => order.providerId === userData.id);
     const isAdmin = userData.userType === "ADMIN";
-    const path = window.location.pathname;
-    if (isAdmin && !!path.includes("admin") ) {
-        return (
-            <>
-                {EditOrder(row, navigate)}
-            </>
-        )
-    } else if (isCustomer) {
-        return (
-            <>
-                {ReviewCar(order, navigate)}
-                {ReviewProvider(order, navigate)}
-            </>
-        )
-    } else if (isProvider) {
-        return (
-            <>
-                {ReviewCustomer(order, navigate)}
-                {EditOrder(row, navigate)}
-            </>
-        )
-    }
 
-    //TODO: Check if the user is the provider or the customer in the order
+    const columns = isAdmin
+        ? ["order number", "car", "customer name", "provider name", "order date", "status", "price paid"]
+        : isCustomer
+            ? ["order number", "car", "provider name", "order date", "status", "price paid"]
+            : isProvider
+                ? ["order number", "car", "customer name", "order date", "status", "price paid"]
+                : ["order number", "car", "order date", "status", "price paid"];
 
-
-}
-
-function OrderList (orders) {
-    orders = orders["orders"]
-    const processedOrders = orders.map((order) => ({
-        ...order,
-        "order date": `${order.dateFrom}-${order.timeFrom} / ${order.dateTo}-${order.timeTo}`,
-        "status": `${order.orderStatus}`,
-        "order number": order.id,
-        "price paid": order.pricePaid,
-        "car": `${order.car.manufacturer} ${order.car.carModel}`,
-
-    }));
-    console.log(processedOrders);
     return (
-            <SearchableFieldTable rowKey={"id"} data={processedOrders} columns={["order number", "car", "order date", "status", "price paid"]}>
-                <ReviewOptions />
-            </SearchableFieldTable>
+        <SearchableFieldTable rowKey={"id"} data={processedOrders} columns={columns}>
+
+                <ReviewOptions userData={userData} />
+
+        </SearchableFieldTable>
     );
 }
 
