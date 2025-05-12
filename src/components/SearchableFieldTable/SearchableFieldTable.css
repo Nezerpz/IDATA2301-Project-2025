@@ -62,7 +62,7 @@
 .searchableFieldTable thead tr th:first-child {
     border-top-left-radius: 10px;
 }
-    
+
 .searchableFieldTable thead tr th:last-child {
     border-top-right-radius: 10px;
 }
@@ -73,5 +73,53 @@
     
 .searchableFieldTable tr:last-child td:last-child {
     border-bottom-right-radius: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    .searchableFieldTable {
+        display: block;
+        width: 100%;
+    }
+
+    td {
+        display: block;
+        width: 100%;
+        margin-bottom: 4px;
+    }
+
+    .searchableFieldTable thead {
+        display: none;
+    }
+
+    .searchableFieldTable tbody tr {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        padding: 10px;
+        border: 1px solid var(--main-color);
+        border-radius: 12px;
+        padding: 10px;
+    }
+
+    .searchableFieldTable tbody tr td {
+        border-bottom: 1px solid var(--main-color);
+    }
+
+    .searchableFieldTable tr td:last-child {
+        border-bottom: none;
+    }
+
+    .searchableFieldTableRow {
+        display: flex;
+        justify-content: space-between;
+        padding: 5px 0;
+    }
+
+    .searchableFieldTableRow::before {
+        content: attr(data-header);
+        font-weight: bold;
+        margin-right: 10px;
+    }
 }
 
