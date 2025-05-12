@@ -264,3 +264,15 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
 .margin-bottom-10px {
     margin-bottom: 10px;
 }
+
+.review {
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px;
+
+    border-radius: var(--corner-rounding);
+    border: 1px solid var(--dark-shadow-color);
+}
