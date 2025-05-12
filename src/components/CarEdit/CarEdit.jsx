@@ -7,8 +7,11 @@ function CarEdit({carToEdit, title, actionText}) {
     const [manufacturers, setManufacturers] = useState(null)
     const [transmissionTypes, setTransmissionTypes] = useState(null)
     const [fuelTypes, setFuelTypes] = useState(null)
-    const [car, setCar] = useState(carToEdit != null ? carToEdit : { features: [] })
+    const [car, setCar] = useState((carToEdit == null) ? { features: [] } : carToEdit)
     const [features, setFeatures] = useState(null)
+
+    console.log("car")
+    console.log(car)
 
     // Helper to update selected features
     function updateSelectedFeatures(selectElement) {
@@ -137,7 +140,7 @@ function CarEdit({carToEdit, title, actionText}) {
                     <span className={"car-edit-property-heading"}>Manufacturer</span>
                     <select placeholder="Select Manufacturer" 
                         className={"car-edit-property-input"}
-                        value={car.manufacturer} 
+                        value={car.manufacturer != undefined ? car.manufacturer : ""} 
                         onChange={e => setCar({ ...car, manufacturer: e.target.value})}>
                         {manufacturers != null 
                             ? manufacturers.map((value, i) => (
@@ -156,7 +159,7 @@ function CarEdit({carToEdit, title, actionText}) {
                     <span className={"car-edit-property-heading"}>Number of seats</span>
                         <input type="number" placeholder="Enter number of seats" min={1}
                             className={"car-edit-property-input"}
-                            value={car.numberOfSeats != undefined ? car.numberOfSeats : 5} 
+                            value={car.numberOfSeats != undefined ? car.numberOfSeats : ""} 
                             onChange={(e) => setCar({ ...car, numberOfSeats: e.target.value })} />
                 </label>
                 <label>
