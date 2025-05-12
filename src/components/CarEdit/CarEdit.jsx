@@ -50,6 +50,27 @@ function CarEdit({carToEdit, title, actionText}) {
         }
     })()}, [manufacturers, features, car])
 
+    // Used to set image for Car
+    function uploadImage(id, event) {
+        event.preventDefault()
+        let file = event.target.files[0]
+        const formData = new FormData()
+        formData.append('file', file)
+
+        // Send image
+        let response = fetchWithAuth(`/upload`, {
+            method: "POST",
+            body: formData
+        })
+
+        if (response.ok) {
+            console.log("Image uploaded successfully")
+        }
+
+        else {
+            alert("Image upload failed")
+        }
+    }
 
     // Removes some code-duplication
     function handleReturnCodes(response) {
@@ -194,7 +215,8 @@ function CarEdit({carToEdit, title, actionText}) {
                 </label>
                 <label>
                     <span className={"car-edit-property-heading"}>Image</span>
-                    <input type="file" placeholder="Upload image" />
+                    <input type="file" placeholder="Upload image" 
+                        onChange={e => uploadImage(car.id, e)}/>
                 </label>
                 <button className={"big-button"} type="submit">{actionText}</button>
             </form>
