@@ -1,7 +1,10 @@
 .dropdown {
     position: relative;
     display: inline-block;
-    width: 100%;
+}
+
+.dropdown-toggle:hover{
+    cursor: pointer;
 }
 
 .dropdown-content {
@@ -42,9 +45,22 @@
 
 .dropdown:hover .dropdown-content {display: block;}
 
+#dropdown-user-menu {
+    position: absolute;
+    z-index: 1;
+    top: calc(100% + 20px);
+    left: -40px;
+}
+
+
 @media screen and (max-width: 600px) {
     .dropdown-content {
         left: 0%;
         top: 100%;
+    }
+    #dropdown-user-menu {
+        left: 50%;
+        transform: translateX(-50%);
+        top: calc(100% + 20px);
     }
 }

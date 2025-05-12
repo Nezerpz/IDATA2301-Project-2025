@@ -1,4 +1,53 @@
 import {Outlet, Link} from "react-router-dom";
+import {useEffect, useRef, useState} from "react";
+import SettingsNavbar from "./pages/MyPage/SettingsNavbar.jsx";
+import Logout from "./components/LogOut/Logout.jsx";
+
+function UserDropdown() {
+    const [isOpen, setIsOpen] = useState(false);
+    const dropdownRef = useRef(null);
+
+    useEffect(() => {
+        if (isOpen) {
+            const dropdown = dropdownRef.current;
+            const rect = dropdown.getBoundingClientRect();
+
+            // Adjust position if it overflows the viewport
+            if (rect.right > window.innerWidth) {
+                dropdown.style.left = `${window.innerWidth - rect.width}px`;
+            } else if (rect.left < 0) {
+                dropdown.style.left = "0px";
+            }
+
+            if (rect.bottom > window.innerHeight) {
+                dropdown.style.top = `${window.innerHeight - rect.height}px`;
+            } else {
+                dropdown.style.top = "calc(100% + 20px)";
+            }
+        }
+    }, [isOpen]);
+
+    const handleDropdownClick = () => {
+        setIsOpen(!isOpen);
+    };
+
+    return (
+        <div className="dropdown navbar-item" onClick={handleDropdownClick}>
+            <span className="dropdown-toggle">
+                User
+            </span>
+            {isOpen && (
+                <div
+                    ref={dropdownRef}
+                    id="dropdown-user-menu"
+                >
+                    <SettingsNavbar />
+                </div>
+            )}
+        </div>
+    );
+}
+
 
 function LoginSignup() {
   if (localStorage.getItem("jwt") === null) {
@@ -9,7 +58,8 @@ function LoginSignup() {
   }
   else {
     return <div className="navbar">
-      <Link className="navbar-item" to={"/mypage/settings"}>User</Link>
+      <UserDropdown />
+
     </div>
   }
 

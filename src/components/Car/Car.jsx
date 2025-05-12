@@ -5,12 +5,13 @@ import { CarContext } from "../../context/CarContext.js";
 import OrderModal from "./OrderModal.jsx";
 import { useState, useContext } from "react";
 import checkLogin from "../../static/js/checkLogin.js";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 
 
 
 function Car ({car}) {
     const [ordering, setIsOrdering] = useState(false)
+    const [searchParams] = useSearchParams();
     let [ fromToDate, setFromToDate ] = useContext(CarContext);
 
     const navigate = useNavigate();
@@ -23,7 +24,7 @@ function Car ({car}) {
         }
         else {
             alert("You need to be logged in to order a car.");
-            navigate('/login', { state: { from: window.location.pathname } });
+            navigate('/login', { state: { from: window.location.pathname + "?" + searchParams } });
         }
     }
 
