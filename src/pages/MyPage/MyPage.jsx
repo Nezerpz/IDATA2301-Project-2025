@@ -15,44 +15,21 @@ import Logout from "../../components/LogOut/Logout.jsx";
 import "./MyPage.css";
 import React from "react";
 import {jwtDecode} from "jwt-decode";
-
-function getUsername(token) {
-    try {
-        const decodedToken = jwtDecode(token);
-        return decodedToken.sub;
-    } catch (error) {
-        console.error("Error decoding token:", error);
-        return null;
-    }
-}
+import BackButton from "../../components/BackButton/BackButton.jsx";
 
 function MyPage() {
     useTitle("My Page");
-    const token = localStorage.getItem("jwt");
-    const username = getUsername(token);
     const isLoggedIn = CheckLogin();
     if (isLoggedIn) {
         return (
-            <div className={"row"}>
-                <div className={"col-2"}>
-                    <div id={"settings-menu"}>
-                        <h1 id="username-heading">{username}</h1>
-                        {/*TODO: Add nav bar for this menu*/}
-                        <SettingsNavbar/>
-                        <Logout />
+            <div className={"row mypage-background"}>
+                <div className={"col-2"}></div>
+                <div className={"col-8"}>
+                    <div className={"mypage-container"}>
+                        <Outlet/>
                     </div>
                 </div>
-                <div className={"col-10 mypage-background"}>
-                    <div className={"col-9"}>
-                        <div className={"col-1"}></div>
-                        <div className={"col-10"}>
-                            <Outlet/>
-                        </div>
-                        <div className={"col-1"}></div>
-                    </div>
-                    <div className={"col-3"}></div>
-                </div>
-
+                <div className={"col-2"}></div>
             </div>
         );
     } else {

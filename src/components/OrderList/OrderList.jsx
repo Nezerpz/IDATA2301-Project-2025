@@ -153,9 +153,7 @@ function OrderList({ orders }) {
 
     return (
         <SearchableFieldTable rowKey={"id"} data={processedOrders} columns={columns}>
-
                 <ReviewOptions userData={userData} />
-
         </SearchableFieldTable>
     );
 }

@@ -2,8 +2,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import {useEffect, useRef, useState} from "react";
 import {fetchWithAuth} from "../../static/js/auth.js";
 import "./dropdown.css";
-
-//TODO: Make this dynamically change based on the user's role
+import Logout from "../../components/LogOut/Logout.jsx";
 
 function renderComponent({userType}) {
     if (userType === "ADMIN") {
@@ -11,7 +10,7 @@ function renderComponent({userType}) {
             <>
                 <CustomerOrders />
                 <SettingsLink />
-                <DropdownAdmin />
+                <AdminPage />
             </>
         );
     } else if (userType === "PROVIDER") {
@@ -19,7 +18,7 @@ function renderComponent({userType}) {
             <>
                 <CustomerOrders />
                 <SettingsLink />
-                <DropdownProvider />
+                <ProviderPage />
             </>
         );
     } else if (userType === "CUSTOMER") {
@@ -42,9 +41,7 @@ function NavBarPicker() {
                 let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/userType");
 
             if (response.status === 401) {
-                // Delete the JWT token and redirect to the login page
                 localStorage.removeItem("jwt");
-                //navigate('/login');
                 navigate('/login', { state: { from: window.location.pathname } });
             }
 
@@ -57,93 +54,6 @@ function NavBarPicker() {
     return renderComponent({userType});
 }
 
-function DropdownAdmin() {
-    const [isOpen, setIsOpen] = useState(false);
-    const dropdownRef = useRef(null);
-
-    useEffect(() => {
-        if (isOpen) {
-            const dropdown = dropdownRef.current;
-            const rect = dropdown.getBoundingClientRect();
-            if (rect.right > window.innerWidth) {
-                dropdown.style.left = 'auto';
-                dropdown.style.right = '0';
-            }
-            if (rect.bottom > window.innerHeight) {
-                dropdown.style.top = 'auto';
-                dropdown.style.bottom = '100%';
-            }
-        }
-    }, [isOpen]);
-
-    const handleDropdownClick = () => {
-        setIsOpen(!isOpen);
-    };
-
-    return (
-        <div className={"dropdown"} onClick={handleDropdownClick}>
-            <text className={"navbar-item-dark dropItem"}>
-                Admin Settings
-            </text>
-            {isOpen && (
-                <div className={"dropdown-content"} ref={dropdownRef}>
-                    <Link to={"/mypage/admin/users"} className={"navbar-item-dark"}>
-                        Manage Users
-                    </Link>
-                    <Link to={"/mypage/admin/cars"} className={"navbar-item-dark"}>
-                        Manage Cars
-                    </Link>
-                    <Link to={"/mypage/admin/orders"} className={"navbar-item-dark"}>
-                        Manage Orders
-                    </Link>
-                </div>
-            )}
-        </div>
-    )
-}
-
-function DropdownProvider(){
-    const [isOpen, setIsOpen] = useState(false);
-    const dropdownRef = useRef(null);
-
-    useEffect(() => {
-        if (isOpen) {
-            const dropdown = dropdownRef.current;
-            const rect = dropdown.getBoundingClientRect();
-            if (rect.right > window.innerWidth) {
-                dropdown.style.left = 'auto';
-                dropdown.style.right = '0';
-            }
-            if (rect.bottom > window.innerHeight) {
-                dropdown.style.top = 'auto';
-                dropdown.style.bottom = '100%';
-            }
-        }
-    }, [isOpen]);
-
-    const handleDropdownClick = () => {
-        setIsOpen(!isOpen);
-    };
-
-    return (
-        <div className={"dropdown"} onClick={handleDropdownClick}>
-            <text className={"navbar-item-dark dropItem"}>
-                Provider
-            </text>
-            {isOpen && (
-                <div className={"dropdown-content"} ref={dropdownRef}>
-                    <Link to={"/mypage/provider/cars"} className={"navbar-item-dark"}>
-                        Manage cars
-                    </Link>
-                    <Link to={"/mypage/provider/orders"} className={"navbar-item-dark"}>
-                        Orders
-                    </Link>
-                </div>
-            )}
-        </div>
-    )
-}
-
 function SettingsLink() {
     return (
         <>
@@ -151,6 +61,22 @@ function SettingsLink() {
                 Settings
             </Link>
         </>
+    );
+}
+
+function AdminPage() {
+    return (
+        <Link to={"/mypage/admin"} className={"navbar-item-dark"}>
+            Admin Page
+        </Link>
+    );
+}
+
+function ProviderPage() {
+    return (
+        <Link to={"/mypage/provider"} className={"navbar-item-dark"}>
+            Provider Page
+        </Link>
     );
 }
 
@@ -167,6 +93,7 @@ function BecomeProvider() {
     const handleBecomeProvider = async (event) => {
         event.preventDefault();
         try {
+            if (window.confirm("Are you sure you want to become a provider?")) {
             const token = localStorage.getItem("jwt");
             const response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/become-provider", {
                 method: 'POST',
@@ -174,6 +101,7 @@ function BecomeProvider() {
                     'Content-Type': 'application/json',
                 },
             });
+            }
 
             if (response.ok) {
                 //navigate('/');
@@ -197,9 +125,10 @@ function BecomeProvider() {
 
 function SettingsNavbar() {
     return (
-        <div className="navbar-column">
+        <>
             <NavBarPicker />
-        </div>
+            <Logout />
+        </>
     );
 
 }

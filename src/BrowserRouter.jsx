@@ -16,6 +16,8 @@ import AddNewCar from "./pages/ManageOwnedCarsPage/AddNewCar.jsx";
 import App from "./App.jsx";
 import EditCarPage from "./pages/EditCarPage/EditCarPage.jsx";
 import EditOrderPage from "./pages/EditOrderPage/EditOrderPage.jsx";
+import ProviderPage from "./pages/ProviderPage/ProviderPage.jsx";
+import AdminPage from "./pages/AdminPage/AdminPage.jsx";
 
 const router = createBrowserRouter([
     {
@@ -59,6 +61,10 @@ const router = createBrowserRouter([
                         path: "admin",
                         children: [
                             {
+                                index: true,
+                                element: <AdminPage />,
+                            },
+                            {
                                 path: "users",
                                 element: <UsersPage />,
                             },
@@ -93,7 +99,7 @@ const router = createBrowserRouter([
                         children: [
                             {
                                 index: true,
-                                element: <ManageOwnedCarsPage />
+                                element: <ProviderPage />
                             },
                             {
                                 path: "cars",

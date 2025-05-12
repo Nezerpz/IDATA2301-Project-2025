@@ -3,7 +3,6 @@ import React, {useEffect, useState} from "react";
 import {fetchWithAuth} from "../../static/js/auth.js";
 
 async function saveChanges(car) {
-    console.log(car);
     try {
         const response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars/" + car.id, {
             method: 'PUT',

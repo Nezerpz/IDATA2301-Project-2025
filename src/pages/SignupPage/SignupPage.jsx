@@ -9,7 +9,6 @@ function SignupPage() {
     const location = useLocation()
     const handleSignup = async (event) => {
         event.preventDefault()
-        console.log("something happens")
         try {
         let form = event.target
         let response = await fetch(
