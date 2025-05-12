@@ -34,7 +34,7 @@ function ReviewPage() {
                     reviewed_user_id: order.providerId,
                 }
             }
-            const response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/review-user", {
+            const response = await fetchWithAuth("/review-user", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -58,7 +58,7 @@ function ReviewPage() {
                 car: order.carId,
                 user: order.customerId,
             }
-            const response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/review-car", {
+            const response = await fetchWithAuth("/review-car", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

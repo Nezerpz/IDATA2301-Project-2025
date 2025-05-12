@@ -31,7 +31,7 @@ function DeleteCar({row}) {
 
     const postDelete = async () => {
         try {
-            const response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars/" + row.id, {
+            const response = await fetchWithAuth("/cars/" + row.id, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
