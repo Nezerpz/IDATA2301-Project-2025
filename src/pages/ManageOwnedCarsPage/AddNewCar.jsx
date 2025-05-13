@@ -3,9 +3,12 @@ import CarEdit from '../../components/CarEdit/CarEdit.jsx'
 
 //TODO: Add option to add manufacturer
 function AddNewCar() {
+    const [car, setCar] = useState(null)
+
     return (
         <CarEdit 
-            carToEdit={null} 
+            car={car} 
+            setCar={setCar}
             title={"Add New Car"} 
             actionText={"Add Car"}/>
     )

@@ -9,6 +9,7 @@ function CarEdit({car, setCar, title, actionText}) {
     const [fuelTypes, setFuelTypes] = useState(null)
     const [features, setFeatures] = useState(null)
 
+    let editing = car != undefined
     console.log(`inside: ${car}`)
 
     // Helper to update selected features
@@ -126,8 +127,8 @@ function CarEdit({car, setCar, title, actionText}) {
     // Callback for submit button
     const handleSubmit = (e, carToEdit, car) => {
         e.preventDefault()
-        if (carToEdit != null) { updateCar(car) }
-        else                   { addCar(car)       }
+        if (editing) { updateCar(car) }
+        else         { addCar(car)       }
     }
 
     // cope
