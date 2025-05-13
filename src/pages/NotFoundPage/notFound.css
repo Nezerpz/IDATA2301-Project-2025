@@ -1,5 +1,5 @@
 #not-found-page{
-    background-image: url('https://i.redd.it/63gmasx3mxj31.jpg');
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://i.redd.it/63gmasx3mxj31.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

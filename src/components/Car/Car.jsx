@@ -2,14 +2,14 @@ import "./Car.css";
 import PropTypes from 'prop-types';
 import FeatureList from "./FeatureList.jsx";
 import { CarContext } from "../../context/CarContext.js";
-import OrderModal from "./OrderModal.jsx";
+import OrderModal from "../Modals/OrderModal/OrderModal.jsx";
 import { useState, useContext } from "react";
 import checkLogin from "../../static/js/checkLogin.js";
 import {useNavigate, useSearchParams} from "react-router-dom";
-import ProviderReviewModal from "./ProviderReviewModal.jsx";
+import ReviewModal from "../Modals/ReviewModal/ReviewModal.jsx";
 
 
-
+//TODO: Add start under provider name. When clicking stars show the review modal for the car.
 function Car ({car}) {
     const [ordering, setIsOrdering] = useState(false)
     const [reviews, setReviews] = useState(false);
@@ -43,11 +43,11 @@ function Car ({car}) {
                     >
                         <strong>{car.user}</strong>
                     </p>
-                    <ProviderReviewModal
+                    <ReviewModal
                         open={reviews}
                         onClose={() => {setReviews(false)}}
-                        carId={car.id}
-                        provider={car.user}
+                        id={car.providerId}
+                        type={"user"}
                     />
                     <p>{car.transmissionType} ∙ {car.fuelType} ∙ {car.numberOfSeats} SEATS ∙ {car.productionYear}</p>
                 </div>

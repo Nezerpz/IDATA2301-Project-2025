@@ -1,11 +1,13 @@
 import PropTypes from "prop-types"
 import ReactDom from 'react-dom'
 import { useNavigate } from 'react-router';
-import {fetchWithAuth} from "../../static/js/auth.js";
-import "./Modal.css"
+import {fetchWithAuth} from "../../../static/js/auth.js";
+import "../Modal.css"
+import {useEffect} from "react";
+import scrollLock from "../../scrollLock/scrollLock.jsx";
 
 async function placeOrder(car, timespan, navigate, onClose) {
-    var response
+    let response
     try {
         response = await fetchWithAuth(`/order`, {
                 method: 'POST',
@@ -51,8 +53,14 @@ function OrderModal({open, onClose, car, timespan}) {
                 <h4>In Total</h4>
                 <p>{car.price} x {totalDays} = {totalPrice} total</p>
                 <div className={"button-container flex-container-row"}>
-                    <button className = {"big-button"} onClick={() => {placeOrder(car, timespan, navigate, onClose)}}>Place Order</button>
-                    <button className = {"big-button"} onClick={onClose}>Cancel</button>
+                    <button className = {"big-button"} onClick={() => {
+                        document.body.classList.remove("no-scroll");
+                        placeOrder(car, timespan, navigate, onClose);
+                    }}>Place Order</button>
+                    <button className = {"big-button"} onClick={() => {
+                        document.body.classList.remove("no-scroll");
+                        onClose();
+                    }}>Cancel</button>
                 </div>
             </div>
         </>,
@@ -85,4 +93,4 @@ OrderModal.propTypes = {
     })
 }
 
-export default OrderModal
+export default scrollLock(OrderModal);
