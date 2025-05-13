@@ -13,7 +13,7 @@ function EditCarPage() {
             try {
                 let data = await fetchJSON("/cars/" + id);
                 console.log("data")
-                console.debug(data)
+                console.log(data)
                 setCar(data);
             } catch (error) {
                 console.error(error);
@@ -23,11 +23,13 @@ function EditCarPage() {
         fetchdata();
     }, [id]);
 
-    console.log(car)
+    console.log(`outside: ${car}`)
 
     return (
         <CarEdit 
-            carToEdit={car} 
+            car={car} 
+            setCar={setCar}
+            addingNewCar={false}
             title={"Edit Car"} 
             actionText={"Update Car"}/>
     )
