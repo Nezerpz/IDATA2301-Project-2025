@@ -9,6 +9,7 @@ function AddNewCar() {
         <CarEdit 
             car={car} 
             setCar={setCar}
+            addingNewCar={true}
             title={"Add New Car"} 
             actionText={"Add Car"}/>
     )

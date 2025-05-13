@@ -3,14 +3,13 @@ import React, { useState, useEffect, useRef } from "react";
 import { fetchJSON, fetchWithAuth } from "../../static/js/auth.js"
 import "./CarEdit.css";
 
-function CarEdit({car, setCar, title, actionText}) {
+function CarEdit({car, setCar, addingNewCar, title, actionText}) {
     const [manufacturers, setManufacturers] = useState(null)
     const [transmissionTypes, setTransmissionTypes] = useState(null)
     const [fuelTypes, setFuelTypes] = useState(null)
     const [features, setFeatures] = useState(null)
 
-    let addingNewCar = useRef(car == undefined)
-    console.log(`inside: ${car}`)
+    console.log(`adding new car? ${addingNewCar}`)
 
     // Helper to update selected features
     function updateSelectedFeatures(selectElement) {
@@ -129,7 +128,7 @@ function CarEdit({car, setCar, title, actionText}) {
         e.preventDefault()
         console.log(addingNewCar)
         if (addingNewCar) { addCar(car)    }
-        else        { updateCar(car) }
+        else              { updateCar(car) }
     }
 
     // cope

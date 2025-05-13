@@ -28,7 +28,8 @@ function EditCarPage() {
     return (
         <CarEdit 
             car={car} 
-        setCar={setCar}
+            setCar={setCar}
+            addingNewCar={false}
             title={"Edit Car"} 
             actionText={"Update Car"}/>
     )
