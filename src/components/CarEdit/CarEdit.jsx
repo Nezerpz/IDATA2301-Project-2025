@@ -78,6 +78,19 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
         }
     }
 
+    function validateCarState(car) {
+        return car == undefined 
+            ? false
+            : ("manufacturer"     in car ? car.manufacturer     : false) && 
+              ("carModel"         in car ? car.carModel         : false) && 
+              ("numberOfSeats"    in car ? car.numberOfSeats    : false) &&
+              ("transmissionType" in car ? car.transmissionType : false) &&
+              ("fuelType"         in car ? car.fuelType         : false) &&
+              ("price"            in car ? car.price            : false) &&
+              ("productionYear"   in car ? car.productionYear   : false) &&
+              ("features"         in car ? car.features         : false) 
+    }
+
     // Removes some code-duplication
     function handleReturnCodes(response) {
         if (response.status === 404) {
@@ -124,8 +137,7 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
     }
 
     // Callback for submit button
-    const handleSubmit = (e, addingNewCar, car) => {
-        e.preventDefault()
+    const handleSubmit = (addingNewCar, car) => {
         console.log(addingNewCar)
         if (addingNewCar) { addCar(car)    }
         else              { updateCar(car) }
@@ -148,7 +160,7 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
     return (
         <div>
             <h1>{title}</h1>
-            <form className={"car-edit"} onSubmit={(e) => handleSubmit(e, addingNewCar, car)}>
+            <form className={"car-edit"} onSubmit={(e) => e.preventDefault()}>
                 <label>
                     <span className={"car-edit-property-heading"}>Manufacturer</span>
                     <select placeholder="Select Manufacturer" 
@@ -239,7 +251,9 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
                     <input type="file" placeholder="Upload image" 
                         onChange={e => uploadImage(car.id, e, setCar)}/>
                 </label>
-                <button className={"big-button"} type="submit">{actionText}</button>
+                <button className={"big-button"} type="submit"
+                    disabled={!validateCarState(car)}
+                    onClick={e => handleSubmit(addingNewCar, car)}>{actionText}</button>
             </form>
         </div>
     );
