@@ -3,15 +3,13 @@ import React, { useState, useEffect } from "react";
 import { fetchJSON, fetchWithAuth } from "../../static/js/auth.js"
 import "./CarEdit.css";
 
-function CarEdit({carToEdit, title, actionText}) {
+function CarEdit({car, setCar, title, actionText}) {
     const [manufacturers, setManufacturers] = useState(null)
     const [transmissionTypes, setTransmissionTypes] = useState(null)
     const [fuelTypes, setFuelTypes] = useState(null)
-    const [car, setCar] = useState((carToEdit == null) ? { features: [] } : carToEdit)
     const [features, setFeatures] = useState(null)
 
-    console.log("car")
-    console.log(car)
+    console.log(`inside: ${car}`)
 
     // Helper to update selected features
     function updateSelectedFeatures(selectElement) {
@@ -132,6 +130,20 @@ function CarEdit({carToEdit, title, actionText}) {
         else                   { addCar(car)       }
     }
 
+    // cope
+    if (car == undefined) {
+        car = {
+            manufacturer: "",
+            carModel: "",
+            numberOfSeats: "",
+            transmissionType: "",
+            fuelType: "",
+            price: "",
+            productionYear: "",
+            features: [],
+        }
+    }
+
     return (
         <div>
             <h1>{title}</h1>
@@ -140,7 +152,7 @@ function CarEdit({carToEdit, title, actionText}) {
                     <span className={"car-edit-property-heading"}>Manufacturer</span>
                     <select placeholder="Select Manufacturer" 
                         className={"car-edit-property-input"}
-                        value={car.manufacturer != undefined ? car.manufacturer : ""} 
+                        value={car.manufacturer} 
                         onChange={e => setCar({ ...car, manufacturer: e.target.value})}>
                         {manufacturers != null 
                             ? manufacturers.map((value, i) => (
@@ -152,14 +164,14 @@ function CarEdit({carToEdit, title, actionText}) {
                     <span className={"car-edit-property-heading"}>Model</span>
                         <input type="text" placeholder="Enter Model" 
                             className={"car-edit-property-input"}
-                            value={car.carModel != undefined ? car.carModel : ""} 
+                            value={car.carModel} 
                             onChange={(e) => setCar({ ...car, carModel: e.target.value })} />
                 </label>
                 <label>
                     <span className={"car-edit-property-heading"}>Number of seats</span>
                         <input type="number" placeholder="Enter number of seats" min={1}
                             className={"car-edit-property-input"}
-                            value={car.numberOfSeats != undefined ? car.numberOfSeats : ""} 
+                            value={car.numberOfSeats} 
                             onChange={(e) => setCar({ ...car, numberOfSeats: e.target.value })} />
                 </label>
                 <label>
@@ -195,14 +207,14 @@ function CarEdit({carToEdit, title, actionText}) {
                     <span className={"car-edit-property-heading"}>Rental Price per Day</span>
                          <input type="number" placeholder="Enter price" min={0}
                             className={"car-edit-property-input"}
-                            value={car.price != undefined ? car.price : ""} 
+                            value={car.price} 
                             onChange={(e) => setCar({ ...car, price: e.target.value })} />
                 </label>
                 <label>
                     <span className={"car-edit-property-heading"}>Production year</span>
                         <input type="number" placeholder="Enter production year" min={1885}
                             className={"car-edit-property-input"}
-                            value={car.productionYear != undefined ? car.productionYear : ""} 
+                            value={car.productionYear} 
                             onChange={(e) => setCar({ ...car, productionYear: e.target.value })} />
                 </label>
                 <label>
