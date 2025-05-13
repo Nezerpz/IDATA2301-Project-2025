@@ -7,6 +7,10 @@ import ReviewModal from "../Modals/ReviewModal/ReviewModal.jsx";
 function ReviewCustomer(order, navigate) {
     return (
         <button onClick={() => {
+            if (order.orderStatus !== "COMPLETED") {
+                alert("You can only review the customer after the order is completed.");
+                return;
+            }
             navigate("/mypage/review", {state: {order: order, type: "customer"}})
         }}>
             Review customer
@@ -17,6 +21,10 @@ function ReviewCustomer(order, navigate) {
 function ReviewProvider(order, navigate) {
     return(
         <button onClick={() => {
+            if (order.orderStatus !== "COMPLETED") {
+                alert("You can only review the provider after the order is completed.");
+                return;
+            }
             navigate("/mypage/review", {state: {order: order, type: "provider"}})
         }}>
             Review provider
@@ -27,6 +35,10 @@ function ReviewProvider(order, navigate) {
 function ReviewCar(order, navigate) {
     return(
         <button onClick={() => {
+            if (order.orderStatus !== "COMPLETED") {
+                alert("You can only review the car after the order is completed.");
+                return;
+            }
             navigate("/mypage/review", {state: {order: order, type: "car"}})
         }}>
             Review car
