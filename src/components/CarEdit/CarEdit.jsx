@@ -25,6 +25,7 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
             try {
                 let data = await fetchJSON("/manufacturers", { method: "GET" })
                 setManufacturers(data)
+                setCar({...car, manufacturer: data[0]})
             }   catch (e) { console.error(e) }
         }
 
@@ -32,6 +33,7 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
             try {
                 let data = await fetchJSON("/transmission-types", { method: "GET" })
                 setTransmissionTypes(data)
+                setCar({...car, transmissionType: data[0]})
             }   catch (e) { console.error(e) }
         }
 
@@ -39,6 +41,7 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
             try {
                 let data = await fetchJSON("/fuel-types", { method: "GET" })
                 setFuelTypes(data)
+                setCar({...car, fuelType: data[0]})
             }   catch (e) { console.error(e) }
         }
 
@@ -47,6 +50,7 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
                 let data = await fetchJSON("/features", { method: "Get" })
                 console.debug(data)
                 setFeatures(data)
+                setCar({...car, features: []})
             }   catch (e) { console.error(e) }
         }
     })()}, [manufacturers, features, car])
