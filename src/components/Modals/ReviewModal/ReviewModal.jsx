@@ -7,7 +7,6 @@ import scrollLock from "../../scrollLock/scrollLock.jsx";
 
 //TODO: If modal is open prevent user from being able to scroll
 function getReviews(id, setReviews, type, setLoading) {
-    console.debug(id)
     useEffect(() => {
         const fetchdata = async () => {
             try {
