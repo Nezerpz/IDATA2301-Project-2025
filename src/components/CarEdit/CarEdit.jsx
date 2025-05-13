@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { fetchJSON, fetchWithAuth } from "../../static/js/auth.js"
 import "./CarEdit.css";
 
@@ -9,7 +9,7 @@ function CarEdit({car, setCar, title, actionText}) {
     const [fuelTypes, setFuelTypes] = useState(null)
     const [features, setFeatures] = useState(null)
 
-    let editing = car != undefined
+    let addingNewCar = useRef(car == undefined)
     console.log(`inside: ${car}`)
 
     // Helper to update selected features
@@ -125,10 +125,11 @@ function CarEdit({car, setCar, title, actionText}) {
     }
 
     // Callback for submit button
-    const handleSubmit = (e, carToEdit, car) => {
+    const handleSubmit = (e, addingNewCar, car) => {
         e.preventDefault()
-        if (editing) { updateCar(car) }
-        else         { addCar(car)       }
+        console.log(addingNewCar)
+        if (addingNewCar) { addCar(car)    }
+        else        { updateCar(car) }
     }
 
     // cope
@@ -148,7 +149,7 @@ function CarEdit({car, setCar, title, actionText}) {
     return (
         <div>
             <h1>{title}</h1>
-            <form className={"car-edit"} onSubmit={(e) => handleSubmit(e, carToEdit, car)}>
+            <form className={"car-edit"} onSubmit={(e) => handleSubmit(e, addingNewCar, car)}>
                 <label>
                     <span className={"car-edit-property-heading"}>Manufacturer</span>
                     <select placeholder="Select Manufacturer" 
