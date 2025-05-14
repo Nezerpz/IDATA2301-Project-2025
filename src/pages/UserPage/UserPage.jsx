@@ -24,7 +24,19 @@ async function saveChanges(user) {
     }
 }
 
+async function unsuspendUser(user) {
+    if (!confirm("Sure you want to unsuspend this user?")) return
+    let response = await fetchWithAuth(`/users/unsuspend/${user.id}`, { method: "POST" })
+    if (response.ok) {
+        alert("User successfully unsuspended")
+    }
+    else {
+        alert("Error occured")
+    }
+}
+
 async function suspendUser(user) {
+    if (!confirm("Sure you want to suspend this user?")) return
     let response = await fetchWithAuth(`/users/suspend/${user.id}`, { method: "POST" })
     if (response.ok) {
         alert("User successfully suspended")
@@ -35,6 +47,7 @@ async function suspendUser(user) {
 }
 
 async function deleteUser(user) {
+    if (!confirm("Sure you want to delete this user?")) return
     let response = await fetchWithAuth(`/users/${user.id}`, { method: "DELETE" })
     if (response.ok) {
         alert("User successfully deleted")
@@ -69,14 +82,26 @@ function renderPage(user, setUser) {
                             <button className={"big-button"}>Send password reset</button>
                         </div>
                     </form>
-                        <h4>Suspend or delete user?</h4>
+                        <h4>Suspend/unsuspend or delete user?</h4>
                         <div className={"flex-container-row"}>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                                 stroke="currentColor" className="size-6 flex-end-item" width={48}
-                                 onClick={() => suspendUser(user)}>
+                            <svg xmlns="http://www.w3.org/2000/svg" 
+                                fill="none" viewBox="0 0 24 24" 
+                                strokeWidth={1.5} stroke="currentColor" 
+                                width={48}
+                                className="size-6" onClick={() => unsuspendUser(user)}>
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                              <path strokeLinecap="round" strokeLinejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" />
+                            </svg>
+
+                            <svg xmlns="http://www.w3.org/2000/svg" 
+                                fill="none" viewBox="0 0 24 24" 
+                                strokeWidth="1.5" stroke="currentColor" 
+                                className="size-6 flex-end-item" width={48}
+                                onClick={() => suspendUser(user)}>
                                 <path strokeLinecap="round" strokeLinejoin="round"
                                       d="M14.25 9v6m-4.5 0V9M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                             </svg>
+
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
                                  stroke="currentColor" className="size-6 flex-end-item" width={48}
                                  onClick={() => deleteUser(user)}>
