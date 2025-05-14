@@ -5,7 +5,7 @@ import {useParams} from "react-router-dom";
 
 async function saveChanges(order) {
     try {
-        const response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/orders/" + order.id, {
+        const response = await fetchWithAuth("/orders/" + order.id, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -68,24 +68,23 @@ function EditOrderPage() {
         const fetchData = async () => {
             setLoading(true);
             try {
-                let orderResponse = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/orders/" + id);
+                let orderResponse = await fetchWithAuth("/orders/" + id);
                 let orderData = await orderResponse.json();
                 setOrder(orderData);
 
                 // Fetch the customer
-                let customerResponse = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/users/" + orderData.customerId);
+                let customerResponse = await fetchWithAuth("/users/name/" + orderData.customerId);
                 let customerData = await customerResponse.json();
-                setCustomerName(customerData.firstName + " " + customerData.lastName);
+                setCustomerName(customerData.name);
 
                 // Fetch the provider
-                let providerResponse = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/users/" + orderData.providerId);
+                let providerResponse = await fetchWithAuth("/users/name/" + orderData.providerId);
                 let providerData = await providerResponse.json();
-                setProviderName(providerData.firstName + " " + providerData.lastName);
+                setProviderName(providerData.name);
 
-                let orderStatusResponse = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/order-statuses");
+                let orderStatusResponse = await fetchWithAuth("/order-statuses");
                 let orderStatusData = await orderStatusResponse.json();
                 setOrderStatuses(orderStatusData);
-                console.log(orderStatusData);
 
             } catch (error) {
                 setError(error);

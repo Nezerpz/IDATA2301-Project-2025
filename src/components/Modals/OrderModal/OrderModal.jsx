@@ -1,37 +1,15 @@
 import PropTypes from "prop-types"
 import ReactDom from 'react-dom'
 import { useNavigate } from 'react-router';
-import {fetchWithAuth} from "../../static/js/auth.js";
-
-const MODAL_STYLES = {
-    position: 'fixed',
-    width: '325px',
-    maxHeight: '525px',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    backgroundColor: '#EEE',
-    borderRadius: '12px',
-    padding: '25px',
-    zIndex: 1000
-}
-
-const OVERLAY_STYLES = {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-    zIndex: 1000
-}
+import {fetchWithAuth} from "../../../static/js/auth.js";
+import "../Modal.css"
+import {useEffect} from "react";
+import scrollLock from "../../scrollLock/scrollLock.jsx";
 
 async function placeOrder(car, timespan, navigate, onClose) {
-    var response
+    let response
     try {
-        response = await fetchWithAuth(
-            import.meta.env.VITE_BACKEND_URL + ":" + 
-            import.meta.env.VITE_BACKEND_PORT + `/order`, {
+        response = await fetchWithAuth(`/order`, {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
@@ -66,8 +44,8 @@ function OrderModal({open, onClose, car, timespan}) {
     let totalPrice = car.price * totalDays
     return ReactDom.createPortal(
         <>
-            <div style={OVERLAY_STYLES}></div>
-            <div style={MODAL_STYLES}>
+            <div className={"overlay"}></div>
+            <div className={"modal"}>
                 <h4>Order {car.carModel}</h4>
                 <p><strong>From:</strong> {timespan.dateFrom} {timespan.timeFrom}</p>
                 <p><strong>To:</strong> {timespan.dateTo} {timespan.timeTo}</p>
@@ -75,8 +53,14 @@ function OrderModal({open, onClose, car, timespan}) {
                 <h4>In Total</h4>
                 <p>{car.price} x {totalDays} = {totalPrice} total</p>
                 <div className={"button-container flex-container-row"}>
-                    <button className = {"big-button"} onClick={() => {placeOrder(car, timespan, navigate, onClose)}}>Place Order</button>
-                    <button className = {"big-button"} onClick={onClose}>Cancel</button>
+                    <button className = {"big-button"} onClick={() => {
+                        document.body.classList.remove("no-scroll");
+                        placeOrder(car, timespan, navigate, onClose);
+                    }}>Place Order</button>
+                    <button className = {"big-button"} onClick={() => {
+                        document.body.classList.remove("no-scroll");
+                        onClose();
+                    }}>Cancel</button>
                 </div>
             </div>
         </>,
@@ -109,4 +93,4 @@ OrderModal.propTypes = {
     })
 }
 
-export default OrderModal
+export default scrollLock(OrderModal);

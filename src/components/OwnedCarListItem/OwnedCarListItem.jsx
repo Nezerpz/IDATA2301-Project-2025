@@ -13,7 +13,7 @@ function OwnedCarListItem(car) {
 
     const postDelete = async () => {
         try {
-            const response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/cars/" + car.id, {
+            const response = await fetchWithAuth("/cars/" + car.id, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

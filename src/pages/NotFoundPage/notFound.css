@@ -1,0 +1,25 @@
+#not-found-page{
+    background-image: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://i.redd.it/63gmasx3mxj31.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-shadow: 1px 1px 2px black;
+}
+
+#not-found-page h1{
+    font-size: 3rem;
+    color: var(--heading-color-light);
+    margin-bottom: 20px;
+}
+
+#not-found-page p{
+    font-size: 1.5rem;
+    color: var(--heading-color-light);
+    margin-bottom: 20px;
+}

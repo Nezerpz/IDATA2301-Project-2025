@@ -25,7 +25,6 @@ function SearchDateFromTo() {
             dateTo: (newDateTo.toISOString().split('T')[0]),
             timeTo: ('0'  + newTimeTo.getHours()).slice(-2)+':'+('0' + newTimeTo.getMinutes()).slice(-2),
         }
-        console.debug(timespan)
         setTimespan({...timespan});
         const queryParams = new URLSearchParams(timespan).toString();
         navigate(`/cars?${queryParams}`);

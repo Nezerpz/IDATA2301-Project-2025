@@ -6,18 +6,34 @@ import useTitle from "../../components/useTitle.jsx";
 import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {fetchWithAuth} from "../../static/js/auth.js";
-import "./ManageOwnedCarsPage.css"
+import BackButton from "../../components/BackButton/BackButton.jsx";
 
 function renderPage(cars) {
+    const path = window.location.pathname;
+    const isAdmin = path.includes("admin");
+
+    if (isAdmin) {
+        return (
+            <>
+                <div className={"flex-container-row flex-space-between margin-bottom-10px"}>
+                    <BackButton />
+                </div>
+                <h1>List of all cars</h1>
+                <OwnedCarsList cars={cars} />
+            </>
+        );
+    }
     return(
-        <div id={"manage-cars"}>
-            <div className={"button-container-end"}>
+        <>
+            <div className={"flex-container-row flex-space-between margin-bottom-10px"}>
+                <BackButton />
                 <button className={"big-button"}>
                     <Link to={"/mypage/provider/cars/add"}>Add new car</Link>
                 </button>
             </div>
+            <h1>Cars</h1>
             <OwnedCarsList cars={cars}/>
-        </div>
+        </>
     )
 }
 
@@ -34,7 +50,7 @@ function ManageOwnedCarsPage() {
                 const path = window.location.pathname;
                 let endpoint = path.includes("provider") ? "/cars/provider" : "/cars" ;
 
-                let response = await fetchWithAuth(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + endpoint);
+                let response = await fetchWithAuth(endpoint);
                 let data = await response.json();
                 setCars(data);
             } catch (error) {

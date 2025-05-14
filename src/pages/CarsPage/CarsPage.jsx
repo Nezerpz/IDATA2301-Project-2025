@@ -34,9 +34,7 @@ function CarsPage() {
       const fetchData = async () => {
         setLoading(true);
         try {
-            const response = await fetchWithAuth(
-                import.meta.env.VITE_BACKEND_URL + ":" +
-                import.meta.env.VITE_BACKEND_PORT + "/cars", {
+            const response = await fetchWithAuth("/cars", {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json', },
                     body: JSON.stringify(fromToDate),

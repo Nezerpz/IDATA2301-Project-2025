@@ -25,3 +25,24 @@ footer{
     font-size: 125%;
     color: var(--heading-color-light);
 }
+
+.address-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#address-header{
+    color: var(--heading-color-light);
+}
+
+#address-street{
+    font-size: 1.25rem;
+    color: var(--heading-color-light);
+    margin: 10px 0;
+}
+
+#address-city{
+    font-size: 1.25rem;
+    color: var(--heading-color-light);
+    margin: 10px 0;
+}

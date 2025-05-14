@@ -1,3 +1,5 @@
+import {useNavigate} from "react-router-dom";
+
 export async function refreshToken() {
     try {
         const response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/refresh-token", {
@@ -6,6 +8,10 @@ export async function refreshToken() {
         });
 
         if (!response.ok) {
+            if (response.status === 401) {
+                localStorage.removeItem("jwt");
+                useNavigate("/login");
+            }
             throw new Error("Failed to refresh token");
         }
 
@@ -18,7 +24,14 @@ export async function refreshToken() {
     }
 }
 
-export async function fetchWithAuth(url, options = {}) {
+
+export async function fetchJSON(endpoint, options = {}) {
+    let response = await fetchWithAuth(endpoint, options)
+    let data = await response.json()
+    return data
+}
+
+export async function fetchWithAuth(endpoint, options = {}) {
     const token = localStorage.getItem("jwt");
     const headers = {
         ...options.headers,
@@ -26,29 +39,41 @@ export async function fetchWithAuth(url, options = {}) {
     };
 
     try {
-        const response = await fetch(url, { ...options, headers });
+        const response = await fetch(
+            import.meta.env.VITE_BACKEND_URL + ":" +
+            import.meta.env.VITE_BACKEND_PORT + endpoint,
+            {...options, headers }
+        )
 
+        // Refresh token if expired
         if (response.status === 401) {
             try {
                 const newToken = await refreshToken();
                 headers.Authorization = `Bearer ${newToken}`;
                 const retryResponse = await fetch(url, { ...options, headers });
+
                 if (!retryResponse.ok) {
                     throw new Error(`Retry failed with status: ${retryResponse.status}`);
                 }
+
                 return retryResponse;
-            } catch (refreshError) {
+            } 
+
+            catch (refreshError) {
                 console.error("Error refreshing token:", refreshError);
                 throw new Error("Failed to refresh token and retry request.");
             }
         }
 
         if (!response.ok) {
+            console.log(response)
             throw new Error(`Request failed with status: ${response.status}`);
         }
 
         return response;
-    } catch (error) {
+    } 
+
+    catch (error) {
         console.error("Error in fetchWithAuth:", error);
         throw error;
     }
