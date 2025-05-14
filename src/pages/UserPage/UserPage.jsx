@@ -24,6 +24,22 @@ async function saveChanges(user) {
     }
 }
 
+function updatePassword(event) {
+    if (!confirm("Are you sure you want to update this user's password?")) return
+    let passwordField = event.target.parentElement.querySelector('input[type="password"]')
+    let password = passwordField.value
+    const response = fetchWithAuth("/users/self/password", { 
+        method: "POST", 
+        password: password 
+    })
+    if (response.ok) {
+        alert("Password updated successfully")
+    }
+    else {
+        alert("Error occured")
+    }
+}
+
 async function suspendUser(user) {
     let response = await fetchWithAuth(`/users/suspend/${user.id}`, { method: "POST" })
     if (response.ok) {
@@ -47,7 +63,7 @@ async function deleteUser(user) {
 function renderPage(user, setUser) {
     return (
         <>
-            <form>
+            <form onSubmit={(e) => e.preventDefault()}>
                 <h2>Manage user - {user.firstName} {user.lastName}</h2>
                 <label>
                     <span>Name</span>
@@ -62,11 +78,14 @@ function renderPage(user, setUser) {
                     <span>Email</span>
                     <input type={"email"} value={user.email} onChange={(e) => setUser({...user, email: e.target.value})} />
                 </label>
-                <button className={"big-button"} type={"submit"}>Submit changes</button>
+                <button className={"big-button"} type={"submit"}
+                    onChange={() => saveChanges(user)}>Submit changes</button>
             </form>
             <div>
                 <h4>Password reset</h4>
-                <button className={"big-button"}>Send password reset</button>
+                <input type={"password"} placeholder={"Enter new password"}></input>
+                <button className={"big-button"}
+                    onChange={(e) => updatePassword(e)}>Send password reset</button>
             </div>
             <h4>Suspend or delete user?</h4>
             <div className={"flex-container-row"}>
