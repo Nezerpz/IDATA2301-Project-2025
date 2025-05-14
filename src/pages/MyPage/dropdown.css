@@ -3,7 +3,7 @@
     display: inline-block;
 }
 
-.dropdown-toggle:hover{
+.dropdown-toggle{
     cursor: pointer;
 }
 

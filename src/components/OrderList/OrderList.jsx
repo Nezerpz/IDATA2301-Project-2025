@@ -2,13 +2,18 @@ import SearchableFieldTable from "../SearchableFieldTable/SearchableFieldTable.j
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {fetchWithAuth} from "../../static/js/auth.js";
+import ReviewModal from "../Modals/ReviewModal/ReviewModal.jsx";
 
 function ReviewCustomer(order, navigate) {
     return (
         <button onClick={() => {
+            if (order.orderStatus !== "COMPLETED") {
+                alert("You can only review the customer after the order is completed.");
+                return;
+            }
             navigate("/mypage/review", {state: {order: order, type: "customer"}})
         }}>
-            Review Customer
+            Review customer
         </button>
     )
 }
@@ -16,9 +21,13 @@ function ReviewCustomer(order, navigate) {
 function ReviewProvider(order, navigate) {
     return(
         <button onClick={() => {
+            if (order.orderStatus !== "COMPLETED") {
+                alert("You can only review the provider after the order is completed.");
+                return;
+            }
             navigate("/mypage/review", {state: {order: order, type: "provider"}})
         }}>
-            Review Provider
+            Review provider
         </button>
     )
 }
@@ -26,11 +35,76 @@ function ReviewProvider(order, navigate) {
 function ReviewCar(order, navigate) {
     return(
         <button onClick={() => {
+            if (order.orderStatus !== "COMPLETED") {
+                alert("You can only review the car after the order is completed.");
+                return;
+            }
             navigate("/mypage/review", {state: {order: order, type: "car"}})
         }}>
-            Review Car
+            Review car
         </button>
     )
+}
+
+function ReadCar(row) {
+    const [reviews, setReviews] = useState(false);
+    return (
+        <>
+            <button
+                className={"car-user"}
+                title={"Read reviews of this user"}
+                onClick={() => {setReviews(true)}}
+            >Car reviews
+            </button>
+            <ReviewModal
+                open={reviews}
+                onClose={() => {setReviews(false)}}
+                id={row.car.id}
+                type={"car"}
+            />
+        </>
+    );
+}
+
+
+function ReadCustomer(row) {
+    const [reviews, setReviews] = useState(false);
+    return (
+        <>
+            <button
+                className={"car-user"}
+                title={"Read reviews of this user"}
+                onClick={() => {setReviews(true)}}
+            >Customer reviews
+            </button>
+            <ReviewModal
+                open={reviews}
+                onClose={() => {setReviews(false)}}
+                id={row.customerId}
+                type={"user"}
+            />
+        </>
+    );
+}
+
+function ReadProvider(row) {
+    const [reviews, setReviews] = useState(false);
+    return (
+        <>
+            <button
+                title={"Read reviews of this user"}
+                onClick={() => {setReviews(true)}}
+            >
+                Provider reviews
+            </button>
+            <ReviewModal
+                open={reviews}
+                onClose={() => {setReviews(false)}}
+                id={row.providerId}
+                type={"user"}
+            />
+        </>
+    );
 }
 
 function EditOrder(row, navigate) {
@@ -62,12 +136,14 @@ function ReviewOptions({ row, userData }) {
             <>
                 {ReviewCar(row, navigate)}
                 {ReviewProvider(row, navigate)}
+                {ReadProvider(row)}
             </>
         );
     } else if (isProvider) {
         return (
             <>
                 {ReviewCustomer(row, navigate)}
+                {ReadCustomer(row)}
                 {EditOrder(row, navigate)}
             </>
         );
@@ -81,6 +157,7 @@ function OrderList({ orders }) {
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    console.log(orders);
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -88,6 +165,7 @@ function OrderList({ orders }) {
                 const response = await fetchWithAuth("/users/self");
                 const data = await response.json();
                 setUserData(data);
+
             } catch (error) {
                 console.error("Error fetching user data:", error);
                 setError(error);

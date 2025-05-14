@@ -1,0 +1,37 @@
+.modal {
+    position: fixed;
+    width: 325px;
+    max-height: 525px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #EEE;
+    border-radius: 12px;
+    padding: 25px;
+    z-index: 1000
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000
+}
+
+.close {
+    cursor: pointer;
+}
+
+.modal-content {
+    gap: 10px;
+}
+
+.modal-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

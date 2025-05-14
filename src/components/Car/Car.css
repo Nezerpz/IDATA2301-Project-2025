@@ -17,6 +17,10 @@
     color: var(--heading-color-dark);
 }
 
+.car-user {
+    cursor: pointer;
+}
+
 .car p {
     margin: 15px 0px 15px 0px;
     font-family: var(--main-font);
