@@ -48,7 +48,6 @@ figure > img {
 }
 
 span {
-    color: var(--text-color);
     font-family: var(--main-font);
 }
 
