@@ -53,7 +53,7 @@ function Car ({car}) {
                         id={car.providerId}
                         type={"user"}
                     />
-                    <div className="star-container">
+                    <div className="star-container" onClick={() => setCarReviews(true)}>
                         {car.averageRating === 0 ? (
                             <span>Car has no reviews</span>
                         ) : (
@@ -70,6 +70,12 @@ function Car ({car}) {
                             })
                         )}
                     </div>
+                    <ReviewModal
+                        open={carReviews}
+                        onClose={() => setCarReviews(false)}
+                        id={car.id}
+                        type={"car"}
+                    />
                     <p>{car.transmissionType} ∙ {car.fuelType} ∙ {car.numberOfSeats} SEATS ∙ {car.productionYear}</p>
                 </div>
                 <FeatureList features={car.features}/>

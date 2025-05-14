@@ -32,9 +32,13 @@ function ReviewModal({ open, id, type, onClose }) {
 
     console.debug(reviews)
 
-    let userNameString = "Loading...";
+    let userNameString = "Sorry, no reviews found";
     if (!loading && reviews && reviews.length > 0) {
-        userNameString = reviews[0].reviewedUser.firstName + " " + reviews[0].reviewedUser.lastName;
+        if (type === "car") {
+            userNameString = reviews[0].car.manufacturer + " " + reviews[0].car.carModel;
+        } else {
+            userNameString = reviews[0].reviewedUser.firstName + " " + reviews[0].reviewedUser.lastName;
+        }
     }
 
 
@@ -56,7 +60,11 @@ function ReviewModal({ open, id, type, onClose }) {
                     {reviews && reviews.length > 0 ? (
                         reviews.map((review) => (
                             <div className="review" key={review.id}>
-                                <p><strong>{review.reviewingUser.firstName + " " +review.reviewingUser.lastName}</strong></p>
+                                <p><strong>
+                                    {type === "car"
+                                        ? review.user.firstName + " " + review.user.lastName
+                                        : review.reviewingUser.firstName + " " + review.reviewingUser.lastName}
+                                </strong></p>
                                 <span>{review.review}</span>
                                 <span>Rating: {review.rating}</span>
                             </div>
