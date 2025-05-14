@@ -31,8 +31,11 @@ function LoginPage() {
                 const redirectTo = location.state?.from || '/';
                 navigate(redirectTo);
                 window.location.reload();
+            } else if (response.status === 403){
+                alert("You have been forbidden from logging in. Your account is most likely suspended. Contact us for more information.")
             } else {
                 console.error('Failed to login', response.statusText);
+                alert('Failed to login');
             }
         } catch (error) {
             console.error('Error logging in', error);
