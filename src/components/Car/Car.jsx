@@ -10,48 +10,18 @@ import ReviewModal from "../Modals/ReviewModal/ReviewModal.jsx";
 import {FaStar} from "react-icons/fa";
 import {fetchJSON} from "../../static/js/auth.js";
 
-function getRating(car, setRating) {
-    useEffect(() => {
-        const fetchdata = async () => {
-            try {
-                let data = await fetchJSON(`/review/car/` + car.id);
-                if (data && data.length > 0) {
-                    const total = data.reduce((sum, review) => sum + review.rating, 0);
-                    const average = total / data.length;
-                    setRating(average);
-                } else {
-                    setRating(2.5);
-                }
-            } catch (error) {
-                console.error(error);
-                setRating(0);
-            }
-        };
-
-        fetchdata();
-    }, [car]);
-}
-
 
 //TODO: Add start under provider name. When clicking stars show the review modal for the car.
 function Car ({car}) {
     const [ordering, setIsOrdering] = useState(false)
     const [providerReviews, setProviderReviews] = useState(false);
     const [carReviews, setCarReviews] = useState(false);
-    const [rating, setRating] = useState(0);
     const [searchParams] = useSearchParams();
     let [ fromToDate, setFromToDate ] = useContext(CarContext);
     const totalStars = 5;
 
-    const carWithRating = {
-        ...car,
-        rating: rating
-    }
-
     const navigate = useNavigate();
     // <button onClick={() => {orderCar(car, fromToDate, setIsOrdering)}}>Order Now</button>
-
-    getRating(car, setRating);
 
 
     const canOrder = () => {
@@ -66,8 +36,8 @@ function Car ({car}) {
 
     return (
         <div className="car">
-            <h3>{carWithRating.manufacturer} {carWithRating.carModel}</h3>
-            <img src={"src" + carWithRating.imagePath} alt={carWithRating.carModel} className={"car-image"}/>
+            <h3>{car.manufacturer} {car.carModel}</h3>
+            <img src={"src" + car.imagePath} alt={car.carModel} className={"car-image"}/>
             <div className={"carInfo"}>
                 <div>
                     <p
@@ -80,34 +50,38 @@ function Car ({car}) {
                     <ReviewModal
                         open={providerReviews}
                         onClose={() => {setProviderReviews(false)}}
-                        id={carWithRating.providerId}
+                        id={car.providerId}
                         type={"user"}
                     />
                     <div className="star-container">
-                        {Array.from({ length: totalStars }).map((_, index) => {
-                            const currentRating = index + 1;
-                            return (
-                                <FaStar
-                                    key={index}
-                                    size={25}
-                                    color={currentRating <= carWithRating.rating ? "yellow" : "grey"}
-                                />
-                            );
-                        })}
-                        <span>Rating: {carWithRating.rating} / {totalStars}</span>
+                        {car.averageRating === 0 ? (
+                            <span>Car has no reviews</span>
+                        ) : (
+                            Array.from({ length: totalStars }).map((_, index) => {
+                                const currentRating = index + 1;
+                                return (
+                                    <FaStar
+                                        key={index}
+                                        size={25}
+                                        color={currentRating <= Math.ceil(car.averageRating) ? "yellow" : "grey"}
+                                        title={`${car.averageRating} / ${totalStars}`}
+                                    />
+                                );
+                            })
+                        )}
                     </div>
-                    <p>{carWithRating.transmissionType} ∙ {carWithRating.fuelType} ∙ {carWithRating.numberOfSeats} SEATS ∙ {carWithRating.productionYear}</p>
+                    <p>{car.transmissionType} ∙ {car.fuelType} ∙ {car.numberOfSeats} SEATS ∙ {car.productionYear}</p>
                 </div>
-                <FeatureList features={carWithRating.features}/>
+                <FeatureList features={car.features}/>
             </div>
             <span className={"grow"}></span>
             <div className={"orderButtonContainer"}>
-                <button className = {"big-button"} onClick={() => {canOrder()}}>Rent for {carWithRating.price}/day</button>
+                <button className = {"big-button"} onClick={() => {canOrder()}}>Rent for {car.price}/day</button>
             </div>
             <OrderModal 
                 open={ordering} 
                 onClose={() => {setIsOrdering(false)}}
-                car={carWithRating}
+                car={car}
                 timespan={fromToDate}>
             </OrderModal>
         </div>
