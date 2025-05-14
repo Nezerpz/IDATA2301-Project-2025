@@ -1,14 +1,15 @@
 import PropTypes from 'prop-types'
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { fetchJSON, fetchWithAuth } from "../../static/js/auth.js"
 import "./CarEdit.css";
 
-function CarEdit({carToEdit, title, actionText}) {
+function CarEdit({car, setCar, addingNewCar, title, actionText}) {
     const [manufacturers, setManufacturers] = useState(null)
     const [transmissionTypes, setTransmissionTypes] = useState(null)
     const [fuelTypes, setFuelTypes] = useState(null)
-    const [car, setCar] = useState(carToEdit != null ? carToEdit : { features: [] })
     const [features, setFeatures] = useState(null)
+
+    console.log(`adding new car? ${addingNewCar}`)
 
     // Helper to update selected features
     function updateSelectedFeatures(selectElement) {
@@ -24,6 +25,7 @@ function CarEdit({carToEdit, title, actionText}) {
             try {
                 let data = await fetchJSON("/manufacturers", { method: "GET" })
                 setManufacturers(data)
+                setCar({...car, manufacturer: data[0]})
             }   catch (e) { console.error(e) }
         }
 
@@ -31,6 +33,7 @@ function CarEdit({carToEdit, title, actionText}) {
             try {
                 let data = await fetchJSON("/transmission-types", { method: "GET" })
                 setTransmissionTypes(data)
+                setCar({...car, transmissionType: data[0]})
             }   catch (e) { console.error(e) }
         }
 
@@ -38,6 +41,7 @@ function CarEdit({carToEdit, title, actionText}) {
             try {
                 let data = await fetchJSON("/fuel-types", { method: "GET" })
                 setFuelTypes(data)
+                setCar({...car, fuelType: data[0]})
             }   catch (e) { console.error(e) }
         }
 
@@ -46,12 +50,13 @@ function CarEdit({carToEdit, title, actionText}) {
                 let data = await fetchJSON("/features", { method: "Get" })
                 console.debug(data)
                 setFeatures(data)
+                setCar({...car, features: []})
             }   catch (e) { console.error(e) }
         }
     })()}, [manufacturers, features, car])
 
     // Used to set image for Car
-    async function uploadImage(id, event) {
+    async function uploadImage(id, event, setCar) {
         event.preventDefault()
         let file = event.target.files[0]
         const formData = new FormData()
@@ -69,11 +74,25 @@ function CarEdit({carToEdit, title, actionText}) {
             console.log("Image uploaded successfully")
             let imagePath = await response.text();
             console.log(imagePath)
+            setCar({...car, imagePath: imagePath})
         }
 
         else {
             alert("Image upload failed")
         }
+    }
+
+    function validateCarState(car) {
+        return car == undefined 
+            ? false
+            : ("manufacturer"     in car ? car.manufacturer     : false) && 
+              ("carModel"         in car ? car.carModel         : false) && 
+              ("numberOfSeats"    in car ? car.numberOfSeats    : false) &&
+              ("transmissionType" in car ? car.transmissionType : false) &&
+              ("fuelType"         in car ? car.fuelType         : false) &&
+              ("price"            in car ? car.price            : false) &&
+              ("productionYear"   in car ? car.productionYear   : false) &&
+              ("features"         in car ? car.features         : false) 
     }
 
     // Removes some code-duplication
@@ -122,16 +141,30 @@ function CarEdit({carToEdit, title, actionText}) {
     }
 
     // Callback for submit button
-    const handleSubmit = (e, carToEdit, car) => {
-        e.preventDefault()
-        if (carToEdit != null) { updateCar(car) }
-        else                   { addCar(car)       }
+    const handleSubmit = (addingNewCar, car) => {
+        console.log(addingNewCar)
+        if (addingNewCar) { addCar(car)    }
+        else              { updateCar(car) }
+    }
+
+    // cope
+    if (car == undefined) {
+        car = {
+            manufacturer: "",
+            carModel: "",
+            numberOfSeats: "",
+            transmissionType: "",
+            fuelType: "",
+            price: "",
+            productionYear: "",
+            features: [],
+        }
     }
 
     return (
         <div>
             <h1>{title}</h1>
-            <form className={"car-edit"} onSubmit={(e) => handleSubmit(e, carToEdit, car)}>
+            <form className={"car-edit"} onSubmit={(e) => e.preventDefault()}>
                 <label>
                     <span className={"car-edit-property-heading"}>Manufacturer</span>
                     <select placeholder="Select Manufacturer" 
@@ -148,14 +181,14 @@ function CarEdit({carToEdit, title, actionText}) {
                     <span className={"car-edit-property-heading"}>Model</span>
                         <input type="text" placeholder="Enter Model" 
                             className={"car-edit-property-input"}
-                            value={car.carModel != undefined ? car.carModel : ""} 
+                            value={car.carModel} 
                             onChange={(e) => setCar({ ...car, carModel: e.target.value })} />
                 </label>
                 <label>
                     <span className={"car-edit-property-heading"}>Number of seats</span>
                         <input type="number" placeholder="Enter number of seats" min={1}
                             className={"car-edit-property-input"}
-                            value={car.numberOfSeats != undefined ? car.numberOfSeats : 5} 
+                            value={car.numberOfSeats} 
                             onChange={(e) => setCar({ ...car, numberOfSeats: e.target.value })} />
                 </label>
                 <label>
@@ -191,14 +224,14 @@ function CarEdit({carToEdit, title, actionText}) {
                     <span className={"car-edit-property-heading"}>Rental Price per Day</span>
                          <input type="number" placeholder="Enter price" min={0}
                             className={"car-edit-property-input"}
-                            value={car.price != undefined ? car.price : ""} 
+                            value={car.price} 
                             onChange={(e) => setCar({ ...car, price: e.target.value })} />
                 </label>
                 <label>
                     <span className={"car-edit-property-heading"}>Production year</span>
                         <input type="number" placeholder="Enter production year" min={1885}
                             className={"car-edit-property-input"}
-                            value={car.productionYear != undefined ? car.productionYear : ""} 
+                            value={car.productionYear} 
                             onChange={(e) => setCar({ ...car, productionYear: e.target.value })} />
                 </label>
                 <label>
@@ -220,9 +253,11 @@ function CarEdit({carToEdit, title, actionText}) {
                 <label>
                     <span className={"car-edit-property-heading"}>Image</span>
                     <input type="file" placeholder="Upload image" 
-                        onChange={e => uploadImage(car.id, e)}/>
+                        onChange={e => uploadImage(car.id, e, setCar)}/>
                 </label>
-                <button className={"big-button"} type="submit">{actionText}</button>
+                <button className={"big-button"} type="submit"
+                    disabled={!validateCarState(car)}
+                    onClick={e => handleSubmit(addingNewCar, car)}>{actionText}</button>
             </form>
         </div>
     );

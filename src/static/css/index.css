@@ -47,6 +47,10 @@ figure > img {
     height: auto;
 }
 
+span {
+    font-family: var(--main-font);
+}
+
 
 h1,h2,h3,h4,h5 {
     font-family: var(--main-font);
@@ -222,7 +226,8 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
 
 .scrollable-list {
     overflow-y: auto;
-    max-height: 40vh;
+    max-height: 300px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -275,4 +280,8 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
 
     border-radius: var(--corner-rounding);
     border: 1px solid var(--dark-shadow-color);
+}
+
+.no-scroll {
+    overflow: hidden;
 }

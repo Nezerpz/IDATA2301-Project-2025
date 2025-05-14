@@ -2,19 +2,23 @@ import "./Car.css";
 import PropTypes from 'prop-types';
 import FeatureList from "./FeatureList.jsx";
 import { CarContext } from "../../context/CarContext.js";
-import OrderModal from "./OrderModal.jsx";
-import { useState, useContext } from "react";
+import OrderModal from "../Modals/OrderModal/OrderModal.jsx";
+import {useState, useContext, useEffect} from "react";
 import checkLogin from "../../static/js/checkLogin.js";
 import {useNavigate, useSearchParams} from "react-router-dom";
-import ProviderReviewModal from "./ProviderReviewModal.jsx";
+import ReviewModal from "../Modals/ReviewModal/ReviewModal.jsx";
+import {FaStar} from "react-icons/fa";
+import {fetchJSON} from "../../static/js/auth.js";
 
 
-
+//TODO: Add start under provider name. When clicking stars show the review modal for the car.
 function Car ({car}) {
     const [ordering, setIsOrdering] = useState(false)
-    const [reviews, setReviews] = useState(false);
+    const [providerReviews, setProviderReviews] = useState(false);
+    const [carReviews, setCarReviews] = useState(false);
     const [searchParams] = useSearchParams();
     let [ fromToDate, setFromToDate ] = useContext(CarContext);
+    const totalStars = 5;
 
     const navigate = useNavigate();
     // <button onClick={() => {orderCar(car, fromToDate, setIsOrdering)}}>Order Now</button>
@@ -39,15 +43,38 @@ function Car ({car}) {
                     <p
                         className={"car-user"}
                         title={"Read reviews of this user"}
-                        onClick={() => {setReviews(true)}}
+                        onClick={() => {setProviderReviews(true)}}
                     >
                         <strong>{car.user}</strong>
                     </p>
-                    <ProviderReviewModal
-                        open={reviews}
-                        onClose={() => {setReviews(false)}}
-                        carId={car.id}
-                        provider={car.user}
+                    <ReviewModal
+                        open={providerReviews}
+                        onClose={() => {setProviderReviews(false)}}
+                        id={car.providerId}
+                        type={"user"}
+                    />
+                    <div className="star-container" onClick={() => setCarReviews(true)}>
+                        {car.averageRating === 0 ? (
+                            <span>Car has no reviews</span>
+                        ) : (
+                            Array.from({ length: totalStars }).map((_, index) => {
+                                const currentRating = index + 1;
+                                return (
+                                    <FaStar
+                                        key={index}
+                                        size={25}
+                                        color={currentRating <= Math.ceil(car.averageRating) ? "yellow" : "grey"}
+                                        title={`${car.averageRating} / ${totalStars}`}
+                                    />
+                                );
+                            })
+                        )}
+                    </div>
+                    <ReviewModal
+                        open={carReviews}
+                        onClose={() => setCarReviews(false)}
+                        id={car.id}
+                        type={"car"}
                     />
                     <p>{car.transmissionType} ∙ {car.fuelType} ∙ {car.numberOfSeats} SEATS ∙ {car.productionYear}</p>
                 </div>
@@ -59,8 +86,8 @@ function Car ({car}) {
             </div>
             <OrderModal 
                 open={ordering} 
-                onClose={() => {setIsOrdering(false)}} 
-                car={car} 
+                onClose={() => {setIsOrdering(false)}}
+                car={car}
                 timespan={fromToDate}>
             </OrderModal>
         </div>
