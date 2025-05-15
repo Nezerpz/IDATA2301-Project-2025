@@ -16,6 +16,9 @@ async function saveChanges(order) {
             throw new Error('Order not found');
         }  else if (response.status === 401) {
             throw new Error('Unauthorized');
+        } else if (response.status === 400) {
+            throw new Error('You cannot change the order status once an order has been completed or cancelled. ' +
+                'If you accidentally closed or cancelled the order, please contact us.');
         } else if (!response.ok) {
             throw new Error('Failed to update order');
         }

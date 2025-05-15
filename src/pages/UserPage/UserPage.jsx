@@ -39,11 +39,21 @@ async function updatePassword(event, user) {
     }
     else {
         console.log(response)
+
+async function unsuspendUser(user) {
+    if (!confirm("Sure you want to unsuspend this user?")) return
+    let response = await fetchWithAuth(`/users/unsuspend/${user.id}`, { method: "POST" })
+    if (response.ok) {
+        alert("User successfully unsuspended")
+    }
+    else {
+
         alert("Error occured")
     }
 }
 
 async function suspendUser(user) {
+    if (!confirm("Sure you want to suspend this user?")) return
     let response = await fetchWithAuth(`/users/suspend/${user.id}`, { method: "POST" })
     if (response.ok) {
         alert("User successfully suspended")
@@ -54,6 +64,7 @@ async function suspendUser(user) {
 }
 
 async function deleteUser(user) {
+    if (!confirm("Sure you want to delete this user?")) return
     let response = await fetchWithAuth(`/users/${user.id}`, { method: "DELETE" })
     if (response.ok) {
         alert("User successfully deleted")
