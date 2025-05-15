@@ -37,7 +37,7 @@ function Car ({car}) {
     return (
         <div className="car">
             <h3>{car.manufacturer} {car.carModel}</h3>
-            <img src={"src" + car.imagePath} alt={car.carModel} className={"car-image"}/>
+            <img src={"http://localhost:8080" + car.imagePath} alt={car.carModel} className={"car-image"}/>
             <div className={"carInfo"}>
                 <div>
                     <p
