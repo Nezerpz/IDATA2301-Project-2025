@@ -1,5 +1,6 @@
 import {Outlet} from "react-router-dom";
 import {useEffect, useState} from "react";
+import { fetchWithAuth } from "../../static/js/auth.js"
 
 //TODO: Link to manage cars. Change the routing so the buttons dont persist to pages it shouldn't
 function ResetPassword() {
@@ -13,13 +14,9 @@ function ResetPassword() {
         }
 
         try {
-            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}:${import.meta.env.VITE_BACKEND_PORT}/users/self/password`, {
+            const response = await fetchWithAuth(`/users/self/password`, {
                 method: "PUT",
-                headers: {
-                    "Authorization": `Bearer ${localStorage.getItem("jwt")}`,
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ password })
+                body: JSON.stringify({ "password": password })
             });
 
             if (response.ok) {
@@ -64,12 +61,8 @@ function DeleteAccount() {
         const confirmDelete = window.confirm("Are you sure you want to delete your account?");
         if (confirmDelete) {
             try {
-                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}:${import.meta.env.VITE_BACKEND_PORT}/users/self`, {
+                const response = await fetchWithAuth(`/users/self`, {
                     method: "DELETE",
-                    headers: {
-                        "Authorization": `Bearer ${localStorage.getItem("jwt")}`,
-                        "Content-Type": "application/json"
-                    }
                 });
                 if (response.ok) {
                     alert("Account deleted successfully.");
