@@ -78,7 +78,8 @@ function Car ({car}) {
                     />
                     <p>{car.transmissionType} ∙ {car.fuelType} ∙ {car.numberOfSeats} SEATS ∙ {car.productionYear}</p>
                 </div>
-                <FeatureList features={car.features}/>
+                {console.log(car.features.map(feature => feature.featureName))}
+                <FeatureList features={car.features.map(feature => feature.featureName)} />
             </div>
             <span className={"grow"}></span>
             <div className={"orderButtonContainer"}>

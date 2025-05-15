@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import React, { useState, useEffect, useRef } from "react";
+import Select from "react-select";
 import { fetchJSON, fetchWithAuth } from "../../static/js/auth.js"
 import "./CarEdit.css";
 
@@ -9,7 +10,12 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
     const [fuelTypes, setFuelTypes] = useState(null)
     const [features, setFeatures] = useState(null)
 
-    console.log(`adding new car? ${addingNewCar}`)
+    const options = features != null
+        ? features.map(f => ({ value: f.id, label: f.featureName }))
+        : [];
+
+
+    //console.debug(`adding new car? ${addingNewCar}`)
 
     // Helper to update selected features
     function updateSelectedFeatures(selectElement) {
@@ -20,40 +26,45 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
     }
 
     // Fetch required info
-    useEffect(() => { (async () => {
-        if (manufacturers == null) {
+    useEffect(() => {
+        (async () => {
             try {
-                let data = await fetchJSON("/manufacturers", { method: "GET" })
-                setManufacturers(data)
-                setCar({...car, manufacturer: data[0]})
-            }   catch (e) { console.error(e) }
-        }
+                if (manufacturers == null) {
+                    const data = await fetchJSON("/manufacturers", { method: "GET" });
+                    setManufacturers(data);
+                    if (addingNewCar && car.manufacturer === "") {
+                        setCar(prevCar => ({ ...prevCar, manufacturer: data[0] }));
+                    }
+                }
 
-        if (transmissionTypes == null) {
-            try {
-                let data = await fetchJSON("/transmission-types", { method: "GET" })
-                setTransmissionTypes(data)
-                setCar({...car, transmissionType: data[0]})
-            }   catch (e) { console.error(e) }
-        }
+                if (transmissionTypes == null) {
+                    const data = await fetchJSON("/transmission-types", { method: "GET" });
+                    setTransmissionTypes(data);
+                    if (addingNewCar && car.transmissionType === "") {
+                        setCar(prevCar => ({ ...prevCar, transmissionType: data[0] }));
+                    }
+                }
 
-        if (fuelTypes == null) {
-            try {
-                let data = await fetchJSON("/fuel-types", { method: "GET" })
-                setFuelTypes(data)
-                setCar({...car, fuelType: data[0]})
-            }   catch (e) { console.error(e) }
-        }
+                if (fuelTypes == null) {
+                    const data = await fetchJSON("/fuel-types", { method: "GET" });
+                    setFuelTypes(data);
+                    if (addingNewCar && car.fuelType === "") {
+                        setCar(prevCar => ({ ...prevCar, fuelType: data[0] }));
+                    }
+                }
 
-        if (features == null) {
-            try {
-                let data = await fetchJSON("/features", { method: "Get" })
-                console.debug(data)
-                setFeatures(data)
-                setCar({...car, features: []})
-            }   catch (e) { console.error(e) }
-        }
-    })()}, [manufacturers, features, car])
+                if (features == null) {
+                    const data = await fetchJSON("/features", { method: "GET" });
+                    setFeatures(data);
+                    if (addingNewCar && car.features.length === 0) {
+                        setCar(prevCar => ({ ...prevCar, features: [] }));
+                    }
+                }
+            } catch (e) {
+                console.error(e);
+            }
+        })();
+    }, [manufacturers, transmissionTypes, fuelTypes, features, addingNewCar, car]);
 
     // Used to set image for Car
     async function uploadImage(id, event, setCar) {
@@ -73,7 +84,7 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
         if (response.ok) {
             console.log("Image uploaded successfully")
             let imagePath = await response.text();
-            console.log(imagePath)
+            //console.log(imagePath)
             setCar({...car, imagePath: imagePath})
         }
 
@@ -142,10 +153,18 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
 
     // Callback for submit button
     const handleSubmit = (addingNewCar, car) => {
-        console.log(addingNewCar)
-        if (addingNewCar) { addCar(car)    }
-        else              { updateCar(car) }
-    }
+        // Map features to only include ids
+        const carToSend = {
+            ...car,
+            features: car.features.map(feature => feature.id)
+        };
+
+        if (addingNewCar) {
+            addCar(carToSend);
+        } else {
+            updateCar(carToSend);
+        }
+    };
 
     // cope
     if (car == undefined) {
@@ -235,20 +254,19 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
                             onChange={(e) => setCar({ ...car, productionYear: e.target.value })} />
                 </label>
                 <label>
-                    <span className={"car-edit-property-heading"}>Features</span>
-                    <select placeholder="Select Features" multiple
-                        className={"car-edit-property-input"}
-                        value={car.features}
-                        onChange={e => updateSelectedFeatures(e.target)}>
-                        {features != null 
-                            ? features
-                                .map(f => [f["id"], f["featureName"]])
-                                .map(f => (
-                                    <option key={f[0]} value={f[0]}>
-                                        {f[1]}
-                                    </option>))
-                            : <option>none</option>}
-                    </select>
+                    <span className={"car-edit-property-heading"}>Features </span>
+                    <Select
+                        options={options}
+                        value={options.filter(option => car.features.some(feature => feature.id === option.value))}
+                        isMulti
+                        onChange={selectedOptions => {
+                            const updatedFeatures = selectedOptions.map(option =>
+                                features.find(feature => feature.id === option.value)
+                            );
+                            console.log(updatedFeatures)
+                            setCar({ ...car, features: updatedFeatures });
+                        }}
+                    />
                 </label>
                 <label>
                     <span className={"car-edit-property-heading"}>Image</span>

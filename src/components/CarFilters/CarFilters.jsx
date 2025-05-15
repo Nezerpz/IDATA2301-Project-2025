@@ -44,13 +44,13 @@ function getMinPrice(cars) {
  * where the key value is a list
  * (not a single value)
  */
-function getUniqueEntriesInLists(dictList, key) {
+function getUniqueEntriesInLists(dictList, key, extractor = item => item) {
     const uniqueEntries = Array.from(dictList.reduce(
         // The acc variable contains accumulated set
         // The ... operator inserts list content as args
         // dict[key] is a list (a given for this function)
         // A set has no duplicates
-        (acc, dict) => new Set([...acc, ...dict[key]]),
+        (acc, dict) => new Set([...acc, ...dict[key].map(extractor)]),
         new Set() // initial value for acc
     ));
 
@@ -64,7 +64,7 @@ function Filters({cars}) {
     const manufacturers = getUniqueEntries(cars, "manufacturer");
     const prices = [getMinPrice(cars), getMaxPrice(cars)];
     const transmission = getUniqueEntries(cars, "transmissionType");
-    const features = getUniqueEntriesInLists(cars, "features");
+    const features = getUniqueEntriesInLists(cars, "features", feature => feature.featureName);
     
     const [activeManufacturers, setActiveManufacturers] = useState(manufacturers);
     const [activePrices, setActivePrices] = useState(prices);
