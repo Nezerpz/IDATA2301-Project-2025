@@ -81,6 +81,12 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
 
         console.log(response)
 
+        if (response.status === 422) {
+            const errorMessage = await response.text();
+            alert(errorMessage);
+            return;
+        }
+
         if (response.ok) {
             console.log("Image uploaded successfully")
             let imagePath = await response.text();
@@ -270,7 +276,7 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
                 </label>
                 <label>
                     <span className={"car-edit-property-heading"}>Image</span>
-                    <input type="file" placeholder="Upload image" 
+                    <input type="file" placeholder="Upload image" accept="image/png, image/jpeg"
                         onChange={e => uploadImage(car.id, e, setCar)}/>
                 </label>
                 <button className={"big-button"} type="submit"
