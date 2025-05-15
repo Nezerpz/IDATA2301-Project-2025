@@ -1,5 +1,5 @@
 import {useNavigate, useParams} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useEffect, useState } from "react";
 import {fetchWithAuth} from "../../static/js/auth.js";
 
 async function saveChanges(user) {
@@ -60,26 +60,44 @@ async function deleteUser(user) {
     }
 }
 
-function renderPage(user, setUser) {
+function renderPage(user, userModification, setUserModification) {
     return (
         <>
             <form onSubmit={(e) => e.preventDefault()}>
                 <h2>Manage user - {user.firstName} {user.lastName}</h2>
                 <label>
                     <span>Name</span>
-                    <input type={"text"} value={user.firstName} onChange={(e) => setUser({...user, firstName: e.target.value})} />
-                    <input type={"text"} value={user.lastName} onChange={(e) => setUser({...user, lastName: e.target.value})} />
+                    <input type={"text"} value={userModification.firstName} 
+                        onChange={(e) => setUserModification({
+                            ...userModification, 
+                            firstName: e.target.value
+                        })}/>
+                    <input type={"text"} value={userModification.lastName} 
+                        onChange={(e) => setUserModification({
+                            ...userModification, 
+                            lastName: e.target.value
+                        })}/>
                 </label>
                 <label>
                     <span>Username</span>
-                    <input type={"text"} value={user.username} onChange={(e) => setUser({...user, username: e.target.value})} />
+                    <input type={"text"} value={userModification.username} 
+                        onChange={(e) => setUserModification({
+                            ...userModification, 
+                            username: e.target.value
+                        })} />
                 </label>
                 <label>
                     <span>Email</span>
-                    <input type={"email"} value={user.email} onChange={(e) => setUser({...user, email: e.target.value})} />
+                    <input type={"email"} value={userModification.email} 
+                        onChange={(e) => setUserModification({
+                            ...userModification, 
+                            email: e.target.value
+                        })} />
                 </label>
                 <button className={"big-button"} type={"submit"}
-                    onChange={() => saveChanges(user)}>Submit changes</button>
+                    onChange={() => saveChanges(userModification)}>
+                    Submit changes
+                </button>
             </form>
             <div>
                 <h4>Password reset</h4>
@@ -110,6 +128,7 @@ function UserPage() {
     const { id } = useParams();
     const navigate = useNavigate();
     const [user, setUser] = useState({});
+    const [userModification, setUserModification] = useState(user)
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
@@ -133,7 +152,7 @@ function UserPage() {
     if (error) return <div>Error: {error.message}</div>;
     if (user === null) return <div>User not found</div>;
 
-    return renderPage(user, setUser);
+    return renderPage(user, userModification, setUserModification);
 }
 
 export default UserPage;
