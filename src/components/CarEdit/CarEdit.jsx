@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 import Select from "react-select";
 import { fetchJSON, fetchWithAuth } from "../../static/js/auth.js"
 import "./CarEdit.css";
+import {findVariable} from "eslint-plugin-react/lib/util/variable.js";
 
 function CarEdit({car, setCar, addingNewCar, title, actionText}) {
     const [manufacturers, setManufacturers] = useState(null)
@@ -263,6 +264,7 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
                     <span className={"car-edit-property-heading"}>Features </span>
                     <Select
                         options={options}
+                        id="car-edit-multi-select"
                         value={options.filter(option => car.features.some(feature => feature.id === option.value))}
                         isMulti
                         onChange={selectedOptions => {
