@@ -7,7 +7,6 @@ export async function refreshToken() {
             credentials: "include", // Include cookies in the request
         });
 
-        console.error("Error refreshing token:", response);
         if (!response.ok) {
             if (response.status === 401) {
                 localStorage.removeItem("jwt");
