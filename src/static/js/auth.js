@@ -45,15 +45,11 @@ export async function fetchWithAuth(endpoint, options = {}) {
         )
 
         // Refresh token if expired
-        if (!response.ok) {
+        if (response.status === 401 || response.status === 403) {
             try {
                 const newToken = await refreshToken();
                 headers.Authorization = `Bearer ${newToken}`;
                 const retryResponse = await fetch(url, { ...options, headers });
-
-                if (!retryResponse.ok) {
-                    throw new Error(`Retry failed with status: ${retryResponse.status}`);
-                }
 
                 return retryResponse;
             }
@@ -62,10 +58,6 @@ export async function fetchWithAuth(endpoint, options = {}) {
                 console.error("Error refreshing token:", refreshError);
                 throw new Error("Failed to refresh token and retry request. Please reload page. If the problem persists, please contact support.");
             }
-        }
-
-        if (!response.ok) {
-            throw new Error(`Request failed with status: ${response.status}`);
         }
 
         return response;
