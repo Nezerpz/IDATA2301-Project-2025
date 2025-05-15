@@ -24,18 +24,21 @@ async function saveChanges(user) {
     }
 }
 
-function updatePassword(event) {
+async function updatePassword(event, user) {
     if (!confirm("Are you sure you want to update this user's password?")) return
     let passwordField = event.target.parentElement.querySelector('input[type="password"]')
     let password = passwordField.value
-    const response = fetchWithAuth("/users/self/password", { 
-        method: "POST", 
-        password: password 
+    const response = await fetchWithAuth(`/users/${user.id}/password`, { 
+        method: "PUT", 
+        body: JSON.stringify({
+            "password": password 
+        })
     })
     if (response.ok) {
         alert("Password updated successfully")
     }
     else {
+        console.log(response)
         alert("Error occured")
     }
 }
@@ -103,7 +106,7 @@ function renderPage(user, userModification, setUserModification) {
                 <h4>Password reset</h4>
                 <input type={"password"} placeholder={"Enter new password"}></input>
                 <button className={"big-button"}
-                    onClick={(e) => updatePassword(e)}>Send password reset</button>
+                    onClick={(e) => updatePassword(e, user)}>Send password reset</button>
             </div>
             <h4>Suspend or delete user?</h4>
             <div className={"flex-container-row"}>
