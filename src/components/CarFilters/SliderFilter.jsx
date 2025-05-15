@@ -31,7 +31,7 @@ function SliderFilter({name, min, max, onUpdate}) {
                 <input type="range" min={min} max={max} value={minValue} className="min" id={`${name}-min-slider`} onChange={handleMinChange}/>
                 <input type="range" min={min} max={max} value={maxValue} className="max" id={`${name}-max-slider`} onChange={handleMaxChange}/>
             </div>
-            <div>
+            <div className={"price-inputs"}>
                 <input type="number" min={min} max={max} value={minValue} onChange={e => setMinValue(e.target.value)}/>
                 <input type="number" min={min} max={max} value={maxValue} onChange={e => setMaxValue(e.target.value)}/>
             </div>

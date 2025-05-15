@@ -2,6 +2,7 @@ import {Outlet, Link} from "react-router-dom";
 import {useEffect, useRef, useState} from "react";
 import SettingsNavbar from "./pages/MyPage/SettingsNavbar.jsx";
 import Logout from "./components/LogOut/Logout.jsx";
+import "./static/css/hamburger.css";
 
 function UserDropdown() {
     const [isOpen, setIsOpen] = useState(false);
@@ -81,22 +82,60 @@ function LoginSignup() {
 
 }
 
-//TODO: DO THIS https://www.youtube.com/watch?v=oTIJunBa6MA&t=1334s
 function App() {
+    const [isNavbarVisible, setIsNavbarVisible] = useState(false);
+    const [isUserDropdownVisible, setIsUserDropdownVisible] = useState(false);
+
+    const toggleNavbar = () => {
+        setIsNavbarVisible(!isNavbarVisible);
+        console.log(isNavbarVisible);
+    };
+
+    const toggleUserDropdown = () => {
+        setIsUserDropdownVisible(!isUserDropdownVisible);
+    };
   return (
     <>
        <header>
-           <div id="title">
-             <Link to="/">
-               <img id="logo" src="src/static/svg/roulette.png" alt="Logo of the company" />
-             </Link>
+           <div className={"flex-container-row logo-and-mobile flex-align-center flex-space-between"}>
+               <svg className={`hamburger ${isNavbarVisible ? "rotated" : ""}`}
+                    viewBox={"0 0 100 100"}
+                    width={"50px"}
+                    onClick={toggleNavbar}
+               >
+                   <rect className={"line top-bar"}
+                         width={"80"} height={"10"}
+                         x={"10"} y={"25"} rx={"5"}
+                   ></rect>
+                   <rect className={"line middle-bar"}
+                         width={"80"} height={"10"}
+                         x={"10"} y={"45"} rx={"5"}
+                   ></rect>
+                   <rect className={"line bottom-bar"}
+                         width={"80"} height={"10"}
+                         x={"10"} y={"65"} rx={"5"}
+                   ></rect>
+               </svg>
+               <div id="title">
+                 <Link to="/">
+                   <img id="logo" src="src/static/svg/roulette.png" alt="Logo of the company" />
+                 </Link>
+               </div>
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 user-icon"
+                    width={"50px"} onClick={toggleUserDropdown}>
+                   <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+               </svg>
+
            </div>
-           <div className="navbar">
+           <div className={`navbar ${isNavbarVisible ? "visible" : ""}`}>
              <Link className="navbar-item" to="/">Home</Link>
              <Link className="navbar-item" to="/cars">Cars</Link>
              <Link className="navbar-item" to="/about">About</Link>
            </div>
            <LoginSignup/>
+           <div className={`user-dropdown${isUserDropdownVisible ? "visible" : ""} navbar`}>
+               <SettingsNavbar />
+           </div>
        </header>
        <main>
            <Outlet/>

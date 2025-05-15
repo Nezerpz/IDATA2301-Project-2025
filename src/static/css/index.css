@@ -259,6 +259,10 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
     justify-content: space-between;
 }
 
+.flex-align-center {
+    align-items: center;
+}
+
 .icon-with-onclick {
     color: var(--dark-link-color);
     background: none;

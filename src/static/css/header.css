@@ -9,9 +9,17 @@ header {
     color: white;
 }
 
-#title { 
+.logo-and-mobile {
     /* title is left adjusted */
     margin: 10px auto 10px 0;
+}
+
+.user-icon {
+    display: none;
+}
+
+.user-dropdown {
+    display: none;
 }
 
 #logo {
@@ -51,14 +59,24 @@ header {
         padding: 25px 25px;
     }
 
-    #title {
-        margin: 10px auto;
+    .logo-and-mobile {
+        margin: 10px;
+    }
+
+    .user-icon{
+        display: block;
     }
 
     .navbar {
-        /* column layout if screen is small */
+        display: none;
+        transition: all 0.5s ease;
+    }
+
+    .navbar.visible {
+        display: flex;
         flex-direction: column;
         margin: 10px 0;
+        max-height: 500px;
     }
 }
 
