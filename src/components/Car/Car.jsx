@@ -37,7 +37,7 @@ function Car ({car}) {
     return (
         <div className="car">
             <h3>{car.manufacturer} {car.carModel}</h3>
-            <img src={"src" + car.imagePath} alt={car.carModel} className={"car-image"}/>
+            <img src={import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + car.imagePath} alt={car.carModel} className={"car-image"}/>
             <div className={"carInfo"}>
                 <div>
                     <p
@@ -78,7 +78,8 @@ function Car ({car}) {
                     />
                     <p>{car.transmissionType} ∙ {car.fuelType} ∙ {car.numberOfSeats} SEATS ∙ {car.productionYear}</p>
                 </div>
-                <FeatureList features={car.features}/>
+                {console.log(car.features.map(feature => feature.featureName))}
+                <FeatureList features={car.features.map(feature => feature.featureName)} />
             </div>
             <span className={"grow"}></span>
             <div className={"orderButtonContainer"}>

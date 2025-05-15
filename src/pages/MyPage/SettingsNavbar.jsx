@@ -3,6 +3,7 @@ import {useEffect, useRef, useState} from "react";
 import {fetchWithAuth} from "../../static/js/auth.js";
 import "./dropdown.css";
 import Logout from "../../components/LogOut/Logout.jsx";
+import {jwtDecode} from "jwt-decode";
 
 function renderComponent({userType}) {
     if (userType === "ADMIN") {
@@ -33,24 +34,13 @@ function renderComponent({userType}) {
 }
 
 function NavBarPicker() {
-    const [userType, setUserType] = useState(null);
     const navigate = useNavigate();
+    const token = localStorage.getItem("jwt");
+    const decodedToken = token ? jwtDecode(token) : null;
+    const role = decodedToken ? decodedToken.roles[0] : null;
+    const userType = role.authority.split("_")[1];
 
-    useEffect(() => {
-        const fetchData = async () => {
-            let response = await fetchWithAuth("/userType");
 
-            if (response.status === 401) {
-                localStorage.removeItem("jwt");
-                navigate('/login', { state: { from: window.location.pathname } });
-            }
-
-                let data = await response.json();
-                setUserType(data);
-        };
-
-        fetchData();
-    }, []);
     return renderComponent({userType});
 }
 

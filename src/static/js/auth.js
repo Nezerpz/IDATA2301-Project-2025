@@ -37,37 +37,27 @@ export async function fetchWithAuth(endpoint, options = {}) {
         ...options.headers,
         Authorization: `Bearer ${token}`,
     };
+    const url = import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + endpoint;
 
     try {
-        const response = await fetch(
-            import.meta.env.VITE_BACKEND_URL + ":" +
-            import.meta.env.VITE_BACKEND_PORT + endpoint,
+        const response = await fetch(url,
             {...options, headers }
         )
 
         // Refresh token if expired
-        if (response.status === 401) {
+        if (response.status === 401 || response.status === 403) {
             try {
                 const newToken = await refreshToken();
                 headers.Authorization = `Bearer ${newToken}`;
                 const retryResponse = await fetch(url, { ...options, headers });
 
-                if (!retryResponse.ok) {
-                    throw new Error(`Retry failed with status: ${retryResponse.status}`);
-                }
-
                 return retryResponse;
-            } 
+            }
 
             catch (refreshError) {
                 console.error("Error refreshing token:", refreshError);
-                throw new Error("Failed to refresh token and retry request.");
+                throw new Error("Failed to refresh token and retry request. Please reload page. If the problem persists, please contact support.");
             }
-        }
-
-        if (!response.ok) {
-            console.log(response)
-            throw new Error(`Request failed with status: ${response.status}`);
         }
 
         return response;
