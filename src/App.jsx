@@ -27,6 +27,22 @@ function UserDropdown() {
         }
     }, [isOpen]);
 
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsOpen(false); // Close the dropdown if clicked outside
+            }
+        };
+
+        if (isOpen) {
+            document.addEventListener("mousedown", handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [isOpen]);
+
     const handleDropdownClick = () => {
         setIsOpen(!isOpen);
     };
