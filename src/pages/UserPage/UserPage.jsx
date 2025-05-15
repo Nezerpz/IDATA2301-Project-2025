@@ -4,7 +4,7 @@ import {fetchWithAuth} from "../../static/js/auth.js";
 
 async function saveChanges(user) {
     try {
-        const response = await fetchWithAuth("/users/" + user.id, {
+        const response = await fetchWithAuth("/users/" + user.id + "/update", {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -95,7 +95,7 @@ function renderPage(user, userModification, setUserModification) {
                         })} />
                 </label>
                 <button className={"big-button"} type={"submit"}
-                    onChange={() => saveChanges(userModification)}>
+                    onClick={() => saveChanges(userModification)}>
                     Submit changes
                 </button>
             </form>
@@ -103,7 +103,7 @@ function renderPage(user, userModification, setUserModification) {
                 <h4>Password reset</h4>
                 <input type={"password"} placeholder={"Enter new password"}></input>
                 <button className={"big-button"}
-                    onChange={(e) => updatePassword(e)}>Send password reset</button>
+                    onClick={(e) => updatePassword(e)}>Send password reset</button>
             </div>
             <h4>Suspend or delete user?</h4>
             <div className={"flex-container-row"}>
@@ -139,6 +139,7 @@ function UserPage() {
                 let response = await fetchWithAuth("/users/" + id);
                 let data = await response.json();
                 setUser(data);
+                setUserModification(data);
             } catch (error) {
                 setError(error);
             } finally {
