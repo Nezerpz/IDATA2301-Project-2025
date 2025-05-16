@@ -9,6 +9,15 @@
     box-sizing: border-box;
 }
 
+.star-container {
+    display: flex;
+}
+
+.star {
+    cursor: pointer;
+    padding: 4px;
+}
+
 .review-box {
     display: flex;
     flex-direction: column;

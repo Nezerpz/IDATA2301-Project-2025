@@ -86,6 +86,7 @@ function ReviewPage() {
                     return (
                         <FaStar
                             key={index}
+                            className={"star"}
                             size={50}
                             color={currentRating <= (hover || rating) ? "yellow" : "grey"}
                             onMouseEnter={() => setHover(currentRating)}

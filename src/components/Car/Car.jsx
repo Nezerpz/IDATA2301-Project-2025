@@ -53,7 +53,7 @@ function Car ({car}) {
                         id={car.providerId}
                         type={"user"}
                     />
-                    <div className="star-container" onClick={() => setCarReviews(true)}>
+                    <div className="clickable" onClick={() => setCarReviews(true)}>
                         {car.averageRating === 0 ? (
                             <span>Car has no reviews</span>
                         ) : (
