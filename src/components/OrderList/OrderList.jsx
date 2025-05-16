@@ -157,7 +157,6 @@ function OrderList({ orders }) {
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    console.log(orders);
 
     useEffect(() => {
         const fetchUserData = async () => {

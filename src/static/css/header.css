@@ -90,6 +90,11 @@ header {
         text-decoration: none;
     }
 
+    .user-dropdown a:hover{
+        background-color: var(--link-color);
+        color: var(--navbar-item-color);
+    }
+
     .navbar {
         display: none;
         transition: all 0.5s ease;

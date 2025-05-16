@@ -1,0 +1,15 @@
+.new-password-input{
+    width: 50%;
+    border-radius: 7px;
+    gap: 7px;
+    padding: 10px;
+    margin: 15px 10px;
+}
+
+.reset-password-button{
+    margin: 15px 10px;
+}
+
+.delete-account-button{
+    margin: 15px 10px;
+}

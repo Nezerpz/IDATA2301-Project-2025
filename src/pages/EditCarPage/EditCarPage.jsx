@@ -12,8 +12,6 @@ function EditCarPage() {
         const fetchdata = async () => {
             try {
                 let data = await fetchJSON("/cars/" + id);
-                console.log("data")
-                console.log(data)
                 setCar(data);
             } catch (error) {
                 console.error(error);

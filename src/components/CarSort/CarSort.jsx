@@ -16,7 +16,7 @@ function CarSort() {
 
     return (
         <div>
-            <select className={"car-sort"}onChange={updateSortMethod}>
+            <select className={"car-sort"} title={"Sort cars by..."} onChange={updateSortMethod}>
                 <option value={"price_high_low"}>Price High-Low</option>
                 <option value={"price_low_high"}>Price Low-High</option>
                 <option value={"best_reviews"}>Best Reviews</option>

@@ -1,6 +1,7 @@
 import {Outlet} from "react-router-dom";
 import {useEffect, useState} from "react";
 import { fetchWithAuth } from "../../static/js/auth.js"
+import "./SettingsPage.css"
 
 //TODO: Link to manage cars. Change the routing so the buttons dont persist to pages it shouldn't
 function ResetPassword() {
@@ -34,24 +35,27 @@ function ResetPassword() {
 
     return (
         <form
+            className={"flex-container-column"}
             onSubmit={(e) => {
                 e.preventDefault();
                 handleReset();
             }}
         >
             <input
+                className={"new-password-input"}
                 type="password"
                 placeholder="New Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />
             <input
+                className={"new-password-input"}
                 type="password"
                 placeholder="Confirm Password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <button type="submit">Reset Password</button>
+            <button type="submit" className={"reset-password-button big-button"}>Reset Password</button>
         </form>
     );
 }
@@ -77,7 +81,7 @@ function DeleteAccount() {
     };
 
     return (
-        <button onClick={handleDelete}>
+        <button onClick={handleDelete} className={"delete-account-button big-button"}>
             Delete Account
         </button>
     );
@@ -88,12 +92,12 @@ function SettingsPage() {
   return (
     <>
       <h2>Settings</h2>
-        <div>
-            <h3>Reset Password</h3>
+        <div className={"reset-password"}>
+            <h3 className={"reset-password-heading"}>Reset Password</h3>
             <ResetPassword />
         </div>
-        <div>
-            <h3>Delete Account</h3>
+        <div className={"delete-account"}>
+            <h3 className={"delete-account-heading"}>Delete Account</h3>
             <DeleteAccount />
         </div>
     </>

@@ -1,0 +1,29 @@
+.password-reset-input {
+    width: 50%;
+    border-radius: 7px;
+    padding: 10px;
+    margin: 15px 10px;
+}
+
+.password-reset-button {
+    margin: 15px 10px;
+}
+
+.user-information label {
+    width: 100%;
+}
+
+.user-information-input {
+    width: 50%;
+    border-radius: 7px;
+    padding: 10px;
+    margin: 15px 10px;
+}
+
+.user-information-button {
+    margin: 15px 10px;
+}
+
+.user-actions {
+    margin: 25px;
+}

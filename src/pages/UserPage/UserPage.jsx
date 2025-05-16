@@ -1,6 +1,7 @@
 import {useNavigate, useParams} from "react-router-dom";
 import {useEffect, useState } from "react";
 import {fetchWithAuth} from "../../static/js/auth.js";
+import "./UserPage.css";
 
 async function saveChanges(user) {
     try {
@@ -38,7 +39,7 @@ async function updatePassword(event, user) {
         alert("Password updated successfully")
     }
     else {
-        console.log(response)
+        console.error(response)
     }
 }
 
@@ -79,16 +80,16 @@ async function deleteUser(user) {
 function renderPage(user, userModification, setUserModification) {
     return (
         <>
-            <form onSubmit={(e) => e.preventDefault()}>
+            <form className={"flex-container-column user-information"} onSubmit={(e) => e.preventDefault()}>
                 <h2>Manage user - {user.firstName} {user.lastName}</h2>
                 <label>
                     <span>Name</span>
-                    <input type={"text"} value={userModification.firstName} 
+                    <input className={"user-information-input"} type={"text"} value={userModification.firstName}
                         onChange={(e) => setUserModification({
                             ...userModification, 
                             firstName: e.target.value
                         })}/>
-                    <input type={"text"} value={userModification.lastName} 
+                    <input className={"user-information-input"} type={"text"} value={userModification.lastName}
                         onChange={(e) => setUserModification({
                             ...userModification, 
                             lastName: e.target.value
@@ -96,7 +97,7 @@ function renderPage(user, userModification, setUserModification) {
                 </label>
                 <label>
                     <span>Username</span>
-                    <input type={"text"} value={userModification.username} 
+                    <input className={"user-information-input"} type={"text"} value={userModification.username}
                         onChange={(e) => setUserModification({
                             ...userModification, 
                             username: e.target.value
@@ -104,30 +105,30 @@ function renderPage(user, userModification, setUserModification) {
                 </label>
                 <label>
                     <span>Email</span>
-                    <input type={"email"} value={userModification.email} 
+                    <input className={"user-information-input"} type={"email"} value={userModification.email}
                         onChange={(e) => setUserModification({
                             ...userModification, 
                             email: e.target.value
                         })} />
                 </label>
-                <button className={"big-button"} type={"submit"}
+                <button className={"big-button user-information-button"} type={"submit"}
                     onClick={() => saveChanges(userModification)}>
                     Submit changes
                 </button>
             </form>
-            <div>
+            <div className={"flex-container-column password-reset"}>
                 <h4>Password reset</h4>
-                <input type={"password"} placeholder={"Enter new password"}></input>
-                <button className={"big-button"}
+                <input type={"password"} placeholder={"Enter new password"} className={"password-reset-input"}></input>
+                <button className={"big-button password-reset-button"}
                     onClick={(e) => updatePassword(e, user)}>Send password reset</button>
             </div>
             <h4>Suspend/unsuspend or delete user?</h4>
-            <div className={"flex-container-row"}>
+            <div className={"flex-container-row user-actions"}>
                 <svg xmlns="http://www.w3.org/2000/svg" 
                     fill="none" viewBox="0 0 24 24" 
                     strokeWidth={1.5} stroke="currentColor" 
                     width={48}
-                    className="size-6" onClick={() => unsuspendUser(user)}>
+                    className="size-6 clickable" onClick={() => unsuspendUser(user)}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.91 11.672a.375.375 0 0 1 0 .656l-5.603 3.113a.375.375 0 0 1-.557-.328V8.887c0-.286.307-.466.557-.327l5.603 3.112Z" />
                 </svg>
@@ -135,14 +136,14 @@ function renderPage(user, userModification, setUserModification) {
                 <svg xmlns="http://www.w3.org/2000/svg" 
                     fill="none" viewBox="0 0 24 24" 
                     strokeWidth="1.5" stroke="currentColor" 
-                    className="size-6 flex-end-item" width={48}
+                    className="size-6 flex-end-item clickable" width={48}
                     onClick={() => suspendUser(user)}>
                     <path strokeLinecap="round" strokeLinejoin="round"
                           d="M14.25 9v6m-4.5 0V9M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
                 </svg>
 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5"
-                     stroke="currentColor" className="size-6 flex-end-item" width={48}
+                     stroke="currentColor" className="size-6 flex-end-item clickable" width={48}
                      onClick={() => deleteUser(user)}>
                     <path strokeLinecap="round" strokeLinejoin="round"
                           d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"/>

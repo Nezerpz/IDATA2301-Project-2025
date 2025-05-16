@@ -84,6 +84,11 @@ h4 {
     color: var(--heading-color-light);
     border-radius: 7px;
 }
+
+.clickable {
+    cursor: pointer;
+}
+
 .grow {
     flex-grow: 1;
 }

@@ -80,7 +80,6 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
             body: formData
         })
 
-        console.log(response)
 
         if (response.status === 422) {
             const errorMessage = await response.text();
@@ -271,7 +270,6 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
                             const updatedFeatures = selectedOptions.map(option =>
                                 features.find(feature => feature.id === option.value)
                             );
-                            console.log(updatedFeatures)
                             setCar({ ...car, features: updatedFeatures });
                         }}
                     />

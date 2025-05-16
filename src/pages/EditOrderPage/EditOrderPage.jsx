@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {fetchWithAuth} from "../../static/js/auth.js";
 import {useParams} from "react-router-dom";
+import "./EditOrderPage.css"
 
 
 async function saveChanges(order) {
@@ -40,17 +41,19 @@ function renderPage(order, setOrder, customerName, providerName, orderStatuses, 
                 <p>Provider of order: {providerName}</p>
                 <p>Dates of the order: {order.dateFrom}-{order.timeFrom} / {order.dateTo}-{order.timeTo}</p>
                 <p>Price paid/To be paid: {order.pricePaid}</p>
-                <p>Car {order.car.manufacturer} {order.car.carModel}</p>
+                <p>Car: {order.car.manufacturer} {order.car.carModel}</p>
                 <form onSubmit={handleSubmit}>
                     <label>
                         <span>Status</span>
-                        <select value={order.orderStatus} onChange={(e) => setOrder({ ...order, orderStatus: e.target.value })}>
+                        <select className={"order-status-select"}
+                                value={order.orderStatus}
+                                onChange={(e) => setOrder({ ...order, orderStatus: e.target.value })}>
                             {orderStatuses.map((value, index) => (
                             <option key={index}>{value}</option>
                             ))}
                         </select>
                     </label>
-                    <button type="submit">Save changes</button>
+                    <button type="submit" className={"big-button"}>Save changes</button>
                 </form>
             </div>
         );

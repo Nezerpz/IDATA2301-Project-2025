@@ -28,12 +28,12 @@ function SliderFilter({name, min, max, onUpdate}) {
         <details className={"filter-category"} open>
             <summary className={"filter-category-name"}>{name}</summary>
             <div className={"price-range"}>
-                <input type="range" min={min} max={max} value={minValue} className="min" id={`${name}-min-slider`} onChange={handleMinChange}/>
-                <input type="range" min={min} max={max} value={maxValue} className="max" id={`${name}-max-slider`} onChange={handleMaxChange}/>
+                <input type="range" min={min} max={max} value={minValue} className="min" id={`${name}-min-slider`} title={`${name}-min-slider`} onChange={handleMinChange}/>
+                <input type="range" min={min} max={max} value={maxValue} className="max" id={`${name}-max-slider`} title={`${name}-max-slider`} onChange={handleMaxChange}/>
             </div>
             <div className={"price-inputs"}>
-                <input type="number" min={min} max={max} value={minValue} onChange={e => setMinValue(e.target.value)}/>
-                <input type="number" min={min} max={max} value={maxValue} onChange={e => setMaxValue(e.target.value)}/>
+                <input type="number" min={min} max={max} value={minValue} title={`${name}-min-input`} onChange={e => setMinValue(e.target.value)}/>
+                <input type="number" min={min} max={max} value={maxValue} title={`${name}-max-input`} onChange={e => setMaxValue(e.target.value)}/>
             </div>
         </details>
     );
