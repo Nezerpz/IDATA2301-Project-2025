@@ -89,10 +89,16 @@ function App() {
     const toggleNavbar = () => {
         setIsNavbarVisible(!isNavbarVisible);
         console.log(isNavbarVisible);
+        if (isUserDropdownVisible) {
+            setIsUserDropdownVisible(false);
+        }
     };
 
     const toggleUserDropdown = () => {
         setIsUserDropdownVisible(!isUserDropdownVisible);
+        if (isNavbarVisible) {
+            setIsNavbarVisible(false);
+        }
     };
   return (
     <>
@@ -133,7 +139,7 @@ function App() {
              <Link className="navbar-item" to="/about">About</Link>
            </div>
            <LoginSignup/>
-           <div className={`user-dropdown${isUserDropdownVisible ? "visible" : ""} navbar`}>
+           <div className={`user-dropdown ${isUserDropdownVisible ? "visible" : ""} navbar`}>
                <SettingsNavbar />
            </div>
        </header>

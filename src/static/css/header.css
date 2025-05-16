@@ -18,9 +18,7 @@ header {
     display: none;
 }
 
-.user-dropdown {
-    display: none;
-}
+
 
 #logo {
     height: 80px;
@@ -53,6 +51,10 @@ header {
     width: -webkit-fill-available;
 }
 
+.user-dropdown{
+    display: none;
+}
+
 @media screen and (max-width: 730px) {
     header {
         flex-direction: column;
@@ -65,6 +67,27 @@ header {
 
     .user-icon{
         display: block;
+    }
+
+    .user-dropdown.visible{
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0;
+        max-height: 500px;
+    }
+
+    .user-dropdown a{
+        align-content: center;
+        margin: auto;
+        padding: 10px 20px 10px 20px;
+        color: var(--link-color);
+        background-color: transparent;
+        border: 0;
+        font-family: var(--main-font);
+        font-size: 1.5em;
+        text-align: center;
+        word-break: keep-all;
+        text-decoration: none;
     }
 
     .navbar {
