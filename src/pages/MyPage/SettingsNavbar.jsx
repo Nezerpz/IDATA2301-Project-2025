@@ -114,8 +114,12 @@ function BecomeProvider() {
 // When the  back button is clicked, the navbar should expand again, and you will see my page again.
 
 function SettingsNavbar() {
+    const token = localStorage.getItem("jwt");
+    const decodedToken = token ? jwtDecode(token) : null;
+    const userName = decodedToken ? decodedToken.sub : null;
     return (
         <>
+            <span className={"username-in-navbar"}>{userName}</span>
             <NavBarPicker />
             <Logout />
         </>

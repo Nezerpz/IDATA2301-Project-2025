@@ -82,6 +82,7 @@ function renderPage(user, userModification, setUserModification) {
         <>
             <h2>Manage user - {user.firstName} {user.lastName}</h2>
             <div className={"user-information"}>
+                <h4>User information</h4>
                 <form className={"flex-container-column"} onSubmit={(e) => e.preventDefault()}>
                     <label>
                         <span>Name</span>
