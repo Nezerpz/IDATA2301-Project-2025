@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {fetchWithAuth} from "../../static/js/auth.js";
 import {useParams} from "react-router-dom";
 import "./EditOrderPage.css"
+import Select from "react-select";
 
 
 async function saveChanges(order) {
@@ -31,6 +32,10 @@ async function saveChanges(order) {
 
 
 function renderPage(order, setOrder, customerName, providerName, orderStatuses, handleSubmit) {
+    const options = orderStatuses != null
+        ? orderStatuses.map(f => ({value: f, label: f}))
+        : [];
+    console.log(orderStatuses);
     if (order === null) {
         return <p>No order found</p>;
     } else {
@@ -45,13 +50,14 @@ function renderPage(order, setOrder, customerName, providerName, orderStatuses, 
                 <form onSubmit={handleSubmit}>
                     <label>
                         <span>Status</span>
-                        <select className={"order-status-select"}
-                                value={order.orderStatus}
-                                onChange={(e) => setOrder({ ...order, orderStatus: e.target.value })}>
-                            {orderStatuses.map((value, index) => (
-                            <option key={index}>{value}</option>
-                            ))}
-                        </select>
+                        {console.log(options)}
+                        <Select
+                            options={options}
+                            value={options.filter(option => option.value === order.orderStatus)}
+                            onChange={selectedOption => {
+                                setOrder({...order, orderStatus: selectedOption.value});
+                            }}
+                        />
                     </label>
                     <button type="submit" className={"big-button"}>Save changes</button>
                 </form>

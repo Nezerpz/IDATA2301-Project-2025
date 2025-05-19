@@ -86,9 +86,9 @@ function ReviewPage() {
                     return (
                         <FaStar
                             key={index}
-                            className={"star"}
+                            className={"star clickable"}
                             size={50}
-                            color={currentRating <= (hover || rating) ? "yellow" : "grey"}
+                            color={currentRating <= (hover || rating) ? "#0f7c89" : "grey"}
                             onMouseEnter={() => setHover(currentRating)}
                             onMouseLeave={() => setHover(null)}
                             onClick={() => setRating(currentRating)}

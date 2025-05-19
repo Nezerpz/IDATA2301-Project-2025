@@ -8,7 +8,6 @@ import checkLogin from "../../static/js/checkLogin.js";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import ReviewModal from "../Modals/ReviewModal/ReviewModal.jsx";
 import {FaStar} from "react-icons/fa";
-import {fetchJSON} from "../../static/js/auth.js";
 
 
 //TODO: Add start under provider name. When clicking stars show the review modal for the car.
@@ -62,8 +61,9 @@ function Car ({car}) {
                                 return (
                                     <FaStar
                                         key={index}
+                                        className={"star"}
                                         size={25}
-                                        color={currentRating <= Math.ceil(car.averageRating) ? "yellow" : "grey"}
+                                        color={currentRating <= Math.ceil(car.averageRating) ? "#0f7c89" : "lightgrey"}
                                         title={`${car.averageRating} / ${totalStars}`}
                                     />
                                 );

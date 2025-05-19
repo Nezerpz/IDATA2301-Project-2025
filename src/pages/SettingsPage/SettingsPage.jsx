@@ -35,7 +35,7 @@ function ResetPassword() {
 
     return (
         <form
-            className={"flex-container-column"}
+            className={"flex-container-column reset-password"}
             onSubmit={(e) => {
                 e.preventDefault();
                 handleReset();
@@ -90,17 +90,19 @@ function DeleteAccount() {
 function SettingsPage() {
 
   return (
-    <>
-      <h2>Settings</h2>
-        <div className={"reset-password"}>
-            <h3 className={"reset-password-heading"}>Reset Password</h3>
-            <ResetPassword />
+      <>
+        <h2>Settings</h2>
+        <div className={"settings-page"}>
+            <div>
+                <h3 className={"reset-password-heading"}>Reset Password</h3>
+                <ResetPassword />
+            </div>
+            <div className={"delete-account"}>
+                <h3 className={"delete-account-heading"}>Delete Account</h3>
+                <DeleteAccount />
+            </div>
         </div>
-        <div className={"delete-account"}>
-            <h3 className={"delete-account-heading"}>Delete Account</h3>
-            <DeleteAccount />
-        </div>
-    </>
+      </>
   );
 }
 

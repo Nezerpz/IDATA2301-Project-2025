@@ -15,6 +15,18 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
         ? features.map(f => ({ value: f.id, label: f.featureName }))
         : [];
 
+    const transmissionOptions = transmissionTypes != null
+        ? transmissionTypes.map(t => ({ value: t, label: t }))
+        : [];
+
+    const fuelOptions = fuelTypes != null
+        ? fuelTypes.map(t => ({ value: t, label: t }))
+        : [];
+
+    const manufacturerOptions = manufacturers != null
+        ? manufacturers.map(t => ({ value: t, label: t }))
+        : [];
+
 
     //console.debug(`adding new car? ${addingNewCar}`)
 
@@ -192,15 +204,13 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
             <form className={"car-edit"} onSubmit={(e) => e.preventDefault()}>
                 <label>
                     <span className={"car-edit-property-heading"}>Manufacturer</span>
-                    <select placeholder="Select Manufacturer" 
-                        className={"car-edit-property-input"}
-                        value={car.manufacturer} 
-                        onChange={e => setCar({ ...car, manufacturer: e.target.value})}>
-                        {manufacturers != null 
-                            ? manufacturers.map((value, i) => (
-                                <option key={i}>{value}</option>))
-                            : <option>None</option>}
-                    </select>
+                    <Select placeholder="Select Manufacturer"
+                        options={manufacturerOptions}
+                        value={manufacturerOptions.filter(option => car.manufacturer === option.value)}
+                        onChange={selectedOption => {
+                            setCar({ ...car, manufacturer: selectedOption.value })
+                        }} />
+
                 </label>
                 <label>
                     <span className={"car-edit-property-heading"}>Model</span>
@@ -218,32 +228,22 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
                 </label>
                 <label>
                     <span className={"car-edit-property-heading"}>Transmission type</span>
-                        <select className={"car-edit-property-input"} placeholder="Select transmission type" 
-                            value={car.transmissionType} 
-                            onChange={(e) => setCar({ ...car, transmissionType: e.target.value })} >
-                            {transmissionTypes != null 
-                                ? transmissionTypes
-                                    .map((value, i) => (
-                                        <option key={i} value={value}>
-                                            {value}
-                                        </option>))
-                                : <option>None</option>}
-                        </select>
+                        <Select placeholder="Select transmission type"
+                                options={transmissionOptions}
+                                value={transmissionOptions.filter(option => car.transmissionType === option.value)}
+                            onChange={selectedOption => {
+                                setCar({ ...car, transmissionType: selectedOption.value })
+                            }}
+                        />
                 </label>
                 <label>
                     <span className={"car-edit-property-heading"}>Fuel type</span>
-                    <select className={"car-edit-property-input"} placeholder="Select fuel type" 
-                        value={car.fuelType} 
-                        onChange={(e) => setCar({ ...car, fuelType: e.target.value })} >
-                        {fuelTypes != null 
-                            ? fuelTypes
-                                .map((value, i) => (
-                                    <option key={i} value={value}>
-                                        {value}
-                                    </option>))
-                            : <option>None</option>}
-                    </select>
-                        
+                    <Select placeholder="Select fuel type"
+                        options={fuelOptions}
+                        value={fuelOptions.filter(option => car.fuelType === option.value)}
+                        onChange={selectedOption => {
+                            setCar({ ...car, fuelType: selectedOption.value });
+                        }} />
                 </label>
                 <label>
                     <span className={"car-edit-property-heading"}>Rental Price per Day</span>
