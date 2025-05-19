@@ -47,9 +47,7 @@ function HomePage(){
                 <h2 id={"home-page-car-list-header"}>Highest Rated Cars</h2>
                 {loading && <p>Loading...</p>}
                 {error && <p>Error: {error}</p>}
-                <ul className="highest-rated-cars-list">
-                    <CarList cars={highestRatedCars} />
-                </ul>
+                <CarList cars={highestRatedCars} />
             </section>
         </div>
     )
