@@ -121,7 +121,6 @@ function SettingsNavbar() {
     const userName = decodedToken ? decodedToken.sub : null;
     return (
         <>
-            <span className={"username-in-navbar"}>{userName}</span>
             <NavBarPicker />
             <Logout />
         </>
