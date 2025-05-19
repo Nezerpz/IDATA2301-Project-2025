@@ -38,7 +38,9 @@ function NavBarPicker() {
     const token = localStorage.getItem("jwt");
     const decodedToken = token ? jwtDecode(token) : null;
     const role = decodedToken ? decodedToken.roles[0] : null;
-    const userType = role.authority.split("_")[1];
+    const userType = role != null 
+        ? role.authority.split("_")[1] 
+        : "CUSTOMER";
 
 
     return renderComponent({userType});
