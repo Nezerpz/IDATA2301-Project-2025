@@ -1,0 +1,28 @@
+.new-password-input{
+    width: 100%;
+    padding: 10px;
+    border-radius: var(--corner-rounding);
+    border-width: 0px;
+    outline: none;
+    background-color: rgb(239, 239, 239);
+    color: #111;
+    box-sizing: border-box;
+}
+
+.reset-password-button{
+    margin: 15px 10px;
+}
+
+.delete-account-button{
+    margin: 15px 10px;
+}
+
+.settings-page{
+    padding: 25px;
+    border-radius: var(--corner-rounding);
+    background-color: white;
+}
+
+.reset-password {
+    gap: 10px;
+}

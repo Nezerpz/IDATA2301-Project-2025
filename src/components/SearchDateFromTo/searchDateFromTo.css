@@ -2,10 +2,11 @@
 TODO: Remove the margin-right and move it to the container for the home page element
  */
 
-.search-date-from-to{
+.search-date-from-to {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    align-items: stretch; /* Ensures all children stretch to the same height */
     max-width: 625px;
     padding: 20px;
     border-radius: var(--corner-rounding);
@@ -14,6 +15,17 @@ TODO: Remove the margin-right and move it to the container for the home page ele
     background-color: var(--main-color);
     font-family: var(--main-font);
     list-style-type: none;
+}
+
+.search-date-from-to-button {
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    align-items: flex-end;
+    margin-top: auto;
+    margin-bottom: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .search-heading {
@@ -31,25 +43,34 @@ TODO: Remove the margin-right and move it to the container for the home page ele
     width: 100%;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
-}
-
-#timeFrom {
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
+    gap: 7px;
+    margin: 15px 10px;
 }
 
 #to {
+    width: 100%;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
-}
-
-#timeTo {
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
+    gap: 7px;
+    margin: 15px 10px;
 }
 
 @container (width < 575px) {
     .search-date-from-to {
         flex-direction: column;
     }
+
+    #from {
+        margin: 15px 0px;
+    }
+
+    #to {
+        margin: 15px 0px;
+    }
+
+    .search-date-from-to-button {
+        margin: 0px 0px 15px 0px;
+    }
+
+
 }

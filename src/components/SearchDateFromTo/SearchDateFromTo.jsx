@@ -39,7 +39,7 @@ function SearchDateFromTo() {
         return (
             <form className="search-date-from-to" onSubmit={handleSubmit}>
 
-                <label htmlFor="from">
+                <label htmlFor="from" id={"from"}>
                     <span className={"search-heading"}>From</span>
 
                     <DatePicker id={"dateFrom"} 
@@ -60,7 +60,7 @@ function SearchDateFromTo() {
 
                 </label>
 
-                <label htmlFor="to">
+                <label htmlFor="to" id={"to"}>
                     <span className={"search-heading"}>To</span>
 
                     <DatePicker id={"dateTo"} 
@@ -80,10 +80,10 @@ function SearchDateFromTo() {
 
                 {isCarsPage
                     ? (<button type="submit"
-                            className="big-button">Search
+                            className="big-button search-date-from-to-button">Search
                         </button>)
                     : (<button type="submit"
-                            className="big-button"
+                            className="big-button search-date-from-to-button"
                             onClick={() => navigate("/cars")}>Search
                         </button>)}
             </form>

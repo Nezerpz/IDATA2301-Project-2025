@@ -77,7 +77,13 @@ CarList.propTypes = {
             transmissionType: PropTypes.string,
             fuelType: PropTypes.string,
             productionYear: PropTypes.number,
-            features: PropTypes.arrayOf(PropTypes.string)
+            features: PropTypes.arrayOf(PropTypes.shape(
+                {
+                    id: PropTypes.number,
+                    featureName: PropTypes.string,
+                    featureDescription: PropTypes.string
+                }
+            ))
         })
     )
 }

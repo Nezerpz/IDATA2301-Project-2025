@@ -54,8 +54,7 @@
 
 .features > summary {
     font-family: var(--main-font);
-    color: gray;
-    color: gray;
+    color: var(--heading-color-dark);
 }
 
 .feature {

@@ -84,6 +84,11 @@ h4 {
     color: var(--heading-color-light);
     border-radius: 7px;
 }
+
+.clickable {
+    cursor: pointer;
+}
+
 .grow {
     flex-grow: 1;
 }
@@ -257,6 +262,10 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
 
 .flex-space-between {
     justify-content: space-between;
+}
+
+.flex-align-center {
+    align-items: center;
 }
 
 .icon-with-onclick {
