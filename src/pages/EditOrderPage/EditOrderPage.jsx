@@ -35,7 +35,6 @@ function renderPage(order, setOrder, customerName, providerName, orderStatuses, 
     const options = orderStatuses != null
         ? orderStatuses.map(f => ({value: f, label: f}))
         : [];
-    console.log(orderStatuses);
     if (order === null) {
         return <p>No order found</p>;
     } else {
@@ -50,7 +49,6 @@ function renderPage(order, setOrder, customerName, providerName, orderStatuses, 
                 <form onSubmit={handleSubmit}>
                     <label>
                         <span>Status</span>
-                        {console.log(options)}
                         <Select
                             options={options}
                             value={options.filter(option => option.value === order.orderStatus)}
