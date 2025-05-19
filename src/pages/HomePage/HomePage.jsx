@@ -21,7 +21,7 @@ function HomePage(){
     useEffect(() => {
         const fetchHighestRatedCars = async () => {
             try {
-                const data = await fetchJSON("/cars/top-rated");
+                const data = await fetchJSON("/cars/top-rated-available");
                 setHighestRatedCars(data);
             } catch (err) {
                 setError(err.message);
@@ -47,6 +47,7 @@ function HomePage(){
                 <h2 id={"home-page-car-list-header"}>Highest Rated Cars</h2>
                 {loading && <p>Loading...</p>}
                 {error && <p>Error: {error}</p>}
+                <span>Select timespan above</span>
                 <CarList cars={highestRatedCars} />
             </section>
         </div>
