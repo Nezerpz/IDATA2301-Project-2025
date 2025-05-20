@@ -19,4 +19,4 @@ FROM docker.io/nginx:latest
 ARG BUILD_DIR
 ARG APPDIR=/usr/share/nginx/html
 WORKDIR ${APPDIR}
-COPY --from=build ${BUILD_DIR}/dist/* .
+COPY --from=build ${BUILD_DIR}/dist/ .
