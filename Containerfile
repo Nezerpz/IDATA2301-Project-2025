@@ -10,6 +10,7 @@ RUN mkdir -p ${BUILD_DIR}
 ADD . ${BUILD_DIR}
 WORKDIR ${BUILD_DIR}
 # Skip tests here as db is not running yet
+RUN npm install
 RUN npm run build
 
 
