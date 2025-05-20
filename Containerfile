@@ -10,6 +10,7 @@ RUN mkdir -p ${BUILD_DIR}
 ADD . ${BUILD_DIR}
 WORKDIR ${BUILD_DIR}
 # Skip tests here as db is not running yet
+RUN npm install
 RUN npm run build
 
 
@@ -18,4 +19,4 @@ FROM docker.io/nginx:latest
 ARG BUILD_DIR
 ARG APPDIR=/usr/share/nginx/html
 WORKDIR ${APPDIR}
-COPY --from=build ${BUILD_DIR}/target/* .
+COPY --from=build ${BUILD_DIR}/dist/ .
