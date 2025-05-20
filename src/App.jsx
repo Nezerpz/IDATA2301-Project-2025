@@ -3,6 +3,7 @@ import {useEffect, useRef, useState} from "react";
 import SettingsNavbar from "./pages/MyPage/SettingsNavbar.jsx";
 import Logout from "./components/LogOut/Logout.jsx";
 import "./static/css/hamburger.css";
+import logo from "./static/svg/roulette.png";
 
 function UserDropdown() {
     const [isOpen, setIsOpen] = useState(false);
@@ -124,7 +125,7 @@ function App() {
                </svg>
                <div id="title">
                  <Link to="/">
-                   <img id="logo" src="src/static/svg/roulette.png" alt="Logo of the company" />
+                   <img id="logo" src={logo} alt="Logo of the company" />
                  </Link>
                </div>
                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 user-icon"
