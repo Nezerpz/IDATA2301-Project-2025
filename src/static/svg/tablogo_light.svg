@@ -2,9 +2,9 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
-   width="75mm"
-   height="75mm"
-   viewBox="0 0 75 75"
+   width="55mm"
+   height="55mm"
+   viewBox="0 0 55 55"
    version="1.1"
    id="svg1"
    inkscape:version="1.4.1 (93de688d07, 2025-03-30)"
@@ -26,9 +26,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#505050"
      inkscape:document-units="mm"
-     inkscape:zoom="0.40132927"
-     inkscape:cx="161.96177"
-     inkscape:cy="645.35537"
+     inkscape:zoom="1.6053171"
+     inkscape:cx="187.81336"
+     inkscape:cy="115.86496"
      inkscape:window-width="1890"
      inkscape:window-height="1105"
      inkscape:window-x="2026"
@@ -43,15 +43,15 @@
      id="layer1">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.0402px;line-height:normal;font-family:Impact;-inkscape-font-specification:'Impact, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-decoration-color:#000000;fill:#ffffff;stroke-width:1.04279;-inkscape-stroke:none"
-       x="25.3174"
-       y="52.45248"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.0402px;line-height:normal;font-family:Impact;-inkscape-font-specification:'Impact, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-decoration-color:#000000;fill:#ffffff;fill-opacity:1;stroke-width:1.04279;-inkscape-stroke:none"
+       x="13.23867"
+       y="42.332054"
        id="text1"
        transform="matrix(0.9594385,0,-0.23309827,1.0422763,0,0)"><tspan
          sodipodi:role="line"
          id="tspan1"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.0402px;font-family:Impact;-inkscape-font-specification:'Impact, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;stroke-width:1.04279"
-         x="25.3174"
-         y="52.45248">RR</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:42.0402px;font-family:Impact;-inkscape-font-specification:'Impact, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#ffffff;fill-opacity:1;stroke-width:1.04279"
+         x="13.23867"
+         y="42.332054">RR</tspan></text>
   </g>
 </svg>
