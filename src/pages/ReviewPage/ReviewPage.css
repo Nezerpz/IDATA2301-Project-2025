@@ -1,3 +1,40 @@
-.review-box {
+.review-textarea {
+    width: 100%;
+    height: 100px;
+    resize: none;
     padding: 10px;
+    border-radius: 7px;
+    border: 0px solid var(--main-color);
+    font-family: var(--main-font);
+    outline: none;
+    font-size: 150%;
+    box-sizing: border-box;
+}
+
+.star-container {
+    display: flex;
+}
+
+.star {
+    padding: 4px;
+
+}
+
+.review-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+@media screen and (max-width: 730px) {
+    .review-textarea {
+        height: 150px;
+    }
+    .review-box {
+        margin: 10px;
+    }
+
+    .review-heading {
+        font-size: 2em;
+    }
 }

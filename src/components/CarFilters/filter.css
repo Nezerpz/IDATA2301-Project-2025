@@ -71,17 +71,35 @@
 
 .filter-category li {
     list-style-type: none;
+    padding: 5px;
+    cursor: pointer;
 }
 
 .filter-category label {
-    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
 }
 
 .filter-category input[type="checkbox"] {
-    width: 1.25rem;
-    height: 1.25rem;
+    width: 1rem;
+    height: 1rem;
 }
 
 .filter-category input[type="checkbox"]:checked {
     accent-color: var(--button-color);
+}
+
+.price-inputs {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.price-inputs > input {
+    width: 100%;
+    height: 1.5rem;
+    border-radius: var(--corner-rounding);
+    padding: 5px;
+    border: none;
+    outline: none;
 }

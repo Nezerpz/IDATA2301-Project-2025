@@ -32,3 +32,7 @@ select[multiple].car-edit-property-input > option {
 .car-edit-property-input::-webkit-scrollbar {
     display: none;
 }
+
+#car-edit-multi-select {
+    font-family: var(--main-font);
+}

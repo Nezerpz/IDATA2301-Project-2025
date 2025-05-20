@@ -1,0 +1,26 @@
+.hamburger-button {
+    background: transparent;
+    border: 3px solid;
+    border-radius: 1rem;
+}
+
+.hamburger {
+  display: none;
+}
+
+.line {
+    fill: var(--heading-color-light);
+    transition: 1s;
+    transform-origin: center;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+        transition: transform 0.5s ease;
+    }
+
+    .hamburger.rotated {
+        transform: rotate(90deg);
+    }
+}

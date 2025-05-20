@@ -8,7 +8,6 @@ import checkLogin from "../../static/js/checkLogin.js";
 import {useNavigate, useSearchParams} from "react-router-dom";
 import ReviewModal from "../Modals/ReviewModal/ReviewModal.jsx";
 import {FaStar} from "react-icons/fa";
-import {fetchJSON} from "../../static/js/auth.js";
 
 
 //TODO: Add start under provider name. When clicking stars show the review modal for the car.
@@ -37,7 +36,7 @@ function Car ({car}) {
     return (
         <div className="car">
             <h3>{car.manufacturer} {car.carModel}</h3>
-            <img src={"src" + car.imagePath} alt={car.carModel} className={"car-image"}/>
+            <img src={import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + car.imagePath} alt={car.carModel} className={"car-image"}/>
             <div className={"carInfo"}>
                 <div>
                     <p
@@ -53,7 +52,7 @@ function Car ({car}) {
                         id={car.providerId}
                         type={"user"}
                     />
-                    <div className="star-container" onClick={() => setCarReviews(true)}>
+                    <div className="clickable" onClick={() => setCarReviews(true)}>
                         {car.averageRating === 0 ? (
                             <span>Car has no reviews</span>
                         ) : (
@@ -62,8 +61,9 @@ function Car ({car}) {
                                 return (
                                     <FaStar
                                         key={index}
+                                        className={"star"}
                                         size={25}
-                                        color={currentRating <= Math.ceil(car.averageRating) ? "yellow" : "grey"}
+                                        color={currentRating <= Math.ceil(car.averageRating) ? "#0f7c89" : "lightgrey"}
                                         title={`${car.averageRating} / ${totalStars}`}
                                     />
                                 );
@@ -78,7 +78,7 @@ function Car ({car}) {
                     />
                     <p>{car.transmissionType} ∙ {car.fuelType} ∙ {car.numberOfSeats} SEATS ∙ {car.productionYear}</p>
                 </div>
-                <FeatureList features={car.features}/>
+                <FeatureList features={car.features.map(feature => feature.featureName)} />
             </div>
             <span className={"grow"}></span>
             <div className={"orderButtonContainer"}>

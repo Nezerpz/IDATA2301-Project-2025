@@ -9,10 +9,16 @@ header {
     color: white;
 }
 
-#title { 
+.logo-and-mobile {
     /* title is left adjusted */
     margin: 10px auto 10px 0;
 }
+
+.user-icon {
+    display: none;
+}
+
+
 
 #logo {
     height: 80px;
@@ -45,20 +51,60 @@ header {
     width: -webkit-fill-available;
 }
 
+.user-dropdown{
+    display: none;
+}
+
 @media screen and (max-width: 730px) {
     header {
         flex-direction: column;
         padding: 25px 25px;
     }
 
-    #title {
-        margin: 10px auto;
+    .logo-and-mobile {
+        margin: 10px;
+    }
+
+    .user-icon{
+        display: block;
+    }
+
+    .user-dropdown.visible{
+        display: flex;
+        flex-direction: column;
+        margin: 10px 0;
+        max-height: 500px;
+    }
+
+    .user-dropdown a{
+        align-content: center;
+        margin: auto;
+        padding: 10px 20px 10px 20px;
+        color: var(--link-color);
+        background-color: transparent;
+        border: 0;
+        font-family: var(--main-font);
+        font-size: 1.5em;
+        text-align: center;
+        word-break: keep-all;
+        text-decoration: none;
+    }
+
+    .user-dropdown a:hover{
+        background-color: var(--link-color);
+        color: var(--navbar-item-color);
     }
 
     .navbar {
-        /* column layout if screen is small */
+        display: none;
+        transition: all 0.5s ease;
+    }
+
+    .navbar.visible {
+        display: flex;
         flex-direction: column;
         margin: 10px 0;
+        max-height: 500px;
     }
 }
 
@@ -103,6 +149,23 @@ header {
 .navbar-item .navbar-item-dark {
     font-size: 1em;
 }
+.username-in-navbar {
+    display: flex;
+    align-content: center;
+    padding: 10px 20px 10px 20px;
+    flex: 1;
+    border: 1px solid var(--dark-link-color);
+    background-color: var(--foreground-color);
+
+    color: var(--dark-link-color);
+    font-family: var(--main-font);
+    font-size: 1em;
+    text-align: center;
+    word-break: keep-all;
+    text-decoration: none;
+    padding-bottom: 40px;
+}
+
 
 .navbar-item-dark .navbar-item {
     font-size: 1em;

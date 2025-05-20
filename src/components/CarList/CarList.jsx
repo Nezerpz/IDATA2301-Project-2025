@@ -41,8 +41,8 @@ function CarList ({cars}) {
                     : true) &&
 
                 // either none or all matching features are selected.
-                (selectedFeatures.length != 0 
-                    ? selectedFeatures.every((feature) => carFeatures.includes(feature))
+                (selectedFeatures.length != 0
+                    ? selectedFeatures.every((feature) => carFeatures.map(feature => feature.featureName).includes(feature))
                     : true)
 
             )
@@ -77,7 +77,13 @@ CarList.propTypes = {
             transmissionType: PropTypes.string,
             fuelType: PropTypes.string,
             productionYear: PropTypes.number,
-            features: PropTypes.arrayOf(PropTypes.string)
+            features: PropTypes.arrayOf(PropTypes.shape(
+                {
+                    id: PropTypes.number,
+                    featureName: PropTypes.string,
+                    featureDescription: PropTypes.string
+                }
+            ))
         })
     )
 }

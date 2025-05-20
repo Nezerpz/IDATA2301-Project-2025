@@ -30,8 +30,6 @@ function ReviewModal({ open, id, type, onClose }) {
 
     getReviews(id, setReviews, type, setLoading);
 
-    console.debug(reviews)
-
     let userNameString = "Sorry, no reviews found";
     if (!loading && reviews && reviews.length > 0) {
         if (type === "car") {
