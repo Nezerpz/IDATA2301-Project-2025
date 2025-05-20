@@ -47,7 +47,6 @@ function HomePage(){
                 <h2 id={"home-page-car-list-header"}>Highest Rated Cars</h2>
                 {loading && <p>Loading...</p>}
                 {error && <p>Error: {error}</p>}
-                <span>Select timespan above</span>
                 <CarList cars={highestRatedCars} />
             </section>
         </div>
