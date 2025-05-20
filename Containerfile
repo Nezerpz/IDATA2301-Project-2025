@@ -11,7 +11,6 @@ ADD . ${BUILD_DIR}
 WORKDIR ${BUILD_DIR}
 ARG VITE_BACKEND_PORT=${VITE_BACKEND_PORT}
 ARG VITE_BACKEND_URL=${VITE_BACKEND_URL}
-# Skip tests here as db is not running yet
 RUN npm install
 RUN npm run build
 
