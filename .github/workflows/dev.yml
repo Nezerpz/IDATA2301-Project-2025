@@ -25,10 +25,6 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Debug print environment variables
-        run: |
-          echo "VITE_BACKEND_URL=$VITE_BACKEND_URL"
-          echo "VITE_BACKEND_PORT=$VITE_BACKEND_PORT"
       - name: Build the rental-roulette docker image
         run: |
           docker build --build-arg VITE_BACKEND_URL=${{ env.VITE_BACKEND_URL }} --build-arg VITE_BACKEND_PORT=${{ env.VITE_BACKEND_PORT }} -t rental-roulette-frontend . -f Containerfile --tag ghcr.io/nezerpz/rental-roulette-frontend:latest
