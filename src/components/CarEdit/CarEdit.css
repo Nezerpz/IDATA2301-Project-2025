@@ -8,6 +8,8 @@
     color: var(--heading-color-dark);
     font-family: var(--main-font);
     font-weight: bold;
+    margin: 1px;
+    font-size: 1.1em;
 }
 
 .car-edit-property-input {
