@@ -2,7 +2,7 @@ import {useNavigate} from "react-router-dom";
 
 export async function refreshToken() {
     try {
-        const response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/refresh-token", {
+        const response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/api/refresh-token", {
             method: "POST",
             credentials: "include", // Include cookies in the request
         });
@@ -37,7 +37,7 @@ export async function fetchWithAuth(endpoint, options = {}) {
         ...options.headers,
         Authorization: `Bearer ${token}`,
     };
-    const url = import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + endpoint;
+    const url = import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/api" + endpoint;
 
     try {
         const response = await fetch(url,
