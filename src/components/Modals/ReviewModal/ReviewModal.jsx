@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import "../Modal.css"
 import {fetchJSON} from "../../../static/js/auth.js";
 import scrollLock from "../../scrollLock/scrollLock.jsx";
+import "./ReviewModal.css";
 
 
 
