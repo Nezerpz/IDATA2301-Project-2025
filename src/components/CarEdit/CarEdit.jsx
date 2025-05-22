@@ -218,6 +218,7 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
                 <label>
                     <h5 className={"car-edit-property-heading"}>Manufacturer</h5>
                     <Select placeholder="Select Manufacturer"
+                        className={"react-select"}
                         options={manufacturerOptions}
                         value={manufacturerOptions.filter(option => car.manufacturer === option.value)}
                         onChange={selectedOption => {
@@ -242,8 +243,9 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
                 <label>
                     <h5 className={"car-edit-property-heading"}>Transmission type</h5>
                         <Select placeholder="Select transmission type"
-                                options={transmissionOptions}
-                                value={transmissionOptions.filter(option => car.transmissionType === option.value)}
+                            className={"react-select"}
+                            options={transmissionOptions}
+                            value={transmissionOptions.filter(option => car.transmissionType === option.value)}
                             onChange={selectedOption => {
                                 setCar({ ...car, transmissionType: selectedOption.value })
                             }}
@@ -252,6 +254,7 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
                 <label>
                     <h5 className={"car-edit-property-heading"}>Fuel type</h5>
                     <Select placeholder="Select fuel type"
+                        className={"react-select"}
                         options={fuelOptions}
                         value={fuelOptions.filter(option => car.fuelType === option.value)}
                         onChange={selectedOption => {
@@ -275,6 +278,7 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
                 <label>
                     <h5 className={"car-edit-property-heading"}>Features </h5>
                     <Select
+                        className={"react-select"}
                         options={options}
                         id="car-edit-multi-select"
                         value={options.filter(option => car.features.some(feature => feature.id === option.value))}
@@ -295,6 +299,7 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
                 <label>
                     <h5 className={"car-edit-property-heading"}>Car status</h5>
                     <Select placeholder="Select car status"
+                        className={"react-select"}
                         options={carStatusOptions}
                         value={carStatusOptions.filter(option => car.carStatus === option.value)}
                         onChange={selectedOption => {
