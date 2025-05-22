@@ -38,3 +38,7 @@ select[multiple].car-edit-property-input > option {
 #car-edit-multi-select {
     font-family: var(--main-font);
 }
+
+.react-select {
+    font-family: var(--main-font);
+}
