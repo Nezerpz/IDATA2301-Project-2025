@@ -6,7 +6,9 @@ import ReviewModal from "../Modals/ReviewModal/ReviewModal.jsx";
 
 function ReviewCustomer(order, navigate) {
     return (
-        <button onClick={() => {
+        <button
+            className={"small-button clickable"}
+            onClick={() => {
             if (order.orderStatus !== "COMPLETED") {
                 alert("You can only review the customer after the order is completed.");
                 return;
@@ -20,7 +22,9 @@ function ReviewCustomer(order, navigate) {
 
 function ReviewProvider(order, navigate) {
     return(
-        <button onClick={() => {
+        <button
+            className={"small-button clickable"}
+            onClick={() => {
             if (order.orderStatus !== "COMPLETED") {
                 alert("You can only review the provider after the order is completed.");
                 return;
@@ -34,7 +38,9 @@ function ReviewProvider(order, navigate) {
 
 function ReviewCar(order, navigate) {
     return(
-        <button onClick={() => {
+        <button
+            className={"small-button clickable"}
+            onClick={() => {
             if (order.orderStatus !== "COMPLETED") {
                 alert("You can only review the car after the order is completed.");
                 return;
@@ -51,7 +57,7 @@ function ReadCar(row) {
     return (
         <>
             <button
-                className={"car-user"}
+                className={"car-user small-button clickable"}
                 title={"Read reviews of this user"}
                 onClick={() => {setReviews(true)}}
             >Car reviews
@@ -72,7 +78,7 @@ function ReadCustomer(row) {
     return (
         <>
             <button
-                className={"car-user"}
+                className={"car-user small-button clickable"}
                 title={"Read reviews of this user"}
                 onClick={() => {setReviews(true)}}
             >Customer reviews
@@ -93,6 +99,7 @@ function ReadProvider(row) {
         <>
             <button
                 title={"Read reviews of this user"}
+                className={"small-button clickable"}
                 onClick={() => {setReviews(true)}}
             >
                 Provider reviews
@@ -107,18 +114,33 @@ function ReadProvider(row) {
     );
 }
 
+function EditOrderButton(row, navigate) {
+    const path = window.location.pathname;
+    const isAdmin = path.includes("admin");
+    const pathTo = isAdmin ? "admin" : "provider";
+
+    return (
+        <button className={"small-button clickable"} onClick={() => {
+            navigate(`/mypage/${pathTo}/orders/edit/${row.id}`);
+        }}>
+            Edit order
+        </button>
+    )
+}
+
 function EditOrder(row, navigate) {
     const path = window.location.pathname;
     const isAdmin = path.includes("admin");
     const pathTo = isAdmin ? "admin" : "provider";
 
     return (
-        <button onClick={() => {
-            navigate(`/mypage/${pathTo}/orders/edit/${row.id}`);
-        }}>
-            Edit Order
-        </button>
-    );
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6" width={"24"} onClick={() => {
+        navigate(`/mypage/${pathTo}/orders/edit/${row.id}`);
+    }}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+    </svg>
+
+);
 }
 
 function ReviewOptions({ row, userData }) {
@@ -144,7 +166,7 @@ function ReviewOptions({ row, userData }) {
             <>
                 {ReviewCustomer(row, navigate)}
                 {ReadCustomer(row)}
-                {EditOrder(row, navigate)}
+                {EditOrderButton(row, navigate)}
             </>
         );
     }
@@ -228,7 +250,7 @@ function OrderList({ orders }) {
 
     return (
         <SearchableFieldTable rowKey={"id"} data={processedOrders} columns={columns}>
-                <ReviewOptions userData={userData} />
+            <ReviewOptions userData={userData} />
         </SearchableFieldTable>
     );
 }

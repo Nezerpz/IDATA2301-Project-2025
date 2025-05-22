@@ -85,6 +85,16 @@ h4 {
     border-radius: 7px;
 }
 
+.small-button {
+    outline: none;
+    border: 1px solid var(--button-color);
+    font-family: var(--main-font);
+    border-radius: 7px;
+    background-color: var(--button-color);
+    color: var(--heading-color-light);
+    margin: 3px;
+}
+
 .clickable {
     cursor: pointer;
 }

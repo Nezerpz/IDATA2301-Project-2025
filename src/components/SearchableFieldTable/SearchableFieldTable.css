@@ -28,6 +28,12 @@
     background-color: var(--main-color);
     color: var(--heading-color-light);
     font-family: var(--main-font);
+    word-break: break-word;
+    overflow-wrap: break-word;
+    text-overflow: ellipsis;
+    white-space: normal;
+    text-decoration: none;
+    hyphens: auto;
 }
 
 .searchableFieldTableRow {

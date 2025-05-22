@@ -28,7 +28,6 @@ services:
   frontend:
     restart: unless-stopped
     image: ghcr.io/nezerpz/rental-roulette-frontend:latest
-    env_file: .env-frontend
     ports:
       - 80:80
       - 443:443
@@ -37,6 +36,7 @@ services:
       - ./nginx-config:/etc/nginx/conf.d/:ro
       - ./certbot/www:/var/www/certbot/:ro
       - ./certbot/conf:/etc/nginx/ssl/:ro
+      
   certbot:
     image: certbot/certbot:latest
     volumes:
@@ -100,6 +100,14 @@ server {
 
     location / {
         try_files $uri $uri/ /index.html;
+    }
+    
+    location /api {
+        proxy_pass http://localhost:8080/api;
+    }
+    
+    location /user-uploads {
+        proxy_pass http://localhost:8080/user-uploads;
     }
 
     location /assets/ {
