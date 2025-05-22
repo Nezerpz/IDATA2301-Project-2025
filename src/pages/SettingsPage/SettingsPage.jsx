@@ -39,41 +39,46 @@ async function saveChanges(user, userModification, navigate) {
 function UpdateUsers({user, userModification, setUserModification, navigate}) {
 
     return (
-        <form onSubmit={(e) => e.preventDefault()}>
-            <label>
-                <span>Name</span>
-                <input className={"user-information-input"} type={"text"} value={userModification.firstName}
-                    onChange={(e) => setUserModification({
-                        ...userModification,
-                        firstName: e.target.value
-                    })}/>
-                <input className={"user-information-input"} type={"text"} value={userModification.lastName}
-                    onChange={(e) => setUserModification({
-                        ...userModification,
-                        lastName: e.target.value
-                    })}/>
-            </label>
-            <label>
-                <span>Username</span>
-                <input className={"user-information-input"} type={"text"} value={userModification.username}
-                    onChange={(e) => setUserModification({
-                        ...userModification,
-                        username: e.target.value
-                    })} />
-            </label>
-            <label>
-                <span>Email</span>
-                <input className={"user-information-input"} type={"email"} value={userModification.email}
-                    onChange={(e) => setUserModification({
-                        ...userModification,
-                        email: e.target.value
-                    })} />
-            </label>
-            <button className={"big-button user-information-button"} type={"submit"}
-                onClick={() => saveChanges(user, userModification, navigate)}>
-                Submit changes
-            </button>
-        </form>
+        <>
+            <h3 className={"user-information-heading"}>User Information</h3>
+            <form onSubmit={(e) => e.preventDefault()}>
+                <label>
+                    <h4>Name</h4>
+                    <section className={"user-information-name-section"}>
+                        <input className={"user-information-input"} type={"text"} value={userModification.firstName}
+                            onChange={(e) => setUserModification({
+                                ...userModification,
+                                firstName: e.target.value
+                            })}/>
+                        <input className={"user-information-input"} type={"text"} value={userModification.lastName}
+                            onChange={(e) => setUserModification({
+                                ...userModification,
+                                lastName: e.target.value
+                            })}/>
+                    </section>
+                </label>
+                <label>
+                    <h4>Username</h4>
+                    <input className={"user-information-input"} type={"text"} value={userModification.username}
+                        onChange={(e) => setUserModification({
+                            ...userModification,
+                            username: e.target.value
+                        })} />
+                </label>
+                <label>
+                    <h4>Email</h4>
+                    <input className={"user-information-input"} type={"email"} value={userModification.email}
+                        onChange={(e) => setUserModification({
+                            ...userModification,
+                            email: e.target.value
+                        })} />
+                </label>
+                <button className={"big-button user-information-button"} type={"submit"}
+                    onClick={() => saveChanges(user, userModification, navigate)}>
+                    Submit changes
+                </button>
+            </form>
+        </>
     )
 }
 

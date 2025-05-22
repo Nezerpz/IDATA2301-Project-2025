@@ -26,3 +26,9 @@
 .reset-password {
     gap: 10px;
 }
+
+.user-information-name-section{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
