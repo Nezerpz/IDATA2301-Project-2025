@@ -3,6 +3,24 @@
     margin-bottom: 1rem;
 }
 
+.edit-order-page{
+    padding: 25px;
+    border-radius: var(--corner-rounding);
+    background-color: white;
+}
+
+.edit-order-page-header {
+    color: var(--heading-color-dark);
+    font-size: 1.1rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.edit-order-page-paragraph {
+    font-size: 0.9rem;
+    margin: 0;
+}
+
 @media screen and (max-width: 730px){
     .order-status-select {
         width: 100%;
