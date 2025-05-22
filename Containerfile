@@ -25,4 +25,3 @@ ARG BUILD_DIR
 ARG APPDIR=/usr/share/nginx/html
 WORKDIR ${APPDIR}
 COPY --from=build ${BUILD_DIR}/dist/ .
-COPY nginx.conf /etc/nginx/conf.d/default.conf
