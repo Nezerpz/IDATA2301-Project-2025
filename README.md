@@ -101,6 +101,14 @@ server {
     location / {
         try_files $uri $uri/ /index.html;
     }
+    
+    location /api {
+        proxy_pass http://localhost:8080/api;
+    }
+    
+    location /user-uploads {
+        proxy_pass http://localhost:8080/user-uploads;
+    }
 
     location /assets/ {
         try_files $uri =404;
