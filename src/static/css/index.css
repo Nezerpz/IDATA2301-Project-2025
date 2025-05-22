@@ -294,3 +294,7 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
 .no-scroll {
     overflow: hidden;
 }
+
+.react-select {
+    font-family: var(--main-font);
+}
