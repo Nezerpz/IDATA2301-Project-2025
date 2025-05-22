@@ -4,7 +4,9 @@
     resize: none;
     padding: 10px;
     border-radius: 7px;
-    border: 1px solid var(--main-color);
+    border: 0px solid var(--main-color);
+    font-family: var(--main-font);
+    outline: none;
     font-size: 150%;
     box-sizing: border-box;
 }

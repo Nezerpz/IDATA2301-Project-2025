@@ -25,3 +25,7 @@ main > div > div > section {
     text-shadow: 2px 2px 20px var(--dark-shadow-color);
 }
 
+#home-page-car-list-header {
+    color: var(--heading-color-dark);
+    margin-left: 15px;
+}

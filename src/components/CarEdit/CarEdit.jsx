@@ -10,6 +10,7 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
     const [transmissionTypes, setTransmissionTypes] = useState(null)
     const [fuelTypes, setFuelTypes] = useState(null)
     const [features, setFeatures] = useState(null)
+    const [carStatus, setCarStatus] = useState(null)
 
     const options = features != null
         ? features.map(f => ({ value: f.id, label: f.featureName }))
@@ -25,6 +26,10 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
 
     const manufacturerOptions = manufacturers != null
         ? manufacturers.map(t => ({ value: t, label: t }))
+        : [];
+
+    const carStatusOptions = carStatus != null
+        ? carStatus.map(t => ({ value: t, label: t }))
         : [];
 
 
@@ -71,6 +76,14 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
                     setFeatures(data);
                     if (addingNewCar && car.features.length === 0) {
                         setCar(prevCar => ({ ...prevCar, features: [] }));
+                    }
+                }
+
+                if (carStatus == null) {
+                    const data = await fetchJSON("/car-status", { method: "GET" });
+                    setCarStatus(data);
+                    if (addingNewCar && car.carStatus === "") {
+                        setCar(prevCar => ({ ...prevCar, carStatus: data[0] }));
                     }
                 }
             } catch (e) {
@@ -203,8 +216,9 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
             <h1>{title}</h1>
             <form className={"car-edit"} onSubmit={(e) => e.preventDefault()}>
                 <label>
-                    <span className={"car-edit-property-heading"}>Manufacturer</span>
+                    <h5 className={"car-edit-property-heading"}>Manufacturer</h5>
                     <Select placeholder="Select Manufacturer"
+                        className={"react-select"}
                         options={manufacturerOptions}
                         value={manufacturerOptions.filter(option => car.manufacturer === option.value)}
                         onChange={selectedOption => {
@@ -213,32 +227,34 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
 
                 </label>
                 <label>
-                    <span className={"car-edit-property-heading"}>Model</span>
+                    <h5 className={"car-edit-property-heading"}>Model</h5>
                         <input type="text" placeholder="Enter Model" 
                             className={"car-edit-property-input"}
                             value={car.carModel} 
                             onChange={(e) => setCar({ ...car, carModel: e.target.value })} />
                 </label>
                 <label>
-                    <span className={"car-edit-property-heading"}>Number of seats</span>
+                    <h5 className={"car-edit-property-heading"}>Number of seats</h5>
                         <input type="number" placeholder="Enter number of seats" min={1}
                             className={"car-edit-property-input"}
                             value={car.numberOfSeats} 
                             onChange={(e) => setCar({ ...car, numberOfSeats: e.target.value })} />
                 </label>
                 <label>
-                    <span className={"car-edit-property-heading"}>Transmission type</span>
+                    <h5 className={"car-edit-property-heading"}>Transmission type</h5>
                         <Select placeholder="Select transmission type"
-                                options={transmissionOptions}
-                                value={transmissionOptions.filter(option => car.transmissionType === option.value)}
+                            className={"react-select"}
+                            options={transmissionOptions}
+                            value={transmissionOptions.filter(option => car.transmissionType === option.value)}
                             onChange={selectedOption => {
                                 setCar({ ...car, transmissionType: selectedOption.value })
                             }}
                         />
                 </label>
                 <label>
-                    <span className={"car-edit-property-heading"}>Fuel type</span>
+                    <h5 className={"car-edit-property-heading"}>Fuel type</h5>
                     <Select placeholder="Select fuel type"
+                        className={"react-select"}
                         options={fuelOptions}
                         value={fuelOptions.filter(option => car.fuelType === option.value)}
                         onChange={selectedOption => {
@@ -246,22 +262,23 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
                         }} />
                 </label>
                 <label>
-                    <span className={"car-edit-property-heading"}>Rental Price per Day</span>
+                    <h5 className={"car-edit-property-heading"}>Rental Price per Day</h5>
                          <input type="number" placeholder="Enter price" min={0}
                             className={"car-edit-property-input"}
                             value={car.price} 
                             onChange={(e) => setCar({ ...car, price: e.target.value })} />
                 </label>
                 <label>
-                    <span className={"car-edit-property-heading"}>Production year</span>
+                    <h5 className={"car-edit-property-heading"}>Production year</h5>
                         <input type="number" placeholder="Enter production year" min={1885}
                             className={"car-edit-property-input"}
                             value={car.productionYear} 
                             onChange={(e) => setCar({ ...car, productionYear: e.target.value })} />
                 </label>
                 <label>
-                    <span className={"car-edit-property-heading"}>Features </span>
+                    <h5 className={"car-edit-property-heading"}>Features </h5>
                     <Select
+                        className={"react-select"}
                         options={options}
                         id="car-edit-multi-select"
                         value={options.filter(option => car.features.some(feature => feature.id === option.value))}
@@ -275,9 +292,19 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
                     />
                 </label>
                 <label>
-                    <span className={"car-edit-property-heading"}>Image</span>
+                    <h5 className={"car-edit-property-heading"}>Image</h5>
                     <input type="file" placeholder="Upload image" accept="image/png, image/jpeg"
                         onChange={e => uploadImage(car.id, e, setCar)}/>
+                </label>
+                <label>
+                    <h5 className={"car-edit-property-heading"}>Car status</h5>
+                    <Select placeholder="Select car status"
+                        className={"react-select"}
+                        options={carStatusOptions}
+                        value={carStatusOptions.filter(option => car.carStatus === option.value)}
+                        onChange={selectedOption => {
+                            setCar({ ...car, carStatus: selectedOption.value });
+                        }} />
                 </label>
                 <button className={"big-button"} type="submit"
                     disabled={!validateCarState(car)}

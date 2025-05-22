@@ -1,0 +1,10 @@
+.review {
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    flex-direction: column;
+    padding: 10px;
+
+    border-radius: var(--corner-rounding);
+    border: 1px solid var(--dark-shadow-color);
+}

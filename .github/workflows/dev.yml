@@ -1,20 +1,31 @@
-name: Development Deployed
-run-name: ${{ github.actor }} merged to dev!
+name: Container Deployment
+run-name: ${{ github.actor }} merged to main!
 on:
   pull_request:
-    branches: [dev]
+    branches: [ main ]
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: "prod env"  
+    env:
+      VITE_BACKEND_URL: '${{ vars.VITE_BACKEND_URL }}'
+      VITE_BACKEND_PORT: '${{ vars.VITE_BACKEND_PORT }}'
+    permissions:
+      contents: read
+      packages: write
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
       cancel-in-progress: true
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
-      - name: Install NPM
-        run: sudo apt install npm
-      - name: Install dependencies
-        run: npm install
-      - name: Build frontend
-        run:  npm run build
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build the rental-roulette docker image
+        run: |
+          docker build --build-arg VITE_BACKEND_URL=${{ env.VITE_BACKEND_URL }} --build-arg VITE_BACKEND_PORT=${{ env.VITE_BACKEND_PORT }} -t rental-roulette-frontend . -f Containerfile --tag ghcr.io/nezerpz/rental-roulette-frontend:latest
+          docker push ghcr.io/nezerpz/rental-roulette-frontend:latest

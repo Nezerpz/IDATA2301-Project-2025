@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 function updateList(event, name, onUpdate) {
     let selectedFilters = new Array()
-    let filterList = document.getElementById(`-${name}`);
+    let filterList = document.getElementById(`checkbox-filter-${name}`);
 
     // Add checked options to list
     for (const listItem of filterList.childNodes) {
@@ -26,9 +26,9 @@ function CheckBoxFilters({name, values, onUpdate}) {
             <ul id={`checkbox-filter-${name}`}>
                 {Object.entries(values).map(indexValue => (
                     <li key={indexValue[0]}>
-                        <label className={"ue"}>
-                            <input className={"filter-checkbox"} 
-                                type={"checkbox"} 
+                        <label className={"filter-value"}>
+                            <input className={"filter-checkbox"}
+                                type={"checkbox"}
                                 onChange={(e) => {updateList(e, name, onUpdate)}}/>
                                 {indexValue[1]}
                         </label>

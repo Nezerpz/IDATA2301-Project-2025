@@ -16,7 +16,7 @@ function LoginPage() {
     const handleLogin = async (event) => {
         event.preventDefault();
         try {
-            const response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/authenticate", {
+            const response = await fetch(import.meta.env.VITE_BACKEND_URL + ":" + import.meta.env.VITE_BACKEND_PORT + "/api/authenticate", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
