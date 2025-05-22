@@ -156,50 +156,6 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
     opacity: .5;
 }
 
-.price-range {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 80%; /* Set the total width of the component */
-    margin: 30px auto; /* Center the component */
-    position: relative;
-    /*
-    pointer-events: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    */
-}
-
-.price-range > input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    position: absolute;
-    width: 100%;
-    height: 3px;
-    background-color: var(--button-color);
-    pointer-events: none;
-}
-
-.price-range > input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    background-color: var(--button-color);
-    height: 2rem;
-    width: 1rem;
-    border-radius: var(--corner-rounding);
-    cursor: pointer;
-    pointer-events: all;
-}
-.price-range > input[type="range"]::-moz-range-thumb {
-    border: none;
-    border-radius: var(--corner-rounding);
-    background-color: var(--button-color);
-    height: 2rem;
-    width: 1rem;
-    cursor: pointer;
-    pointer-events: all;
-}
 
 #provider-container{
     background-color: var(--foreground-color);
@@ -280,17 +236,11 @@ label:not(li label) > input[placeholder=" "]:not(:focus):placeholder-shown + spa
     margin-bottom: 10px;
 }
 
-.review {
-    display: flex;
-    box-sizing: border-box;
-    width: 100%;
-    flex-direction: column;
-    padding: 10px;
-
-    border-radius: var(--corner-rounding);
-    border: 1px solid var(--dark-shadow-color);
-}
 
 .no-scroll {
     overflow: hidden;
+}
+
+.react-select {
+    font-family: var(--main-font);
 }

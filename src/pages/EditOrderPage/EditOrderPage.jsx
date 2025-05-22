@@ -52,6 +52,7 @@ function renderPage(order, setOrder, customerName, providerName, orderStatuses, 
                         <span>Status</span>
                         {console.log(options)}
                         <Select
+                            className={"react-select"}
                             options={options}
                             value={options.filter(option => option.value === order.orderStatus)}
                             onChange={selectedOption => {
