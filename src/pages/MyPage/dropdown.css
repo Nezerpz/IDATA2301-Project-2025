@@ -24,7 +24,7 @@
     align-content: center;
     padding: 10px 20px 10px 20px;
     flex: 1;
-    border: 1px solid var(--dark-link-color);
+    border-width: 0px;
     background-color: var(--foreground-color);
 
     color: var(--dark-link-color);
