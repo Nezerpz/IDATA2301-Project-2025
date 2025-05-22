@@ -6,6 +6,10 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: "prod env"  
+    env:
+      VITE_BACKEND_URL: '${{ vars.VITE_BACKEND_URL }}'
+      VITE_BACKEND_PORT: '${{ vars.VITE_BACKEND_PORT }}'
     permissions:
       contents: read
       packages: write
@@ -23,5 +27,5 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: Build the rental-roulette docker image
         run: |
-          docker build -t rental-roulette-frontend . -f Containerfile --tag ghcr.io/nezerpz/rental-roulette-frontend:latest
+          docker build --build-arg VITE_BACKEND_URL=${{ env.VITE_BACKEND_URL }} --build-arg VITE_BACKEND_PORT=${{ env.VITE_BACKEND_PORT }} -t rental-roulette-frontend . -f Containerfile --tag ghcr.io/nezerpz/rental-roulette-frontend:latest
           docker push ghcr.io/nezerpz/rental-roulette-frontend:latest
