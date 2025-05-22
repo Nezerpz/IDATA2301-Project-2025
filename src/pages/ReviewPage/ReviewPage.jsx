@@ -55,8 +55,8 @@ function ReviewPage() {
             completeReview = {
                 rating: rating,
                 review: review,
-                car: order.carId,
-                user: order.customerId,
+                order_id: order.id,
+                user_id: order.customerId,
             }
             const response = await fetchWithAuth("/review-car", {
                 method: 'POST',

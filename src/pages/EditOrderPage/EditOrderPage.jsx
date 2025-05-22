@@ -35,22 +35,35 @@ function renderPage(order, setOrder, customerName, providerName, orderStatuses, 
     const options = orderStatuses != null
         ? orderStatuses.map(f => ({value: f, label: f}))
         : [];
-    console.log(orderStatuses);
     if (order === null) {
         return <p>No order found</p>;
     } else {
         return (
-            <div>
+            <>
                 <h1>Order {order.id}</h1>
-                <p>Customer of order: {customerName}</p>
-                <p>Provider of order: {providerName}</p>
-                <p>Dates of the order: {order.dateFrom}-{order.timeFrom} / {order.dateTo}-{order.timeTo}</p>
-                <p>Price paid/To be paid: {order.pricePaid}</p>
-                <p>Car: {order.car.manufacturer} {order.car.carModel}</p>
-                <form onSubmit={handleSubmit}>
+                <form className={"edit-order-page"} onSubmit={handleSubmit}>
                     <label>
-                        <span>Status</span>
-                        {console.log(options)}
+                        <h5 className={"edit-order-page-header"}>Customer:</h5>
+                        <p className={"edit-order-page-paragraph"}>{customerName}</p>
+                    </label>
+                    <label>
+                        <h5 className={"edit-order-page-header"}>Provider:</h5>
+                        <p className={"edit-order-page-paragraph"}>{providerName}</p>
+                    </label>
+                    <label>
+                        <h5 className={"edit-order-page-header"}>Rental period:</h5>
+                        <p className={"edit-order-page-paragraph"}>{order.dateFrom}-{order.timeFrom} / {order.dateTo}-{order.timeTo}</p>
+                    </label>
+                    <label>
+                        <h5 className={"edit-order-page-header"}>Price:</h5>
+                        <p className={"edit-order-page-paragraph"}>{order.pricePaid}</p>
+                    </label>
+                    <label>
+                        <h5 className={"edit-order-page-header"}>Order number:</h5>
+                        <p className={"edit-order-page-paragraph"}>{order.id}</p>
+                    </label>
+                    <label>
+                        <h5 className={"edit-order-page-header"}>Status</h5>
                         <Select
                             className={"react-select"}
                             options={options}
@@ -62,7 +75,7 @@ function renderPage(order, setOrder, customerName, providerName, orderStatuses, 
                     </label>
                     <button type="submit" className={"big-button"}>Save changes</button>
                 </form>
-            </div>
+            </>
         );
     }
 }
