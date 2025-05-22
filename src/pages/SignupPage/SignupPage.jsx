@@ -13,7 +13,7 @@ function SignupPage() {
         let form = event.target
         let response = await fetch(
             import.meta.env.VITE_BACKEND_URL + ":" + 
-            import.meta.env.VITE_BACKEND_PORT + "/users/new", {
+            import.meta.env.VITE_BACKEND_PORT + "/api/users/new", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -30,7 +30,7 @@ function SignupPage() {
         if (response.ok) {
             let authResponse = await fetch(
                 import.meta.env.VITE_BACKEND_URL + ":" +
-                import.meta.env.VITE_BACKEND_PORT + "/authenticate", {
+                import.meta.env.VITE_BACKEND_PORT + "/api/authenticate", {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
