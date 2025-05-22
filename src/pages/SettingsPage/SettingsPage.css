@@ -32,3 +32,7 @@
     flex-direction: column;
     gap: 10px;
 }
+
+.user-information-heading{
+    margin-bottom: 0;
+}
