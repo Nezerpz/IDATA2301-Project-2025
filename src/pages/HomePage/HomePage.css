@@ -29,3 +29,12 @@ main > div > div > section {
     color: var(--heading-color-dark);
     margin-left: 15px;
 }
+
+.home-page-provider-button {
+    margin: 25px;
+}
+
+#home-page-provider-header {
+    color: var(--heading-color-dark);
+    margin-left: 15px;
+}
