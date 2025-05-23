@@ -2,13 +2,14 @@
 //TODO: CSS for review-box
 
 
-import { useLocation } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import { useState } from "react";
 import {fetchWithAuth} from "../../static/js/auth.js";
 import "./ReviewPage.css";
 
 function ReviewPage() {
+    const navigate = useNavigate();
     const location = useLocation();
     const { order, type } = location.state;
     const [rating, setRating] = useState(0);

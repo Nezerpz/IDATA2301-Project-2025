@@ -197,28 +197,38 @@ function OrderList({ orders }) {
 
         const fetchUsernames = async () => {
             try {
+
                 const updatedOrders = await Promise.all(
                     orders.map(async (order) => {
-                        const customerResponse = await fetchWithAuth(
-                            `/users/name/${order.customerId}`
-                        );
-                        const customerData = await customerResponse.json();
-
-                        const providerResponse = await fetchWithAuth(
-                            `/users/name/${order.providerId}`
-                        );
-                        const providerData = await providerResponse.json();
-
-                        return {
+                        const processedOrder = {
                             ...order,
-                            "customer name": customerData.name,
-                            "provider name": providerData.name,
                             "order date": `${order.dateFrom}-${order.timeFrom} / ${order.dateTo}-${order.timeTo}`,
                             "status": `${order.orderStatus}`,
                             "order number": order.id,
                             "price paid": order.pricePaid,
                             "car": `${order.car.manufacturer} ${order.car.carModel}`,
-                        };
+                        }
+                        let customerData = null;
+                        if (order.customerId === -1) {
+                            processedOrder["customer name"] = "Deleted user";
+                        } else {
+                            const customerResponse = await fetchWithAuth(
+                                `/users/name/${order.customerId}`
+                            );
+                            customerData = await customerResponse.json();
+                            processedOrder["customer name"] = customerData.name;
+                        }
+                        let providerData = null;
+                        if (order.providerId === -1) {
+                            processedOrder["provider name"] = "Deleted user";
+                        } else {
+                            const providerResponse = await fetchWithAuth(
+                                `/users/name/${order.providerId}`
+                            );
+                            providerData = await providerResponse.json();
+                            processedOrder["provider name"] = providerData.name;
+                        }
+                        return processedOrder;
                     })
                 );
                 setProcessedOrders(updatedOrders);
