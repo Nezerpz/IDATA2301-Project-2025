@@ -85,7 +85,7 @@ function BecomeProvider() {
     const handleBecomeProvider = async (event) => {
         event.preventDefault();
         try {
-            if (window.confirm("Are you sure you want to become a provider?")) {
+            if (!window.confirm("Are you sure you want to become a provider?")) return
             const token = localStorage.getItem("jwt");
             const response = await fetchWithAuth("/become-provider", {
                 method: 'POST',
@@ -93,10 +93,9 @@ function BecomeProvider() {
                     'Content-Type': 'application/json',
                 },
             });
-            }
 
             if (response.ok) {
-                //navigate('/');
+                localStorage.removeItem("jwt")
                 navigate('/login', { state: { from: window.location.pathname } });
             } else {
                 console.error('Failed to become a provider', response.statusText);
