@@ -4,8 +4,10 @@ import Select from "react-select";
 import { fetchJSON, fetchWithAuth } from "../../static/js/auth.js"
 import "./CarEdit.css";
 import {findVariable} from "eslint-plugin-react/lib/util/variable.js";
+import {useNavigate} from "react-router-dom";
 
 function CarEdit({car, setCar, addingNewCar, title, actionText}) {
+    const navigate = useNavigate()
     const [manufacturers, setManufacturers] = useState(null)
     const [transmissionTypes, setTransmissionTypes] = useState(null)
     const [fuelTypes, setFuelTypes] = useState(null)
@@ -150,6 +152,12 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
 
     // Function used to update existing car
     const updateCar = async (car) => {
+        let path = window.location.pathname;
+        let pathTo = "provider";
+        let isAdmin = path.includes("admin");
+        if (isAdmin) {
+            pathTo = "admin";
+        }
         try {
             const response = await fetchWithAuth("/cars/" + car.id, {
                 method: 'PUT',
@@ -158,6 +166,7 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
             });
             handleReturnCodes(response)
             alert("Car details updated successfully!");
+            navigate(`/mypage/${pathTo}/cars`);
         } 
 
         catch (error) {
@@ -167,6 +176,12 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
 
     // Function used to register new car
     const addCar = async (car) => {
+        let path = window.location.pathname;
+        let pathTo = "provider";
+        let isAdmin = path.includes("admin");
+        if (isAdmin) {
+            pathTo = "admin";
+        }
         try {
             const response = await fetchWithAuth("/cars/add", {
                 method: 'POST',
@@ -175,6 +190,7 @@ function CarEdit({car, setCar, addingNewCar, title, actionText}) {
             });
             handleReturnCodes(response)
             alert("Car details updated successfully!");
+            navigate(`/mypage/${pathTo}/cars`);
         } 
 
         catch (error) {
