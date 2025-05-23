@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {fetchWithAuth} from "../../static/js/auth.js";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import "./EditOrderPage.css"
 import Select from "react-select";
 
@@ -81,6 +81,7 @@ function renderPage(order, setOrder, customerName, providerName, orderStatuses, 
 }
 
 function EditOrderPage() {
+    const navigate = useNavigate();
     const { id } = useParams();
     const [order, setOrder] = useState(null);
     const [loading, setLoading] = useState(true);
